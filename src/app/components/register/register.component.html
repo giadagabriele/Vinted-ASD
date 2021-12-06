@@ -5,7 +5,7 @@
     </div>
   </ng-container>
 
-  <form #form="ngForm" (ngSubmit)="registerUser(form.value)"  class="form-horizontal"  >
+  <form [formGroup]="formChangesSubscription" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
@@ -15,23 +15,26 @@
     </div>
     <div class="row">
       <div class="col-md-3 field-label-responsive">
-        <label for="fname">First Name</label>
+        <label for="firstName">First Name</label>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-            <input class="form-control"  id="fname" name="fname"
-                   placeholder="John"
+            <input class="form-control"  formControlName="firstName" name="firstName"
+                   placeholder="First Name"
                    ngModel required type="text">
           </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-control-feedback">
-                        <span class="text-danger align-middle">
-                            <!-- Put name validation error messages here -->
-                        </span>
+          <span class="text-danger align-middle">
+
+            <div *ngIf="submitted && f.username.errors" >
+              <div *ngIf="f.firstName.errors.required">First Name is required</div>
+          </div>
+            </span>
         </div>
       </div>
     </div>
@@ -43,7 +46,7 @@
         <div class="form-group">
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-            <input class="form-control"  id="lname" name="lname"
+            <input class="form-control"  formControlName="lastName" name="lastName"
                    placeholder="Doe" ngModel
                    required type="text">
           </div>
@@ -51,9 +54,37 @@
       </div>
       <div class="col-md-3">
         <div class="form-control-feedback">
-                        <span class="text-danger align-middle">
-                            <!-- Put name validation error messages here -->
-                        </span>
+          <span class="text-danger align-middle">
+
+          <div *ngIf="submitted && f.lastName.errors" >
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        </div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="lname">Username</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+            <input class="form-control"  formControlName="username" name="username"
+                   placeholder="Username" ngModel
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+
+          <div *ngIf="submitted && f.username.errors" >
+            <div *ngIf="f.username.errors.required">User name is required</div>
+        </div>
+          </span>
         </div>
       </div>
     </div>
@@ -65,7 +96,7 @@
         <div class="form-group">
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
-            <input class="form-control"  id="email" name="email"
+            <input class="form-control"  formControlName="email" name="email"
                    placeholder="you@example.com" ngModel
                    required type="text">
           </div>
@@ -74,30 +105,16 @@
       </div>
       <div class="col-md-3">
         <div class="form-control-feedback">
-          <ng-container *ngIf="formControls.email.errors?.taken && formControls.email.touched">
-             <span class="text-danger align-middle">
-                <i class="fa fa-close"> Email Already Taken</i>
-             </span>
-          </ng-container>
-          <ng-container *ngIf="formControls.email.pending && formControls.email.touched">
-            <span class="text-info align-middle">
-              <i class="fa fa-hourglass"> Checking Email ....</i>
-            </span>
-          </ng-container>
-          <ng-container *ngIf="!formControls.email.errors && formControls.email.touched && !formControls.email.pending">
-             <span class="text-success align-middle">
-                            <i class="fa fa-check"> Email Available</i>
-                        </span>
-          </ng-container>
-          <ng-container *ngIf="formControls.email.errors?.required && formControls.email.touched">
-                          <span class="text-danger align-middle">
-                            <i class="fa fa-check"> Email Required</i>
-                        </span>
-          </ng-container>
+          <span class="text-danger align-middle">
+            <div *ngIf="submitted && f.email.errors">
 
+              <div *ngIf="f.email.errors.required">email is required</div>
+              <div *ngIf="f.email.errors.email">Not a valid email</div>
+            </div>
+          </span>
+        </div>
         </div>
       </div>
-    </div>
     <div class="row">
       <div class="col-md-3 field-label-responsive">
         <label for="password">Password</label>
@@ -106,14 +123,21 @@
         <div class="form-group has-danger">
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-            <input class="form-control"  id="password" name="password"
+            <input class="form-control"  formControlName="password" name="password" 
                    placeholder="Password" ngModel
-                   required type="password">
+                    type="password" required>
           </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <div *ngIf="submitted && f.password.errors">
+
+              <div *ngIf="f.password.errors.required">Password is required</div>
+              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </span>
         </div>
       </div>
     </div>
@@ -127,18 +151,20 @@
             <div class="input-group-addon" style="width: 2.6rem">
               <i class="fa fa-repeat"></i>
             </div>
-            <input class="form-control"  id="password-confirm"
-                   name="password-confirmation" ngModel
-                   placeholder="Password" required type="password">
+            <input class="form-control"  formControlName="confirmPassword"
+                   name="confirmPassword" ngModel
+                   placeholder="Confirm password" required type="password">
           </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-control-feedback">
-          <ng-container *ngIf="!comparePassword ">
+        <ng-container>
                           <span class="text-danger align-middle">
+                            <div *ngIf="submitted && !comparePassword">
                             <i class="fa fa-close"> Passwords don't match</i>
-                        </span>
+                          </div>
+                          </span>
           </ng-container>
         </div>
       </div>
@@ -146,7 +172,7 @@
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
-        <button 
+        <button  [disabled]="loding"
                 class="btn btn-success" type="submit">
           <i class="fa fa-user-plus"></i> Register
         </button>
