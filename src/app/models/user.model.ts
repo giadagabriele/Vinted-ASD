@@ -1,10 +1,13 @@
 
 export class User {
     id: number;
-    fname: string;
-    lname: string;
+    lastName: string;
+    username:string;
     email: string;
     phoneNumber: number;
     password: string;
+    firstName: string;
+
 }
+
   

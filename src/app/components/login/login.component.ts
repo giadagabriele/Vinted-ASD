@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private userService: UserService,
               private route: ActivatedRoute) {
+                this.route.queryParams.subscribe(params => {
+                  this.loginMessage = params['message'];
+                  console.log(this.loginMessage);})
   }
 
   ngOnInit(): void {
@@ -48,7 +51,7 @@ export class LoginComponent implements OnInit {
     }
 
     form.reset();
-    this.userService.loginUser(email, password);
+    this.userService.Login(email, password);
 
     this.userService.loginMessage$.subscribe(msg => {
       this.loginMessage = msg;
@@ -56,6 +59,10 @@ export class LoginComponent implements OnInit {
         this.loginMessage = '';
       }, 2000);
     });
+    this.userService.Login(email,password);
+    
+
+    
 
 
   }
