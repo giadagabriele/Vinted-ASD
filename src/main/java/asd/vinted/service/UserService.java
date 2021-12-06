@@ -1,8 +1,10 @@
 package asd.vinted.service;
 
 import asd.vinted.entity.User;
+import asd.vinted.util.UserAlreadyExistAuthenticationException;
 
 public interface UserService {
-    User saveUser(User u);
-    User findById(String email, String password);
+
+    String saveUser(User u) ;
+    User findByEmailAndPassword(String email, String Password);
 }
