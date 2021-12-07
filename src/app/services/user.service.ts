@@ -12,14 +12,14 @@ import {catchError} from 'rxjs/operators';
 export class UserService {
   auth = false;
   private SERVER_URL = environment.SERVER_URL;
-  private user= new User;
+  private user = new User;
   authState$ = new BehaviorSubject<boolean>(this.auth);
   userData$ = new BehaviorSubject<SocialUser | ResponseModel | object>(null);
   loginMessage$ = new BehaviorSubject<string>(null);
-  obj:ResponseModell ;
+  obj: ResponseModell ;
 
   userRole: number;
-  registerMessage:any;
+  registerMessage: any;
 
   constructor(private authService: AuthService,
               private httpClient: HttpClient) {
@@ -98,31 +98,30 @@ export class UserService {
       photoUrl: photoUrl || null
     });
   }
-  registraUser(user: User):Observable<string> {
+  registraUser(user: User): Observable<string> {
     console.log(user);
     const headers = new HttpHeaders().set('responsType', 'text');
-     
-    return this.httpClient.post('http://localhost:8080/user/registration',user,{headers, responseType: 'text' as const});
-  
+    return this.httpClient.post(`${this.SERVER_URL}user/registration`, user, {headers, responseType: 'text' as const});
+
 
   }
-    
-  
-      
- 
-     
 
-    
 
-    
-  
-  Login(email,password){
-    console.log(email,password)
-    this.user.email=email;
-    this.user.password=password;
-     this.httpClient.post('http://localhost:8080/user/login',this.user).subscribe((res)=>{
+
+
+
+
+
+
+
+
+  Login(email, password) {
+    console.log(email, password);
+    this.user.email = email;
+    this.user.password = password;
+    this.httpClient.post(`${this.SERVER_URL} user/login`, this.user).subscribe((res) => {
       console.log(res);
-      
+
       this.auth = true;
       this.userRole = 1;
       this.authState$.next(true);
@@ -147,6 +146,6 @@ export interface ResponseModel {
   role: number;
 }
 export interface ResponseModell {
-  user :string ;
-  message :string;
+  user: string ;
+  message: string;
 }
