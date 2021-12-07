@@ -9,6 +9,6 @@ public interface UserInformationDao extends JpaRepository<UserInformation,Long> 
 
     UserInformation findById(long id);
     UserInformation findByUserId(long userId);
-    void addUserInformation(UserInformation user);
-    void update(UserInformation user);
+    //void add(UserInformation user);
+    //void update(UserInformation user);
 }

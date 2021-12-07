@@ -9,5 +9,4 @@ public class VintedApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VintedApplication.class, args);
 	}
-
 }
