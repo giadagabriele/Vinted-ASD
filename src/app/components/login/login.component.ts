@@ -51,13 +51,10 @@ export class LoginComponent implements OnInit {
     }
 
     form.reset();
-    this.userService.Login(email, password);
-
+  
     this.userService.loginMessage$.subscribe(msg => {
       this.loginMessage = msg;
-      setTimeout(() => {
-        this.loginMessage = '';
-      }, 2000);
+      
     });
     this.userService.Login(email,password);
     
