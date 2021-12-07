@@ -17,7 +17,6 @@ export class UserService {
   authState$ = new BehaviorSubject<boolean>(this.auth);
   userData$ = new BehaviorSubject<SocialUser | ResponseModel | object>(null);
   loginMessage$ = new BehaviorSubject<string>(null);
-  obj: ResponseModell ;
 
   userRole: number;
   registerMessage: any;
@@ -106,18 +105,23 @@ export class UserService {
 
 
   }
-
-  Login(email, password) {
-    console.log(email, password);
-    this.user.email = email;
-    this.user.password = password;
-    this.httpClient.post(`${this.SERVER_URL}user/login`, this.user).subscribe((res) => {
+    
+  Login(email,password){
+     this.user.email=email;
+     this.user.password=password;
+     this.httpClient.post('http://localhost:8080/user/login',this.user).subscribe((res)=>{
       console.log(res);
-
+      if(res!= undefined){
       this.auth = true;
       this.userRole = 1;
       this.authState$.next(true);
       this.userData$.next(res);
+      console.log(this.userData$)
+      }
+      else{
+      this.auth=false;
+      this.loginMessage$.next("Incorrect email address or password, please try again");  
+    }
       return true;
     });
   }
@@ -136,8 +140,4 @@ export interface ResponseModel {
   userId: number;
   type: string;
   role: number;
-}
-export interface ResponseModell {
-  user: string ;
-  message: string;
 }
