@@ -2,7 +2,7 @@ import { User } from './../models/user.model';
 import {Injectable} from '@angular/core';
 import {AuthService, GoogleLoginProvider, SocialUser} from 'angularx-social-login';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import {environment} from 'environment';
 import {BehaviorSubject, Observable, of, ReplaySubject} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
@@ -12,6 +12,7 @@ import {catchError} from 'rxjs/operators';
 export class UserService {
   auth = false;
   private SERVER_URL = environment.SERVER_URL;
+  // tslint:disable-next-line:new-parens
   private user = new User;
   authState$ = new BehaviorSubject<boolean>(this.auth);
   userData$ = new BehaviorSubject<SocialUser | ResponseModel | object>(null);
@@ -106,20 +107,11 @@ export class UserService {
 
   }
 
-
-
-
-
-
-
-
-
-
   Login(email, password) {
     console.log(email, password);
     this.user.email = email;
     this.user.password = password;
-    this.httpClient.post(`${this.SERVER_URL} user/login`, this.user).subscribe((res) => {
+    this.httpClient.post(`${this.SERVER_URL}user/login`, this.user).subscribe((res) => {
       console.log(res);
 
       this.auth = true;
