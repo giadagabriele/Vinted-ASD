@@ -2016,7 +2016,11 @@ textarea.input {
 ===========================================================*/
 
 #footer {
-  
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
   background: #15161D;
   color: #B9BABC;
 }
