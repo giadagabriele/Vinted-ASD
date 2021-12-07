@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
         }
 
-        if (usernameExist(u.getUsername())) {
+        if (usernameExist(u.getUserName())) {
             return  "username Error";
         }
 
@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService {
         return userDao.findByEmail(email) != null;
     }
     private boolean usernameExist(String username) {
-        return userDao.existsByUsernameEqualsIgnoreCase(username);
+       // return userDao.existsByUsernameEqualsIgnoreCase(username);
+       return false;
     }
 
 }
