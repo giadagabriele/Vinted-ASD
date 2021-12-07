@@ -2,7 +2,7 @@ import { User } from './../models/user.model';
 import {Injectable} from '@angular/core';
 import {AuthService, GoogleLoginProvider, SocialUser} from 'angularx-social-login';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import {environment} from 'environment';
 import {BehaviorSubject, Observable, of, ReplaySubject} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
@@ -12,13 +12,14 @@ import {catchError} from 'rxjs/operators';
 export class UserService {
   auth = false;
   private SERVER_URL = environment.SERVER_URL;
-  private user= new User;
+  // tslint:disable-next-line:new-parens
+  private user = new User;
   authState$ = new BehaviorSubject<boolean>(this.auth);
   userData$ = new BehaviorSubject<SocialUser | ResponseModel | object>(null);
   loginMessage$ = new BehaviorSubject<string>(null);
 
   userRole: number;
-  registerMessage:any;
+  registerMessage: any;
 
   constructor(private authService: AuthService,
               private httpClient: HttpClient) {
@@ -97,24 +98,14 @@ export class UserService {
       photoUrl: photoUrl || null
     });
   }
-  registraUser(user: User):Observable<string> {
+  registraUser(user: User): Observable<string> {
     console.log(user);
     const headers = new HttpHeaders().set('responsType', 'text');
-     
-    return this.httpClient.post('http://localhost:8080/user/registration',user,{headers, responseType: 'text' as const});
-  
+    return this.httpClient.post(`${this.SERVER_URL}user/registration`, user, {headers, responseType: 'text' as const});
+
 
   }
     
-  
-      
- 
-     
-
-    
-
-    
-  
   Login(email,password){
      this.user.email=email;
      this.user.password=password;
@@ -129,7 +120,6 @@ export class UserService {
       }
       else{
       this.auth=false;
-
       this.loginMessage$.next("Incorrect email address or password, please try again");  
     }
       return true;

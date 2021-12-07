@@ -467,6 +467,7 @@ textarea.input {
 
 .header-search form {
   position: relative;
+  display: inline-block;
 }
 
 .header-search form .input-select {
@@ -475,8 +476,9 @@ textarea.input {
 }
 
 .header-search form .input {
-  width: calc(100% - 260px);
+  width: 100%;
   margin-right: -4px;
+  display: inline-block;
 }
 
 .header-search form .search-btn {
@@ -489,13 +491,25 @@ textarea.input {
   border-radius: 0px 40px 40px 0px;
 }
 
+.sell-button{
+  height: 40px;
+  width: 150px;
+  background: #D10024;
+  color: #FFF;
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+  margin-right: 8px;
+}
+
 /*----------------------------*\
 	Cart
 \*----------------------------*/
 
 .header-ctn {
   float: right;
-  padding: 15px 0px;
+  padding: 10px 0px;
 }
 
 .header-ctn>div {
@@ -503,7 +517,7 @@ textarea.input {
 }
 
 .header-ctn>div+div {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 .header-ctn>div>a {
@@ -2002,16 +2016,13 @@ textarea.input {
 ===========================================================*/
 
 #footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
   background: #15161D;
   color: #B9BABC;
-}
-
-#bottom-footer {
-  background: #1E1F29;
-}
-
-.footer {
-  margin: 30px 0px;
 }
 
 .footer .footer-title {
@@ -2021,40 +2032,9 @@ textarea.input {
   margin: 0px 0px 30px;
 }
 
-.footer-links li+li {
-  margin-top: 15px;
-}
-
-.footer-links li a {
-  color: #B9BABC;
-}
-
-.footer-links li i {
-  margin-right: 15px;
-  color: #D10024;
-  width: 14px;
-  text-align: center;
-}
-
-.footer-links li a:hover {
-  color: #D10024;
-}
-
 .copyright {
-  margin-top: 30px;
   display: block;
   font-size: 12px;
-}
-
-.footer-payments li {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-.footer-payments li a {
-  color: #15161D;
-  font-size: 36px;
-  display: block;
 }
 
 /*=========================================================
