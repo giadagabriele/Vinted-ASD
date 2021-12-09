@@ -29,7 +29,8 @@ const routes: Routes = [
         path: 'cart', component: CartComponent
       },
       {
-        path: 'checkout', component: CheckoutComponent, canActivate: [ProfileGuard]
+        path: 'checkout', component: CheckoutComponent
+        //, canActivate: [ProfileGuard]
       },
       {
         path: 'thankyou', component: ThankyouComponent
@@ -38,7 +39,8 @@ const routes: Routes = [
         path: 'login', component: LoginComponent
       },
       {
-        path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard]
+        path: 'profile', component: ProfileComponent
+        //, canActivate: [ProfileGuard]
       },
       {
         path: 'register', component: RegisterComponent
@@ -46,6 +48,8 @@ const routes: Routes = [
     ]
   },
   // Wildcard Route if no route is found == 404 NOTFOUND page
+   // Wildcard Route if no route is found == 404 NOTFOUND page
+   { path: 'myprofile', loadChildren: () => import(`./profile/profile.module`).then(m => m.ProfileModule) },
   {
     path: '**', pathMatch: 'full', redirectTo: ''
   }
