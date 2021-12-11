@@ -31,4 +31,28 @@ export class HomeComponent implements OnInit {
   AddToCart(id: number) {
     this.cartService.AddProductToCart(id);
   }
+
+  navigateToClothes(){
+    this.router.navigateByUrl('/clothes')
+  }
+
+  navigateToShoes(){
+    this.router.navigateByUrl('/shoes')
+  }
+
+  navigateToAccessories(){
+    this.router.navigateByUrl('/accessories')
+  }
+
+  navigateToCook(){
+    this.router.navigateByUrl('/cook')
+  }
+
+  navigateToTechnology(){
+    this.router.navigateByUrl('/technology')
+  }
+
+  navigateToBook(){
+    this.router.navigateByUrl('/book')
+  }
 }
