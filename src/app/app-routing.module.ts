@@ -72,8 +72,10 @@ const routes: Routes = [
   },
   // Wildcard Route if no route is found == 404 NOTFOUND page
    // Wildcard Route if no route is found == 404 NOTFOUND page
-   { path: 'myprofile', loadChildren: () => import(`./profile/profile.module`).then(m => m.ProfileModule) },
-  {
+   { path: 'myprofile', loadChildren: () => import('./components/profile/profile/profile.module').then(m => m.ProfileModule) },
+  
+  // { path: 'myprofile', loadChildren: () => import(`./profile/profile.module`).then(m => m.ProfileModule)
+   {
     path: '**', pathMatch: 'full', redirectTo: ''
   }
 
