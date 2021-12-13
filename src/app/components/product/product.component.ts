@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         })
       )
       .subscribe(prodId => {
-        this.id = prodId;
+        this.id = (prodId === 0) ? prodId : 2 ;
         this.productService.getSingleProduct(this.id).subscribe(prod => {
           this.product = prod;
 
@@ -42,8 +42,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
         });
       });
-
-
   }
 
   ngAfterViewInit(): void {
@@ -87,6 +85,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   Increase() {
+    // tslint:disable-next-line:radix
     let value = parseInt(this.quantityInput.nativeElement.value);
 
     if (this.product.quantity >= 1) {
@@ -104,6 +103,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   Decrease() {
+    // tslint:disable-next-line:radix
     let value = parseInt(this.quantityInput.nativeElement.value);
 
     if (this.product.quantity > 0) {
