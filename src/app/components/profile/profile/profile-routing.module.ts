@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
-import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
-
+import { ProfileDetailComponent } from '@app/components/profile/profile/profile-detail/profile-detail.component';
+import { ProfileSettingsComponent } from '@app/components/profile/profile/profile-settings/profile-settings.component';
 
 
 const routes: Routes = [

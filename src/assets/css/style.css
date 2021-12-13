@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+
 /*
 Template Name: Electro - HTML Ecommerce Template
 Author: yaminncco
@@ -339,6 +341,7 @@ textarea.input {
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
 }
+
 
 .section-tab-nav li.active a {
   color: #D10024;
@@ -739,7 +742,7 @@ textarea.input {
   bottom: 0;
   left: 0px;
   width: 60%;
-  background: #D10024;
+  background: #cec7c754;
   opacity: 0.9;
   -webkit-transform: skewX(-45deg);
   -ms-transform: skewX(-45deg);
@@ -753,7 +756,7 @@ textarea.input {
   bottom: 0;
   left: 1px;
   width: 100%;
-  background: #D10024;
+  background: #cec7c754;
   opacity: 0.9;
   -webkit-transform: skewX(-45deg) translateX(-100%);
   -ms-transform: skewX(-45deg) translateX(-100%);
@@ -787,13 +790,28 @@ textarea.input {
 }
 
 .shop .shop-body h3 {
-  color: #FFF;
+  color: rgb(0, 0, 0);
 }
 
-.shop .shop-body .cta-btn {
-  color: #FFF;
+.shop .shop-body .btn {
+  color: #000000;
+  border: inset;
+  border-color: #000000;
+  background-color: #cec7c754;
   text-transform: uppercase;
+  position: relative;
+  top: 130px;
+  right: -173px;
+
 }
+.shop .shop-body .btn:hover{
+  color: #c42424;
+  border-color: #c42424;
+  background-color: #8f383854;
+
+}
+
+/*================QUA C'è LA PROVAAAAAAAAAAAAAAAAAAA====*/
 
 /*=========================================================
 	05 -> HOT DEAL
@@ -2016,10 +2034,11 @@ textarea.input {
 ===========================================================*/
 
 #footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
-  height: 60px;
+  margin-bottom: 0;
+  height: 130px;
   width: 100%;
   background: #15161D;
   color: #B9BABC;
@@ -2103,7 +2122,7 @@ textarea.input {
 }
 
 .slick-dots li.slick-active button:before {
-  background-color: #D10024;
+  background-color: #000000;
 }
 
 .custom-dots .slick-dots {

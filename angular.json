@@ -51,6 +51,8 @@
             "styles": [
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css"
+             
+              
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",
@@ -58,6 +60,7 @@
               "src/assets/js/slick.min.js",
               "src/assets/js/nouislider.min.js",
               "src/assets/js/jquery.zoom.min.js"
+              
             ]
           },
           "configurations": {
