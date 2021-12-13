@@ -75,25 +75,25 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadUserProfile();
-    window.scroll(0, 0);
+    //this.loadUserProfile();
+    //window.scroll(0, 0);
 
-    // this.userService.userData$
-    //   .pipe(
-    //     map((user: SocialUser | ResponseModel) => {
-    //       if (user instanceof SocialUser || user.type === "social") {
-    //         return {
-    //           ...user,
-    //           email: "test@test.com",
-    //         };
-    //       } else {
-    //         return user;
-    //       }
-    //     })
-    //   )
-    //   .subscribe((data: ResponseModel | SocialUser) => {
-    //     this.myUser = data;
-    //   });
+    this.userService.userData$
+      .pipe(
+        map((user: SocialUser | ResponseModel) => {
+          if (user instanceof SocialUser || user.type === "social") {
+            return {
+              ...user,
+              email: "test@test.com",
+            };
+          } else {
+            return user;
+          }
+        })
+      )
+      .subscribe((data: ResponseModel | SocialUser) => {
+        this.myUser = data;
+      });
   }
 
   logout() {

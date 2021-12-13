@@ -140,7 +140,7 @@ export class UserService {
     this.user.email = email;
     this.user.password = password;
     this.httpClient
-      .post("http://localhost:8090/user/login", this.user)
+      .post("http://localhost:8080/user/login", this.user)
       .subscribe((res) => {
         console.log(res);
         if (res != undefined) {
