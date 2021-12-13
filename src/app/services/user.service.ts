@@ -103,13 +103,12 @@ export class UserService {
     const headers = new HttpHeaders().set('responsType', 'text');
     return this.httpClient.post(`${this.SERVER_URL}user/registration`, user, {headers, responseType: 'text' as const});
 
-
   }
-    
+
   Login(email,password){
      this.user.email=email;
      this.user.password=password;
-     this.httpClient.post('http://localhost:8080/user/login',this.user).subscribe((res)=>{
+     this.httpClient.post(`${this.SERVER_URL}user/login`,this.user).subscribe((res)=>{
       console.log(res);
       if(res!= undefined){
       this.auth = true;
@@ -120,7 +119,7 @@ export class UserService {
       }
       else{
       this.auth=false;
-      this.loginMessage$.next("Incorrect email address or password, please try again");  
+      this.loginMessage$.next("Incorrect email address or password, please try again");
     }
       return true;
     });
