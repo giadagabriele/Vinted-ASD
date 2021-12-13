@@ -11,6 +11,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-profile",
@@ -184,7 +185,6 @@ export class ProfileComponent implements OnInit {
   showErrorModal() {
     this.modalTitle = "Update Error";
     this.modalMessage = "Please review errors and try again";
-    //$("#errorModal").modal("show");
   }
 
   triggerInput() {
@@ -203,6 +203,63 @@ export class ProfileComponent implements OnInit {
                 .attr('src', reader.result as string);
         };
     }
+}
+onSubmit() {
+  if (this.updateProfileForm.valid) {
+      this.isProfileLoaded = false;
+      let userDetails = this.updateProfileForm.value;
+      // userDetails.country = this.ProfileDetails.billingAddress.country;
+      // userDetails.scountry = this.ProfileDetails.shippingAddress.country;
+         //userDetails.gender =
+         // this.userProfile.Ge == 'null' || this.ProfileDetails.gender == '' ? 'Prefer Not To Say' : this.ProfileDetails.gender;
+
+      Swal.fire({
+          title: 'Enter your password',
+          input: 'password',
+          inputAttributes: {
+              autocapitalize: 'off'
+          },
+          showCancelButton: true,
+          confirmButtonText: 'Update Profile',
+          showLoaderOnConfirm: true,
+          preConfirm: (password) => {
+              userDetails.password = password;
+              this.userService.updateUserProfile(userDetails).subscribe((result) => {
+                  this.toastr.success(result.message);
+                  this.userService.clearCache();
+                  this.loadUserProfile();
+                  this.isProfileLoaded = true;
+              });
+          }
+      }).then((result) => {
+          if (result.dismiss) {
+              this.isProfileLoaded = true;
+          }
+      });
+  } else {
+      this.errorList = [];
+      const controls = this.updateProfileForm.controls;
+
+      for (let name in controls) {
+          if (controls[name].invalid) {
+              let errorDescription = '';
+              if (controls[name].hasError('required')) {
+                  switch (name) {
+                      // case 'isTermsAccepted':
+                      //     errorDescription = 'acceptance of Term is required';
+                      //     this.errorList.push(errorDescription);
+                      //     break;
+                  }
+              } else {
+                  errorDescription = 'Please review ' + name;
+                  this.errorList.push(errorDescription);
+              }
+              controls[name].markAsTouched();
+          }
+      }
+      console.log(this.errorList);
+      this.showErrorModal();
+  }
 }
 
 }
