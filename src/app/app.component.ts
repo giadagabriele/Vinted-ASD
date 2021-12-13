@@ -35,4 +35,8 @@ export class AppComponent {
   navigateToBook(){
     this.router.navigateByUrl('/book')
   }
+
+  navigateToContact(){
+    this.router.navigateByUrl('/contact')
+  }
 }

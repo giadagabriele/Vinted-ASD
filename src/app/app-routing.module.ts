@@ -10,6 +10,7 @@ import {ProfileGuard} from './guard/profile.guard';
 import {RegisterComponent} from './components/register/register.component';
 import {HomeComponent} from './components/home/home.component';
 import {HomeLayoutComponent} from './components/home-layout/home-layout.component';
+import {ContactComponent} from './components/contact/contact.component';
 import { ClothesComponent} from './components/clothes/clothes.component';
 import { ShoesComponent } from './components/shoes/shoes.component';
 import { AccessoriesComponent } from './components/accessories/accessories.component';
@@ -48,6 +49,9 @@ const routes: Routes = [
       },
       {
         path: 'register', component: RegisterComponent
+      },
+      {
+        path: 'contact', component: ContactComponent
       },
       {
         path: 'clothes' , component: ClothesComponent
