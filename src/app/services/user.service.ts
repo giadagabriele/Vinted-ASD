@@ -190,6 +190,31 @@ export class UserService {
       return new Observable<Error>();
     }
   }
+
+  updateUserProfile(userDetails: any) {
+    const formdata = new FormData();
+    let params = new HttpParams().set('username', this.UserName.getValue());
+
+    for (const key of Object.keys(userDetails)) {
+        const value = userDetails[key];
+        formdata.append(key, value);
+    }
+    return this.httpClient.post<any>(this.baseUrlUpdateProfile, formdata, {
+            // headers: { Accept: 'multipart/form-data', 'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN') },
+            // params: params
+        })
+        .pipe(
+            map((result) => {
+                this.clearCache();
+                return result;
+            })
+        );
+}
+
+clearCache() {
+  this.userProfile= null;
+}
+
 }
 
 export interface ResponseModel {
