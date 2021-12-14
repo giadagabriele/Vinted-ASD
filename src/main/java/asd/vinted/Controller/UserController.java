@@ -1,5 +1,6 @@
 package asd.vinted.Controller;
 
+import asd.vinted.dto.UserDto;
 import asd.vinted.entity.User;
 import asd.vinted.service.UserService;
 import asd.vinted.util.UserAlreadyExistAuthenticationException;
@@ -19,28 +20,37 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "/registration")
-
     public ResponseEntity<String> saveUser(@RequestBody User user){
+        System.out.println(user);
+
         String message= userService.saveUser(user);
-        System.out.println(message);
         JSONObject json= new JSONObject();
         json.put("message",message);
         return  new ResponseEntity<>(
                 message,
                 HttpStatus.OK);
+
+
+
+
+
     }
 
 
     @PostMapping(value = "/login")
-    public ResponseEntity<User> loginUser(@RequestBody User user){
-        System.out.println(user.getEmail()+user.getPassword());
+    public ResponseEntity<UserDto> loginUser(@RequestBody User user){
 
-           User user2= userService.findByEmailAndPassword(user.getEmail(),user.getPassword());
-            System.out.println(user2);
-            if(user2!=null)
-                return ResponseEntity.ok(user2);
+        UserDto userLogin=null;
+        userLogin=userService.findByEmailAndPassword(user.getEmail(),user.getPassword());
+        System.out.println(userLogin);
+        return ResponseEntity.ok(userLogin);
+    }
 
-            return ResponseEntity.ok(user2);
+    @PostMapping (value = "/loginGoogle")
+    public ResponseEntity<UserDto> loginUserGoogle(@RequestBody User user){
 
+
+        UserDto userLogin=userService.findByEmail(user.getEmail());
+        return ResponseEntity.ok(userLogin);
     }
 }

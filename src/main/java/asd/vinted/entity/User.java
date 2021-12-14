@@ -27,7 +27,7 @@ public class User {
     @Column
     private String password;
     @Column
-    private String userName;
+    private String username;
 
     @Column
     private String phoneNumber;
@@ -40,8 +40,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column
-    private boolean showCityInProfile;
+    //@Column(nullable = false)
+    //private boolean showCityInProfile;
 
     @ManyToOne
     @JoinColumn(name = "cityId", referencedColumnName = "id")
@@ -100,12 +100,12 @@ public class User {
         this.password = password;
     }
 
-    public String getUserName() {
-        return this.userName;
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getPhoneNumber() {
@@ -140,7 +140,7 @@ public class User {
         this.gender = gender;
     }
 
-    public boolean isShowCityInProfile() {
+/*    public boolean isShowCityInProfile() {
         return this.showCityInProfile;
     }
 
@@ -151,7 +151,7 @@ public class User {
     public void setShowCityInProfile(boolean showCityInProfile) {
         this.showCityInProfile = showCityInProfile;
     }
-
+*/
     public City getCity() {
         return this.city;
     }
@@ -177,12 +177,12 @@ public class User {
             ", address='" + getAddress() + "'" +
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
-            ", userName='" + getUserName() + "'" +
+            ", userName='" + getUsername() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
             ", profilePic='" + getProfilePic() + "'" +
             ", gender='" + getGender() + "'" +
-            ", showCityInProfile='" + isShowCityInProfile() + "'" +
+
             ", city='" + getCity() + "'" +
             ", userInformation='" + getUserInformation() + "'" +
             "}";
