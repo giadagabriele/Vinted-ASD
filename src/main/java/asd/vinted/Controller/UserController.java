@@ -28,11 +28,6 @@ public class UserController {
         return  new ResponseEntity<>(
                 message,
                 HttpStatus.OK);
-
-
-
-
-
     }
 
 
@@ -46,8 +41,6 @@ public class UserController {
                 return ResponseEntity.ok(user2);
 
             return ResponseEntity.ok(user2);
-
-
 
     }
 }

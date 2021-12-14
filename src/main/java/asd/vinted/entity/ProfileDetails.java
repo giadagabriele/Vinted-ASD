@@ -1,11 +1,13 @@
 package asd.vinted.entity;
 
 public class ProfileDetails {
+    private Long userId;
     private String profilePic;
     private boolean showCityInProfile;
     private String country;
     private String city;
     private String motherTongue;
+    private String userInformation;
 
 
     public String getProfilePic() {
@@ -52,15 +54,33 @@ public class ProfileDetails {
         this.motherTongue = motherTongue;
     }
 
+    public String getUserInformation() {
+        return this.userInformation;
+    }
+
+    public void setUserInformation(String userInformation) {
+        this.userInformation = userInformation;
+    }
+
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
 
     @Override
     public String toString() {
         return "{" +
-            " profilePic='" + getProfilePic() + "'" +
+            " userId='" + getUserId() + "'" +
+            ", profilePic='" + getProfilePic() + "'" +
             ", showCityInProfile='" + isShowCityInProfile() + "'" +
             ", country='" + getCountry() + "'" +
             ", city='" + getCity() + "'" +
             ", motherTongue='" + getMotherTongue() + "'" +
+            ", userInformation='" + getUserInformation() + "'" +
             "}";
     }
 

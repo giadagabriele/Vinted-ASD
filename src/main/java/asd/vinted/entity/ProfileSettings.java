@@ -3,6 +3,7 @@ package asd.vinted.entity;
 import java.sql.Date;
 
 public class ProfileSettings {
+    private Long userId;
     private String email;
     private String phoneNumber;
     private String firstName;
@@ -10,8 +11,15 @@ public class ProfileSettings {
     private String gender;
     private Date dateOfBirth;
     private String city;
-    private String motherTongue;
 
+
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getEmail() {
         return this.email;
@@ -69,27 +77,22 @@ public class ProfileSettings {
         this.city = city;
     }
 
-    public String getMotherTongue() {
-        return this.motherTongue;
-    }
-
-    public void setMotherTongue(String motherTongue) {
-        this.motherTongue = motherTongue;
-    }
-
-
     @Override
     public String toString() {
         return "{" +
-            " email='" + getEmail() + "'" +
+            " userId='" + getUserId() + "'" +
+            ", email='" + getEmail() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", gender='" + getGender() + "'" +
             ", dateOfBirth='" + getDateOfBirth() + "'" +
             ", city='" + getCity() + "'" +
-            ", motherTongue='" + getMotherTongue() + "'" +
             "}";
     }
+
+
+
+
 
 }
