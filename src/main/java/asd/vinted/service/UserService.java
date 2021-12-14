@@ -4,6 +4,7 @@ import javax.sound.sampled.Line;
 
 import antlr.collections.List;
 import asd.vinted.entity.ProfileDetails;
+import asd.vinted.entity.ProfileSettings;
 import asd.vinted.entity.User;
 import asd.vinted.util.UserAlreadyExistAuthenticationException;
 
@@ -15,4 +16,6 @@ public interface UserService {
     User getUserById(int id);
     
     ProfileDetails getUserDetails(int id);
+    boolean updateUserDetails(ProfileDetails userdetails);
+    boolean updateUserProfileSettings(ProfileSettings userProfiles);
 }

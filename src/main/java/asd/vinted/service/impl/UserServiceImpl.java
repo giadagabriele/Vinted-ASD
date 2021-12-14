@@ -3,6 +3,7 @@ package asd.vinted.service.impl;
 import asd.vinted.dao.UserDao;
 import asd.vinted.dao.UserInformationDao;
 import asd.vinted.entity.ProfileDetails;
+import asd.vinted.entity.ProfileSettings;
 import asd.vinted.entity.User;
 import asd.vinted.entity.UserInformation;
 import asd.vinted.service.UserService;
@@ -69,14 +70,71 @@ public class UserServiceImpl implements UserService {
 
         if (user != null) {
             profileDetails.setProfilePic(user.getProfilePic());
-            // profileDetails.setCity(user.getCity());
+            // profileDetails.setCity(user);
             profileDetails.setShowCityInProfile(user.getShowCityInProfile());
             // profileDetails.setMotherTongue(user.getMotherTongue());
             if (userInf != null)
                 profileDetails.setUserInformation(userInf.getInformation());
-                return profileDetails;
+            return profileDetails;
         }
         return null;
+    }
+
+    @Override
+    public boolean updateUserDetails(ProfileDetails userdetails) {
+
+        try {
+            User user = new User();
+            user.setId(userdetails.getUserId());
+            user.setProfilePic(userdetails.getProfilePic());
+            user.setShowCityInProfile(userdetails.getShowCityInProfile());
+            // user.setCity(userdetails.getCity());
+
+            // update user details
+            userDao.save(user);
+
+            UserInformation userInformation = new UserInformation();
+            // get user information by Id first
+            userInformation = userInfoDao.findByUserId(user.getId());
+            if (userInformation.getInformation() != null || !userInformation.getInformation().isEmpty())
+                userInformation
+                        .setInformation(userInformation.getInformation() + "," + userdetails.getUserInformation());
+            else
+                userInformation.setInformation(userdetails.getUserInformation());
+
+            // updatee user information
+            userInfoDao.save(userInformation);
+
+            return true;
+
+        } catch (Exception exc) {
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean updateUserProfileSettings(ProfileSettings userProfiles) {
+
+        try {
+
+            User user = new User();
+            user.setId(userProfiles.getUserId());
+            user.setProfilePic(userProfiles.getEmail());
+            user.setPhoneNumber(userProfiles.getPhoneNumber());
+            user.setFirstname(userProfiles.getFirstName());
+            user.setLastName(userProfiles.getLastName());
+            user.setBirthDate(userProfiles.getDateOfBirth());
+            
+            // user.setGender(userProfiles.getGender());
+            // user.setCity(userdetails.getCity());
+            userDao.save(user);
+
+            return true;
+
+        } catch (Exception exc) {
+            return false;
+        }
     }
 
 }

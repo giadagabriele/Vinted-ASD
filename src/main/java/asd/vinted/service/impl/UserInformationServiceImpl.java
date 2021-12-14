@@ -38,12 +38,11 @@ public class UserInformationServiceImpl implements UserInformationService {
 
     @Override
     public boolean updateUserInformation(UserInformation user) {
-        // try {
-        //     userInformationDao.update(user);
-        //     return true;
-        // } catch (Exception ex) {
-        //     return false;
-        // }
-        return false;
+        try {
+            userInformationDao.save(user);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 }
