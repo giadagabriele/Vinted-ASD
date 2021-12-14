@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+/*import { Component, OnInit } from "@angular/core";
 import { AuthService, SocialUser } from "angularx-social-login";
 import { ResponseModel, UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   userProfile: User;
   isProfileLoaded: boolean = false;
 
-  /* Properties for the profile form */
+   Properties for the profile form 
   updateProfileForm: FormGroup;
   userid: FormControl;
   email: FormControl;
@@ -205,4 +205,52 @@ export class ProfileComponent implements OnInit {
     }
 }
 
+}
+*/
+import {Component, OnInit} from '@angular/core';
+import {AuthService, SocialUser} from 'angularx-social-login';
+import {ResponseModel, UserService} from '../../services/user.service';
+import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
+})
+export class ProfileComponent implements OnInit {
+  myUser: any;
+
+
+  constructor(private authService: AuthService,
+              private userService: UserService,
+              private router: Router) {
+  }
+
+  ngOnInit(): void {
+    if (!this.userService.auth) 
+      this.router.navigateByUrl( '/login');
+
+    this.userService.userData$
+      .pipe(
+        map((user: SocialUser | ResponseModel) => {
+          if (user instanceof SocialUser || user.type === 'social') {
+            return {
+              ...user,
+              email: 'test@test.com',
+
+            };
+          } else {
+            return user;
+          }
+        })
+      )
+      .subscribe((data: ResponseModel | SocialUser) => {
+        this.myUser = data;
+      });
+  }
+
+  logout() {
+    this.userService.logout();
+  }
 }

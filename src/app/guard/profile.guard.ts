@@ -15,9 +15,10 @@ export class ProfileGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+      console.log(this.userService.auth)
      if (this.userService.auth) {
        return true;
+
      }
 
      this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}}).then();
