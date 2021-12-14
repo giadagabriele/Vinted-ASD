@@ -11,6 +11,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-profile",
@@ -71,28 +72,29 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private fb: FormBuilder
+    // private mapsAPILoader: MapsAPILoader
   ) {}
 
   ngOnInit(): void {
-    this.loadUserProfile();
-    window.scroll(0, 0);
+    //this.loadUserProfile();
+    //window.scroll(0, 0);
 
-    // this.userService.userData$
-    //   .pipe(
-    //     map((user: SocialUser | ResponseModel) => {
-    //       if (user instanceof SocialUser || user.type === "social") {
-    //         return {
-    //           ...user,
-    //           email: "test@test.com",
-    //         };
-    //       } else {
-    //         return user;
-    //       }
-    //     })
-    //   )
-    //   .subscribe((data: ResponseModel | SocialUser) => {
-    //     this.myUser = data;
-    //   });
+    this.userService.userData$
+      .pipe(
+        map((user: SocialUser | ResponseModel) => {
+          if (user instanceof SocialUser || user.type === "social") {
+            return {
+              ...user,
+              email: "test@test.com",
+            };
+          } else {
+            return user;
+          }
+        })
+      )
+      .subscribe((data: ResponseModel | SocialUser) => {
+        this.myUser = data;
+      });
   }
 
   logout() {
@@ -184,7 +186,6 @@ export class ProfileComponent implements OnInit {
   showErrorModal() {
     this.modalTitle = "Update Error";
     this.modalMessage = "Please review errors and try again";
-    //$("#errorModal").modal("show");
   }
 
   triggerInput() {
@@ -203,6 +204,95 @@ export class ProfileComponent implements OnInit {
                 .attr('src', reader.result as string);
         };
     }
+}
+onSubmit() {
+  if (this.updateProfileForm.valid) {
+      this.isProfileLoaded = false;
+      let userDetails = this.updateProfileForm.value;
+      // userDetails.country = this.ProfileDetails.billingAddress.country;
+      // userDetails.scountry = this.ProfileDetails.shippingAddress.country;
+         //userDetails.gender =
+         // this.userProfile.Ge == 'null' || this.ProfileDetails.gender == '' ? 'Prefer Not To Say' : this.ProfileDetails.gender;
+
+      Swal.fire({
+          title: 'Enter your password',
+          input: 'password',
+          inputAttributes: {
+              autocapitalize: 'off'
+          },
+          showCancelButton: true,
+          confirmButtonText: 'Update Profile',
+          showLoaderOnConfirm: true,
+          preConfirm: (password) => {
+              userDetails.password = password;
+              this.userService.updateUserProfile(userDetails).subscribe((result) => {
+                  this.toastr.success(result.message);
+                  this.userService.clearCache();
+                  this.loadUserProfile();
+                  this.isProfileLoaded = true;
+              });
+          }
+      }).then((result) => {
+          if (result.dismiss) {
+              this.isProfileLoaded = true;
+          }
+      });
+  } else {
+      this.errorList = [];
+      const controls = this.updateProfileForm.controls;
+
+      for (let name in controls) {
+          if (controls[name].invalid) {
+              let errorDescription = '';
+              if (controls[name].hasError('required')) {
+                  switch (name) {
+                      // case 'isTermsAccepted':
+                      //     errorDescription = 'acceptance of Term is required';
+                      //     this.errorList.push(errorDescription);
+                      //     break;
+                  }
+              } else {
+                  errorDescription = 'Please review ' + name;
+                  this.errorList.push(errorDescription);
+              }
+              controls[name].markAsTouched();
+          }
+      }
+      console.log(this.errorList);
+      this.showErrorModal();
+  }
+}
+
+async getCurrentCountry(){
+  // return  await  new Promise((resolve,reject)=>{
+  //   if ('geolocation' in navigator) {
+  //     navigator.geolocation.getCurrentPosition( async (position) => {
+  //       // console.log(position);
+  //       this.mapsAPILoader.load().then(() => {
+  //         const geocoder = new google.maps.Geocoder();
+  //         const latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  //         const request = { latLng: latlng };
+
+  //         geocoder.geocode(request, (results, status) => {
+  //           if (status === google.maps.GeocoderStatus.OK) {
+  //             console.log(results);
+  //             let address_components = results[0].address_components;
+  //             let address = address_components.filter(r=>{
+  //               if(r.types[0] == 'country'){
+  //                 return r;
+  //               }
+  //             }).map(r=>{
+  //               return r.short_name;
+  //             })
+  //             console.log(address);
+  //             resolve(address[0]);
+  //           }
+  //         });
+  //       });
+
+  //     });
+  //   }
+  // })
 }
 
 }

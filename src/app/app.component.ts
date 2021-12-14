@@ -39,4 +39,8 @@ export class AppComponent {
   navigateToContact(){
     this.router.navigateByUrl('/contact')
   }
+
+  navigateToPersonalization(){
+    this.router.navigateByUrl('/personalization')
+  }
 }

@@ -1,7 +1,7 @@
 import { User } from './../models/user.model';
 import {Injectable} from '@angular/core';
 import {AuthService, GoogleLoginProvider, SocialUser} from 'angularx-social-login';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from 'environment';
 import {BehaviorSubject, Observable, of, ReplaySubject} from 'rxjs';
 import { catchError, map, shareReplay } from "rxjs/operators";
@@ -21,11 +21,14 @@ export class UserService {
   userRole: number;
   registerMessage: any;
   userSocial:SocialUser;
+  private UserName = new BehaviorSubject<string>("null");
+  private Email = new BehaviorSubject<string>(null);
+  private baseUrlUpdateProfile: string = "http://localhost:8080/user/";
   private userProfile: Observable<any>;
   private activityDetails$: Observable<any>;
 
   constructor(private authService: AuthService,
-              private httpClient: HttpClient) {
+              private httpClient: HttpClient,  private router: Router) {
 
     authService.authState.subscribe((user: SocialUser) => {
       console.log(user);
@@ -136,7 +139,7 @@ export class UserService {
       return true;
     });
   }
-/*
+
   getUserProfile(): Observable<any> {
     let params = new HttpParams().set("username", this.UserName.getValue());
 
@@ -189,7 +192,6 @@ export class UserService {
         );
 }
 
-*/
 }
 
 
