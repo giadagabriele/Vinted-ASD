@@ -45,7 +45,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "cityId", referencedColumnName = "id")
-    private City city;
+    public City city;
 
     @OneToOne
     @JoinColumn(name = "userInformationId", referencedColumnName = "id")
