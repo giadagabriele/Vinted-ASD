@@ -6,6 +6,7 @@ public class ProfileDetails {
     private String country;
     private String city;
     private String motherTongue;
+    private String userInformation;
 
 
     public String getProfilePic() {
@@ -52,6 +53,14 @@ public class ProfileDetails {
         this.motherTongue = motherTongue;
     }
 
+    public String getUserInformation() {
+        return this.userInformation;
+    }
+
+    public void setUserInformation(String userInformation) {
+        this.userInformation = userInformation;
+    }
+
 
     @Override
     public String toString() {
@@ -61,7 +70,14 @@ public class ProfileDetails {
             ", country='" + getCountry() + "'" +
             ", city='" + getCity() + "'" +
             ", motherTongue='" + getMotherTongue() + "'" +
+            ", userInformation='" + getUserInformation() + "'" +
             "}";
     }
+
+
+
+    
+
+  
 
 }

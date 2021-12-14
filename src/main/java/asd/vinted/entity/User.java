@@ -51,8 +51,9 @@ public class User {
     @JoinColumn(name = "userInformationId", referencedColumnName = "id")
     private UserInformation userInformation;
     
+
     public long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(long id) {
@@ -60,7 +61,7 @@ public class User {
     }
 
     public String getFirstname() {
-        return firstname;
+        return this.firstname;
     }
 
     public void setFirstname(String firstname) {
@@ -68,7 +69,7 @@ public class User {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -76,7 +77,7 @@ public class User {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
@@ -84,7 +85,7 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -92,7 +93,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -100,15 +101,23 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public Date getBirthDate() {
-        return birthDate;
+        return this.birthDate;
     }
 
     public void setBirthDate(Date birthDate) {
@@ -116,19 +125,11 @@ public class User {
     }
 
     public String getProfilePic() {
-        return profilePic;
+        return this.profilePic;
     }
 
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
     }
 
     public Gender getGender() {
@@ -150,6 +151,15 @@ public class User {
     public void setShowCityInProfile(boolean showCityInProfile) {
         this.showCityInProfile = showCityInProfile;
     }
+
+    public City getCity() {
+        return this.city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     public UserInformation getUserInformation() {
         return this.userInformation;
     }
@@ -157,15 +167,6 @@ public class User {
     public void setUserInformation(UserInformation userInformation) {
         this.userInformation = userInformation;
     }
-
-    public String getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
 
     @Override
     public String toString() {
@@ -177,6 +178,7 @@ public class User {
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
             ", userName='" + getUserName() + "'" +
+            ", phoneNumber='" + getPhoneNumber() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
             ", profilePic='" + getProfilePic() + "'" +
             ", gender='" + getGender() + "'" +
@@ -185,5 +187,9 @@ public class User {
             ", userInformation='" + getUserInformation() + "'" +
             "}";
     }
+ 
+
+
+
 
 }
