@@ -21,7 +21,6 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
 import {RegisterComponent} from '@app/components/register/register.component';
 import {HomeLayoutComponent} from '@app/components/home-layout/home-layout.component';
 
-
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -59,7 +58,9 @@ export function provideConfig() {
     ToastrModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    HttpClientModule,
+
   ],
   providers: [
     {
@@ -69,5 +70,6 @@ export function provideConfig() {
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

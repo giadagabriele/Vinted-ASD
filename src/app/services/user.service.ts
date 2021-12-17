@@ -1,28 +1,28 @@
-import { User } from "./../models/user.model";
-import { Injectable } from "@angular/core";
+import { User } from './../models/user.model';
+import { Injectable } from '@angular/core';
 import {
   AuthService,
   GoogleLoginProvider,
   SocialUser,
-} from "angularx-social-login";
+} from 'angularx-social-login';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
   HttpParams,
-} from "@angular/common/http";
-import { environment } from "environment";
-import { BehaviorSubject, Observable, of, ReplaySubject } from "rxjs";
-import { catchError, map, shareReplay } from "rxjs/operators";
-import { Router } from "@angular/router";
+} from '@angular/common/http';
+import { environment } from 'environment';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
+import { catchError, map, shareReplay } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UserService {
   auth = false;
   private SERVER_URL = environment.SERVER_URL;
-  private baseUrlUpdateProfile: string = "http://localhost:8080/user/";
+  private baseUrlUpdateProfile = `${this.SERVER_URL}user/`;
   // tslint:disable-next-line:new-parens
   private user = new User();
   authState$ = new BehaviorSubject<boolean>(this.auth);
@@ -31,9 +31,9 @@ export class UserService {
 
   userRole: number;
   registerMessage: any;
-  private UserName = new BehaviorSubject<string>("null");
+  private UserName = new BehaviorSubject<string>('null');
   private Email = new BehaviorSubject<string>(null);
-  //private UserRole = new BehaviorSubject<string>(this.cookieService.get('userRole'));
+  // private UserRole = new BehaviorSubject<string>(this.cookieService.get('userRole'));
 
   private userProfile: Observable<any>;
   private activityDetails$: Observable<any>;
@@ -56,12 +56,12 @@ export class UserService {
                   email: user.email,
                   fname: user.firstName,
                   lname: user.lastName,
-                  password: "123456",
+                  password: '123456',
                 },
                 user.photoUrl,
-                "social"
+                'social'
               ).subscribe((response) => {
-                if (response.message === "Registration successful") {
+                if (response.message === 'Registration successful') {
                   this.auth = true;
                   this.userRole = 555;
                   this.authState$.next(this.auth);
@@ -83,10 +83,10 @@ export class UserService {
   //  Login User with Email and Password
   loginUser(email: string, password: string) {
     this.httpClient
-      .post<ResponseModel>(`${this.SERVER_URL}/auth/login`, { email, password })
+      .post<ResponseModel>(`${this.SERVER_URL}auth/login`, { email, password })
       .pipe(catchError((err: HttpErrorResponse) => of(err.error.message)))
       .subscribe((data: ResponseModel) => {
-        if (typeof data === "string") {
+        if (typeof data === 'string') {
           this.loginMessage$.next(data);
         } else {
           this.auth = data.auth;
@@ -129,10 +129,10 @@ export class UserService {
   }
   registraUser(user: User): Observable<string> {
     console.log(user);
-    const headers = new HttpHeaders().set("responsType", "text");
+    const headers = new HttpHeaders().set('responsType', 'text');
     return this.httpClient.post(`${this.SERVER_URL}user/registration`, user, {
       headers,
-      responseType: "text" as const,
+      responseType: 'text' as const,
     });
   }
 
@@ -140,10 +140,10 @@ export class UserService {
     this.user.email = email;
     this.user.password = password;
     this.httpClient
-      .post("http://localhost:8080/user/login", this.user)
+      .post(`${this.SERVER_URL}user/login`, this.user)
       .subscribe((res) => {
         console.log(res);
-        if (res != undefined) {
+        if (res !== undefined) {
           this.auth = true;
           this.userRole = 1;
           this.authState$.next(true);
@@ -152,7 +152,7 @@ export class UserService {
         } else {
           this.auth = false;
           this.loginMessage$.next(
-            "Incorrect email address or password, please try again"
+            'Incorrect email address or password, please try again'
           );
         }
         return true;
@@ -160,14 +160,14 @@ export class UserService {
   }
 
   getUserProfile(): Observable<any> {
-    let params = new HttpParams().set("username", this.UserName.getValue());
+    const params = new HttpParams().set('username', this.UserName.getValue());
 
-    if (params.get("username") !== null) {
+    if (params.get('username') !== null) {
       if (!this.userProfile) {
         this.userProfile = this.httpClient
           .get<any>(
-            this.baseUrlUpdateProfile + "/" + this.UserName.getValue(),
-            { params: params }
+            this.baseUrlUpdateProfile + '/' + this.UserName.getValue(),
+            { params }
           )
           .pipe(
             shareReplay(),
@@ -186,14 +186,14 @@ export class UserService {
       }
       return this.userProfile;
     } else {
-      this.router.navigate(["/login"]);
+      this.router.navigate(['/login']);
       return new Observable<Error>();
     }
   }
 
   updateUserProfile(userDetails: any) {
     const formdata = new FormData();
-    let params = new HttpParams().set('username', this.UserName.getValue());
+    const params = new HttpParams().set('username', this.UserName.getValue());
 
     for (const key of Object.keys(userDetails)) {
         const value = userDetails[key];
@@ -212,7 +212,7 @@ export class UserService {
 }
 
 clearCache() {
-  this.userProfile= null;
+  this.userProfile = null;
 }
 
 }

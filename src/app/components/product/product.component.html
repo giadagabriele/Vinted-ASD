@@ -8,8 +8,8 @@
                 <ul class="breadcrumb-tree">
                     <!-- <li><a href="#">Product Home</a></li>
                     <li><a href="#">All Categories</a></li> -->
-                    <li><a href="#">{{product.category}}</a></li>
-                    <li class="active">{{product.name}}</li>
+
+                    <li class="active">{{product.category}}</li>
                 </ul>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <ng-template [ngIf]="thumbImages.length === 0">
                     <div id="product-imgs">
                         <div class="product-preview">
-                            <img [src]="product.image" alt="{{product.name}}">
+                            <img [src]="image" alt="{{product.name}}">
                         </div>
                     </div>
                 </ng-template>

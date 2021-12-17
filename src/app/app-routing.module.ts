@@ -1,3 +1,4 @@
+import { ProductModelServer } from './models/product.model';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProductComponent} from './components/product/product.component';
@@ -70,18 +71,21 @@ const routes: Routes = [
         path: 'cook' , component: CookComponent
       },
       {
-        path: 'technology' , component: TechnologyComponent 
+        path: 'technology' , component: TechnologyComponent
       },
       {
         path: 'book' , component: BookComponent
+      },
+      {
+        path: 'product', component: ProductComponent
       }
-  
+
     ]
   },
   // Wildcard Route if no route is found == 404 NOTFOUND page
    // Wildcard Route if no route is found == 404 NOTFOUND page
    { path: 'myprofile', loadChildren: () => import('./components/profile/profile/profile.module').then(m => m.ProfileModule) },
-  
+
   // { path: 'myprofile', loadChildren: () => import(`./profile/profile.module`).then(m => m.ProfileModule)
    {
     path: '**', pathMatch: 'full', redirectTo: ''
