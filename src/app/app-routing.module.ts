@@ -1,3 +1,4 @@
+import { ProductModelServer } from './models/product.model';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProductComponent} from './components/product/product.component';
@@ -17,6 +18,7 @@ import { AccessoriesComponent } from './components/accessories/accessories.compo
 import { CookComponent } from './components/cook/cook.component';
 import { TechnologyComponent } from './components/technology/technology.component';
 import { BookComponent } from './components/book/book.component';
+import { PersonalizationComponent } from './components/personalization/personalization.component';
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
   // put only header, footer and router-outlet there
@@ -51,6 +53,9 @@ const routes: Routes = [
         path: 'register', component: RegisterComponent
       },
       {
+        path: 'personalization', component: PersonalizationComponent
+      },
+      {
         path: 'contact', component: ContactComponent
       },
       {
@@ -66,18 +71,21 @@ const routes: Routes = [
         path: 'cook' , component: CookComponent
       },
       {
-        path: 'technology' , component: TechnologyComponent 
+        path: 'technology' , component: TechnologyComponent
       },
       {
         path: 'book' , component: BookComponent
+      },
+      {
+        path: 'product', component: ProductComponent
       }
-  
+
     ]
   },
   // Wildcard Route if no route is found == 404 NOTFOUND page
    // Wildcard Route if no route is found == 404 NOTFOUND page
    { path: 'myprofile', loadChildren: () => import('./components/profile/profile/profile.module').then(m => m.ProfileModule) },
-  
+
   // { path: 'myprofile', loadChildren: () => import(`./profile/profile.module`).then(m => m.ProfileModule)
    {
     path: '**', pathMatch: 'full', redirectTo: ''

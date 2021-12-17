@@ -21,11 +21,10 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
 import {RegisterComponent} from '@app/components/register/register.component';
 import {HomeLayoutComponent} from '@app/components/home-layout/home-layout.component';
 
-
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('799705726167-vn6184fsovmps0kpbg5c7jabv15r3ias.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider('303960986715-qtdi8and1rpcerlaom82f56hp9a5g1t8.apps.googleusercontent.com')
   }
 
 ]);
@@ -59,15 +58,19 @@ export function provideConfig() {
     ToastrModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    HttpClientModule,
+
   ],
   providers: [
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
     }
+    
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+/*import { Component, OnInit } from "@angular/core";
 import { AuthService, SocialUser } from "angularx-social-login";
 import { ResponseModel, UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   userProfile: User;
   isProfileLoaded: boolean = false;
 
-  /* Properties for the profile form */
+   Properties for the profile form 
   updateProfileForm: FormGroup;
   userid: FormControl;
   email: FormControl;
@@ -72,28 +72,29 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private fb: FormBuilder
+    // private mapsAPILoader: MapsAPILoader
   ) {}
 
   ngOnInit(): void {
-    this.loadUserProfile();
-    window.scroll(0, 0);
+    //this.loadUserProfile();
+    //window.scroll(0, 0);
 
-    // this.userService.userData$
-    //   .pipe(
-    //     map((user: SocialUser | ResponseModel) => {
-    //       if (user instanceof SocialUser || user.type === "social") {
-    //         return {
-    //           ...user,
-    //           email: "test@test.com",
-    //         };
-    //       } else {
-    //         return user;
-    //       }
-    //     })
-    //   )
-    //   .subscribe((data: ResponseModel | SocialUser) => {
-    //     this.myUser = data;
-    //   });
+    this.userService.userData$
+      .pipe(
+        map((user: SocialUser | ResponseModel) => {
+          if (user instanceof SocialUser || user.type === "social") {
+            return {
+              ...user,
+              email: "test@test.com",
+            };
+          } else {
+            return user;
+          }
+        })
+      )
+      .subscribe((data: ResponseModel | SocialUser) => {
+        this.myUser = data;
+      });
   }
 
   logout() {
@@ -262,4 +263,84 @@ onSubmit() {
   }
 }
 
+async getCurrentCountry(){
+  // return  await  new Promise((resolve,reject)=>{
+  //   if ('geolocation' in navigator) {
+  //     navigator.geolocation.getCurrentPosition( async (position) => {
+  //       // console.log(position);
+  //       this.mapsAPILoader.load().then(() => {
+  //         const geocoder = new google.maps.Geocoder();
+  //         const latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  //         const request = { latLng: latlng };
+
+  //         geocoder.geocode(request, (results, status) => {
+  //           if (status === google.maps.GeocoderStatus.OK) {
+  //             console.log(results);
+  //             let address_components = results[0].address_components;
+  //             let address = address_components.filter(r=>{
+  //               if(r.types[0] == 'country'){
+  //                 return r;
+  //               }
+  //             }).map(r=>{
+  //               return r.short_name;
+  //             })
+  //             console.log(address);
+  //             resolve(address[0]);
+  //           }
+  //         });
+  //       });
+
+  //     });
+  //   }
+  // })
+}
+
+}
+*/
+import {Component, OnInit} from '@angular/core';
+import {AuthService, SocialUser} from 'angularx-social-login';
+import {ResponseModel, UserService} from '../../services/user.service';
+import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
+})
+export class ProfileComponent implements OnInit {
+  myUser: any;
+
+
+  constructor(private authService: AuthService,
+              private userService: UserService,
+              private router: Router) {
+  }
+
+  ngOnInit(): void {
+    if (!this.userService.auth) 
+      this.router.navigateByUrl( '/login');
+
+    this.userService.userData$
+      .pipe(
+        map((user: SocialUser | ResponseModel) => {
+          if (user instanceof SocialUser || user.type === 'social') {
+            return {
+              ...user,
+              email: 'test@test.com',
+
+            };
+          } else {
+            return user;
+          }
+        })
+      )
+      .subscribe((data: ResponseModel | SocialUser) => {
+        this.myUser = data;
+      });
+  }
+
+  logout() {
+    this.userService.logout();
+  }
 }

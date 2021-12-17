@@ -5,17 +5,26 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {map} from 'rxjs/operators';
 
 declare let $: any;
-
+export class Product {
+  constructor(
+    public id: number,
+    public name: string,
+    public brand: string,
+    public image: string,
+    public catagory: string,
+  ) { }
+}
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit, AfterViewInit {
-  id: number;
-  product;
-  thumbImages: any[] = [];
 
+export class ProductComponent implements OnInit, AfterViewInit {
+  [x: string]: any;
+  id: number;
+  product: any;
+  thumbImages: any[] = [];
   @ViewChild('quantity') quantityInput;
 
   constructor(private productService: ProductService,
@@ -32,7 +41,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
         })
       )
       .subscribe(prodId => {
-        this.id = (prodId === 0) ? prodId : 2 ;
+        this.id = prodId;
+        if (this.id == null) {
+          this.productService.getAllProduct().subscribe(prod => {
+            (// tslint:disable-next-line:no-unused-expression
+           response: any) => {
+             console.log('the value is ', response);
+             this.Product = response;
+           };
+          });
+        } else {
         this.productService.getSingleProduct(this.id).subscribe(prod => {
           this.product = prod;
 
@@ -41,6 +59,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
           }
 
         });
+      }
       });
   }
 

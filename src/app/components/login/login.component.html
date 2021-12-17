@@ -1,35 +1,30 @@
-<div class="container">
-  <div class="jumbotron">
-    <div class="row">
-      <div class="col-md-6 d-flex mx-auto flex-column">
-        <ng-container *ngIf="loginMessage?.length > 0">
-          <div class="alert alert-danger alert-dismissible text-center">
-            {{loginMessage}}
-          </div>
-        </ng-container>
-        <form novalidate #myform="ngForm">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-control" id="email" type="email" [(ngModel)]="email" name="email" required>
-          </div>
 
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input class="form-control" id="password" type="password" [(ngModel)]="password" name="password" required>
-          </div>
-          <div class="d-flex flex-column align-items-center justify-content-around">
-            <button class="btn btn-primary btn-sm btn-block" (click)="login(myform)" [disabled]="myform.invalid && myform.touched">Login</button>
-            <hr>
-            <h4 class="text-uppercase"><strong>Login Using</strong></h4>
-
-            <button (click)="signInWithGoogle()" class="btn btn-danger btn-sm btn-block mt-4"><span><i
-              class="fa fa-google"></i> Google </span>
-            </button>
-          </div>
-        </form>
-
-
-      </div>
-    </div>
-  </div>
+<div class="container" id="container">
+	
+	<div class="form-container sign-in-container">
+		<form [formGroup]="formSignIn" (ngSubmit)="login()">
+					<h1>Sign in</h1>
+			<div class="social-container">
+				
+				<a (click)="signInWithGoogle()" class="social"><i class="fa fa-google"></i></a>
+			
+			</div>
+			<span>or use your account</span>
+			<input type="email" placeholder="Email" formControlName="email" name="email" />
+			<input type="password" placeholder="Password" formControlName="password" name="password"/>
+			<a href="#">Forgot your password?</a>
+			<button>Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+		
+			<div class="overlay-panel overlay-right">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info or you can just sign up</p>
+				<a routerLink="/register"><button class="ghost">Sign Up</button>
+        </a>
+        </div>
+		</div>
+	</div>
 </div>
