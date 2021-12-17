@@ -1,6 +1,6 @@
 package asd.vinted.data.service;
 
-import asd.vinted.entity.UserInformation;
+import asd.vinted.data.entity.UserInformation;
 
 public interface UserInformationService {
     UserInformation findById(Long i);

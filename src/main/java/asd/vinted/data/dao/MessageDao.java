@@ -1,6 +1,6 @@
-package asd.vinted.dao;
+package asd.vinted.data.dao;
 
-import asd.vinted.entity.Message;
+import asd.vinted.data.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MessageDao extends JpaRepository<Message,Long> {

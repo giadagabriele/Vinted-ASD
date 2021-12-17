@@ -3,15 +3,14 @@ package asd.vinted.data.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import asd.vinted.dao.UserDao;
-import asd.vinted.dao.UserInformationDao;
-import asd.vinted.entity.User;
-import asd.vinted.entity.UserInformation;
-import asd.vinted.service.UserInformationService;
+import asd.vinted.data.dao.UserDao;
+import asd.vinted.data.dao.UserInformationDao;
+import asd.vinted.data.entity.User;
+import asd.vinted.data.entity.UserInformation;
+import asd.vinted.data.service.UserInformationService;
 
 @Service
 public class UserInformationServiceImpl implements UserInformationService {
-
     @Autowired
     private UserInformationDao userInformationDao;
 

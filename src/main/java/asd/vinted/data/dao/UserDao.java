@@ -1,6 +1,6 @@
-package asd.vinted.dao;
+package asd.vinted.data.dao;
 
-import asd.vinted.entity.User;
+import asd.vinted.data.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

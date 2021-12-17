@@ -1,8 +1,7 @@
 package asd.vinted.Controller;
 
-import asd.vinted.dto.UserDto;
-import asd.vinted.entity.User;
-import asd.vinted.service.UserService;
+import asd.vinted.data.entity.User;
+import asd.vinted.data.service.UserService;
 import asd.vinted.util.UserAlreadyExistAuthenticationException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,28 +28,23 @@ public class UserController {
         return  new ResponseEntity<>(
                 message,
                 HttpStatus.OK);
-
-
-
-
-
     }
 
 
     @PostMapping(value = "/login")
-    public ResponseEntity<UserDto> loginUser(@RequestBody User user){
+    public ResponseEntity<User> loginUser(@RequestBody User user){
 
-        UserDto userLogin=null;
+        User userLogin=null;
         userLogin=userService.findByEmailAndPassword(user.getEmail(),user.getPassword());
         System.out.println(userLogin);
         return ResponseEntity.ok(userLogin);
     }
 
     @PostMapping (value = "/loginGoogle")
-    public ResponseEntity<UserDto> loginUserGoogle(@RequestBody User user){
+    public ResponseEntity<User> loginUserGoogle(@RequestBody User user){
 
 
-        UserDto userLogin=userService.findByEmail(user.getEmail());
+        User userLogin=userService.findByEmail(user.getEmail());
         return ResponseEntity.ok(userLogin);
     }
 }

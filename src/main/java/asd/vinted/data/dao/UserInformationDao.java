@@ -3,8 +3,8 @@ package asd.vinted.data.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import asd.vinted.entity.User;
-import asd.vinted.entity.UserInformation;
+import asd.vinted.data.entity.User;
+import asd.vinted.data.entity.UserInformation;
 
 public interface UserInformationDao extends JpaRepository<UserInformation,Long> {
 

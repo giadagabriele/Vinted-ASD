@@ -1,6 +1,6 @@
-package asd.vinted.dao;
+package asd.vinted.data.dao;
 
-import asd.vinted.entity.SubCategory;
+import asd.vinted.data.entity.SubCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SubCategoryDao extends JpaRepository<SubCategory,Long> {

@@ -1,4 +1,4 @@
-package asd.vinted.entity;
+package asd.vinted.data.entity;
 
 public class ProfileDetails {
     private Long userId;
@@ -9,6 +9,14 @@ public class ProfileDetails {
     private String motherTongue;
     private String userInformation;
 
+
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getProfilePic() {
         return this.profilePic;
@@ -62,15 +70,6 @@ public class ProfileDetails {
         this.userInformation = userInformation;
     }
 
-    public Long getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-
     @Override
     public String toString() {
         return "{" +
@@ -83,5 +82,5 @@ public class ProfileDetails {
             ", userInformation='" + getUserInformation() + "'" +
             "}";
     }
-
+    
 }

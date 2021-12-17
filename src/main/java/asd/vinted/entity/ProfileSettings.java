@@ -1,4 +1,4 @@
-package asd.vinted.data.entity;
+package asd.vinted.entity;
 
 import java.sql.Date;
 
@@ -11,7 +11,6 @@ public class ProfileSettings {
     private String gender;
     private Date dateOfBirth;
     private String city;
-    private String profilePic;
 
 
     public Long getUserId() {
@@ -78,14 +77,6 @@ public class ProfileSettings {
         this.city = city;
     }
 
-    public String getProfilePic() {
-        return this.profilePic;
-    }
-
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
-    }
-
     @Override
     public String toString() {
         return "{" +
@@ -97,8 +88,11 @@ public class ProfileSettings {
             ", gender='" + getGender() + "'" +
             ", dateOfBirth='" + getDateOfBirth() + "'" +
             ", city='" + getCity() + "'" +
-            ", profilePic='" + getProfilePic() + "'" +
             "}";
     }
+
+
+
+
 
 }

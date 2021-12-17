@@ -1,4 +1,4 @@
-package asd.vinted.service;
+package asd.vinted.data.service;
 
 public interface CategoryService {
 }

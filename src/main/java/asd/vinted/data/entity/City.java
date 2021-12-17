@@ -1,4 +1,4 @@
-package asd.vinted.entity;
+package asd.vinted.data.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;

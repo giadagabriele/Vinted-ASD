@@ -40,8 +40,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    //@Column(nullable = false)
-    //private boolean showCityInProfile;
+    @Column(nullable = false)
+    private boolean showCityInProfile;
 
     @ManyToOne
     @JoinColumn(name = "cityId", referencedColumnName = "id")
@@ -140,7 +140,7 @@ public class User {
         this.gender = gender;
     }
 
-/*    public boolean isShowCityInProfile() {
+    public boolean isShowCityInProfile() {
         return this.showCityInProfile;
     }
 
@@ -151,7 +151,8 @@ public class User {
     public void setShowCityInProfile(boolean showCityInProfile) {
         this.showCityInProfile = showCityInProfile;
     }
-*/
+
+
     public City getCity() {
         return this.city;
     }
@@ -168,6 +169,7 @@ public class User {
         this.userInformation = userInformation;
     }
 
+
     @Override
     public String toString() {
         return "{" +
@@ -177,16 +179,17 @@ public class User {
             ", address='" + getAddress() + "'" +
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
-            ", userName='" + getUsername() + "'" +
+            ", username='" + getUsername() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
             ", profilePic='" + getProfilePic() + "'" +
             ", gender='" + getGender() + "'" +
-
+            ", showCityInProfile='" + isShowCityInProfile() + "'" +
             ", city='" + getCity() + "'" +
             ", userInformation='" + getUserInformation() + "'" +
             "}";
     }
+  
  
 
 
