@@ -1,185 +1,84 @@
-<div class="container my-5">
-  <ng-container *ngIf="registrationMessage?.length > 0">
-    <div class="alert alert-success alert-dismissible">
-      {{registrationMessage}}
+
+<div class="container" id="container">
+
+  
+  <div class="form-container sign-in-container">    
+    <form [formGroup]="formChangesSubscription" (ngSubmit)="onSubmit()">
+
+    <h3>Create Account</h3>
+			<div class="social-container">
+				<a (click)="signInWithGoogle()" class="social"><i class="fa fa-google"></i></a>
+      </div>
+
+      <span>or use your email for registration</span>
+      <input  formControlName="firstName" name="firstName"
+      placeholder="First Name"
+      ngModel required type="text"/>
+      <span class="text-danger align-middle">
+
+        <div *ngIf="submitted && f.firstName.errors" >
+          <div *ngIf="f.firstName.errors.required">First Name is required</div>
+      </div>
+        </span>
+      <input  formControlName="lastName" name="lastName"
+      placeholder="Last Name" ngModel
+      required type="text"/>
+      <span class="text-danger align-middle">
+
+        <div *ngIf="submitted && f.lastName.errors" >
+          <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+      </div>
+        </span>
+      <input  formControlName="username" name="username"
+      placeholder="Username" ngModel
+      required type="text" />
+      
+      <span class="text-danger align-middle">
+
+        <div *ngIf="submitted && f.username.errors" >
+          <div *ngIf="f.username.errors.required">User name is required</div>
+      </div>
+        </span>
+      <input  formControlName="email" name="email"
+      placeholder="you@example.com" ngModel
+      required type="text"/>
+      <span class="text-danger align-middle">
+        <div *ngIf="submitted && f.email.errors">
+
+          <div *ngIf="f.email.errors.required">email is required</div>
+          <div *ngIf="f.email.errors.email">Not a valid email</div>
+        </div>
+      </span>
+      <input  formControlName="password" name="password" 
+      placeholder="Password" ngModel type="password" required />
+      <span class="text-danger align-middle">
+        <div *ngIf="submitted && f.password.errors">
+
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </span>
+      <input formControlName="confirmPassword"
+      name="confirmPassword" ngModel  placeholder="Confirm password" required type="password" />
+      
+      <span class="text-danger align-middle">
+        <div *ngIf="submitted && !comparePassword">
+        <i class="fa fa-close"> Passwords don't match</i>
+      </div>
+      </span>
+      <button type="submit" >Sign Up</button>
+		</form>
+	</div>
+  <div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us, if you are already registered you can just sign in</p>
+				<a routerLink="/login"><button class="ghost">Sign in</button>
+</a>
+ 			</div>
     </div>
-  </ng-container>
-
-  <form [formGroup]="formChangesSubscription" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <h2>Register New User</h2>
-        <hr>
-      </div>
     </div>
-    <div class="row">
-      <div class="col-md-3 field-label-responsive">
-        <label for="firstName">First Name</label>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-            <input class="form-control"  formControlName="firstName" name="firstName"
-                   placeholder="First Name"
-                   ngModel required type="text">
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-control-feedback">
-          <span class="text-danger align-middle">
+  </div>
 
-            <div *ngIf="submitted && f.username.errors" >
-              <div *ngIf="f.firstName.errors.required">First Name is required</div>
-          </div>
-            </span>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3 field-label-responsive">
-        <label for="lname">Last Name</label>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-            <input class="form-control"  formControlName="lastName" name="lastName"
-                   placeholder="Doe" ngModel
-                   required type="text">
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-control-feedback">
-          <span class="text-danger align-middle">
-
-          <div *ngIf="submitted && f.lastName.errors" >
-            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-        </div>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3 field-label-responsive">
-        <label for="lname">Username</label>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-            <input class="form-control"  formControlName="username" name="username"
-                   placeholder="Username" ngModel
-                   required type="text">
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-control-feedback">
-          <span class="text-danger align-middle">
-
-          <div *ngIf="submitted && f.username.errors" >
-            <div *ngIf="f.username.errors.required">User name is required</div>
-        </div>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3 field-label-responsive">
-        <label for="email">E-Mail Address</label>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
-            <input class="form-control"  formControlName="email" name="email"
-                   placeholder="you@example.com" ngModel
-                   required type="text">
-          </div>
-        </div>
-
-      </div>
-      <div class="col-md-3">
-        <div class="form-control-feedback">
-          <span class="text-danger align-middle">
-            <div *ngIf="submitted && f.email.errors">
-
-              <div *ngIf="f.email.errors.required">email is required</div>
-              <div *ngIf="f.email.errors.email">Not a valid email</div>
-            </div>
-          </span>
-        </div>
-        </div>
-      </div>
-    <div class="row">
-      <div class="col-md-3 field-label-responsive">
-        <label for="password">Password</label>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group has-danger">
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-            <input class="form-control"  formControlName="password" name="password" 
-                   placeholder="Password" ngModel
-                    type="password" required>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-control-feedback">
-          <span class="text-danger align-middle">
-            <div *ngIf="submitted && f.password.errors">
-
-              <div *ngIf="f.password.errors.required">Password is required</div>
-              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-            </div>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3 field-label-responsive">
-        <label for="password">Confirm Password</label>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-addon" style="width: 2.6rem">
-              <i class="fa fa-repeat"></i>
-            </div>
-            <input class="form-control"  formControlName="confirmPassword"
-                   name="confirmPassword" ngModel
-                   placeholder="Confirm password" required type="password">
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-control-feedback">
-        <ng-container>
-                          <span class="text-danger align-middle">
-                            <div *ngIf="submitted && !comparePassword">
-                            <i class="fa fa-close"> Passwords don't match</i>
-                          </div>
-                          </span>
-          </ng-container>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <button  [disabled]="loding"
-                class="btn btn-success" type="submit">
-          <i class="fa fa-user-plus"></i> Register
-        </button>
-      </div>
-    </div>
-
-  </form>
-
-
-</div>
+  

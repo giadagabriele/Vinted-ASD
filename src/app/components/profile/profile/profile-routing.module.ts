@@ -7,7 +7,7 @@ import { ProfileSettingsComponent } from '@app/components/profile/profile/profil
 const routes: Routes = [
   { path: '', component:ProfileDetailComponent },
   { path: 'profiledetail', component:ProfileDetailComponent
-  //, canActivate: [ProfileGuard] 
+  // , canActivate: [ProfileGuard] 
 },
   { path: 'profilesettings',component:ProfileSettingsComponent
   //,canActivate: [ProfileGuard]

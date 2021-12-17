@@ -24,11 +24,10 @@ export class UserService {
   private SERVER_URL = environment.SERVER_URL;
   private baseUrlUpdateProfile = `${this.SERVER_URL}user/`;
   // tslint:disable-next-line:new-parens
-  private user = new User();
+  private user = new User;
   authState$ = new BehaviorSubject<boolean>(this.auth);
   userData$ = new BehaviorSubject<SocialUser | ResponseModel | object>(null);
   loginMessage$ = new BehaviorSubject<string>(null);
-
   userRole: number;
   registerMessage: any;
   private UserName = new BehaviorSubject<string>('null');
@@ -38,12 +37,12 @@ export class UserService {
   private userProfile: Observable<any>;
   private activityDetails$: Observable<any>;
 
-  constructor(
-    private authService: AuthService,
-    private httpClient: HttpClient,
-    private router: Router
-  ) {
+  constructor(private authService: AuthService,
+              private httpClient: HttpClient,  private router: Router) {
+
     authService.authState.subscribe((user: SocialUser) => {
+      console.log(user);
+
       if (user != null) {
         this.httpClient
           .get(`${this.SERVER_URL}/users/validate/${user.email}`)
@@ -95,10 +94,11 @@ export class UserService {
           this.userData$.next(data);
         }
       });
+
   }
 
-  //  Google Authentication
-  googleLogin() {
+//  Google Authentication
+  googleLogin()  {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
@@ -108,12 +108,8 @@ export class UserService {
     this.authState$.next(this.auth);
   }
 
-  registerUser(
-    formData: any,
-    photoUrl?: string,
-    typeOfUser?: string
-  ): Observable<{ message: string }> {
-    const { fname, lname, email, password } = formData;
+  registerUser(formData: any, photoUrl?: string, typeOfUser?: string): Observable<{ message: string }> {
+    const {fname, lname, email, password} = formData;
     console.log(formData);
     return this.httpClient.post<{ message: string }>(
       `${this.SERVER_URL}/auth/register`,
@@ -214,17 +210,4 @@ export class UserService {
 clearCache() {
   this.userProfile = null;
 }
-
-}
-
-export interface ResponseModel {
-  auth: boolean;
-  email: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  photoUrl: string;
-  userId: number;
-  type: string;
-  role: number;
 }
