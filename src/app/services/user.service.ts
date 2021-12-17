@@ -44,7 +44,7 @@ export class UserService {
       console.log(user);
 
       if (user != null) {
-        user.id=0;
+        user.id ='';
        
         this.httpClient.post('http://localhost:8080/user/loginGoogle',user).subscribe((res) => {
        console.log(res);
