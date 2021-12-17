@@ -44,7 +44,7 @@ export class UserService {
       console.log(user);
 
       if (user != null) {
-        user.id='0';
+        user.id=0;
        
         this.httpClient.post('http://localhost:8080/user/loginGoogle',user).subscribe((res) => {
        console.log(res);
@@ -102,11 +102,12 @@ export class UserService {
   Login(email, password) {
     this.user.email = email;
     this.user.password = password;
+    console.log(this.user)
     this.httpClient
-      .post(`${this.SERVER_URL}user/login`, this.user)
+      .post('http://localhost:8080/user/login', this.user)
       .subscribe((res) => {
         console.log(res);
-        if (res !== undefined) {
+        if (res != undefined) {
           this.auth = true;
           this.userRole = 1;
           this.authState$.next(true);

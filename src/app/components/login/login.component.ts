@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
     const password = this.f.password.value;
 
     console.log(email,password)
-    this.formSignIn.reset();
+   
   
     this.userService.loginMessage$.subscribe(msg => {
       this.loginMessage = msg;
