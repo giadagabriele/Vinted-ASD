@@ -4,13 +4,16 @@ import {CartModelServer} from '../../models/cart.model';
 import {CartService} from '../../services/cart.service';
 import {UserService} from '../../services/user.service';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  selected?: string;
+  users: string[] = ['Giada','Mohamed','Antonio','Tesfay','Gebreyowhans','Beatrice']
+  noResult = false;
+
   cartData: CartModelServer;
   cartTotal: number;
   authState: boolean;
@@ -33,6 +36,10 @@ export class HeaderComponent implements OnInit {
   }
   navigateToContact(){
     this.router.navigateByUrl('/contact')
+  }
+
+  typeaheadNoResults(event: boolean): void {
+    this.noResult = event;
   }
 
 }
