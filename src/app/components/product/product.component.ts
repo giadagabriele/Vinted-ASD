@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {CartService} from '../../services/cart.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {map} from 'rxjs/operators';
 
 declare let $: any;
@@ -140,5 +140,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   addToCart(id: number) {
     this.cartService.AddProductToCart(id, this.quantityInput.nativeElement.value);
+  }
+  addFavorite(id: number) {
+    console.log('the adde favorite is ', id);
+    // this.router.navigate([`/product/${id}`]);
+
+  //   $('a').click(function(e: { preventDefault: () => void; }) {
+  //     e.preventDefault();
+  //  });
   }
 }

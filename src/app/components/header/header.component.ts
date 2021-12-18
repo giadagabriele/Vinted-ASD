@@ -28,11 +28,13 @@ export class HeaderComponent implements OnInit {
     this.userService.authState$.subscribe(authState => this.authState = authState);
   }
 
-  logout(){ 
+  logout(){
     this.userService.logout();
   }
   navigateToContact(){
     this.router.navigateByUrl('/contact')
   }
-
+  favoriteList(){
+    console.log("i am heading to the favorite list")
+  }
 }
