@@ -2,6 +2,7 @@ package asd.vinted.data.service.impl;
 
 import asd.vinted.data.dao.UserDao;
 import asd.vinted.data.dao.UserInformationDao;
+import asd.vinted.data.dto.UserDto;
 import asd.vinted.data.entity.ProfileDetails;
 import asd.vinted.data.entity.ProfileSettings;
 import asd.vinted.data.entity.User;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -21,19 +23,18 @@ public class UserServiceImpl implements UserService {
     private UserInformationDao userInfoDao;
 
     @Override
-    public User findByEmailAndPassword(String mail, String pass) {
-        User user = userDao.findByEmailAndPassword(mail, pass);
-        if (user != null)
-            return modelMapper.map(user, User.class);
+    public UserDto findByEmailAndPassword(String mail, String pass) {
+        User user= userDao.findByEmailAndPassword(mail,pass);
+        if(user!=null)
+            return modelMapper.map(user, UserDto.class);
         else
             return null;
     }
-
     @Override
-    public User findByEmail(String email) {
-        User user = userDao.findByEmail(email);
-        if (user != null)
-            return modelMapper.map(user, User.class);
+    public UserDto findByEmail(String email) {
+        User user= userDao.findByEmail(email);
+        if(user !=null)
+            return modelMapper.map(user, UserDto.class);
         return null;
     }
 
@@ -45,23 +46,25 @@ public class UserServiceImpl implements UserService {
         }
 
         if (usernameExist(u.getUsername())) {
-            return "Username is already taken";
+            return  "Username is already taken";
         }
 
-        User user = userDao.save(u);
-        if (user != null) {
+        User user= userDao.save(u);
+        if(user!=null){
             return "Congratulations, your account has been successfully created.";
-        } else
-            return "Error";
+        }
+        else
+            return  "Error";
     }
+
 
     private boolean emailExist(String email) {
         return userDao.findByEmail(email) != null;
     }
-
     private boolean usernameExist(String username) {
         return userDao.existsByUsernameEqualsIgnoreCase(username);
     }
+
 
     @Override
     public User getUserByEmail(String email) {
@@ -73,6 +76,35 @@ public class UserServiceImpl implements UserService {
         return userDao.findById(id);
     }
 
+
+
+
+    @Override
+    public boolean updateUserProfileSettings(ProfileSettings userProfiles) {
+
+        try {
+
+            User user = new User();
+            user.setId(userProfiles.getUserId());
+            user.setProfilePic(userProfiles.getEmail());
+            user.setPhoneNumber(userProfiles.getPhoneNumber());
+            user.setFirstname(userProfiles.getFirstName());
+            user.setLastName(userProfiles.getLastName());
+            user.setBirthDate(userProfiles.getDateOfBirth());
+
+            // user.setGender(userProfiles.getGender());
+            // user.setCity(userdetails.getCity());
+            userDao.save(user);
+
+            return true;
+
+        } catch (Exception exc) {
+            return false;
+        }
+    }
+
+
+
     @Override
     public ProfileDetails getUserDetails(int id) {
         User user = userDao.findById(id);
@@ -82,7 +114,13 @@ public class UserServiceImpl implements UserService {
             profileDetails.setProfilePic(user.getProfilePic());
             profileDetails.setCity(user.getCity().getName());
 
-            profileDetails.setShowCityInProfile(user.getShowCityInProfile());
+            // profileDetails.setCity(user.getCity());
+           //profileDetails.setShowCityInProfile(user.getShowCityInProfile());
+
+           // profileDetails.setCity(user);
+            // profileDetails.setShowCityInProfile(user.getShowCityInProfile());
+            //profileDetails.setMotherTongue(user.getMotherTongue());
+
             if (userInf != null)
                 profileDetails.setUserInformation(userInf.getInformation());
             return profileDetails;
@@ -107,30 +145,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
-    public boolean updateUserProfileSettings(ProfileSettings userProfiles) {
-        try {
 
-            User user = new User();
-            user.setId(userProfiles.getUserId());
-            user.setProfilePic(userProfiles.getEmail());
-            user.setPhoneNumber(userProfiles.getPhoneNumber());
-            user.setFirstname(userProfiles.getFirstName());
-            user.setLastName(userProfiles.getLastName());
-            user.setBirthDate(userProfiles.getDateOfBirth());
-
-            // user.setGender(userProfiles.getGender());
-            // City info should be updated
-            // user.city.setCity(userProfiles.getCity());
-
-            userDao.save(user);
-
-            return true;
-
-        } catch (Exception exc) {
-            return false;
-        }
-    }
 
     @Override
     public boolean updateUserDetails(ProfileDetails profileDetail) {
@@ -142,7 +157,7 @@ public class UserServiceImpl implements UserService {
 
             // City information should be updated
             // user.setCity(userdetails.getCity());
-            
+
             // update user details
             userDao.save(user);
 
