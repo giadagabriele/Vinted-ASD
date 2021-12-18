@@ -3,8 +3,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-import asd.vinted.core.Exception.ProductException;
-import asd.vinted.core.Exception.ProductNotFoundException;
+import asd.vinted.core.Exception.ExceptionHandler;
+import asd.vinted.core.Exception.ItemNotFoundException;
 import asd.vinted.data.dao.ProductDao;
 import asd.vinted.data.dto.ProductDto;
 import asd.vinted.data.entity.Product;
@@ -31,7 +31,7 @@ public List<ProductDto> getAllProducts() {
 
 @Override
 public ProductDto getProduct(Long id) {
-  Product product = productDao.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+  Product product = productDao.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
   return modelMapper.map(product, ProductDto.class);
 }
 
@@ -49,7 +49,7 @@ public Product updateProduct(Long id, ProductDto product) {
     prod.setName(product.getName());
     prod.setBrand(product.getBrand());
     return productDao.save(prod);
-  }).orElseThrow(() -> new ProductException());
+  }).orElseThrow(() -> new ExceptionHandler());
 }
 
 @Override

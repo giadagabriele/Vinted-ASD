@@ -5,15 +5,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import asd.vinted.core.Exception.ProductNotFoundException;
+import asd.vinted.core.Exception.ItemNotFoundException;
 
 @ControllerAdvice
-public class ProductExceptionAdvice {
+public class ItemExceptionAdvice {
 
   @ResponseBody
-  @ExceptionHandler(ProductNotFoundException.class)
+  @ExceptionHandler(ItemNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  String ProductNotFoundHandler(ProductNotFoundException e) {
+  String ProductNotFoundHandler(ItemNotFoundException e) {
     return e.getMessage();
   }
 
