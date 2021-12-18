@@ -21,14 +21,14 @@ import asd.vinted.data.service.ProductService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product") //the root path for products
+@RequestMapping("/") //the root path for products
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductController {
 
   @Autowired
   private ProductService productService;
 
-  @GetMapping("/product")
+  @GetMapping("products")
   public ResponseEntity<List<ProductDto>> all() {
     return ResponseEntity.ok(productService.getAllProducts());
   }
@@ -38,13 +38,13 @@ public class ProductController {
   //   return ResponseEntity.ok(productService.getProductByName(name) );
   // }
 
-  @GetMapping("/product/{id}")
+  @GetMapping("product/{id}")
   public ResponseEntity<ProductDto> all(@PathVariable("id") Long id) {
     ProductDto product = productService.getProduct(id);
     return ResponseEntity.ok(product);
   }
 
-  @PostMapping("/product")
+  @PostMapping("product")
   public ResponseEntity<ProductDto> add(@RequestBody ProductDto product) {
     ProductDto p = productService.addProduct(product);
     return ResponseEntity.ok(p);
@@ -56,7 +56,7 @@ public class ProductController {
   //   ProductDto p = productService.updateProduct(id, product);
   //   return ResponseEntity.ok(p);
   // }
-  @PutMapping("/product/{id}")
+  @PutMapping("product/{id}")
   public ResponseEntity<Product> update(@PathVariable Long id,
       @RequestBody ProductDto product) {
     Product p = productService.updateProduct(id, product);
@@ -64,7 +64,7 @@ public class ProductController {
   }
 
 
-  @DeleteMapping("/product/{id}")
+  @DeleteMapping("product/{id}")
   public HttpStatus delete(@PathVariable Long id) {
     productService.delete(id);
     return HttpStatus.OK;

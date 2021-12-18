@@ -21,6 +21,6 @@ public class ProductExceptionAdvice {
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   String ProductNotFoundHandler(Exception e) {
-    return "ERROR:happend ";
+    return "ERROR:happend "+e;
   }
 }
