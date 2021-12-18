@@ -1,13 +1,19 @@
 package asd.vinted.data.service.impl;
 
+import asd.vinted.core.Exception.UserException;
+import asd.vinted.core.Exception.UserNotFoundException;
 import asd.vinted.data.dao.UserDao;
 import asd.vinted.data.dao.UserInformationDao;
+import asd.vinted.data.dto.ProfileDetailsDto;
+import asd.vinted.data.dto.ProfileSettingsDto;
 import asd.vinted.data.dto.UserDto;
-import asd.vinted.data.entity.ProfileDetails;
-import asd.vinted.data.entity.ProfileSettings;
+import asd.vinted.data.dto.UserDto;
 import asd.vinted.data.entity.User;
 import asd.vinted.data.entity.UserInformation;
 import asd.vinted.data.service.UserService;
+
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +38,11 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public UserDto findByEmail(String email) {
-        User user= userDao.findByEmail(email);
-        if(user !=null)
-            return modelMapper.map(user, UserDto.class);
-        return null;
+        UserDto user = userDao.findByEmail(email);
+        return user;
+        // if (user != null)
+        //     return modelMapper.map(user, User.class);
+        // return null;
     }
 
     @Override
@@ -67,20 +74,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User getUserByEmail(String email) {
-        return userDao.findByEmail(email);
-    }
+    public UserDto getUserById(long id) {
 
-    @Override
-    public User getUserById(int id) {
-        return userDao.findById(id);
+        User user = userDao.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        return modelMapper.map(user, UserDto.class);
     }
 
 
 
 
     @Override
-    public boolean updateUserProfileSettings(ProfileSettings userProfiles) {
+    public boolean updateUserProfileSettings(ProfileSettingsDto userProfiles) {
 
         try {
 
@@ -106,10 +110,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public ProfileDetails getUserDetails(int id) {
-        User user = userDao.findById(id);
-        UserInformation userInf = userInfoDao.findById(id);
-        ProfileDetails profileDetails = new ProfileDetails();
+    public ProfileDetailsDto getUserDetails(long id) {
+
+        User user = userDao.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+
+        UserInformation userInf = userInfoDao.findByUserId(id);
+
+        ProfileDetailsDto profileDetails = new ProfileDetailsDto();
         if (user != null) {
             profileDetails.setProfilePic(user.getProfilePic());
             profileDetails.setCity(user.getCity().getName());
@@ -129,17 +136,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ProfileSettings getProfileSettings(int id) {
-        User user = userDao.findById(id);
-        ProfileSettings profileSettings = new ProfileSettings();
+    public ProfileSettingsDto getProfileSettings(long id) {
+
+        User user = userDao.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+
+        ProfileSettingsDto profileSettings = new ProfileSettingsDto();
         if (user != null) {
             profileSettings.setProfilePic(user.getProfilePic());
-            profileSettings.setCity(user.getCity().getName());
+          //  profileSettings.setCity(user.getCity().getName());
             profileSettings.setEmail(user.getEmail());
             profileSettings.setPhoneNumber(user.getPhoneNumber());
             profileSettings.setFirstName(user.getFirstname());
             profileSettings.setLastName(user.getLastName());
 
+            System.out.println("profile Settings"+profileSettings);
+            
             return profileSettings;
         }
         return null;
@@ -148,7 +159,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean updateUserDetails(ProfileDetails profileDetail) {
+    public boolean updateUserDetails(ProfileDetailsDto profileDetail) {
         try {
             User user = new User();
             user.setId(profileDetail.getUserId());
@@ -179,5 +190,4 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
-
 }

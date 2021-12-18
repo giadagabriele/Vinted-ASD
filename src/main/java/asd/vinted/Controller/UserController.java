@@ -38,8 +38,6 @@ public class UserController {
 
     @PostMapping (value = "/loginGoogle")
     public ResponseEntity<UserDto> loginUserGoogle(@RequestBody User user){
-
-
         UserDto userLogin=userService.findByEmail(user.getEmail());
         return ResponseEntity.ok(userLogin);
     }

@@ -3,6 +3,8 @@ package asd.vinted.data.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+
+import asd.vinted.core.Exception.ItemNotFoundException;
 import asd.vinted.data.dao.MessageDao;
 import asd.vinted.data.dto.MessageDto;
 import asd.vinted.data.entity.Message;
@@ -26,8 +28,8 @@ public class MessageServiceImpl implements MessageService {
     }
     @Override
     public MessageDto getMessage(Long id) {
-      Optional<Message> Message = messageDao.findById(id);
-      return modelMapper.map(Message, MessageDto.class);
+      Message message = messageDao.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
+      return modelMapper.map(message, MessageDto.class);
     }
 
     @Override
@@ -39,10 +41,5 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void delete(Long id) {
       messageDao.deleteById(id);
-    }
-    @Override
-    public Message updateProduct(Long id, MessageDto product) {
-      // TODO Auto-generated method stub
-      return null;
     }
 }
