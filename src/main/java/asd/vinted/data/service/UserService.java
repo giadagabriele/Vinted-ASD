@@ -1,7 +1,4 @@
 package asd.vinted.data.service;
-
-import java.util.Optional;
-
 import asd.vinted.data.dto.ProfileDetailsDto;
 import asd.vinted.data.dto.ProfileSettingsDto;
 import asd.vinted.data.dto.UserDto;
@@ -12,11 +9,11 @@ public interface UserService {
     String saveUser(User u);
 
     // User findByEmailAndPassword(String email, String Password);
-    User findByEmailAndPassword(String email, String Password);
+    UserDto findByEmailAndPassword(String email, String Password);
 
     UserDto getUserById (long id);
 
-    User findByEmail(String email);
+    UserDto findByEmail(String email);
 
     ProfileDetailsDto getUserDetails(long id);
 
