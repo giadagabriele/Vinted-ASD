@@ -86,11 +86,11 @@ public class UserServiceImpl implements UserService {
             profileDetails.setProfilePic(user.getProfilePic());
 
             // profileDetails.setCity(user.getCity());
-           profileDetails.setShowCityInProfile(user.getShowCityInProfile());
+           //profileDetails.setShowCityInProfile(user.getShowCityInProfile());
 
            // profileDetails.setCity(user);
             // profileDetails.setShowCityInProfile(user.getShowCityInProfile());
-            profileDetails.setMotherTongue(user.getMotherTongue());
+            //profileDetails.setMotherTongue(user.getMotherTongue());
             if (userInf != null)
                 profileDetails.setUserInformation(userInf.getInformation());
             return profileDetails;
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             user.setId(userdetails.getUserId());
             user.setProfilePic(userdetails.getProfilePic());
-            user.setShowCityInProfile(userdetails.getShowCityInProfile());
+            //user.setShowCityInProfile(userdetails.getShowCityInProfile());
             // user.setCity(userdetails.getCity());
 
             // update user details

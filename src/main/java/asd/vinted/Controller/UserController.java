@@ -39,10 +39,8 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public ResponseEntity<UserDto> loginUser(@RequestBody User user){
-
         UserDto userLogin=null;
         userLogin=userService.findByEmailAndPassword(user.getEmail(),user.getPassword());
-        System.out.println(userLogin);
         return ResponseEntity.ok(userLogin);
     }
 
