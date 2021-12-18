@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import asd.vinted.data.dto.ProductDto;
+import asd.vinted.data.entity.Product;
 import asd.vinted.data.service.ProductService;
 
 import java.util.List;
@@ -49,12 +50,19 @@ public class ProductController {
     return ResponseEntity.ok(p);
   }
 
+  // @PutMapping("/product/{id}")
+  // public ResponseEntity<ProductDto> update(@PathVariable Long id,
+  //     @RequestBody ProductDto product) {
+  //   ProductDto p = productService.updateProduct(id, product);
+  //   return ResponseEntity.ok(p);
+  // }
   @PutMapping("/product/{id}")
-  public ResponseEntity<ProductDto> update(@PathVariable Long id,
+  public ResponseEntity<Product> update(@PathVariable Long id,
       @RequestBody ProductDto product) {
-    ProductDto p = productService.updateProduct(id, product);
+    Product p = productService.updateProduct(id, product);
     return ResponseEntity.ok(p);
   }
+
 
   @DeleteMapping("/product/{id}")
   public HttpStatus delete(@PathVariable Long id) {

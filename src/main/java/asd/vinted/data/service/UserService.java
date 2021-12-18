@@ -1,12 +1,7 @@
 package asd.vinted.data.service;
-
-import javax.sound.sampled.Line;
-
-import antlr.collections.List;
 import asd.vinted.data.entity.ProfileDetails;
 import asd.vinted.data.entity.ProfileSettings;
 import asd.vinted.data.entity.User;
-import asd.vinted.util.UserAlreadyExistAuthenticationException;
 
 public interface UserService  {
 
