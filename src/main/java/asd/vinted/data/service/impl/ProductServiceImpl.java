@@ -12,7 +12,6 @@ import asd.vinted.data.service.ProductService;
 import org.modelmapper.ModelMapper;
 
 import java.util.stream.Collectors;
-import java.util.Collection;
 import java.util.List;
 
 @Service

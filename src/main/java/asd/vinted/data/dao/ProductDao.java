@@ -1,6 +1,5 @@
 package asd.vinted.data.dao;
 
-import asd.vinted.data.dto.ProductDto;
 import asd.vinted.data.entity.Product;
 
 import org.springframework.data.jpa.repository.JpaRepository;

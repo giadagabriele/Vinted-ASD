@@ -2,7 +2,6 @@ package asd.vinted.data.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Optional;
 import java.sql.Date;
 
 @Entity

@@ -1,9 +1,8 @@
 package asd.vinted.data.dto;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import java.util.stream.Stream;
+
 
 public class ProductDto implements Serializable {
 
