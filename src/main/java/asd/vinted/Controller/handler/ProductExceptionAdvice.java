@@ -1,0 +1,27 @@
+package asd.vinted.Controller.handler;
+import org.springframework.util.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import asd.vinted.core.Exception.ProductNotFoundException;
+
+@ControllerAdvice
+public class ProductExceptionAdvice {
+
+  @ResponseBody
+  @ExceptionHandler(ProductNotFoundException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  String employeeNotFoundHandler(ProductNotFoundException e) {
+    return e.getMessage();
+  }
+
+  @ResponseBody
+  @ExceptionHandler(Exception.class)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  String ProductNotFoundHandler(Exception e) {
+    return "ERROR:happend ";
+  }
+}
