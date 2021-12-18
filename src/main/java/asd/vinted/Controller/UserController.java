@@ -1,16 +1,13 @@
 package asd.vinted.Controller;
 
-import asd.vinted.dto.UserDto;
-import asd.vinted.entity.User;
-import asd.vinted.service.UserService;
-import asd.vinted.util.UserAlreadyExistAuthenticationException;
+import asd.vinted.data.dto.UserDto;
+import asd.vinted.data.entity.User;
+import asd.vinted.data.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -29,11 +26,6 @@ public class UserController {
         return  new ResponseEntity<>(
                 message,
                 HttpStatus.OK);
-
-
-
-
-
     }
 
 
