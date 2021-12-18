@@ -34,6 +34,8 @@ export class LoginComponent implements OnInit {
       this.usergoogle=user;
       console.log(this.usergoogle);
     });
+    if (!this.userService.auth) 
+    this.router.navigateByUrl( '/profile');
     this.userService.authState$.subscribe(authState => {
       if (authState) {
         this.router.navigateByUrl(this.route.snapshot.queryParams.returnUrl || '/profile');
@@ -64,7 +66,7 @@ export class LoginComponent implements OnInit {
     const password = this.f.password.value;
 
     console.log(email,password)
-    this.formSignIn.reset();
+   
   
     this.userService.loginMessage$.subscribe(msg => {
       this.loginMessage = msg;

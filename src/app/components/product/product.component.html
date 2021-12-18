@@ -35,7 +35,7 @@
                     </ng-template>
                     <ng-template [ngIf]="thumbImages.length > 0">
                         <div class="product-preview" *ngFor="let t of thumbImages">
-                            <img [src]="t" alt="{{product.name}}">
+                            <img [src]="product.image" alt="{{product.name}}">
                         </div>
                     </ng-template>
                 </div>
@@ -47,14 +47,14 @@
                 <ng-template [ngIf]="thumbImages.length > 0">
                     <div id="product-imgs">
                         <div class="product-preview" *ngFor="let t of thumbImages">
-                            <img [src]="t" alt="{{product.name}}">
+                            <img [src]="product.image" alt="{{product.name}}">
                         </div>
                     </div>
                 </ng-template>
                 <ng-template [ngIf]="thumbImages.length === 0">
                     <div id="product-imgs">
                         <div class="product-preview">
-                            <img [src]="image" alt="{{product.name}}">
+                            <img [src]="product.image" alt="{{product.name}}">
                         </div>
                     </div>
                 </ng-template>
@@ -93,27 +93,27 @@
                                 <span class="qty-down" (click)="Decrease()">-</span>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn" (click)="addToCart(product?.id)"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+                        <button class="add-to-cart-btn" (click)="addToCart(product?.id)"><i class="fa fa-shopping-cart"></i> Send message</button>
                     </div>
 
                     <ul class="product-btns">
-                        <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-                        <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
+                        <li><a href="#"><i class="fa fa-heart-o"></i> add to Faverites List</a></li>
+                        <!-- <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li> -->
                     </ul>
 
                     <ul class="product-links">
                         <li>Category:</li>
-                        <li><a href="#">Headphones</a></li>
-                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">{{product.category}}</a></li>
+                        <!-- <li><a href="#">Accessories</a></li> -->
                     </ul>
 
-                    <ul class="product-links">
+                    <!-- <ul class="product-links">
                         <li>Share:</li>
                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                         <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                    </ul>
+                    </ul> -->
 
                 </div>
             </div>

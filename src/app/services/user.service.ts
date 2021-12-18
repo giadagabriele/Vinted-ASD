@@ -26,7 +26,7 @@ export class UserService {
   // tslint:disable-next-line:new-parens
   private user = new User;
   authState$ = new BehaviorSubject<boolean>(this.auth);
-  userData$ = new BehaviorSubject<SocialUser | ResponseModel | object>(null);
+  userData$ = new BehaviorSubject<SocialUser  | ResponseModel | object>(null);
   loginMessage$ = new BehaviorSubject<string>(null);
   userRole: number;
   registerMessage: any;
@@ -44,59 +44,39 @@ export class UserService {
       console.log(user);
 
       if (user != null) {
-        this.httpClient
-          .get(`${this.SERVER_URL}/users/validate/${user.email}`)
-          .subscribe((res: { status: boolean; user: object }) => {
-            //  No user exists in database with Social Login
-            if (!res.status) {
-              // Send data to backend to register the user in database so that the user can place orders against his user id
-              this.registerUser(
-                {
-                  email: user.email,
-                  fname: user.firstName,
-                  lname: user.lastName,
-                  password: '123456',
-                },
-                user.photoUrl,
-                'social'
-              ).subscribe((response) => {
-                if (response.message === 'Registration successful') {
-                  this.auth = true;
-                  this.userRole = 555;
-                  this.authState$.next(this.auth);
-                  this.userData$.next(user);
-                }
-              });
-            } else {
-              this.auth = true;
-              // @ts-ignore
-              this.userRole = res.user.role;
-              this.authState$.next(this.auth);
-              this.userData$.next(res.user);
-            }
-          });
+        user.id ='';
+       
+        this.httpClient.post('http://localhost:8080/user/loginGoogle',user).subscribe((res) => {
+       console.log(res);
+        //  No user exists in database with Social Login
+          if (res===undefined) {
+            // Send data to backend to register the user in database so that the user can place orders against his user id
+            
+            this.registraUser({
+          user
+            }).subscribe(response => {
+              if (response === 'Congratulations, your account has been successfully created.') {
+                this.auth = true;
+                
+                this.authState$.next(this.auth);
+                this.userData$.next(user);
+              }
+            });
+
+          } else {
+            this.auth = true;
+            // @ts-ignore
+            this.authState$.next(this.auth);
+            this.userData$.next(res);
+          }
+        });
+
       }
     });
   }
 
   //  Login User with Email and Password
-  loginUser(email: string, password: string) {
-    this.httpClient
-      .post<ResponseModel>(`${this.SERVER_URL}auth/login`, { email, password })
-      .pipe(catchError((err: HttpErrorResponse) => of(err.error.message)))
-      .subscribe((data: ResponseModel) => {
-        if (typeof data === 'string') {
-          this.loginMessage$.next(data);
-        } else {
-          this.auth = data.auth;
-          this.userRole = data.role;
-          this.authState$.next(this.auth);
-          this.userData$.next(data);
-        }
-      });
-
-  }
-
+ 
 //  Google Authentication
   googleLogin()  {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -108,22 +88,9 @@ export class UserService {
     this.authState$.next(this.auth);
   }
 
-  registerUser(formData: any, photoUrl?: string, typeOfUser?: string): Observable<{ message: string }> {
-    const {fname, lname, email, password} = formData;
-    console.log(formData);
-    return this.httpClient.post<{ message: string }>(
-      `${this.SERVER_URL}/auth/register`,
-      {
-        email,
-        lname,
-        fname,
-        typeOfUser,
-        password,
-        photoUrl: photoUrl || null,
-      }
-    );
-  }
-  registraUser(user: User): Observable<string> {
+ 
+
+  registraUser(user: any): Observable<string> {
     console.log(user);
     const headers = new HttpHeaders().set('responsType', 'text');
     return this.httpClient.post(`${this.SERVER_URL}user/registration`, user, {
@@ -135,11 +102,12 @@ export class UserService {
   Login(email, password) {
     this.user.email = email;
     this.user.password = password;
+    console.log(this.user)
     this.httpClient
-      .post(`${this.SERVER_URL}user/login`, this.user)
+      .post('http://localhost:8080/user/login', this.user)
       .subscribe((res) => {
         console.log(res);
-        if (res !== undefined) {
+        if (res != undefined) {
           this.auth = true;
           this.userRole = 1;
           this.authState$.next(true);
@@ -210,4 +178,17 @@ export class UserService {
 clearCache() {
   this.userProfile = null;
 }
+}
+
+
+export interface ResponseModel {
+  auth: boolean;
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  photoUrl: string;
+  userId: number;
+  type: string;
+  role: number;
 }
