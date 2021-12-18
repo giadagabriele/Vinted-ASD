@@ -1,18 +1,28 @@
 package asd.vinted.data.service;
-import asd.vinted.data.entity.ProfileDetails;
-import asd.vinted.data.entity.ProfileSettings;
+
+import java.util.Optional;
+
+import asd.vinted.data.dto.ProfileDetailsDto;
+import asd.vinted.data.dto.ProfileSettingsDto;
+import asd.vinted.data.dto.UserDto;
 import asd.vinted.data.entity.User;
 
-public interface UserService  {
+public interface UserService {
 
-    String saveUser(User u) ;
-   // User findByEmailAndPassword(String email, String Password);
+    String saveUser(User u);
+
+    // User findByEmailAndPassword(String email, String Password);
     User findByEmailAndPassword(String email, String Password);
-    User getUserByEmail(String email);
-    User getUserById(int id);
+
+    UserDto getUserById (long id);
+
     User findByEmail(String email);
-    ProfileDetails getUserDetails(int id);
-    boolean updateUserDetails(ProfileDetails profileDetail);
-    ProfileSettings getProfileSettings(int id);
-    boolean updateUserProfileSettings(ProfileSettings userProfiles);
+
+    ProfileDetailsDto getUserDetails(long id);
+
+    boolean updateUserDetails(ProfileDetailsDto profileDetail);
+
+    ProfileSettingsDto getProfileSettings(long id);
+
+    boolean updateUserProfileSettings(ProfileSettingsDto userProfiles);
 }

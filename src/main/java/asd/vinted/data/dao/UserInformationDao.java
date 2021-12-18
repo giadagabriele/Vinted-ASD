@@ -5,7 +5,7 @@ import asd.vinted.data.entity.UserInformation;
 
 public interface UserInformationDao extends JpaRepository<UserInformation,Long> {
 
-    UserInformation findById(long id);
+    //UserInformation findById(long id);
     UserInformation findByUserId(long userId);
     //void add(UserInformation user);
     //void update(UserInformation user);
