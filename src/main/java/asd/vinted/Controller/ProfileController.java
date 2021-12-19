@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,7 +54,7 @@ public class ProfileController {
         return ResponseEntity.ok(userProfile);
     }
 
-    @PostMapping(value = "updateProfileDetail")
+    @PostMapping("updateProfileDetail")
     public ResponseEntity<Boolean> updateProfileDetail(@RequestBody ProfileDetailsDto profileDetail) {
 
         if (userService.updateUserDetails(profileDetail))
@@ -75,7 +76,8 @@ public class ProfileController {
         return ResponseEntity.ok(userSettings);
     }
 
-    @PostMapping(value = "updateProfileSettings")
+    
+    @PutMapping("updateProfileSettings")
     public ResponseEntity<Boolean> updateProfileSettings(@RequestBody ProfileSettingsDto profileSettings) {
 
         if (userService.updateUserProfileSettings(profileSettings))

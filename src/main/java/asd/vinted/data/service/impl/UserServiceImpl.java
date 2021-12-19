@@ -30,18 +30,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findByEmailAndPassword(String mail, String pass) {
-        User user= userDao.findByEmailAndPassword(mail,pass);
-        if(user!=null)
+        User user = userDao.findByEmailAndPassword(mail, pass);
+        if (user != null)
             return modelMapper.map(user, UserDto.class);
         else
             return null;
     }
+
     @Override
     public UserDto findByEmail(String email) {
         UserDto user = userDao.findByEmail(email);
         return user;
         // if (user != null)
-        //     return modelMapper.map(user, User.class);
+        // return modelMapper.map(user, User.class);
         // return null;
     }
 
@@ -53,25 +54,23 @@ public class UserServiceImpl implements UserService {
         }
 
         if (usernameExist(u.getUsername())) {
-            return  "Username is already taken";
+            return "Username is already taken";
         }
 
-        User user= userDao.save(u);
-        if(user!=null){
+        User user = userDao.save(u);
+        if (user != null) {
             return "Congratulations, your account has been successfully created.";
-        }
-        else
-            return  "Error";
+        } else
+            return "Error";
     }
-
 
     private boolean emailExist(String email) {
         return userDao.findByEmail(email) != null;
     }
+
     private boolean usernameExist(String username) {
         return userDao.existsByUsernameEqualsIgnoreCase(username);
     }
-
 
     @Override
     public UserDto getUserById(long id) {
@@ -79,9 +78,6 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         return modelMapper.map(user, UserDto.class);
     }
-
-
-
 
     @Override
     public boolean updateUserProfileSettings(ProfileSettingsDto userProfiles) {
@@ -98,16 +94,18 @@ public class UserServiceImpl implements UserService {
 
             // user.setGender(userProfiles.getGender());
             // user.setCity(userdetails.getCity());
+
             userDao.save(user);
+
+            //System.out.println("User saved "+user);
 
             return true;
 
         } catch (Exception exc) {
+            //System.out.println("Exception happend ");
             return false;
         }
     }
-
-
 
     @Override
     public ProfileDetailsDto getUserDetails(long id) {
@@ -122,11 +120,11 @@ public class UserServiceImpl implements UserService {
             profileDetails.setCity(user.getCity().getName());
 
             // profileDetails.setCity(user.getCity());
-           //profileDetails.setShowCityInProfile(user.getShowCityInProfile());
-
-           // profileDetails.setCity(user);
             // profileDetails.setShowCityInProfile(user.getShowCityInProfile());
-            //profileDetails.setMotherTongue(user.getMotherTongue());
+
+            // profileDetails.setCity(user);
+            // profileDetails.setShowCityInProfile(user.getShowCityInProfile());
+            // profileDetails.setMotherTongue(user.getMotherTongue());
 
             if (userInf != null)
                 profileDetails.setUserInformation(userInf.getInformation());
@@ -143,20 +141,18 @@ public class UserServiceImpl implements UserService {
         ProfileSettingsDto profileSettings = new ProfileSettingsDto();
         if (user != null) {
             profileSettings.setProfilePic(user.getProfilePic());
-          //  profileSettings.setCity(user.getCity().getName());
+            // profileSettings.setCity(user.getCity().getName());
             profileSettings.setEmail(user.getEmail());
             profileSettings.setPhoneNumber(user.getPhoneNumber());
             profileSettings.setFirstName(user.getFirstname());
             profileSettings.setLastName(user.getLastName());
 
-            System.out.println("profile Settings"+profileSettings);
-            
+            System.out.println("profile Settings" + profileSettings);
+
             return profileSettings;
         }
         return null;
     }
-
-
 
     @Override
     public boolean updateUserDetails(ProfileDetailsDto profileDetail) {
@@ -175,6 +171,7 @@ public class UserServiceImpl implements UserService {
             UserInformation userInformation = new UserInformation();
             // get user information by Id first
             userInformation = userInfoDao.findByUserId(user.getId());
+
             if (userInformation.getInformation() != null || !userInformation.getInformation().isEmpty())
                 userInformation
                         .setInformation(userInformation.getInformation() + "," + profileDetail.getUserInformation());
@@ -183,10 +180,10 @@ public class UserServiceImpl implements UserService {
 
             // updatee user information
             userInfoDao.save(userInformation);
-
             return true;
 
         } catch (Exception exc) {
+            // System.out.println("Exception happend in here :");
             return false;
         }
     }
