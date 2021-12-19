@@ -11,7 +11,18 @@ import {UserService} from '../../services/user.service';
 })
 export class HeaderComponent implements OnInit {
   selected?: string;
-  users: string[] = ['Giada','Mohamed','Antonio','Tesfay','Gebreyowhans','Beatrice']
+  users: string [] = []
+  products: string [] = []
+  optEmpty(){
+    this.users = []
+    this.products = []
+  }
+  optUsers(){
+   this.users = ['Giada','Mohamed','Antonio','Tesfay','Gebreyowhans','Beatrice']
+  }
+  optProducts(){
+    this.products = ['prod1','prod2','prod3','prod4','prod5','prod6']
+  }
   noResult = false;
 
   cartData: CartModelServer;

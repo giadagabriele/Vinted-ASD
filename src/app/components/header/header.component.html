@@ -25,11 +25,11 @@
           <div class="header-search">
             <form>
               <select class="input-select col-md-3">
-                <option value="0">Choose option</option>
-                <option value="1">Users</option>
-                <option value="1">Products</option>
+                <option (click)=optEmpty() value="0">Choose option</option>
+                <option (click)=optUsers() value="1">Users</option>
+                <option (click)=optProducts() value="2">Products</option>
               </select>
-              <input [(ngModel)]="selected" [typeahead]="users" [typeaheadScrollable]="true" [typeaheadOptionsInScrollableView]="5" (typeaheadNoResults)="typeaheadNoResults($event)" class="input col-md-3" placeholder="Search here">
+              <input [(ngModel)]="selected" [typeahead]="users" [typeahead]="products" [typeaheadScrollable]="true" [typeaheadOptionsInScrollableView]="5" (typeaheadNoResults)="typeaheadNoResults($event)" class="input col-md-3" placeholder="Search here">
               <input class="input col-md-3" placeholder="Where">
               <button class="search-btn col-md-2">Search</button>
               <div class="alert alert-danger" style="width: fit-content; margin-left: 12em;" *ngIf="noResult">No Results Found</div>
