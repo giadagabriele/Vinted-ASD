@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   password: string;
   loginMessage: string;
   user;
+  submited=false;
   usergoogle: SocialUser;
   userRole: number;
   container = <HTMLInputElement>document.getElementById("container");
@@ -30,10 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.authState.subscribe((user)=>{
-      this.usergoogle=user;
-      console.log(this.usergoogle);
-    });
+    
     if (!this.userService.auth) 
     this.router.navigateByUrl( '/profile');
     this.userService.authState$.subscribe(authState => {
@@ -55,13 +53,19 @@ export class LoginComponent implements OnInit {
     this.container.classList.add("right-panel-active");
   }
   signInWithGoogle() {
+    this.authService.authState.subscribe((user)=>{
+      this.usergoogle=user;
+      console.log(this.usergoogle);
+    });
     this.userService.googleLogin();
     
   }
   get f() { return this.formSignIn.controls; }
 
   login() {
-    
+    this.submited=true;
+    if(this.formSignIn.invalid)
+      return;
     const email = this.f.email.value;
     const password = this.f.password.value;
 
@@ -74,7 +78,7 @@ export class LoginComponent implements OnInit {
     });
     this.userService.Login(email,password);
     
-
+    
     
 
 
