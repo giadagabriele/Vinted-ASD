@@ -20,6 +20,7 @@ import {ProfileComponent} from '@app/components/profile/profile.component';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
 import {RegisterComponent} from '@app/components/register/register.component';
 import {HomeLayoutComponent} from '@app/components/home-layout/home-layout.component';
+import {SellAreaModule} from './components/sell-area/sell-area.module';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 import { MessageComponent } from './message/message.component';
 
@@ -63,6 +64,7 @@ export function provideConfig() {
     ReactiveFormsModule,
     SocialLoginModule,
     HttpClientModule,
+    SellAreaModule,
     TypeaheadModule.forRoot()
   ],
   providers: [

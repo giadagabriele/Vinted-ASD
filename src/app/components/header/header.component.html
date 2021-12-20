@@ -40,8 +40,8 @@
 
         <!-- ACCOUNT -->
         <div class="col-md-3">
-          <button class="sell-button">Sell Product</button>
-          <div class="header-ctn">
+          <button class="sell-button" *ngIf="authState" routerLink="/create-product">Sell Product</button>
+          <div class="header-ctn">           
             <!-- Wishlist -->
             <div>
               <a routerLink="/product" (click)="favoriteList()">
