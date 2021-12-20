@@ -45,4 +45,8 @@ public class UserController {
         UserDto userLogin=userService.findByEmail(user.getEmail());
         return ResponseEntity.ok(userLogin);
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable long id) {
+        return ResponseEntity.ok(userService.deleteUser(id));
+    }
 }
