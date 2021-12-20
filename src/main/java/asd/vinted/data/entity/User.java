@@ -40,7 +40,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(nullable = false)
+    @Column()
     private boolean showCityInProfile;
 
     @ManyToOne
