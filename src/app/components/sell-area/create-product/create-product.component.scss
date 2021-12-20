@@ -46,8 +46,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #D10024;
+	background-color: #D10024;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -68,6 +68,11 @@ button:focus {
 button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
+}
+
+.btn-primary:hover {
+background-color:#52585f;
+border-color:#52585f;
 }
 
 form {
