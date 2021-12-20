@@ -19,7 +19,7 @@ public class UserController {
     @PostMapping(value = "/registration")
     public ResponseEntity<String> saveUser(@RequestBody User user){
         System.out.println(user);
-
+        user.setShowCityInProfile(false);
         String message= userService.saveUser(user);
         JSONObject json= new JSONObject();
         json.put("message",message);
@@ -32,6 +32,7 @@ public class UserController {
     @PostMapping(value = "/login")
     public ResponseEntity<UserDto> loginUser(@RequestBody User user){
         UserDto userLogin=null;
+            user.setShowCityInProfile(false);
         userLogin=userService.findByEmailAndPassword(user.getEmail(),user.getPassword());
         return ResponseEntity.ok(userLogin);
     }
@@ -39,8 +40,13 @@ public class UserController {
     @PostMapping (value = "/loginGoogle")
     public ResponseEntity<UserDto> loginUserGoogle(@RequestBody User user){
 
+        user.setShowCityInProfile(false);
 
         UserDto userLogin=userService.findByEmail(user.getEmail());
         return ResponseEntity.ok(userLogin);
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable long id) {
+        return ResponseEntity.ok(userService.deleteUser(id));
     }
 }

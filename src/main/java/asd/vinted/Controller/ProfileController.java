@@ -3,48 +3,51 @@ package asd.vinted.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import asd.vinted.data.dao.UserDao;
-import asd.vinted.data.entity.ProfileDetails;
-import asd.vinted.data.entity.ProfileSettings;
+import asd.vinted.data.dto.ProfileDetailsDto;
+import asd.vinted.data.dto.ProfileSettingsDto;
+import asd.vinted.data.dto.UserDto;
 import asd.vinted.data.entity.User;
 import asd.vinted.data.service.UserInformationService;
 import asd.vinted.data.service.UserService;
 
 @RestController
-@RequestMapping(value = "/userprofile")
+@RequestMapping(value = "/")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ProfileController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserInformationService userInformationService;
+    // @Autowired
+    // private UserInformationService userInformationService;
 
-    @PostMapping(value = "/profile")
-    public ResponseEntity<User> getProfile(@RequestBody User user) {
-
-        User userProfile = userService.getUserByEmail(user.getEmail());
+    @GetMapping(value = "profile/{id}")
+    public ResponseEntity<UserDto> getProfile(@PathVariable("id") long id) {
+        UserDto userProfile = userService.getUserById(id);
 
         if (userProfile != null)
             return ResponseEntity.ok(userProfile);
-
         return ResponseEntity.ok(userProfile);
     }
 
-    @PostMapping(value = "/profileDetaile")
-    public ResponseEntity<ProfileDetails> profileDetaile(@RequestBody User user) {
+    @GetMapping(value = "profileDetaile/{id}")
+    public ResponseEntity<ProfileDetailsDto> profileDetaile(@PathVariable("id") long id) {
 
-        User _user = userService.getUserByEmail(user.getEmail());
+        UserDto _user = userService.getUserById(id);
 
-        asd.vinted.data.entity.ProfileDetails userProfile = new asd.vinted.data.entity.ProfileDetails();
+        ProfileDetailsDto userProfile = new ProfileDetailsDto();
 
         if (_user != null) {
-            userProfile = userService.getUserDetails((int) _user.getId());
+            userProfile = userService.getUserDetails(_user.getId());
             if (userProfile != null)
                 return ResponseEntity.ok(userProfile);
         }
@@ -52,8 +55,8 @@ public class ProfileController {
         return ResponseEntity.ok(userProfile);
     }
 
-    @PostMapping(value = "/updateProfileDetail")
-    public ResponseEntity<Boolean> updateProfileDetail(@RequestBody ProfileDetails profileDetail) {
+    @PostMapping("updateProfileDetail")
+    public ResponseEntity<Boolean> updateProfileDetail(@RequestBody ProfileDetailsDto profileDetail) {
 
         if (userService.updateUserDetails(profileDetail))
             return ResponseEntity.ok(true);
@@ -61,10 +64,10 @@ public class ProfileController {
             return ResponseEntity.ok(false);
     }
 
-    @PostMapping(value = "/profileSettings")
-    public ResponseEntity<ProfileSettings> profileSettings(@RequestBody int id) {
+    @GetMapping(value = "profileSettings/{id}")
+    public ResponseEntity<ProfileSettingsDto> profileSettings(@PathVariable("id") long id) {
 
-        ProfileSettings userSettings = new ProfileSettings();
+        ProfileSettingsDto userSettings = new ProfileSettingsDto();
 
         userSettings = userService.getProfileSettings(id);
 
@@ -74,8 +77,9 @@ public class ProfileController {
         return ResponseEntity.ok(userSettings);
     }
 
-    @PostMapping(value = "/updateProfileSettings")
-    public ResponseEntity<Boolean> updateProfileSettings(@RequestBody ProfileSettings profileSettings) {
+    
+    @PutMapping("updateProfileSettings")
+    public ResponseEntity<Boolean> updateProfileSettings(@RequestBody ProfileSettingsDto profileSettings) {
 
         if (userService.updateUserProfileSettings(profileSettings))
             return ResponseEntity.ok(true);

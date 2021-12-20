@@ -1,7 +1,7 @@
-package asd.vinted.data.entity;
+package asd.vinted.data.dto;
 
-public class ProfileDetails {
-    private Long userId;
+public class ProfileDetailsDto {
+    private long userId;
     private String profilePic;
     private boolean showCityInProfile;
     private String country;
@@ -69,6 +69,7 @@ public class ProfileDetails {
     public void setUserInformation(String userInformation) {
         this.userInformation = userInformation;
     }
+
 
     @Override
     public String toString() {

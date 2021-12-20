@@ -1,8 +1,8 @@
-package asd.vinted.data.entity;
+package asd.vinted.data.dto;
 
 import java.sql.Date;
 
-public class ProfileSettings {
+public class ProfileSettingsDto {
     private Long userId;
     private String email;
     private String phoneNumber;
@@ -100,5 +100,7 @@ public class ProfileSettings {
             ", profilePic='" + getProfilePic() + "'" +
             "}";
     }
+
+
 
 }
