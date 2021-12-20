@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   selected?: string;
   users: string[] = ['Giada','Mohamed','Antonio','Tesfay','Gebreyowhans','Beatrice']
   noResult = false;
-
+  favNum: number;
   cartData: CartModelServer;
   cartTotal: number;
   authState: boolean;
@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.favoriteList();
     this.cartService.cartTotal$.subscribe(total => this.cartTotal = total);
 
     this.cartService.cartData$.subscribe(data => this.cartData = data);
@@ -38,7 +39,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/contact')
   }
   favoriteList(){
-    console.log("test for favorite")
+    this.favNum = this.cartService.addFavoriteProduct(3);
   }
 
   typeaheadNoResults(event: boolean): void {
