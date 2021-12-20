@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
 export class UserService {
   auth = false;
   private SERVER_URL = environment.SERVER_URL;
-  private baseUrlUpdateProfile = `${this.SERVER_URL}user/`;
+  private baseUrlUpdateProfile = `${this.SERVER_URL}/user/`;
   // tslint:disable-next-line:new-parens
   private user = new User;
   authState$ = new BehaviorSubject<boolean>(this.auth);
@@ -45,19 +45,19 @@ export class UserService {
 
       if (user != null) {
         user.id ='';
-       
-        this.httpClient.post('http://localhost:8080/user/loginGoogle',user).subscribe((res) => {
+
+        this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`,user).subscribe((res) => {
        console.log(res);
         //  No user exists in database with Social Login
           if (res===undefined) {
             // Send data to backend to register the user in database so that the user can place orders against his user id
-            
+
             this.registraUser({
           user
             }).subscribe(response => {
               if (response === 'Congratulations, your account has been successfully created.') {
                 this.auth = true;
-                
+
                 this.authState$.next(this.auth);
                 this.userData$.next(user);
               }
@@ -76,7 +76,7 @@ export class UserService {
   }
 
   //  Login User with Email and Password
- 
+
 //  Google Authentication
   googleLogin()  {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -88,7 +88,7 @@ export class UserService {
     this.authState$.next(this.auth);
   }
 
- 
+
 
   registraUser(user: any): Observable<string> {
     console.log(user);
@@ -104,7 +104,7 @@ export class UserService {
     this.user.password = password;
     console.log(this.user)
     this.httpClient
-      .post('http://localhost:8080/user/login', this.user)
+      .post(`${this.SERVER_URL}/user/login`, this.user)
       .subscribe((res) => {
         console.log(res);
         if (res != undefined) {
