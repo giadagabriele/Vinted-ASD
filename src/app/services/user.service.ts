@@ -93,7 +93,7 @@ export class UserService {
   registraUser(user: any): Observable<string> {
     console.log(user);
     const headers = new HttpHeaders().set('responsType', 'text');
-    return this.httpClient.post(`${this.SERVER_URL}user/registration`, user, {
+    return this.httpClient.post(`${this.SERVER_URL}/user/registration`, user, {
       headers,
       responseType: 'text' as const,
     });
