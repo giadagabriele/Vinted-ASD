@@ -10,9 +10,30 @@
 			
 			</div>
 			<span>or use your account</span>
+			<span style="font-size: 15px;" class="text-danger align-middle">
+
+				  {{loginMessage}}
+				</span>
+			  
 			<input type="email" placeholder="Email" formControlName="email" name="email" />
+			<span class="text-danger align-middle">
+				<div *ngIf="submited && f.email.errors">
+		
+				  <div *ngIf="f.email.errors.required">email is required</div>
+				  <div *ngIf="f.email.errors.email">Not a valid email</div>
+				</div>
+			  </span>
 			<input type="password" placeholder="Password" formControlName="password" name="password"/>
+			<span class="text-danger align-middle">
+				<div *ngIf="submited && f.password.errors">
+		
+				  <div *ngIf="f.password.errors.required">Password is required</div>
+				  <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+				</div>
+			  </span>
 			<a href="#">Forgot your password?</a>
+			
+		
 			<button>Sign In</button>
 		</form>
 	</div>
