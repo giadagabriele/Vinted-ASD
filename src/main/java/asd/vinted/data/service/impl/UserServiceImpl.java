@@ -1,13 +1,19 @@
 package asd.vinted.data.service.impl;
 
+import asd.vinted.core.Exception.UserException;
+import asd.vinted.core.Exception.UserNotFoundException;
 import asd.vinted.data.dao.UserDao;
 import asd.vinted.data.dao.UserInformationDao;
+import asd.vinted.data.dto.ProfileDetailsDto;
+import asd.vinted.data.dto.ProfileSettingsDto;
 import asd.vinted.data.dto.UserDto;
-import asd.vinted.data.entity.ProfileDetails;
-import asd.vinted.data.entity.ProfileSettings;
+import asd.vinted.data.dto.UserDto;
 import asd.vinted.data.entity.User;
 import asd.vinted.data.entity.UserInformation;
 import asd.vinted.data.service.UserService;
+
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,13 +36,15 @@ public class UserServiceImpl implements UserService {
         String password = Base64.getEncoder().encodeToString(pass.getBytes());
         User user= userDao.findByEmailAndPassword(mail,password);
 
-        if(user!=null)
+        if (user != null)
             return modelMapper.map(user, UserDto.class);
         else
             return null;
     }
+
     @Override
     public UserDto findByEmail(String email) {
+
         User user= userDao.findByEmail(email);
 
         if(user !=null)
@@ -52,43 +60,34 @@ public class UserServiceImpl implements UserService {
         }
 
         if (usernameExist(u.getUsername())) {
-            return  "Username is already taken";
+            return "Username is already taken";
         }
         String encodedString = Base64.getEncoder().encodeToString(u.getPassword().getBytes());
-
         u.setPassword(encodedString);
-        User user= userDao.save(u);
-        if(user!=null){
+                User user = userDao.save(u);
+        if (user != null) {
             return "Congratulations, your account has been successfully created.";
-        }
-        else
-            return  "Error";
+        } else
+            return "Error";
     }
-
 
     private boolean emailExist(String email) {
         return userDao.findByEmail(email) != null;
     }
+
     private boolean usernameExist(String username) {
         return userDao.existsByUsernameEqualsIgnoreCase(username);
     }
 
-
     @Override
-    public User getUserByEmail(String email) {
-        return userDao.findByEmail(email);
+    public UserDto getUserById(long id) {
+
+        User user = userDao.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        return modelMapper.map(user, UserDto.class);
     }
 
     @Override
-    public User getUserById(int id) {
-        return userDao.findById(id);
-    }
-
-
-
-
-    @Override
-    public boolean updateUserProfileSettings(ProfileSettings userProfiles) {
+    public boolean updateUserProfileSettings(ProfileSettingsDto userProfiles) {
 
         try {
 
@@ -102,32 +101,37 @@ public class UserServiceImpl implements UserService {
 
             // user.setGender(userProfiles.getGender());
             // user.setCity(userdetails.getCity());
+
             userDao.save(user);
+
+            //System.out.println("User saved "+user);
 
             return true;
 
         } catch (Exception exc) {
+            //System.out.println("Exception happend ");
             return false;
         }
     }
 
-
-
     @Override
-    public ProfileDetails getUserDetails(int id) {
-        User user = userDao.findById(id);
-        UserInformation userInf = userInfoDao.findById(id);
-        ProfileDetails profileDetails = new ProfileDetails();
+    public ProfileDetailsDto getUserDetails(long id) {
+
+        User user = userDao.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+
+        UserInformation userInf = userInfoDao.findByUserId(id);
+
+        ProfileDetailsDto profileDetails = new ProfileDetailsDto();
         if (user != null) {
             profileDetails.setProfilePic(user.getProfilePic());
             profileDetails.setCity(user.getCity().getName());
 
             // profileDetails.setCity(user.getCity());
-           //profileDetails.setShowCityInProfile(user.getShowCityInProfile());
-
-           // profileDetails.setCity(user);
             // profileDetails.setShowCityInProfile(user.getShowCityInProfile());
-            //profileDetails.setMotherTongue(user.getMotherTongue());
+
+            // profileDetails.setCity(user);
+            // profileDetails.setShowCityInProfile(user.getShowCityInProfile());
+            // profileDetails.setMotherTongue(user.getMotherTongue());
 
             if (userInf != null)
                 profileDetails.setUserInformation(userInf.getInformation());
@@ -137,26 +141,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ProfileSettings getProfileSettings(int id) {
-        User user = userDao.findById(id);
-        ProfileSettings profileSettings = new ProfileSettings();
+    public ProfileSettingsDto getProfileSettings(long id) {
+
+        User user = userDao.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+
+        ProfileSettingsDto profileSettings = new ProfileSettingsDto();
         if (user != null) {
             profileSettings.setProfilePic(user.getProfilePic());
-            profileSettings.setCity(user.getCity().getName());
+            // profileSettings.setCity(user.getCity().getName());
             profileSettings.setEmail(user.getEmail());
             profileSettings.setPhoneNumber(user.getPhoneNumber());
             profileSettings.setFirstName(user.getFirstname());
             profileSettings.setLastName(user.getLastName());
+
+            System.out.println("profile Settings" + profileSettings);
 
             return profileSettings;
         }
         return null;
     }
 
-
-
     @Override
-    public boolean updateUserDetails(ProfileDetails profileDetail) {
+    public boolean updateUserDetails(ProfileDetailsDto profileDetail) {
         try {
             User user = new User();
             user.setId(profileDetail.getUserId());
@@ -172,6 +178,7 @@ public class UserServiceImpl implements UserService {
             UserInformation userInformation = new UserInformation();
             // get user information by Id first
             userInformation = userInfoDao.findByUserId(user.getId());
+
             if (userInformation.getInformation() != null || !userInformation.getInformation().isEmpty())
                 userInformation
                         .setInformation(userInformation.getInformation() + "," + profileDetail.getUserInformation());
@@ -180,12 +187,11 @@ public class UserServiceImpl implements UserService {
 
             // updatee user information
             userInfoDao.save(userInformation);
-
             return true;
 
         } catch (Exception exc) {
+            // System.out.println("Exception happend in here :");
             return false;
         }
     }
-
 }

@@ -8,6 +8,5 @@ public interface MessageService {
     List<MessageDto> getAllMessages();
     MessageDto getMessage(Long id);
     MessageDto addMessage(MessageDto message);
-    Message updateProduct(Long id, MessageDto product);
     void delete(Long id);
 }

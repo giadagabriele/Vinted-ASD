@@ -1,13 +1,13 @@
 package asd.vinted.core.Exception;
 
 
-public class ProductNotFoundException extends ProductException {
+public class ItemNotFoundException extends ExceptionHandler {
 
-  public ProductNotFoundException(Long id) {
+  public ItemNotFoundException(Long id) {
     super(String.format("Product with ID [%s] not found", id));
   }
 
-  public ProductNotFoundException(String name) {
+  public ItemNotFoundException(String name) {
     super(String.format("Product with name [%s] not found", name));
   }
 }
