@@ -108,16 +108,14 @@ export class RegisterComponent implements OnInit {
     this.userService.registraUser(this.usergoogle).subscribe(
       response => {
         console.log(response);
-        if (response === "success") {
-          this.router.navigate(['/login']);
-        }else{
           const modalRef = this.modalService.open(NgbdModalContent);
           modalRef.componentInstance.name = response;
       
-       }
+          if (response === "Congratulations, your account has been successfully created.") {
+            this.submitted = false;
+          }
       });
-      this.submitted = false;
-
+      
   }
  
 }
