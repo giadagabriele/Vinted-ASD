@@ -19,6 +19,8 @@ import { CookComponent } from './components/cook/cook.component';
 import { TechnologyComponent } from './components/technology/technology.component';
 import { BookComponent } from './components/book/book.component';
 import { PersonalizationComponent } from './components/personalization/personalization.component';
+import { CreateProductComponent } from './components/sell-area/create-product/create-product.component';
+import { EditProductComponent } from './components/sell-area/edit-product/edit-product.component';
 import { MessageComponent } from '../app/message/message.component';
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
@@ -79,6 +81,12 @@ const routes: Routes = [
       },
       {
         path: 'product', component: ProductComponent
+      },
+      {
+        path: 'create-product', component: CreateProductComponent
+      },
+      {
+        path: 'edit-product', component: EditProductComponent
       },
       {
         path: 'message', component: MessageComponent
