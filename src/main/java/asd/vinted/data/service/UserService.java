@@ -22,4 +22,6 @@ public interface UserService {
     ProfileSettingsDto getProfileSettings(long id);
 
     boolean updateUserProfileSettings(ProfileSettingsDto userProfiles);
+
+    String deleteUser(long id);
 }
