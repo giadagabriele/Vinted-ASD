@@ -12,6 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -24,7 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findByEmailAndPassword(String mail, String pass) {
-        User user= userDao.findByEmailAndPassword(mail,pass);
+        String password = Base64.getEncoder().encodeToString(pass.getBytes());
+        User user= userDao.findByEmailAndPassword(mail,password);
+
         if(user!=null)
             return modelMapper.map(user, UserDto.class);
         else
@@ -33,6 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto findByEmail(String email) {
         User user= userDao.findByEmail(email);
+
         if(user !=null)
             return modelMapper.map(user, UserDto.class);
         return null;
@@ -48,7 +54,9 @@ public class UserServiceImpl implements UserService {
         if (usernameExist(u.getUsername())) {
             return  "Username is already taken";
         }
+        String encodedString = Base64.getEncoder().encodeToString(u.getPassword().getBytes());
 
+        u.setPassword(encodedString);
         User user= userDao.save(u);
         if(user!=null){
             return "Congratulations, your account has been successfully created.";
