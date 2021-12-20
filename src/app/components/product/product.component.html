@@ -93,11 +93,11 @@
                                 <span class="qty-down" (click)="Decrease()">-</span>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn"><i class="fa fa-envelope"></i> Send message</button>
+                        <a routerLink="/message"> <button class="add-to-cart-btn"><i class="fa fa-envelope"></i> Send message</button></a>
                     </div>
 
                     <ul class="product-btns">
-                        <li><a href="#" (click)="addFavorite(product.id)"><i class="fa fa-heart-o"></i> add to Faverites List</a></li>
+                        <li><a routerLink="/product/11" (click)="addFavorite(product.id)"><i class="fa fa-heart-o"></i> add to Faverites List</a></li>
                         <!-- <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li> -->
                     </ul>
 

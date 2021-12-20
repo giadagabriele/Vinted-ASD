@@ -284,6 +284,16 @@ export class CartService {
 
     return subTotal;
   }
+  addFavoriteProduct(id: number) {
+      localStorage.setItem(`favProducts${id}`, id.toString());
+      console.log(localStorage.getItem(`favProducts${id}`));
+      if (localStorage.getItem('count') === null) {
+        localStorage.setItem('count', '0');
+      }
+      const count = Number(localStorage.getItem('count')) + 1 ;
+      localStorage.setItem('count', count.toString());
+      return count;
+  }
 }
 
 

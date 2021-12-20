@@ -26,6 +26,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   product: any;
   thumbImages: any[] = [];
   @ViewChild('quantity') quantityInput;
+  countFavorite = 0;
 
   constructor(private productService: ProductService,
               private cartService: CartService,
@@ -120,7 +121,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.quantityInput.nativeElement.value = value.toString();
 
   }
-
+  sendMessage() {
+    this.router.navigate(['/message']);
+  }
   Decrease() {
     // tslint:disable-next-line:radix
     let value = parseInt(this.quantityInput.nativeElement.value);
@@ -142,11 +145,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.cartService.AddProductToCart(id, this.quantityInput.nativeElement.value);
   }
   addFavorite(id: number) {
-    console.log('the adde favorite is ', id);
-    // this.router.navigate([`/product/${id}`]);
-
-  //   $('a').click(function(e: { preventDefault: () => void; }) {
-  //     e.preventDefault();
-  //  });
+    this.cartService.addFavoriteProduct(id);
   }
 }

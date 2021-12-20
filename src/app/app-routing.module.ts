@@ -19,6 +19,7 @@ import { CookComponent } from './components/cook/cook.component';
 import { TechnologyComponent } from './components/technology/technology.component';
 import { BookComponent } from './components/book/book.component';
 import { PersonalizationComponent } from './components/personalization/personalization.component';
+import { MessageComponent } from '../app/message/message.component';
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
   // put only header, footer and router-outlet there
@@ -78,6 +79,9 @@ const routes: Routes = [
       },
       {
         path: 'product', component: ProductComponent
+      },
+      {
+        path: 'message', component: MessageComponent
       }
 
     ]

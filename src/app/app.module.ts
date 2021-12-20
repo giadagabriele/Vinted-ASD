@@ -21,6 +21,7 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
 import {RegisterComponent} from '@app/components/register/register.component';
 import {HomeLayoutComponent} from '@app/components/home-layout/home-layout.component';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
+import { MessageComponent } from './message/message.component';
 
 const config = new AuthServiceConfig([
   {
@@ -47,7 +48,8 @@ export function provideConfig() {
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
-    HomeLayoutComponent
+    HomeLayoutComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,7 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig
     }
-    
+
   ],
   bootstrap: [AppComponent]
 })
