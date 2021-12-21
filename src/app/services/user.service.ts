@@ -11,7 +11,7 @@ import {
   HttpHeaders,
   HttpParams,
 } from '@angular/common/http';
-import { environment } from 'environment';
+import { environment } from './../../environment';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
