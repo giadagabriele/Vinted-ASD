@@ -24,6 +24,7 @@ import {SellAreaModule} from './components/sell-area/sell-area.module';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 import { MessageComponent } from './message/message.component';
 
+
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
