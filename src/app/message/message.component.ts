@@ -13,7 +13,6 @@ import { MessageService } from '../services/message.service';
 export class MessageComponent implements OnInit {
   formChangesSubscription: FormGroup;
   // tslint:disable-next-line:new-parens
-  user: any;
   usergoogle: SocialUser;
   constructor(private fb: FormBuilder, private authService: AuthService,
               private userService: UserService, private router: Router, private messageService: MessageService ) { }
@@ -26,7 +25,7 @@ export class MessageComponent implements OnInit {
     this.formChangesSubscription = this.fb.group({
       recieverId: [''],
       subject: [''],
-      description: [''],
+      description: ['']
   });
 
   }
@@ -42,57 +41,5 @@ export class MessageComponent implements OnInit {
       });
 
   }
-// export set {
-//   data() {
-//     return {
-//       sending: false,
-//       robotCheckInvalid: true,
-//       form: {
-//         error: '',
-//         success: '',
-
-//         email: '',
-//         subject: '',
-//         name: '',
-//         message: '',
-//       },
-//     }
-//   },
-
-//   methods: {
-//     async onSubmit() {
-//       try {
-//         this.sending = true
-//         this.form.error = ''
-//         this.form.success = ''
-//         await this.$http.mailer.send(
-//           this.form.name,
-//           this.form.email,
-//           this.form.subject || 'Contact us message from Unknown Heroes',
-//           this.form.message
-//         )
-
-//         this.form.success = 'Thank you for your email.'
-//       } catch (ex) {
-//         this.form.error = ex.message || ex
-//       } finally {
-//         this.sending = false
-//         window.scrollTo({ top: 0, behavior: 'smooth' })
-//       }
-//     },
-
-//     onError() {
-//       this.robotCheckInvalid = true
-//     },
-
-//     onSuccess() {
-//       this.robotCheckInvalid = false
-//     },
-
-//     onExpired() {
-//       this.robotCheckInvalid = true
-//     },
-//   },
-// }
 
 }

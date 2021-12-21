@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {environment} from '../../environment';
 import {Observable} from 'rxjs';
-import {ProductModelServer, ServerResponse} from '../models/product.model';
+import {ProductModelServer} from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
