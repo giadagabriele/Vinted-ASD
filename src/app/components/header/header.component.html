@@ -4,10 +4,11 @@
   <div id="top-header">
     <div class="container">
       <ul class="header-links pull-left">
-        <li><a routerLink="/profile"><i class="fa fa-sign-in"></i> {{authState === false ? 'LOGIN' : 'My Account'}}</a></li>
+        <li *ngIf="!authState"><a routerLink="/login"><i class="fa fa-sign-in"></i> LOGIN</a></li>
+        <li *ngIf="authState"><a routerLink="/profile"><i class="fa fa-sign-in"></i> My account</a></li>
 
         <li *ngIf="!authState"><a routerLink="/register"><i class="fa fa-user-plus"></i> REGISTER</a></li>
-        <li ><a (click)="logout()" *ngIf="authState"><i class="fa fa-user-plus"></i> LOGOUT</a></li>
+        <li *ngIf="authState"><a (click)="logout()"><i class="fa fa-user-plus"></i> LOGOUT</a></li>
       </ul>
     </div>
   </div>
