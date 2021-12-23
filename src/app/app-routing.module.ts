@@ -21,7 +21,9 @@ import { BookComponent } from './components/book/book.component';
 import { PersonalizationComponent } from './components/personalization/personalization.component';
 import { CreateProductComponent } from './components/sell-area/create-product/create-product.component';
 import { EditProductComponent } from './components/sell-area/edit-product/edit-product.component';
-import { MessageComponent } from '../app/message/message.component';
+import { MessageComponent } from './components/message/message.component';
+import { PurchaseComponent } from './components/purchase/purchase.component';
+
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
   // put only header, footer and router-outlet there
@@ -90,6 +92,9 @@ const routes: Routes = [
       },
       {
         path: 'message', component: MessageComponent
+      },
+      {
+        path: 'purchase', component: PurchaseComponent
       }
 
     ]

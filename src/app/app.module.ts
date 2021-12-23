@@ -22,7 +22,8 @@ import {RegisterComponent} from '@app/components/register/register.component';
 import {HomeLayoutComponent} from '@app/components/home-layout/home-layout.component';
 import {SellAreaModule} from './components/sell-area/sell-area.module';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
-import { MessageComponent } from './message/message.component';
+import { MessageComponent } from './components/message/message.component';
+import { PurchaseComponent } from './components/purchase/purchase.component';
 
 
 const config = new AuthServiceConfig([
@@ -38,7 +39,7 @@ export function provideConfig() {
 }
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -51,8 +52,9 @@ export function provideConfig() {
     ProfileComponent,
     RegisterComponent,
     HomeLayoutComponent,
-    MessageComponent
-  ],
+    MessageComponent,
+    PurchaseComponent
+   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
