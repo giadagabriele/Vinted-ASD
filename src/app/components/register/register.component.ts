@@ -113,6 +113,8 @@ export class RegisterComponent implements OnInit {
       
           if (response === "Congratulations, your account has been successfully created.") {
             this.submitted = false;
+            this.formChangesSubscription.reset;
+
           }
       });
       
