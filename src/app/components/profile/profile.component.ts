@@ -310,7 +310,7 @@ import {map} from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
   myUser: any;
-
+  isEditable=true;
 
   constructor(private authService: AuthService,
               private userService: UserService,
@@ -318,8 +318,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.userService.auth) 
-      this.router.navigateByUrl( '/login');
+   // if (!this.userService.auth) 
+     // this.router.navigateByUrl( '/login');
 
     this.userService.userData$
       .pipe(

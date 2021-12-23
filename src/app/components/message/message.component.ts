@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
-import {UserService} from '../services/user.service';
+import {UserService} from '../../services/user.service';
 import { SocialUser, AuthService } from 'angularx-social-login';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from '../services/message.service';
+import { MessageService } from '../../services/message.service';
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
