@@ -144,12 +144,12 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>John Doe</h4>
-                      <p class="text-secondary mb-1">Just small bio here</p>
-                      <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                      <button style="margin-right: 9px;" class="btn btn-primary ">Follow</button>
+                      <h4>{{this.myUser.username}}</h4>
+                      <p class="text-secondary mb-1">Just smille </p>
+                      <p class="text-muted font-size-sm">{{this.myUser.address}}</p>
+                   <!--   <button style="margin-right: 9px;" class="btn btn-primary ">Follow</button> -->
                       
-                      <button class="btn btn-outline-primary">Message</button>
+                   <!--   <button class="btn btn-outline-primary">Message</button> -->
                     </div>
                     <div class="mt-3">
                       <button class="btn btn-outline-primary  btn-lg btn-block ">Change profile pic</button>
@@ -159,7 +159,7 @@
                   </div>
                 </div>
               </div>
-              <div class="card mt-3">
+              <!--<div class="card mt-3">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
@@ -183,38 +183,131 @@
                     </span>
                   </li>
                  </ul>
-              </div>
+              </div>-->
             </div>
             <div class="col-md-8">
               <div class="card mb-3">
                 <div class="card-body">
-                  <form>
-                  <div class="row">
+                  <form [formGroup]="formProfile" >
+                    <div *ngIf="!isEditable" >
+                    <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                      
-                        first name
+                     
+                     
+                     
+                      {{this.myUser.firstName}}{{this.myUser.lastName}}
                     </div>
+                    </div>
+                    <hr>
                   </div>
-                  <hr>
+                  
+                  <div *ngIf="isEditable" >
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">First Name</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                     
+                     
+                        <input  mdbInput formControlName="firstName" name="firstName"
+                        [(ngModel)]="myUser.firstName" required type="text"   class="form-control">
+                        <span class="text-danger align-middle">
+
+                          <div *ngIf="submitted && f.firstName.errors" >
+                            <div style="text-align: center;"  *ngIf="f.firstName.errors.required">First Name is required</div>
+                        </div>
+                          </span>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                  <div *ngIf="isEditable" >
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Last Name</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                     
+                     
+                        <input  mdbInput formControlName="lastName" name="lastName"
+                        [(ngModel)]="myUser.lastName" required type="text"   class="form-control">
+                        <span class="text-danger align-middle">
+
+                          <div *ngIf="submitted && f.lastName.errors" >
+                            <div style="text-align: center;" *ngIf="f.lastName.errors.required">Last Name is required</div>
+                        </div>
+                          </span>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                  <div *ngIf="isEditable" >
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Username</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                     
+                     
+                        <input  mdbInput formControlName="username" name="username"
+                        [(ngModel)]="myUser.username" required type="text"   class="form-control">
+                        <span class="text-danger align-middle">
+
+                          <div *ngIf="submitted && f.username.errors" >
+                            <div  style="text-align: center;" *ngIf="f.username.errors.required">Username is required</div>
+                            <div style="text-align: center;" *ngIf="f.username.errors.minlength"> Username must be at least 6 characters</div>
+
+                        </div>
+                          </span>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      fip@jukmuh.al
+                      <div *ngIf="isEditable" >
+                        <input  mdbInput formControlName="email" name="email"
+                        [(ngModel)]="myUser.email" required type="text"   class="form-control">
+                        <span class="text-danger align-middle">
+                          <div *ngIf="submitted && f.email.errors">
+                  
+                            <div style="text-align: center;" *ngIf="f.email.errors.required">email is required</div>
+                            <div style="text-align: center;" *ngIf="f.email.errors.email">Not a valid email</div>
+                          </div>
+                        </span>
+                      </div>
+                      <div *ngIf="!isEditable" >
+                        {{this.myUser.email}}
+                      </div>
                     </div>
                   </div>
                   <hr>
                  
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Mobile</h6>
+                      <h6 class="mb-0">Phone number</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      (320) 380-4539
+                      <div *ngIf="isEditable" >
+                        <input  mdbInput formControlName="phoneNumber" name="phoneNumber"
+                        [(ngModel)]="myUser.phoneNumber" required type="number"   class="form-control">
+                        <span class="text-danger align-middle">
+                          <div *ngIf="submitted && f.phoneNumber.errors">
+                  
+                            <div  style="text-align: center;" *ngIf="f.phoneNumber.errors.required">Phone number is required</div>
+                          </div>
+                        </span>
+                      </div>
+                      <div *ngIf="!isEditable" >
+                        {{this.myUser.phoneNumber}}
+                      </div>
                     </div>
                   </div>
                   <hr>
@@ -223,13 +316,33 @@
                       <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Bay Area, San Francisco, CA
+                      <div *ngIf="isEditable" >
+                        <input  mdbInput formControlName="address" name="address"
+                        [(ngModel)]="myUser.address" required type="text"   class="form-control">
+                        <span class="text-danger align-middle">
+                          <div *ngIf="submitted && f.address.errors">
+                  
+                            <div  style="text-align: center;" *ngIf="f.address.errors.required">Address is required</div>
+                            <div style="text-align: center;" *ngIf="f.address.errors.minlength"> Address must be at least 12 characters</div>
+                          </div>
+                        </span>
+                      </div>
+                      <div *ngIf="!isEditable" >
+                        {{this.myUser.address}}
+                      </div>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info "  href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                      <div *ngIf="!isEditable" >
+                        <button class="btn btn-info" (click)="edit()" >{{button}}</button>
+                     </div>
+                     <div style="text-align: center" *ngIf="isEditable" >
+                      <button style= "margin-right: 10px;" class="btn btn-info" (click)="save()" >Save</button>
+                      <button class="btn btn-outline-info" (click)="cancel()" >Cancel</button>
+
+                      </div>
                     </div>
                   </div>
                 </form>
@@ -240,8 +353,11 @@
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Followers</i>20</h6>
-                      <small>username</small>
+                      <h6 class="d-flex align-items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                      </svg> Your orders</h6>
+                     <a href="product/1"> <small>username</small></a>
                       <hr>
                       <small>username</small>
                       <hr>
@@ -257,7 +373,10 @@
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Following </i>30</h6>
+                      <h6 class="d-flex align-items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">
+                        <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z"/>
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                      </svg>  Your sales </h6>
                       <small>username 1 </small>
                       <hr>
                       <small>usernameusername</small>

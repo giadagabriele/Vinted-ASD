@@ -1,3 +1,4 @@
+
 import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
 import {
@@ -21,6 +22,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   auth = false;
+  firstLogin = false;
   private SERVER_URL = environment.SERVER_URL;
   private baseUrlUpdateProfile = `${this.SERVER_URL}/user/`;
   // tslint:disable-next-line:new-parens
@@ -40,31 +42,34 @@ export class UserService {
   constructor(private authService: AuthService,
               private httpClient: HttpClient,  private router: Router) {
 
-    authService.authState.subscribe((user: SocialUser) => {
-      console.log(user);
+    authService.authState.subscribe((userSocial: SocialUser) => {
+      console.log(userSocial);
 
-      if (user != null) {
-        user.id = '0';
+      if (userSocial != null) {
+        userSocial.id = 0;
 
-        this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`,user).subscribe((res) => {
-       console.log(res);
+        this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`,userSocial).subscribe((res:User) => {
+       console.log(res.firstLogin);
         //  No user exists in database with Social Login
-          if (res===undefined) {
+          if (res===null) {
             // Send data to backend to register the user in database so that the user can place orders against his user id
-
-            this.registraUser({
-          user
-            }).subscribe(response => {
+          const userConv=this.fromSocialUserToUser(userSocial);
+            this.registraUser(
+              userConv
+            ).subscribe(response => {
               if (response === 'Congratulations, your account has been successfully created.') {
                 this.auth = true;
-
+                this.firstLogin = userConv.firstLogin;
+                
                 this.authState$.next(this.auth);
-                this.userData$.next(user);
+                this.userData$.next(userConv);
               }
             });
 
           } else {
             this.auth = true;
+            this.firstLogin = res.firstLogin;
+
             // @ts-ignore
             this.authState$.next(this.auth);
             this.userData$.next(res);
@@ -76,7 +81,19 @@ export class UserService {
   }
 
   //  Login User with Email and Password
+  fromSocialUserToUser(userSocial):User{
+    console.log(userSocial);
+    const userConverted = new User;
+    userConverted.id= userSocial.id;
+    userConverted.firstName=userSocial.firstName
+    userConverted.lastName=userSocial.lastName
+    userConverted.username=userSocial.name
+    userConverted.email=userSocial.email
+    userConverted.profilePic=userSocial.photoUrl
 
+    return userConverted;
+
+  }
 //  Google Authentication
   googleLogin()  {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -90,10 +107,19 @@ export class UserService {
 
 
 
-  registraUser(user: any): Observable<string> {
+  registraUser(user): Observable<string> {
     console.log(user);
     const headers = new HttpHeaders().set('responsType', 'text');
     return this.httpClient.post(`${this.SERVER_URL}/user/registration`, user, {
+      headers,
+      responseType: 'text' as const,
+    });
+  }
+
+  updateProfile(user: any): Observable<string> {
+    console.log(user);
+    const headers = new HttpHeaders().set('responsType', 'text');
+    return this.httpClient.post(`${this.SERVER_URL}/user/updateUser`, user, {
       headers,
       responseType: 'text' as const,
     });
@@ -105,10 +131,12 @@ export class UserService {
     console.log(this.user)
     this.httpClient
       .post(`${this.SERVER_URL}/user/login`, this.user)
-      .subscribe((res) => {
+      .subscribe((res:User) => {
         console.log(res);
         if (res != undefined) {
           this.auth = true;
+          this.firstLogin = res.firstLogin;
+
           this.userRole = 1;
           this.authState$.next(true);
           this.userData$.next(res);
