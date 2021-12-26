@@ -7,7 +7,7 @@ import asd.vinted.data.entity.User;
 public interface UserService {
 
     String saveUser(User u);
-
+    String updateUser(User u);
     // User findByEmailAndPassword(String email, String Password);
     UserDto findByEmailAndPassword(String email, String Password);
 

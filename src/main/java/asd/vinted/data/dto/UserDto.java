@@ -11,6 +11,7 @@ import asd.vinted.data.entity.UserInformation;
 
 public class UserDto implements Serializable {
 
+
     public enum Gender {
         Male,
         Female,
@@ -30,6 +31,8 @@ public class UserDto implements Serializable {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private boolean showCityInProfile;
+    private boolean firstLogin;
+
     private City city;
     private UserInformation userInformation;
 
@@ -121,6 +124,14 @@ public class UserDto implements Serializable {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
+    }
+
 
     public boolean isShowCityInProfile() {
         return this.showCityInProfile;

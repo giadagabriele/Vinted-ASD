@@ -27,7 +27,17 @@ public class UserController {
                 message,
                 HttpStatus.OK);
     }
+    @PostMapping(value = "/updateUser")
+    public ResponseEntity<String> updateUser(@RequestBody User user){
+        System.out.println(user);
 
+        String message= userService.updateUser(user);
+        JSONObject json= new JSONObject();
+        json.put("message",message);
+        return  new ResponseEntity<>(
+                message,
+                HttpStatus.OK);
+    }
 
     @PostMapping(value = "/login")
     public ResponseEntity<UserDto> loginUser(@RequestBody User user){
@@ -39,10 +49,12 @@ public class UserController {
 
     @PostMapping (value = "/loginGoogle")
     public ResponseEntity<UserDto> loginUserGoogle(@RequestBody User user){
+        System.out.println(user);
 
         user.setShowCityInProfile(false);
 
         UserDto userLogin=userService.findByEmail(user.getEmail());
+        System.out.println((userLogin));
         return ResponseEntity.ok(userLogin);
     }
 }
