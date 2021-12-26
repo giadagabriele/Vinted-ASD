@@ -57,4 +57,8 @@ public class UserController {
         System.out.println((userLogin));
         return ResponseEntity.ok(userLogin);
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable long id) {
+        return ResponseEntity.ok(userService.deleteUser(id));
+    }
 }

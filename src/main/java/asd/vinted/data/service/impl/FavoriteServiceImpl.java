@@ -31,7 +31,7 @@ public class FavoriteServiceImpl implements FavoriteService{
     @Override
     public FavoriteDto getFavorite(Long id) {
         Favorite favorite = favoriteDao.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
-      return modelMapper.map(favorite, FavoriteDto.class);
+        return modelMapper.map(favorite, FavoriteDto.class);
     }
 
     @Override

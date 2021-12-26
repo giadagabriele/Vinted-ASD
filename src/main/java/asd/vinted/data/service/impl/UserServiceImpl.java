@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto findByEmailAndPassword(String mail, String pass) {
         String password = Base64.getEncoder().encodeToString(pass.getBytes());
-        User user= userDao.findByEmailAndPassword(mail,password);
+        User user = userDao.findByEmailAndPassword(mail, password);
 
         if (user != null)
             return modelMapper.map(user, UserDto.class);
@@ -47,9 +47,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto findByEmail(String email) {
 
-        User user= userDao.findByEmail(email);
+        User user = userDao.findByEmail(email);
 
-        if(user !=null)
+        if (user != null)
             return modelMapper.map(user, UserDto.class);
         return null;
     }
@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
         if (usernameExist(u.getUsername())) {
             return usernameExistsError;
         }
+
         if(u.getPassword()!=null) {
             String encodedString = Base64.getEncoder().encodeToString(u.getPassword().getBytes());
             u.setPassword(encodedString);
@@ -88,6 +89,7 @@ public class UserServiceImpl implements UserService {
             if(user.getId()!=u.getId() && user.getUsername().equalsIgnoreCase(u.getUsername()))
                 return usernameExistsError;
         }
+
 
 
         User user = userDao.save(u);
@@ -130,12 +132,12 @@ public class UserServiceImpl implements UserService {
 
             userDao.save(user);
 
-            //System.out.println("User saved "+user);
+            // System.out.println("User saved "+user);
 
             return true;
 
         } catch (Exception exc) {
-            //System.out.println("Exception happend ");
+            // System.out.println("Exception happend ");
             return false;
         }
     }
@@ -218,6 +220,27 @@ public class UserServiceImpl implements UserService {
         } catch (Exception exc) {
             // System.out.println("Exception happend in here :");
             return false;
+        }
+    }
+
+    @Override
+    public String deleteUser(long id) {
+
+        try {
+
+            // check if the user have inputed user information and delete it if it have user
+            // info
+            if (userInfoDao.findByUserId(id) != null)
+                userInfoDao.delete(userInfoDao.findByUserId(id));
+
+            // delete user with id : id
+            userDao.deleteById(id);
+
+            return "User with Id : " + id + " is removed successfully";
+
+        } catch (Exception exc) {
+
+            return "User cannot be removed  \n Error : " + exc.getMessage();
         }
     }
 }
