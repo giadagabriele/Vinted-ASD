@@ -1,5 +1,12 @@
 package asd.vinted.data.entity;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +19,8 @@ public class Message {
     private String recieverId;
     private String subject;
     private String description;
-    private String sentDate;
+    @CreationTimestamp
+    private Timestamp sentDate;
 
     public String getSenderId() {
         return this.senderId;
@@ -26,8 +34,8 @@ public class Message {
         return this.recieverId;
     }
 
-    public void setReciverId(String reciverId) {
-        this.recieverId = reciverId;
+    public void setRecieverId(String recieverId) {
+        this.recieverId = recieverId;
     }
 
     public long getId() {
@@ -54,11 +62,11 @@ public class Message {
         this.description = description;
     }
 
-    public String getSentDate() {
+    public Timestamp getSentDate() {
         return this.sentDate;
     }
 
-    public void setSentDate(String sentDate) {
+    public void setSentDate(Timestamp sentDate) {
         this.sentDate = sentDate;
     }
 
@@ -70,7 +78,7 @@ public class Message {
       return false;
     Message message = (Message) o;
     return Objects.equals(this.id, message.id) && Objects.equals(this.subject, message.subject) && Objects
-        .equals(this.subject, message.subject);
+        .equals(this.recieverId, message.recieverId);
   }
 
   @Override
