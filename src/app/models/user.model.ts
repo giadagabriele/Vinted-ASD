@@ -7,6 +7,8 @@ export class User {
     phoneNumber: number;
     password: string;
     firstName: string;
-
+    address : string;
+    profilePic: string;
+    firstLogin :boolean;
 }
 

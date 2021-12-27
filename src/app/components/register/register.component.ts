@@ -1,3 +1,4 @@
+import { ModalComponent } from './../modal/modal.component';
 import { SocialUser, AuthService } from 'angularx-social-login';
 import { User } from './../../models/user.model';
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
@@ -44,10 +45,9 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.authService.authState.subscribe((user)=>{
-      this.usergoogle=user;
-      console.log(this.usergoogle);
-    });
+    if (this.userService.auth) 
+    this.router.navigateByUrl( '/');
+    
     this.comparePassword=true;
       this.formChangesSubscription = this.fb.group({
         firstName: ['', Validators.required],
@@ -86,12 +86,12 @@ export class RegisterComponent implements OnInit {
     this.userService.registraUser(this.formChangesSubscription.value).subscribe(
       response => {
         console.log(response);
-        if (response === "success") {
-          this.router.navigate(['/login']);
-        }else{
-          const modalRef = this.modalService.open(NgbdModalContent);
+        const modalRef = this.modalService.open(ModalComponent);
           modalRef.componentInstance.name = response;
 
+          if (response === "Congratulations, your account has been successfully created.") {
+            this.submitted = false;
+            this.formChangesSubscription.reset;
        }
       });
 
@@ -102,13 +102,16 @@ export class RegisterComponent implements OnInit {
 
   }
   signInWithGoogle() {
-
+    this.authService.authState.subscribe((user)=>{
+      this.usergoogle=user;
+      console.log(this.usergoogle);
+    });
     this.userService.googleLogin();
     console.log(this.usergoogle);
     this.userService.registraUser(this.usergoogle).subscribe(
       response => {
         console.log(response);
-          const modalRef = this.modalService.open(NgbdModalContent);
+          const modalRef = this.modalService.open(ModalComponent);
           modalRef.componentInstance.name = response;
 
           if (response === "Congratulations, your account has been successfully created.") {

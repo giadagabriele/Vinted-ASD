@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {CartModelServer} from '../../models/cart.model';
-import {CartService} from '../../services/cart.service';
+import { FavoriteService } from '@app/services/favorite.service';
 import {UserService} from '../../services/user.service';
 
 @Component({
@@ -24,11 +24,11 @@ export class HeaderComponent implements OnInit {
     this.products = ['prod1','prod2','prod3','prod4','prod5','prod6']
   }
   noResult = false;
-  favNum: number;
+  // tslint:disable-next-line:member-ordering;
   cartData: CartModelServer;
   cartTotal: number;
   authState: boolean;
-  constructor(public cartService: CartService,
+  constructor(public favoriteService: FavoriteService,
               public userService: UserService,
               private router: Router
   ) {
@@ -36,9 +36,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.favoriteList();
-    this.cartService.cartTotal$.subscribe(total => this.cartTotal = total);
+    // this.cartService.cartTotal$.subscribe(total => this.cartTotal = total);
 
-    this.cartService.cartData$.subscribe(data => this.cartData = data);
+    // this.cartService.cartData$.subscribe(data => this.cartData = data);
 
     this.userService.authState$.subscribe(authState => this.authState = authState);
   }
@@ -51,7 +51,17 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/contact')
   }
   favoriteList(){
-    this.favNum = this.cartService.addFavoriteProduct(3);
+    // this.router.navigateByUrl('/favorite')
+    const response = this.favoriteService.getAllFavorites()
+    .subscribe(prod => {
+      (// tslint:disable-next-line:no-unused-expression
+     // tslint:disable-next-line:no-shadowed-variable
+     response: any) => {
+       console.log('the value is ', response);
+      //  this.Product = response;
+     };
+    });
+    console.log(response);
   }
 
   typeaheadNoResults(event: boolean): void {
