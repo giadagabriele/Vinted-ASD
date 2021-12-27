@@ -42,13 +42,13 @@
         <!-- ACCOUNT -->
         <div class="col-md-3">
           <button class="sell-button" *ngIf="authState" routerLink="/create-product">Sell Product</button>
-          <div class="header-ctn">           
+          <div class="header-ctn">
             <!-- Wishlist -->
             <div>
-              <a routerLink="/product" (click)="favoriteList()">
+              <a routerLink="/favorite" (click)="favoriteList()">
                 <i class="fa fa-heart-o"></i>
                 <span>Favorites List</span>
-                <div class="qty">{{favNum}}</div>
+                <div class="qty">{{5}}</div>
               </a>
             </div>
             <!-- /Wishlist -->

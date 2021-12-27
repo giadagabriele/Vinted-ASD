@@ -24,6 +24,7 @@ import {SellAreaModule} from './components/sell-area/sell-area.module';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 import { MessageComponent } from './components/message/message.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
+import { FavoriteComponent } from './components/favorite/favorite.component';
 
 
 const config = new AuthServiceConfig([
@@ -53,7 +54,8 @@ export function provideConfig() {
     RegisterComponent,
     HomeLayoutComponent,
     MessageComponent,
-    PurchaseComponent
+    PurchaseComponent,
+    FavoriteComponent
    ],
   imports: [
     BrowserModule,

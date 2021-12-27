@@ -1,0 +1,15 @@
+<h3 style="margin-left: 10px; margin-top: 10px;">Favorite Products {{favorites.length}}</h3>
+    <div class="center">
+        <table class="table" style="width: fit-content;">
+            <thead>
+            </thead>
+            <tbody>
+                <tr *ngFor="let favorite of favorites">
+                <td>{{ favorite.productId}}</td>
+                <td>
+                  <a routerLink="/favorite" (click)="deleteFavorite(favorite.id)"> X</a>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
