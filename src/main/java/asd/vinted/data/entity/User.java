@@ -7,6 +7,14 @@ import java.sql.Date;
 @Table(name = "user")
 public class User {
 
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
+    }
+
     public enum Gender {
         Male,
         Female,
@@ -17,7 +25,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column
-    private String firstname;
+    private String firstName;
     @Column
     private String lastName;
     @Column
@@ -28,6 +36,10 @@ public class User {
     private String password;
     @Column
     private String username;
+
+    @Column
+    private boolean firstLogin=true;
+
 
     @Column
     private String phoneNumber;
@@ -60,12 +72,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return this.firstname;
+    public String getFirstName() {
+        return this.firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstname) {
+        this.firstName = firstname;
     }
 
     public String getLastName() {
@@ -174,7 +186,7 @@ public class User {
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", firstname='" + getFirstname() + "'" +
+            ", firstname='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", address='" + getAddress() + "'" +
             ", email='" + getEmail() + "'" +

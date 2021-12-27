@@ -1,28 +1,29 @@
 package asd.vinted.data.service.impl;
 
-import asd.vinted.core.Exception.UserException;
 import asd.vinted.core.Exception.UserNotFoundException;
 import asd.vinted.data.dao.UserDao;
 import asd.vinted.data.dao.UserInformationDao;
 import asd.vinted.data.dto.ProfileDetailsDto;
 import asd.vinted.data.dto.ProfileSettingsDto;
 import asd.vinted.data.dto.UserDto;
-import asd.vinted.data.dto.UserDto;
 import asd.vinted.data.entity.User;
 import asd.vinted.data.entity.UserInformation;
 import asd.vinted.data.service.UserService;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Service
 public class UserServiceImpl implements UserService {
+    String mailExistsError= "Email Address is Already Registered";
+    String usernameExistsError= "Username is already taken";
+    String genericErrorMessage="something went wrong please try again later";
+    String successMessage= "Congratulations, your account has been successfully created.";
 
     @Autowired
     private UserDao userDao;
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserService {
     private ModelMapper modelMapper;
     @Autowired
     private UserInformationDao userInfoDao;
+
 
     @Override
     public UserDto findByEmailAndPassword(String mail, String pass) {
@@ -60,15 +62,41 @@ public class UserServiceImpl implements UserService {
         }
 
         if (usernameExist(u.getUsername())) {
-            return "Username is already taken";
+            return usernameExistsError;
         }
-        String encodedString = Base64.getEncoder().encodeToString(u.getPassword().getBytes());
-        u.setPassword(encodedString);
+
+        if(u.getPassword()!=null) {
+            String encodedString = Base64.getEncoder().encodeToString(u.getPassword().getBytes());
+            u.setPassword(encodedString);
+        }
         User user = userDao.save(u);
         if (user != null) {
-            return "Congratulations, your account has been successfully created.";
+            return successMessage;
         } else
-            return "Error";
+            return genericErrorMessage;
+    }
+    @Override
+    public String updateUser(User u) {
+        System.out.println(u);
+
+        List<User> users= userDao.findAll();
+
+        for(User user : users){
+            System.out.println(user);
+
+            if(user.getId()!=u.getId() && user.getEmail().equalsIgnoreCase(u.getEmail()))
+                return mailExistsError;
+            if(user.getId()!=u.getId() && user.getUsername().equalsIgnoreCase(u.getUsername()))
+                return usernameExistsError;
+        }
+
+
+
+        User user = userDao.save(u);
+        if (user != null) {
+            return successMessage;
+        } else
+            return genericErrorMessage;
     }
 
     private boolean emailExist(String email) {
@@ -95,7 +123,7 @@ public class UserServiceImpl implements UserService {
             user.setId(userProfiles.getUserId());
             user.setProfilePic(userProfiles.getEmail());
             user.setPhoneNumber(userProfiles.getPhoneNumber());
-            user.setFirstname(userProfiles.getFirstName());
+            user.setFirstName(userProfiles.getFirstName());
             user.setLastName(userProfiles.getLastName());
             user.setBirthDate(userProfiles.getDateOfBirth());
 
@@ -151,7 +179,7 @@ public class UserServiceImpl implements UserService {
             // profileSettings.setCity(user.getCity().getName());
             profileSettings.setEmail(user.getEmail());
             profileSettings.setPhoneNumber(user.getPhoneNumber());
-            profileSettings.setFirstName(user.getFirstname());
+            profileSettings.setFirstName(user.getFirstName());
             profileSettings.setLastName(user.getLastName());
 
             System.out.println("profile Settings" + profileSettings);
