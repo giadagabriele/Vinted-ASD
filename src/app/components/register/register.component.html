@@ -17,7 +17,7 @@
       <span class="text-danger align-middle">
 
         <div *ngIf="submitted && f.firstName.errors" >
-          <div *ngIf="f.firstName.errors.required">First Name is required</div>
+          <div   *ngIf="f.firstName.errors.required">First Name is required</div>
       </div>
         </span>
       <input  formControlName="lastName" name="lastName"

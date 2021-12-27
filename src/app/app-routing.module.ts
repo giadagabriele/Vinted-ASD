@@ -1,3 +1,5 @@
+import { PersonalizationGuard } from './guard/Personalization.guard';
+import { AdminGuard } from './guard/admin.guard';
 import { ProductModelServer } from './models/product.model';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -33,16 +35,20 @@ const routes: Routes = [
     children: [
       {
         path: '', component: HomeComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
+
       },
       {
-        path: 'product/:id', component: ProductComponent
+        path: 'product/:id', component: ProductComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'cart', component: CartComponent
+        path: 'cart', component: CartComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'checkout', component: CheckoutComponent
-        //, canActivate: [ProfileGuard]
+        , canActivate: [ProfileGuard]
       },
       {
         path: 'thankyou', component: ThankyouComponent
@@ -52,19 +58,22 @@ const routes: Routes = [
       },
       {
         path: 'profile', component: ProfileComponent
-        //, canActivate: [ProfileGuard]
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'register', component: RegisterComponent
       },
       {
-        path: 'personalization', component: PersonalizationComponent
+        path: 'personalization', component: PersonalizationComponent,
+        canActivate: [ProfileGuard]
       },
       {
-        path: 'contact', component: ContactComponent
+        path: 'contact', component: ContactComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'clothes' , component: ClothesComponent
+        path: 'clothes' , component: ClothesComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'shoes' , component: ShoesComponent

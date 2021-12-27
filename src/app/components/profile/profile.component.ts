@@ -1,3 +1,7 @@
+import { User } from './../../models/user.model';
+import { ModalComponent } from './../modal/modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 /*import { Component, OnInit } from "@angular/core";
 import { AuthService, SocialUser } from "angularx-social-login";
 import { ResponseModel, UserService } from "../../services/user.service";
@@ -302,45 +306,87 @@ import {AuthService, SocialUser} from 'angularx-social-login';
 import {ResponseModel, UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  myUser: any;
-  isEditable=true;
-
+  myUser: User;
+  isEditable=false;
+  button="Edit";
+  formProfile: FormGroup;
+  submitted=false;
+  newUser :User;
+  
   constructor(private authService: AuthService,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private modalService: NgbModal,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-   // if (!this.userService.auth) 
-     // this.router.navigateByUrl( '/login');
+   
 
     this.userService.userData$
-      .pipe(
-        map((user: SocialUser | ResponseModel) => {
-          if (user instanceof SocialUser || user.type === 'social') {
-            return {
-              ...user,
-              email: 'test@test.com',
-
-            };
-          } else {
-            return user;
-          }
-        })
-      )
-      .subscribe((data: ResponseModel | SocialUser) => {
+      .subscribe((data: User) => {
         this.myUser = data;
       });
+      this.formProfile = this.fb.group({
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        phoneNumber: ['', Validators.required],
+        username: ['', [Validators.required, Validators.minLength(6)]],
+        address: ['', [Validators.required, Validators.minLength(12)]],
+        email : ['', [Validators.required, Validators.email]]
+    });
+   
+    
   }
+  cancel(){
+    console.log(this.newUser)
+    
+     this.isEditable=false;
+     window.location.reload();
 
+   
+
+  }
   logout() {
     this.userService.logout();
   }
+  edit(){
+    this.isEditable=true;
+    this.newUser=this.myUser;
+    console.log(this.newUser)
+    
+  }
+ 
+  get f() { return this.formProfile.controls; }
+
+  save(){
+    this.submitted=true;
+    if(this.formProfile.invalid)
+      return;
+      console.log(this.myUser)
+      this.userService.updateProfile(this.myUser).subscribe(
+      response => {
+        console.log(response);
+          
+          if (response !== "Congratulations, your account has been successfully created.") {
+            const modalRef = this.modalService.open(ModalComponent);
+            modalRef.componentInstance.name = response;
+          
+       }
+       else 
+       this.isEditable=false;
+
+      });
+
+    
+    
+  }
+
+ 
 }

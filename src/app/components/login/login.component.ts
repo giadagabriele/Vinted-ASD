@@ -32,8 +32,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     
-    if (!this.userService.auth) 
-    this.router.navigateByUrl( '/profile');
+   
     this.userService.authState$.subscribe(authState => {
       if (authState) {
         this.router.navigateByUrl(this.route.snapshot.queryParams.returnUrl || '/profile');

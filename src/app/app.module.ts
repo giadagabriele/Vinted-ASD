@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from '@app/app-routing.module';
 import {AppComponent} from '@app/app.component';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,6 +24,7 @@ import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 import { MessageComponent } from './components/message/message.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 const config = new AuthServiceConfig([
@@ -40,7 +40,7 @@ export function provideConfig() {
 }
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -55,7 +55,8 @@ export function provideConfig() {
     HomeLayoutComponent,
     MessageComponent,
     PurchaseComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    ModalComponent
    ],
   imports: [
     BrowserModule,
