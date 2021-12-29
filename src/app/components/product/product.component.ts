@@ -1,9 +1,10 @@
+import { Favorite, HeaderComponent } from './../header/header.component';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {CartService} from '../../services/cart.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {map} from 'rxjs/operators';
-
+import { FavoriteService } from '@app/services/favorite.service';
 declare let $: any;
 export class Product {
   constructor(
@@ -27,9 +28,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
   thumbImages: any[] = [];
   @ViewChild('quantity') quantityInput;
   countFavorite = 0;
+  headerComponent: HeaderComponent;
 
   constructor(private productService: ProductService,
               private cartService: CartService,
+              public favoriteService: FavoriteService,
               private route: ActivatedRoute) {
   }
 
@@ -144,7 +147,22 @@ export class ProductComponent implements OnInit, AfterViewInit {
   addToCart(id: number) {
     this.cartService.AddProductToCart(id, this.quantityInput.nativeElement.value);
   }
-  addFavorite(id: number) {
-    this.cartService.addFavoriteProduct(id);
-  }
+  // addFavorite(id: number) {
+  //   data: Favorite;
+  //   data.productId =id;
+  //   this.onSave(data)
+  // }
+
+  onSave(id: number) {
+    const userI = 15;
+    const newFavorite: any = { productId: id, userId: userI };
+    this.favoriteService.addFavorite(newFavorite)
+        .subscribe(
+            (data: Favorite) => {
+                console.log('created: ', data);
+            },
+            (error: any) => console.log(error),
+            () => this.headerComponent.favoriteList()
+        );
+}
 }
