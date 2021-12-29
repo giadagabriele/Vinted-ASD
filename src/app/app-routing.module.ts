@@ -26,6 +26,8 @@ import { EditProductComponent } from './components/sell-area/edit-product/edit-p
 import { MessageComponent } from './components/message/message.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
+import { CardComponent } from './components/card/card.component';
+import { SummaryComponent } from './components/summary/summary.component';
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
   // put only header, footer and router-outlet there
@@ -107,6 +109,12 @@ const routes: Routes = [
       },
       {
         path: 'purchase', component: PurchaseComponent
+      },
+      {
+        path: 'addCard', component: CardComponent
+      },
+      {
+        path: 'summary', component: SummaryComponent
       }
 
     ]
