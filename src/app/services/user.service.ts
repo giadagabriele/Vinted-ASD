@@ -48,19 +48,19 @@ export class UserService {
       if (userSocial != null) {
         userSocial.id = '0';
 
-        this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`,userSocial).subscribe((res:User) => {
+        this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`, userSocial).subscribe((res: User) => {
        console.log(res.firstLogin);
         //  No user exists in database with Social Login
-          if (res===null) {
+       if (res === null) {
             // Send data to backend to register the user in database so that the user can place orders against his user id
-          const userConv=this.fromSocialUserToUser(userSocial);
-            this.registraUser(
+          const userConv = this.fromSocialUserToUser(userSocial);
+          this.registraUser(
               userConv
             ).subscribe(response => {
               if (response === 'Congratulations, your account has been successfully created.') {
                 this.auth = true;
                 this.firstLogin = userConv.firstLogin;
-                
+
                 this.authState$.next(this.auth);
                 this.userData$.next(userConv);
               }
@@ -81,15 +81,16 @@ export class UserService {
   }
 
   //  Login User with Email and Password
-  fromSocialUserToUser(userSocial):User{
+  fromSocialUserToUser(userSocial): User {
     console.log(userSocial);
+    // tslint:disable-next-line:new-parens
     const userConverted = new User;
-    userConverted.id= userSocial.id;
-    userConverted.firstName=userSocial.firstName
-    userConverted.lastName=userSocial.lastName
-    userConverted.username=userSocial.name
-    userConverted.email=userSocial.email
-    userConverted.profilePic=userSocial.photoUrl
+    userConverted.id = userSocial.id;
+    userConverted.firstName = userSocial.firstName;
+    userConverted.lastName = userSocial.lastName;
+    userConverted.username = userSocial.name;
+    userConverted.email = userSocial.email;
+    userConverted.profilePic = userSocial.photoUrl;
 
     return userConverted;
 
@@ -128,12 +129,12 @@ export class UserService {
   Login(email, password) {
     this.user.email = email;
     this.user.password = password;
-    console.log(this.user)
+    console.log(this.user);
     this.httpClient
       .post(`${this.SERVER_URL}/user/login`, this.user)
-      .subscribe((res:User) => {
+      .subscribe((res: User) => {
         console.log(res);
-        if (res != undefined) {
+        if (res !== undefined) {
           this.auth = true;
           this.firstLogin = res.firstLogin;
 

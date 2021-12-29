@@ -26,6 +26,13 @@ export class FavoriteComponent implements OnInit {
   ngOnInit(): void {
     this.favoriteList();
   }
+  toggleMessage(popover) {
+    if (popover.isOpen()) {
+      popover.close();
+    } else {
+      popover.open();
+    }
+  }
 
   favoriteList() {
     this.favoriteService.getAllFavorites().subscribe((data: Favorite[]) =>  {

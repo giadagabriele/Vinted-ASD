@@ -25,6 +25,7 @@ import { MessageComponent } from './components/message/message.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CardComponent } from './components/card/card.component';
 import { SummaryComponent } from './components/summary/summary.component';
 
@@ -75,7 +76,8 @@ export function provideConfig() {
     SocialLoginModule,
     HttpClientModule,
     SellAreaModule,
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    NgbModule
   ],
   providers: [
     {

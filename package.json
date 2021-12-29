@@ -28,6 +28,7 @@
     "@types/jquery": "^3.5.10",
     "@types/jqueryui": "^1.12.16",
     "angularx-social-login": "^2.2.1",
+    "bootstrap": "^4.5.0",
     "chosen-js": "^1.8.7",
     "jquery": "^3.6.0",
     "jquery-ui-dist": "^1.12.1",
