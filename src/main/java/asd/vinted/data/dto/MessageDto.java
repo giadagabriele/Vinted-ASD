@@ -1,20 +1,27 @@
 package asd.vinted.data.dto;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Date;
+import java.sql.Timestamp;
 public class MessageDto implements Serializable {
-    
   private Long id;
   private String senderId;
   private String recieverId;
   private String subject;
   private String description;
-  private String sentDate;
 
-  public String getSentDate() {
+  @CreationTimestamp
+  private Timestamp sentDate;
+
+  public Timestamp getSentDate() {
       return this.sentDate;
   }
 
-  public void setSentDate(String sentDate) {
+  public void setSentDate(Timestamp sentDate) {
       this.sentDate = sentDate;
   }
 
@@ -37,7 +44,7 @@ public void setId(Long id) {
       return this.recieverId;
   }
 
-  public void setReciver(String recieverId) {
+  public void setRecieverId(String recieverId) {
       this.recieverId = recieverId;
   }
 

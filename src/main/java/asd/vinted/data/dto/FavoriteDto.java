@@ -6,6 +6,15 @@ public class FavoriteDto implements Serializable {
     private Long id;
     private Long userId;
     private Long productId;
+   	private String image;
+
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 
     public Long getId() {
