@@ -155,7 +155,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   onSave(id: number) {
     const userI = 15;
-    const newFavorite: any = { productId: id, userId: userI };
+    const newFavorite: any = { productId: id, userId: userI, image: this.product.image };
     this.favoriteService.addFavorite(newFavorite)
         .subscribe(
             (data: Favorite) => {
