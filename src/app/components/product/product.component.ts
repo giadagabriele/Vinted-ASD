@@ -59,7 +59,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
           this.product = prod;
 
           if (prod.images !== null) {
-            this.thumbImages = prod.images.split(';');
+            // this.thumbImages = prod.images.split(';');
           }
 
         });

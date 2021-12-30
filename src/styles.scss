@@ -134,3 +134,8 @@
 // }
 
 /* Importing Bootstrap SCSS file. */
+// @import '~bootstrap/scss/bootstrap';
+
+ngb-popover-window {
+  width: 180px !important;
+}

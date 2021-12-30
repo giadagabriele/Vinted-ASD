@@ -10,6 +10,7 @@ export class Favorite {
     public id: number,
     public userId: number,
     public productId: number,
+    public image: string
    ) { }
 }
 
@@ -53,7 +54,6 @@ export class HeaderComponent implements OnInit {
 
     this.userService.authState$.subscribe(authState => this.authState = authState);
   }
-
   toggleMessage(popover) {
     if (popover.isOpen()) {
       popover.close();
@@ -76,6 +76,8 @@ export class HeaderComponent implements OnInit {
       (error: any)   => console.log(error),
       ()             => console.log('all data gets')
     );
+
+
     }
     deleteFavorite(id: number) {
       console.log('deleting the favorite list', id);
