@@ -20,6 +20,7 @@ export class Favorite {
 })
 export class HeaderComponent implements OnInit {
   favorites: Favorite[];
+  favLength = 0;
   displayOrNot = true;
   selected?: string;
   users: string [] = [];
@@ -66,6 +67,7 @@ export class HeaderComponent implements OnInit {
       // start of (1)
         this.favorites = data;
         if (this.favorites.length > 0) {
+          this.favLength = this.favorites.length;
           this.displayOrNot = false;
         } else {
           this.displayOrNot = true;

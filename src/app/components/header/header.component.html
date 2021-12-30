@@ -49,7 +49,9 @@
                     <table class="table" style="width: fit-content;">
                         <tbody>
                             <tr *ngFor="let favorite of favorites">
-                            <td>{{ favorite.productId}}</td>
+                            <td>
+                            <a [routerLink]  ="['/product', favorite.productId]"> {{ favorite.productId}} </a>
+                            </td>
                             <td>
                               <a routerLink="/favorite" (click)="deleteFavorite(favorite.id)"> X</a>
                             </td>
@@ -63,7 +65,7 @@
                 <i class="fa fa-heart-o" [ngbPopover]="popContent" [popoverTitle]="popTitle"
               triggers="manual" #p1="ngbPopover" (click)="toggleMessage(p1)"></i>
                 <span>Favorites List</span>
-                <div class="qty">{{favorites.length}}</div>
+                <div class="qty">{{favLength}}</div>
               </a>
             </div>
             <!-- /Wishlist -->
