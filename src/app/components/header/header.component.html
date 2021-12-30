@@ -44,26 +44,33 @@
           <button class="sell-button" *ngIf="authState" routerLink="/create-product">Sell Product</button>
           <div class="header-ctn">
             <!-- Wishlist -->
-            <ng-template #popTitle let-favorite="favorite">Favorite Products</ng-template>
-            <ng-template #popContent let-favorite="favorite">
+            <ng-template #popTitle let-favorite="favorite"><i routerLink="/favorite">Favorite Products</i></ng-template>
+            <ng-template #popContent let-favorite="favorite" style="width: 150px">
                     <table class="table" style="width: fit-content;">
                         <tbody>
-                            <tr *ngFor="let favorite of favorites">
-                            <td>{{ favorite.productId}}</td>
+                            <tr *ngFor="let favorite of favorites" style ="width:150px">
                             <td>
-                              <a routerLink="/favorite" (click)="deleteFavorite(favorite.id)"> X</a>
+                            <a [routerLink]  ="['/product', favorite.productId]"> {{ favorite.productId}}
+                                <div id="product-imgs">
+                                    <div class="product-preview">
+                                        <img [src]="favorite.image" alt="{{favorite.productId}}">
+                                    </div>
+                                </div>
+                            </a>
+                            </td>
+                            <td>
+                              <a routerLink="/favorite" (click)="deleteFavorite(favorite.id)"> <i class="fa fa-trash-o"> </i></a>
                             </td>
                             </tr>
                         </tbody>
                     </table>
             </ng-template>
-
             <div>
               <a routerLink="#">
                 <i class="fa fa-heart-o" [ngbPopover]="popContent" [popoverTitle]="popTitle"
               triggers="manual" #p1="ngbPopover" (click)="toggleMessage(p1)"></i>
                 <span>Favorites List</span>
-                <div class="qty">{{favorites.length}}</div>
+                <div class="qty">{{favLength}}</div>
               </a>
             </div>
             <!-- /Wishlist -->

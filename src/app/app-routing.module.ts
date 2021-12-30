@@ -41,8 +41,8 @@ const routes: Routes = [
 
       },
       {
-        path: 'product/:id', component: ProductComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'product/:id', component: ProductComponent
+        // canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'cart', component: CartComponent,

@@ -10,6 +10,7 @@ export class Favorite {
     public id: number,
     public userId: number,
     public productId: number,
+    public image: string
    ) { }
 }
 
@@ -20,6 +21,7 @@ export class Favorite {
 })
 export class HeaderComponent implements OnInit {
   favorites: Favorite[];
+  favLength = 0;
   displayOrNot = true;
   selected?: string;
   users: string [] = [];
@@ -52,7 +54,6 @@ export class HeaderComponent implements OnInit {
 
     this.userService.authState$.subscribe(authState => this.authState = authState);
   }
-
   toggleMessage(popover) {
     if (popover.isOpen()) {
       popover.close();
@@ -66,6 +67,7 @@ export class HeaderComponent implements OnInit {
       // start of (1)
         this.favorites = data;
         if (this.favorites.length > 0) {
+          this.favLength = this.favorites.length;
           this.displayOrNot = false;
         } else {
           this.displayOrNot = true;
@@ -74,6 +76,8 @@ export class HeaderComponent implements OnInit {
       (error: any)   => console.log(error),
       ()             => console.log('all data gets')
     );
+
+
     }
     deleteFavorite(id: number) {
       console.log('deleting the favorite list', id);
