@@ -13,6 +13,15 @@ public class Favorite {
 
     private long userId;
     private long productId;
+    private String image;
+
+    public String getImage() {
+        return this.image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public long getId() {
         return this.id;
