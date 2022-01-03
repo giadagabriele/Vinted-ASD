@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '@app/services/product.service';
 
 @Component({
   selector: 'app-purchase',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchaseComponent implements OnInit {
 
-  constructor() { }
+  product: any
+
+  constructor(
+    private productService: ProductService
+    ) { }
 
   ngOnInit() {
+    this.productService.getSingleProduct(1).subscribe(prod => {
+      this.product = prod;
+    });
   }
+
+
 
 }
