@@ -28,23 +28,28 @@ public class PayPalPaymentController {
 
     @PostMapping("/pay")
     public String payment(@RequestBody OrderDto _order) {
-
+        String message ="";
         //@RequestBody ProfileDetailsDto profileDetail
         try {
             Payment payment = paypalOrderService.createPayment(_order.getPrice(), _order.getCurrency(), _order.getMethod(),
                     _order.getIntent(), _order.getDescription(), "http://localhost:8090/" + CANCEL_URL,
                     "http://localhost:8090/" + SUCCESS_URL);
+
+            System.out.println(payment);
+
             for(Links link:payment.getLinks()) {
                 if(link.getRel().equals("approval_url")) {
-                    return "redirect:"+link.getHref();
+                    message= "redirect:"+link.getHref();
                 }
             }
 
         } catch (PayPalRESTException e) {
 
             e.printStackTrace();
+            message= e.getMessage();
         }
-        return "redirect:/";
+//        return "redirect:/";
+        return  message;
     }
 
     @GetMapping(value = CANCEL_URL)
