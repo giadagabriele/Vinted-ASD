@@ -3,6 +3,7 @@ package asd.vinted.data.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="categories")
@@ -31,5 +32,10 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<SubCategory> subCategories;
+
+
+
+
+
 
 }
