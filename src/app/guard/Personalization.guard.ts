@@ -1,3 +1,4 @@
+import { User } from '@app/models/user.model';
 
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
@@ -10,14 +11,19 @@ import {UserService} from '../services/user.service';
 export class PersonalizationGuard implements CanActivate {
   constructor(private userService: UserService,
               private router: Router) {
-  }
-
+                this.userService.userData$
+                .subscribe((data: User) => {
+                  this.userAuth = data;
+                });
+              
+ }
+  userAuth:User;
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.userService.auth ){
-      if( this.userService.firstLogin === false) 
+      if( this.userAuth.firstLogin === false) 
         return true;
       
       else

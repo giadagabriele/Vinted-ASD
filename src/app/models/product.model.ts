@@ -12,3 +12,8 @@ export interface ServerResponse {
   count: number;
   products: ProductModelServer[];
 }
+export class Category {
+  id: number;
+  name: string;
+  
+}
