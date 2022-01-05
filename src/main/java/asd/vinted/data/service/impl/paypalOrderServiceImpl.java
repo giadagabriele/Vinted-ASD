@@ -1,5 +1,6 @@
 package asd.vinted.data.service.impl;
 
+import asd.vinted.data.dto.OrderDto;
 import asd.vinted.data.service.PaypalOrderService;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
@@ -18,26 +19,24 @@ public class paypalOrderServiceImpl implements PaypalOrderService {
     private APIContext apiContext;
 
     @Override
-    public Payment createPayment(Double total, String currency, String method, String intent,
-                                 String description, String cancelUrl,
-                                 String successUrl) throws PayPalRESTException {
+    public Payment createPayment(OrderDto _order,String cancelUrl, String successUrl) throws PayPalRESTException {
         Amount amount = new Amount();
-        amount.setCurrency(currency);
-        total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        amount.setTotal(String.format("%.2f", total));
+        amount.setCurrency(_order.getCurrency());
+        _order.setPrice(new BigDecimal(_order.getPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue());
+        amount.setTotal(String.format("%.2f", _order.getPrice()));
 
         Transaction transaction = new Transaction();
-        transaction.setDescription(description);
+        transaction.setDescription(_order.getDescription());
         transaction.setAmount(amount);
 
         List transactions = new ArrayList<>();
         transactions.add(transaction);
 
         Payer payer = new Payer();
-        payer.setPaymentMethod(method.toString());
+        payer.setPaymentMethod(_order.getMethod().toString());
 
         Payment payment = new Payment();
-        payment.setIntent(intent.toString());
+        payment.setIntent(_order.getIntent().toString());
         payment.setPayer(payer);
         payment.setTransactions(transactions);
         RedirectUrls redirectUrls = new RedirectUrls();
