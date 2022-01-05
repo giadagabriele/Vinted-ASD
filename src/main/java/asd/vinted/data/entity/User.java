@@ -2,6 +2,8 @@ package asd.vinted.data.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -58,6 +60,10 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "cityId", referencedColumnName = "id")
     public City city;
+
+
+
+
 
     @OneToOne
     @JoinColumn(name = "userInformationId", referencedColumnName = "id")
@@ -165,6 +171,9 @@ public class User {
     }
 
 
+
+
+
     public City getCity() {
         return this.city;
     }
@@ -184,27 +193,22 @@ public class User {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", firstname='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", address='" + getAddress() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", username='" + getUsername() + "'" +
-            ", phoneNumber='" + getPhoneNumber() + "'" +
-            ", birthDate='" + getBirthDate() + "'" +
-            ", profilePic='" + getProfilePic() + "'" +
-            ", gender='" + getGender() + "'" +
-            ", showCityInProfile='" + isShowCityInProfile() + "'" +
-            ", city='" + getCity() + "'" +
-            ", userInformation='" + getUserInformation() + "'" +
-            "}";
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", firstLogin=" + firstLogin +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", birthDate=" + birthDate +
+                ", profilePic='" + profilePic + '\'' +
+                ", gender=" + gender +
+                ", showCityInProfile=" + showCityInProfile +
+                ", city=" + city +
+                ", userInformation=" + userInformation +
+                '}';
     }
-  
- 
-
-
-
-
 }

@@ -31,8 +31,7 @@ public class PayPalPaymentController {
         String message ="";
         //@RequestBody ProfileDetailsDto profileDetail
         try {
-            Payment payment = paypalOrderService.createPayment(_order.getPrice(), _order.getCurrency(), _order.getMethod(),
-                    _order.getIntent(), _order.getDescription(), "http://localhost:8090/" + CANCEL_URL,
+            Payment payment = paypalOrderService.createPayment(_order, "http://localhost:8090/" + CANCEL_URL,
                     "http://localhost:8090/" + SUCCESS_URL);
 
             System.out.println(payment);
