@@ -10,6 +10,4 @@ public interface ProductDao extends JpaRepository<Product,Long> {
   List<Product> findAllByCategory(String category);
   Optional<Product> findByName(String name);
   Product save(ProductDao p);
-
-
 }
