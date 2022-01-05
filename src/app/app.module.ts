@@ -1,3 +1,4 @@
+import { PersonalizationComponent } from './components/personalization/personalization.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from '@app/app-routing.module';
@@ -61,6 +62,7 @@ export function provideConfig() {
     FavoriteComponent,
     ModalComponent,
     CardComponent,
+    PersonalizationComponent,
     SummaryComponent
    ],
   imports: [

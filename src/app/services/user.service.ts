@@ -16,6 +16,7 @@ import { environment } from './../../environment';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Category } from '@app/models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +47,7 @@ export class UserService {
       console.log(userSocial);
 
       if (userSocial != null) {
-        userSocial.id = '0';
+        userSocial.id = 0;
 
         this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`, userSocial).subscribe((res: User) => {
        console.log(res.firstLogin);
@@ -117,7 +118,7 @@ export class UserService {
     });
   }
 
-  updateProfile(user: any): Observable<string> {
+  updateProfile(user: User): Observable<string> {
     console.log(user);
     const headers = new HttpHeaders().set('responsType', 'text');
     return this.httpClient.post(`${this.SERVER_URL}/user/updateUser`, user, {
@@ -205,7 +206,11 @@ export class UserService {
 }
 
 clearCache() {
-  this.userProfile = null;
+  this.httpClient.post(`${this.SERVER_URL}/user/savePersonalizations`,55).subscribe(
+  (data:any) => {
+    console.log(data)});
+
+
 }
 }
 
