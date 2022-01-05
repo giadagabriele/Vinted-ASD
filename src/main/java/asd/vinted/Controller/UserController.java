@@ -1,7 +1,9 @@
 package asd.vinted.Controller;
 
 import asd.vinted.data.dto.UserDto;
+import asd.vinted.data.entity.Personalization;
 import asd.vinted.data.entity.User;
+import asd.vinted.data.service.PersonalizationService;
 import asd.vinted.data.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/user")
 @CrossOrigin(origins ="http://localhost:4200")
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PersonalizationService personalizationService;
 
     @PostMapping(value = "/registration")
     public ResponseEntity<String> saveUser(@RequestBody User user){
@@ -60,5 +67,21 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable long id) {
         return ResponseEntity.ok(userService.deleteUser(id));
+    }
+
+    @GetMapping(value = "/getPersonalizations/{id}")
+    public ResponseEntity<List<Personalization>> getPersonalizations(@PathVariable Long id){
+
+        return ResponseEntity.ok(personalizationService.findAllByUserId(id));
+    }
+
+    @PostMapping(value = "/savePersonalizations/{id}")
+    @CrossOrigin(origins ="http://localhost:4200")
+    public ResponseEntity<Boolean> savePersonalizations(@RequestBody List<Personalization> personalizations,@PathVariable Long id){
+        System.out.println(id);
+        for(Personalization pers: personalizations)
+            System.out.println(pers);
+        personalizationService.deleteAllByUserId(id);
+        return ResponseEntity.ok(personalizationService.save(personalizations));
     }
 }
