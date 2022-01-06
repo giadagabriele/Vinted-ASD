@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   @ViewChild('quantity') quantityInput;
   countFavorite = 0;
   headerComponent: HeaderComponent;
-
+  isFavorite = false;
   constructor(private productService: ProductService,
               private cartService: CartService,
               public favoriteService: FavoriteService,
@@ -57,7 +57,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         } else {
         this.productService.getSingleProduct(this.id).subscribe(prod => {
           this.product = prod;
-
+          this.favoriteList(this.id);
           if (prod.images !== null) {
             // this.thumbImages = prod.images.split(';');
           }
@@ -147,22 +147,52 @@ export class ProductComponent implements OnInit, AfterViewInit {
   addToCart(id: number) {
     this.cartService.AddProductToCart(id, this.quantityInput.nativeElement.value);
   }
-  // addFavorite(id: number) {
-  //   data: Favorite;
-  //   data.productId =id;
-  //   this.onSave(data)
-  // }
-
+  favoriteList(id) {
+    let favorites = [];
+    this.favoriteService.getAllFavorites().subscribe((data: Favorite[]) =>  {
+      // start of (1)
+        favorites = data;
+        if (favorites.length > 0) {
+          favorites.forEach(item => {
+            console.log(item.productId.toString() === id);
+            if (item.productId.toString() === id) {
+              this.isFavorite = true;
+              return;
+            }
+          });
+          // console.log(favorites[0].productId);
+          this.displayOrNot = false;
+        } else {
+          this.displayOrNot = true;
+        }
+      },
+      (error: any)   => console.log(error),
+      ()             => console.log('all data gets')
+    );
+    }
   onSave(id: number) {
+    if (this.isFavorite) {
+      console.log('already favorite');
+      return;
+    } else {
     const userI = 15;
     const newFavorite: any = { productId: id, userId: userI, image: this.product.image };
     this.favoriteService.addFavorite(newFavorite)
         .subscribe(
             (data: Favorite) => {
                 console.log('created: ', data);
+                this.isFavorite = true;
             },
             (error: any) => console.log(error),
-            () => this.headerComponent.favoriteList()
+            () => this.ngOnInit()
         );
-}
+    }
+  }
+
+  saveProductId() {
+    this.productService.save(this.id);
+    console.log(this.id)
+    this.router.navigateByUrl("/")
+  }
+
 }

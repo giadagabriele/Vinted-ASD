@@ -1,7 +1,9 @@
         <table class="table" style="width: fit-content;">
             <tbody>
                 <tr *ngFor="let favorite of favorites">
-                <td><img [src]="favorite.image" alt="{{favorite.productId}}"></td>
+                <td> <a [routerLink]  ="['/product', favorite.productId]"> <img [src]="favorite.image" alt="{{favorite.productId}}"></a>
+                </td>
+
                 <td>
                   <a routerLink="/favorite" (click)="deleteFavorite(favorite.id)"> <i class="fa fa-trash-o"> </i></a>
                 </td>
