@@ -8,6 +8,7 @@ export class Favorite {
     public id: number,
     public userId: number,
     public productId: number,
+    public image: string
    ) { }
 }
 

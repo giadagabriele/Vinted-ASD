@@ -47,7 +47,7 @@ export class UserService {
       console.log(userSocial);
 
       if (userSocial != null) {
-        userSocial.id = 0;
+        userSocial.id = '0';
 
         this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`, userSocial).subscribe((res: User) => {
        console.log(res.firstLogin);

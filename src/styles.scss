@@ -138,4 +138,10 @@
 
 ngb-popover-window {
   width: 180px !important;
+
+}
+.popover-body {
+  min-height: 100px;
+  max-height: 600px;
+  overflow-y: auto;
 }

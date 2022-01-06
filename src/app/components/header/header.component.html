@@ -44,7 +44,7 @@
           <button class="sell-button" *ngIf="authState" routerLink="/create-product">Sell Product</button>
           <div class="header-ctn">
             <!-- Wishlist -->
-            <ng-template #popTitle let-favorite="favorite"><i routerLink="/favorite">Favorite Products</i></ng-template>
+            <ng-template #popTitle let-favorite="favorite"><a routerLink="/favorite">All Favorite</a></ng-template>
             <ng-template #popContent let-favorite="favorite" style="width: 150px">
                     <table class="table" style="width: fit-content;">
                         <tbody>
@@ -66,9 +66,9 @@
                     </table>
             </ng-template>
             <div>
-              <a routerLink="#">
-                <i class="fa fa-heart-o" [ngbPopover]="popContent" [popoverTitle]="popTitle"
-              triggers="manual" #p1="ngbPopover" (click)="toggleMessage(p1)"></i>
+              <a href="javascript: void(0)">
+                <i class="fa fa-heart-o" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="bottom"
+              triggers="manual" data-toggle="popover" #p1="ngbPopover" (click)="toggleMessage(p1)"></i>
                 <span>Favorites List</span>
                 <div class="qty">{{favLength}}</div>
               </a>

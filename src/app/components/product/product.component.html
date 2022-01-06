@@ -97,10 +97,11 @@
 
 
                     <ul class="product-btns">
-                        <li><a routerLink="#" (click)="onSave(product.id)"><i class="fa fa-heart-o"></i> add to Favorites List</a></li>
+                        <div *ngIf="isFavorite"><li><a><i class="fa fa-heart"></i> Favorite Added</a></li> </div>
                         <!-- <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li> -->
+                         <div *ngIf="!isFavorite"> <li><a href="javascript:void(0)" (click)="onSave(product.id)">
+                        <i class="fa fa-heart green-color"></i> add to Favorites List</a></li> </div>
                     </ul>
-
                     <ul class="product-links">
                         <li>Category:</li>
                         <li><a href="#">{{product.category}}</a></li>
