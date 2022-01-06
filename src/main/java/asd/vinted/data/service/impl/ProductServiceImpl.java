@@ -56,4 +56,16 @@ public Product updateProduct(Long id, ProductDto product) {
 public void delete(Long id) {
   productDao.deleteById(id);
 }
+
+  @Override
+  public boolean save(Product product) {
+    try {
+      productDao.save(product);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      return false;
+    }
+    return  true;
+  }
+
 }

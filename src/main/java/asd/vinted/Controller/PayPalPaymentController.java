@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/")
-@CrossOrigin(origins = "http://localhost:8090")
+@CrossOrigin(origins = "http://localhost:8080")
 public class PayPalPaymentController {
 
     @Autowired
@@ -31,8 +31,8 @@ public class PayPalPaymentController {
         String message ="";
         //@RequestBody ProfileDetailsDto profileDetail
         try {
-            Payment payment = paypalOrderService.createPayment(_order, "http://localhost:8090/" + CANCEL_URL,
-                    "http://localhost:8090/" + SUCCESS_URL);
+            Payment payment = paypalOrderService.createPayment(_order, "http://localhost:8080/" + CANCEL_URL,
+                    "http://localhost:8080/" + SUCCESS_URL);
 
             System.out.println(payment);
 
