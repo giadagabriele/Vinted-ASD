@@ -186,6 +186,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
             (error: any) => console.log(error),
             () => this.ngOnInit()
         );
-}
-}
+    }
+  }
+
+  saveProductId() {
+    this.productService.save(this.id);
+    console.log(this.id)
+    this.router.navigateByUrl("/")
+  }
+
 }
