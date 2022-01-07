@@ -70,7 +70,7 @@ public class ProductController {
     return HttpStatus.OK;
   }
 
-  @PostMapping(value = "/saveId/{id}")
+  @PostMapping(value = "/saveProduct/{id}")
   @CrossOrigin(origins ="http://localhost:4200")
   public ResponseEntity<Boolean> saveProduct(@RequestBody Product product,@PathVariable Long id){
     System.out.println(id);
