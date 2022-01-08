@@ -34,6 +34,14 @@ export class ProductService {
     return this.httpClient.get<ProductModelServer>(this.SERVER_URL + '/product/' + id);
   }
 
+  save(id: number) {
+    this.httpClient.post(`${this.SERVER_URL}/saveProduct/`+this.getSingleProduct(id),id).subscribe(
+            (data:any) => {
+              console.log(data);    
+            })  ;       
+  }
+
+
   /*GET PRODUCTS FROM ONE CATEGORY */
   getProductByCategory(catName: string): Observable<ProductModelServer[]>  {
     return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName);

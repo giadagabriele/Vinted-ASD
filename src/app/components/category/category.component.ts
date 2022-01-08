@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Params, Router, UrlSegment, UrlSegmentGroup } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { CommonModule } from '@angular/common'
 import {ProductService} from '../../services/product.service';
 import { ProductModelServer } from '@app/models/product.model';
 @Component({
