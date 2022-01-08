@@ -1,4 +1,5 @@
 package asd.vinted.Controller;
+import asd.vinted.data.entity.Personalization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,4 +74,12 @@ public class ProductController {
     productService.delete(id);
     return HttpStatus.OK;
   }
+
+  @PostMapping(value = "/saveProduct/{id}")
+  @CrossOrigin(origins ="http://localhost:4200")
+  public ResponseEntity<Boolean> saveProduct(@RequestBody Product product,@PathVariable Long id){
+    System.out.println(id);
+    return ResponseEntity.ok(productService.save(product));
+  }
+
 }
