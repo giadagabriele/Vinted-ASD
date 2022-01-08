@@ -109,9 +109,7 @@ const routes: Routes = [
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'purchase', component: PurchaseComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
-      },
+        path: 'purchase/:id', component: PurchaseComponent}, 
       {
         path: 'addCard', component: CardComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
