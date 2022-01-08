@@ -42,12 +42,8 @@ const routes: Routes = [
 
       },
       {
-<<<<<<< HEAD
         path: 'product/:id', component: ProductComponent,
         canActivate: [ProfileGuard, PersonalizationGuard]
-=======
-        path: 'product/:id', component: ProductComponent
->>>>>>> eefee420e518240f503ce1bcc34614671d0640f7
       },
       {
         path: 'cart', component: CartComponent
@@ -79,12 +75,7 @@ const routes: Routes = [
         path: 'contact', component: ContactComponent
       },
       {
-<<<<<<< HEAD
-        path: 'clothes' , component: CategoryComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
-=======
         path: 'clothes' , component: ClothesComponent
->>>>>>> eefee420e518240f503ce1bcc34614671d0640f7
       },
       {
         path: 'shoes' , component: CategoryComponent
@@ -106,13 +97,8 @@ const routes: Routes = [
         canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-<<<<<<< HEAD
         path: 'favorite', component: FavoriteComponent,
         canActivate: [ProfileGuard]
-=======
-        path: 'favorite', component: FavoriteComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
->>>>>>> eefee420e518240f503ce1bcc34614671d0640f7
       },
       {
         path: 'create-product', component: CreateProductComponent
