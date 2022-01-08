@@ -35,7 +35,7 @@ export class ProductService {
   }
 
   /*GET PRODUCTS FROM ONE CATEGORY */
-  // getProductsFromCategory(catName: string): Observable<ProductModelServer[]>  {
-  //   return this.http.get<ProductModelServer[]>(this.SERVER_URL + '/product/brand/' + catName);
-  //  }
+  getProductByCategory(catName: string): Observable<ProductModelServer[]>  {
+    return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName);
+   }
 }
