@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '@app/services/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-purchase',
@@ -7,15 +8,20 @@ import { ProductService } from '@app/services/product.service';
   styleUrls: ['./purchase.component.scss']
 })
 export class PurchaseComponent implements OnInit {
-
+  id:any;
   product: any
 
   constructor(
-    private productService: ProductService
-    ) { }
+    private productService: ProductService,
+    private _Activatedroute:ActivatedRoute    ) {
+      this._Activatedroute.paramMap.subscribe(params => { 
+        this.id = params.get('id'); 
+    });
+     }
 
   ngOnInit() {
-    this.productService.getSingleProduct(1).subscribe(prod => {
+    console.log(this.id)
+    this.productService.getSingleProduct(this.id).subscribe(prod => {
       this.product = prod;
     });
   }

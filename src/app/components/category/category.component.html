@@ -11,7 +11,7 @@
             <img [src]="cat.image" alt="">
           </div>
           <div class="shop-body">
-            <h3>Clothes</h3>
+            <h3>{{cat.name}}</h3>
            <!-- <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>-->
            <button [routerLink]  ="['/product', cat.id]" class="cta-btn" class="btn">SHOP NOW  <i class="fa fa-arrow-circle-right"></i></button>
           </div>
