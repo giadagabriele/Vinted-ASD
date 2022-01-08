@@ -42,8 +42,7 @@ const routes: Routes = [
 
       },
       {
-        path: 'product/:id', component: ProductComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'product/:id', component: ProductComponent
       },
       {
         path: 'cart', component: CartComponent
@@ -93,12 +92,11 @@ const routes: Routes = [
         path: 'book' , component: CategoryComponent
       },
       {
-        path: 'product', component: ProductComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'product', component: ProductComponent
       },
       {
         path: 'favorite', component: FavoriteComponent,
-        canActivate: [ProfileGuard]
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'create-product', component: CreateProductComponent
@@ -113,7 +111,9 @@ const routes: Routes = [
         canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'purchase/:id', component: PurchaseComponent}, 
+        path: 'purchase/:id', component: PurchaseComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
+      },   
       {
         path: 'addCard', component: CardComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
