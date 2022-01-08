@@ -15,7 +15,7 @@ import {HomeComponent} from './components/home/home.component';
 import {HomeLayoutComponent} from './components/home-layout/home-layout.component';
 import {ContactComponent} from './components/contact/contact.component';
 import { ClothesComponent} from './components/clothes/clothes.component';
-import { ShoesComponent } from './components/shoes/shoes.component';
+import { CategoryComponent } from './components/category/category.component';
 import { AccessoriesComponent } from './components/accessories/accessories.component';
 import { CookComponent } from './components/cook/cook.component';
 import { TechnologyComponent } from './components/technology/technology.component';
@@ -28,6 +28,8 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { CardComponent } from './components/card/card.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { CommonModule } from '@angular/common';
+
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
   // put only header, footer and router-outlet there
@@ -40,7 +42,8 @@ const routes: Routes = [
 
       },
       {
-        path: 'product/:id', component: ProductComponent
+        path: 'product/:id', component: ProductComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'cart', component: CartComponent
@@ -75,26 +78,27 @@ const routes: Routes = [
         path: 'clothes' , component: ClothesComponent
       },
       {
-        path: 'shoes' , component: ShoesComponent
+        path: 'shoes' , component: CategoryComponent
       },
       {
-        path: 'accessories', component: AccessoriesComponent
+        path: 'accessories', component: CategoryComponent
       },
       {
-        path: 'cook' , component: CookComponent
+        path: 'cook' , component: CategoryComponent
       },
       {
-        path: 'technology' , component: TechnologyComponent
+        path: 'technology' , component: CategoryComponent
       },
       {
-        path: 'book' , component: BookComponent
+        path: 'book' , component: CategoryComponent
       },
       {
-        path: 'product', component: ProductComponent
+        path: 'product', component: ProductComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'favorite', component: FavoriteComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'favorite', component: FavoriteComponent,
+        canActivate: [ProfileGuard]
       },
       {
         path: 'create-product', component: CreateProductComponent
@@ -105,8 +109,8 @@ const routes: Routes = [
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'message', component: MessageComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'message', component: MessageComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'purchase/:id', component: PurchaseComponent}, 
@@ -133,7 +137,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), CommonModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

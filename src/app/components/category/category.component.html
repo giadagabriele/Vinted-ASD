@@ -1,0 +1,30 @@
+<!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <!-- category1 -->
+      <div class="col-md-4 col-xs-6"*ngFor="let cat of product">
+        <div class="shop">
+          <div class="shop-img">
+            <img [src]="cat.image" alt="">
+          </div>
+          <div class="shop-body">
+            <h3>Clothes</h3>
+           <!-- <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>-->
+           <button [routerLink]  ="['/product', cat.id]" class="cta-btn" class="btn">SHOP NOW  <i class="fa fa-arrow-circle-right"></i></button>
+          </div>
+        </div>
+      </div>
+      <!-- /category1 -->
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+
+
+
+
+</div>
+<!-- /SECTION -->
