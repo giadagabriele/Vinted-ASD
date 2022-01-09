@@ -18,7 +18,7 @@ export class ProductService {
     ) { }
 
     getAllProduct() {
-      return this.httpClient.get<{ Product }[]>(this.SERVER_URL + '/products');
+      return this.httpClient.get<Product[]>(this.SERVER_URL + '/products');
     }
   /* This is to fetch all products from the backend server */
   getAllProducts(numberOfResults= 10): Observable<ServerResponse> {
