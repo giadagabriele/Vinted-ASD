@@ -6,7 +6,7 @@ import asd.vinted.data.entity.Personalization;
 import asd.vinted.data.entity.Product;
 
 public interface ProductService {
-
+   List<ProductDto> getProductByCategory(String category);
     List<ProductDto> getAllProducts();
     ProductDto getProduct(Long id);
     ProductDto addProduct(ProductDto product);
