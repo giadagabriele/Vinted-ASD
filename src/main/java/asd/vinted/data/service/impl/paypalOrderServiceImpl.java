@@ -40,8 +40,8 @@ public class paypalOrderServiceImpl implements PaypalOrderService {
         payment.setPayer(payer);
         payment.setTransactions(transactions);
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl(cancelUrl);
-        redirectUrls.setReturnUrl(successUrl);
+        redirectUrls.setCancelUrl(_order.getCancelURL());
+        redirectUrls.setReturnUrl(_order.getSuccessURL());
         payment.setRedirectUrls(redirectUrls);
 
         return payment.create(apiContext);
