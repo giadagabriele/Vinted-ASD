@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/") //the root path for products
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins ="http://localhost:4200")
 public class ProductController {
 
   @Autowired
@@ -38,7 +38,9 @@ public class ProductController {
   //   return ResponseEntity.ok(productService.getProductByName(name) );
   // }
 
+
   @GetMapping("product/{id}")
+  @CrossOrigin(origins ="http://localhost:4200")
   public ResponseEntity<ProductDto> all(@PathVariable("id") Long id) {
     ProductDto product = productService.getProduct(id);
     return ResponseEntity.ok(product);
