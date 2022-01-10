@@ -51,7 +51,7 @@ public class ProductController {
     return ResponseEntity.ok(products);
   }
 
-  @PostMapping("product")
+  @PostMapping("product/add")
   public ResponseEntity<ProductDto> add(@RequestBody ProductDto product) {
     ProductDto p = productService.addProduct(product);
     return ResponseEntity.ok(p);
@@ -63,7 +63,7 @@ public class ProductController {
   //   ProductDto p = productService.updateProduct(id, product);
   //   return ResponseEntity.ok(p);
   // }
-  @PutMapping("product/{id}")
+  @PutMapping("product/update/{id}")
   public ResponseEntity<Product> update(@PathVariable Long id,
       @RequestBody ProductDto product) {
     Product p = productService.updateProduct(id, product);
