@@ -10,7 +10,7 @@
             name="name"
             placeholder="Name">
             <small *ngIf="productForm.get('name').invalid && (productForm.get('name').dirty ||productForm.get('name').touched )">
-              <small *ngIf="(productForm.get('name')).errors?.required">Name is required</small>
+              <small *ngIf="(productForm.get('name')).errors?.required">Name is mandatory</small>
               <small *ngIf="(productForm.get('name')).errors?.minlength">Please enter more than 6 characters</small>
             </small>
         </div>  
