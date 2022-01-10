@@ -41,13 +41,7 @@ export class HeaderComponent implements OnInit {
   cartData: CartModelServer;
   cartTotal: number;
   authState: boolean;
-  optEmpty() {
-    this.users = [];
-    this.products = [];
-  }
-  optUsers() {
-   this.users = ['Giada', 'Mohamed', 'Antonio', 'Tesfay', 'Gebreyowhans', 'Beatrice'];
-  }
+  
   constructor(public favoriteService: FavoriteService,
               public userService: UserService,
               public productService: ProductService,
@@ -117,7 +111,16 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/contact');
   }
 
+  optEmpty() {
+    this.users = [];
+    this.products = [];
+  }
+  optUsers() {
+    this.users = ['Giada', 'Mohamed', 'Antonio', 'Tesfay', 'Gebreyowhans', 'Beatrice'];
+  }
+
   optProducts() {
+    this.optEmpty();
     this.productService.getAllProduct().subscribe((data: Product[]) =>  {
         this.productsDb = data;
         this.productsDb.forEach(element => {
