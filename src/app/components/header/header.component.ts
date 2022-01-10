@@ -35,7 +35,8 @@ export class HeaderComponent implements OnInit {
   displayOrNot = true;
   selected?: string;
   users: string [] = [];
-  products: Product[];
+  productsDb: Product[];
+  products: string[] = [];
   noResult = false;
   cartData: CartModelServer;
   cartTotal: number;
@@ -118,7 +119,10 @@ export class HeaderComponent implements OnInit {
 
   optProducts() {
     this.productService.getAllProduct().subscribe((data: Product[]) =>  {
-        this.products = data;
+        this.productsDb = data;
+        this.productsDb.forEach(element => {
+          this.products.push(element.name);
+        });
       },
       (error: any)   => console.log(error),
       ()             => console.log(this.products)
