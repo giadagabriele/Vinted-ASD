@@ -69,19 +69,12 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 
-    @GetMapping(value = "/getPersonalizations/{id}")
-    public ResponseEntity<List<Personalization>> getPersonalizations(@PathVariable Long id){
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<UserDto>> all(){
 
-        return ResponseEntity.ok(personalizationService.findAllByUserId(id));
+        return ResponseEntity.ok(userService.findAll());
     }
 
-    @PostMapping(value = "/savePersonalizations/{id}")
-    @CrossOrigin(origins ="http://localhost:4200")
-    public ResponseEntity<Boolean> savePersonalizations(@RequestBody List<Personalization> personalizations,@PathVariable Long id){
-        System.out.println(id);
-        for(Personalization pers: personalizations)
-            System.out.println(pers);
-        personalizationService.deleteAllByUserId(id);
-        return ResponseEntity.ok(personalizationService.save(personalizations));
-    }
+
+
 }

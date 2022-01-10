@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,6 +43,15 @@ public class UserServiceImpl implements UserService {
             return modelMapper.map(user, UserDto.class);
         else
             return null;
+    }
+
+    @Override
+    public List<UserDto> findAll() {
+
+      return userDao.findAll()
+                .stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override
