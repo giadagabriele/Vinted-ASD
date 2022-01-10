@@ -13,6 +13,24 @@ public class OrderDto {
     private String method;
     private String description;
     private String intent;
+    private String cancelURL;
+    private String successURL;
+
+    public String getCancelURL() {
+        return cancelURL;
+    }
+
+    public void setCancelURL(String cancelURL) {
+        this.cancelURL = cancelURL;
+    }
+
+    public String getSuccessURL() {
+        return successURL;
+    }
+
+    public void setSuccessURL(String successURL) {
+        this.successURL = successURL;
+    }
 
     public OrderDto() {
     }
