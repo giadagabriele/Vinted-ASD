@@ -1,5 +1,6 @@
 export interface ProductModelServer {
   id: number;
+  userId: number;
   name: string;
   category: string;
   description: string;

@@ -105,6 +105,7 @@ export class UserService {
     this.authService.signOut();
     this.auth = false;
     this.authState$.next(this.auth);
+    sessionStorage.clear()
   }
 
 
@@ -143,6 +144,8 @@ export class UserService {
           this.authState$.next(true);
           this.userData$.next(res);
           console.log(this.userData$);
+          sessionStorage.setItem('id',''+res.id)
+          console.log("ciao bro",sessionStorage.getItem('id'))
         } else {
           this.auth = false;
           this.loginMessage$.next(

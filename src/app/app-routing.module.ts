@@ -28,6 +28,7 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { CardComponent } from './components/card/card.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
   // put only header, footer and router-outlet there
@@ -101,7 +102,7 @@ const routes: Routes = [
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'edit-product', component: EditProductComponent
+        path: 'edit-product/:id', component: EditProductComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
@@ -120,7 +121,6 @@ const routes: Routes = [
         path: 'summary', component: SummaryComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
       }
-
     ]
   },
   // Wildcard Route if no route is found == 404 NOTFOUND page
@@ -135,7 +135,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),FormsModule,ReactiveFormsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
