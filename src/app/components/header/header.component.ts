@@ -1,3 +1,4 @@
+import { User } from './../../models/user.model';
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {CartModelServer} from '../../models/cart.model';
@@ -34,13 +35,16 @@ export class HeaderComponent implements OnInit {
   favLength = 0;
   displayOrNot = true;
   selected?: string;
-  users: string [] = [];
+  users: string[] = [];
+  list: string[] = [];
+
   productsDb: Product[];
   products: string[] = [];
   noResult = false;
   cartData: CartModelServer;
   cartTotal: number;
   authState: boolean;
+  usersDb: User[];
   
   constructor(public favoriteService: FavoriteService,
               public userService: UserService,
@@ -117,15 +121,27 @@ export class HeaderComponent implements OnInit {
   }
 
   opt(val){
+  
+  if(val===0)
+    this.optEmpty()
   if(val==1)
     this.optUsers();
-    if(val==2)
+  if(val==2)
     this.optProducts();
     
   
   }
   optUsers() {
-    this.users = ['Giada', 'Mohamed', 'Antonio', 'Tesfay', 'Gebreyowhans', 'Beatrice'];
+    this.optEmpty();
+    this.userService.getAll().subscribe((data: User[]) =>  {
+      this.usersDb = data;
+      this.usersDb.forEach(element => {
+        this.users.push(element.username);
+      });
+    },
+    (error: any)   => console.log(error),
+    ()             => this.list=this.users
+  );
   }
 
   optProducts() {
@@ -137,7 +153,7 @@ export class HeaderComponent implements OnInit {
         });
       },
       (error: any)   => console.log(error),
-      ()             => console.log(this.products)
+      ()             => this.list=this.products
     );
   }
 

@@ -16,7 +16,6 @@ import { environment } from './../../environment';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Category } from '@app/models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -205,7 +204,7 @@ export class UserService {
 }
 
 getAll(): Observable<User[]> {
-  return this.httpClient.get<User[]>(`${this.SERVER_URL}user/all/`)
+  return this.httpClient.get<User[]>(`${this.SERVER_URL}/user/all`)
 }
 }
 
