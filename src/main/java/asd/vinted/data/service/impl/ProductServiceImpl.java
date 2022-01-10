@@ -1,4 +1,6 @@
 package asd.vinted.data.service.impl;
+import asd.vinted.core.Exception.UserNotFoundException;
+import asd.vinted.data.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class ProductServiceImpl implements ProductService {
 private ProductDao productDao;
 
 @Autowired
+private UserDao userDao;
+
+@Autowired
 private ModelMapper modelMapper;
 
 @Override
@@ -29,7 +34,13 @@ public List<ProductDto> getAllProducts() {
     return product.stream().map(prod->modelMapper.map(prod, ProductDto.class)).collect(Collectors.toList());
 }
 
-@Override
+  @Override
+  public List<ProductDto> getAllProductsBySeller(long id) {
+    //TODO: do it LOL
+    return null;
+  }
+
+  @Override
 public ProductDto getProduct(Long id) {
   Product product = productDao.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
   return modelMapper.map(product, ProductDto.class);
@@ -37,8 +48,13 @@ public ProductDto getProduct(Long id) {
 
 @Override
 public ProductDto addProduct(ProductDto dto) {
-  Product product = modelMapper.map(dto, Product.class);
+  System.out.println();
+  Product product = new Product();
+  product = modelMapper.map(dto, Product.class);
+  System.out.println("prod = "+ dto.getUserId()) ;
+  product.setUser(userDao.findById(dto.getUserId()).orElseThrow(() -> new UserNotFoundException(dto.getUserId())));
   Product saved = ((CrudRepository<Product, Long>) productDao).save(product);
+  System.out.println(saved+ "Product");
   return modelMapper.map(saved, ProductDto.class);
 
 }

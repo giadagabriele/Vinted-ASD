@@ -112,7 +112,51 @@ public class Product {
     @JoinColumn(name="subcategoryId" , referencedColumnName = "id")
     private SubCategory subCategory;
 
-  @Override
+    @ManyToOne
+    @JoinColumn(name="userId" , referencedColumnName = "id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public SubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", size='" + size + '\'' +
+                ", price=" + price +
+                ", brand='" + brand + '\'' +
+                ", color='" + color + '\'' +
+                ", quantity=" + quantity +
+                ", category='" + category + '\'' +
+                ", uploadTime=" + uploadTime +
+                ", subCategory=" + subCategory +
+                ", user=" + user +
+                '}';
+    }
+
+    @Override
   public boolean equals(Object o) {
 
     if (this == o)

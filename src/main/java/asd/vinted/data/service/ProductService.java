@@ -8,6 +8,7 @@ import asd.vinted.data.entity.Product;
 public interface ProductService {
 
     List<ProductDto> getAllProducts();
+    List<ProductDto> getAllProductsBySeller(long id);
     ProductDto getProduct(Long id);
     ProductDto addProduct(ProductDto product);
     Product updateProduct(Long id, ProductDto product);
