@@ -41,6 +41,7 @@
     "sweetalert2": "^11.3.0",
     "tinymce": "^5.2.2",
     "tslib": "^1.10.0",
+    "ui-select": "^0.19.8",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

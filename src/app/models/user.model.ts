@@ -1,3 +1,4 @@
+import { City } from './city.model';
 
 export class User {
     id: number;
@@ -10,5 +11,6 @@ export class User {
     address : string;
     profilePic: string;
     firstLogin :boolean;
+    city :City;
 }
 

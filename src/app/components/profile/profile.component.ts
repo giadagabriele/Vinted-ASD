@@ -1,3 +1,5 @@
+import { City } from './../../models/city.model';
+import { CityService } from './../../services/city.service';
 import { User } from './../../models/user.model';
 import { ModalComponent } from './../modal/modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -318,9 +320,12 @@ export class ProfileComponent implements OnInit {
   formProfile: FormGroup;
   submitted=false;
   newUser :User;
-  
+  noResult = false;
+  citiesDB: City[];
+  cities: string[] = [];
   constructor(private authService: AuthService,
               private userService: UserService,
+              private cityService: CityService,
               private router: Router,
               private modalService: NgbModal,
               private fb: FormBuilder) {
@@ -339,10 +344,15 @@ export class ProfileComponent implements OnInit {
         phoneNumber: ['', Validators.required],
         username: ['', [Validators.required, Validators.minLength(6)]],
         address: ['', [Validators.required, Validators.minLength(12)]],
-        email : ['', [Validators.required, Validators.email]]
+        email : ['', [Validators.required, Validators.email]],
+        city: ['', Validators.required]
     });
    
     
+  }
+  typeaheadNoResults(event: boolean): void {
+    console.log(event)
+    this.noResult = event;
   }
   cancel(){
     console.log(this.newUser)
@@ -359,8 +369,16 @@ export class ProfileComponent implements OnInit {
   edit(){
     this.isEditable=true;
     this.newUser=this.myUser;
-    console.log(this.newUser)
-    
+    this.cityService.getAll().subscribe(
+      (data:City[]) => {
+        this.citiesDB = data;
+        this.citiesDB.forEach(element => {
+          this.cities.push(element.name);
+        });
+      },
+      (error: any)   => console.log(error),
+      ()             => console.log(this.cities),
+      );
   }
  
   get f() { return this.formProfile.controls; }
@@ -386,6 +404,13 @@ export class ProfileComponent implements OnInit {
 
     
     
+  }
+  setCity(){
+    this.citiesDB.forEach(element => {
+      if(element.name=== this.f.city.value)
+        this.myUser.city=element;
+    
+    });
   }
 
  

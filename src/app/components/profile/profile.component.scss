@@ -121,3 +121,10 @@ body{
 .shadow-none {
   box-shadow: none!important;
 }
+::ng-deep .dropdown-menu {
+  min-width: 95% !important;
+}
+
+::ng-deep typeahead-container {
+  width: 95% !important;
+}

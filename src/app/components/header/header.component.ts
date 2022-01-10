@@ -34,10 +34,10 @@ export class HeaderComponent implements OnInit {
   favorites: Favorite[];
   favLength = 0;
   displayOrNot = true;
-  selected?: string;
+  selected: string;
   users: string[] = [];
   list: string[] = [];
-
+  value;
   productsDb: Product[];
   products: string[] = [];
   noResult = false;
@@ -119,7 +119,29 @@ export class HeaderComponent implements OnInit {
     this.users = [];
     this.products = [];
   }
+result(){
+  console.log(this.selected)
+  if(this.value==1)
+    this.searchUser();
+  if(this.value==2)
+    this.searchProducts();
 
+  }
+
+  searchProducts(){
+    this.productsDb.forEach(element => {
+      if(element.name=== this.selected)
+      this.router.navigate(['/product', element.id]);
+    });
+
+  }
+  searchUser(){
+    this.productsDb.forEach(element => {
+      if(element.name== this.selected)
+      this.router.navigate(['/product', element.id]);
+    });
+
+  }
   opt(val){
   
   if(val===0)
@@ -128,7 +150,7 @@ export class HeaderComponent implements OnInit {
     this.optUsers();
   if(val==2)
     this.optProducts();
-    
+  this.value=val;  
   
   }
   optUsers() {
@@ -158,7 +180,9 @@ export class HeaderComponent implements OnInit {
   }
 
   typeaheadNoResults(event: boolean): void {
+    console.log(event)
     this.noResult = event;
+    console.log(this.selected)
   }
 
 }
