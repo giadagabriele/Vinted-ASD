@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/") //the root path for products
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins ="http://localhost:4200")
 public class ProductController {
 
   @Autowired
@@ -38,10 +38,17 @@ public class ProductController {
   //   return ResponseEntity.ok(productService.getProductByName(name) );
   // }
 
+
   @GetMapping("product/{id}")
+  @CrossOrigin(origins ="http://localhost:4200")
   public ResponseEntity<ProductDto> all(@PathVariable("id") Long id) {
     ProductDto product = productService.getProduct(id);
     return ResponseEntity.ok(product);
+  }
+  @GetMapping("product/category/{category}")
+  public ResponseEntity<List<ProductDto>> all(@PathVariable("category") String category) {
+    List<ProductDto> products=productService.getProductByCategory(category);
+    return ResponseEntity.ok(products);
   }
 
   @PostMapping("product/add")
@@ -70,7 +77,7 @@ public class ProductController {
     return HttpStatus.OK;
   }
 
-  @PostMapping(value = "/saveId/{id}")
+  @PostMapping(value = "/saveProduct/{id}")
   @CrossOrigin(origins ="http://localhost:4200")
   public ResponseEntity<Boolean> saveProduct(@RequestBody Product product,@PathVariable Long id){
     System.out.println(id);

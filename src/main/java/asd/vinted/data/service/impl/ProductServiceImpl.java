@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 
 import java.util.stream.Collectors;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -44,6 +45,11 @@ public List<ProductDto> getAllProducts() {
 public ProductDto getProduct(Long id) {
   Product product = productDao.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
   return modelMapper.map(product, ProductDto.class);
+}
+@Override
+public List<ProductDto> getProductByCategory(String category) {
+  List<Product> product = productDao.findByCategory(category);
+  return product.stream().map(prod->modelMapper.map(prod, ProductDto.class)).collect(Collectors.toList());
 }
 
 @Override

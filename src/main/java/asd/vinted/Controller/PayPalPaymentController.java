@@ -2,17 +2,21 @@ package asd.vinted.Controller;
 
 import asd.vinted.data.dto.OrderDto;
 import asd.vinted.data.entity.Order;
+import asd.vinted.data.payment.PayPalConfirmPaymentRequest;
+import asd.vinted.data.payment.PayPalConfirmPaymentResponse;
+import asd.vinted.data.payment.PayPalPaymentResponse;
 import asd.vinted.data.service.PaypalOrderService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PayPalPaymentController {
 
     @Autowired
@@ -27,18 +31,23 @@ public class PayPalPaymentController {
     }
 
     @PostMapping("/pay")
-    public String payment(@RequestBody OrderDto _order) {
+    public ResponseEntity<PayPalPaymentResponse> payment(@RequestBody OrderDto _order) {
+
+        PayPalPaymentResponse response = null;
         String message ="";
         //@RequestBody ProfileDetailsDto profileDetail
         try {
-            Payment payment = paypalOrderService.createPayment(_order, "http://localhost:8080/" + CANCEL_URL,
-                    "http://localhost:8080/" + SUCCESS_URL);
+            Payment payment = paypalOrderService.createPayment(_order, "http://localhost:8090/" + CANCEL_URL,
+                    "http://localhost:8090/" + SUCCESS_URL);
 
-            System.out.println(payment);
+//            System.out.println(payment);
 
             for(Links link:payment.getLinks()) {
                 if(link.getRel().equals("approval_url")) {
-                    message= "redirect:"+link.getHref();
+                    response = new PayPalPaymentResponse();
+                    response.setStatus(true);
+                    response.setUrl(link.getHref());
+                    return ResponseEntity.ok().body(response);
                 }
             }
 
@@ -47,8 +56,9 @@ public class PayPalPaymentController {
             e.printStackTrace();
             message= e.getMessage();
         }
+        System.out.println("Payment created");
 //        return "redirect:/";
-        return  message;
+        return  ResponseEntity.ok().body(response);
     }
 
     @GetMapping(value = CANCEL_URL)
@@ -57,17 +67,29 @@ public class PayPalPaymentController {
     }
 
     @GetMapping(value = SUCCESS_URL)
-    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+    public ResponseEntity<PayPalConfirmPaymentResponse> successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+        double[] amount = {0.0};
+        PayPalConfirmPaymentResponse response=null;
         try {
-            Payment payment = paypalOrderService.executePayment(paymentId, payerId);
+            Payment payment = paypalOrderService.executePayment(paymentId,payerId);
             System.out.println(payment.toJSON());
             if (payment.getState().equals("approved")) {
-                return "success";
+                response = new PayPalConfirmPaymentResponse();
+                response.setStatus("approved");
+                response.setPaymentID(payment.getId());
+
+                payment.getTransactions().forEach(transaction -> {
+                    if (!transaction.getAmount().getTotal().isEmpty()){
+                        amount[0] += (Double.parseDouble(transaction.getAmount().getTotal()));
+                    }
+                });
+                response.setPaidPrice(amount[0]);
+
+                return ResponseEntity.ok().body(response);
             }
         } catch (PayPalRESTException e) {
             System.out.println(e.getMessage());
         }
-        return "redirect:/";
+        return  ResponseEntity.ok().body(response);
     }
-
 }
