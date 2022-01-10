@@ -29,7 +29,7 @@ export class PersonalizationService {
 
     save(list){
         console.log("OKKSERVICE")
-        this.httpClient.post(`${this.SERVER_URL}user/savePersonalizations/`+this.myUser.id,list,
+        this.httpClient.post(`${this.SERVER_URL}personalization/savePersonalizations/`+this.myUser.id,list,
             ).subscribe(
             (data:any) => {
               console.log(data);    
@@ -38,7 +38,7 @@ export class PersonalizationService {
 
     }
     getAllByUserId(): Observable<PersonalizationData[]> {
-       return this.httpClient.get<PersonalizationData[]>(`${this.SERVER_URL}user/getPersonalizations/`+this.myUser.id)
+       return this.httpClient.get<PersonalizationData[]>(`${this.SERVER_URL}personalization/getPersonalizations/`+this.myUser.id)
     }
 
 

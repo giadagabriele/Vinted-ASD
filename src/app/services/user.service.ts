@@ -47,7 +47,7 @@ export class UserService {
       console.log(userSocial);
 
       if (userSocial != null) {
-        userSocial.id = '0';
+        userSocial.id = 0;
 
         this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`, userSocial).subscribe((res: User) => {
        console.log(res.firstLogin);
@@ -199,18 +199,13 @@ export class UserService {
         })
         .pipe(
             map((result) => {
-                this.clearCache();
                 return result;
             })
         );
 }
 
-clearCache() {
-  this.httpClient.post(`${this.SERVER_URL}/user/savePersonalizations`,55).subscribe(
-  (data:any) => {
-    console.log(data)});
-
-
+getAll(): Observable<User[]> {
+  return this.httpClient.get<User[]>(`${this.SERVER_URL}user/all/`)
 }
 }
 

@@ -115,6 +115,15 @@ export class HeaderComponent implements OnInit {
     this.users = [];
     this.products = [];
   }
+
+  opt(val){
+  if(val==1)
+    this.optUsers();
+    if(val==2)
+    this.optProducts();
+    
+  
+  }
   optUsers() {
     this.users = ['Giada', 'Mohamed', 'Antonio', 'Tesfay', 'Gebreyowhans', 'Beatrice'];
   }

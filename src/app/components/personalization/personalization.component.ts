@@ -37,7 +37,6 @@ export class PersonalizationComponent implements OnInit {
         this.personalizationService.getAllByUserId().subscribe(
             (data:any) => {
               console.log(data);
-
               this.list=data;
         });
     }
@@ -46,7 +45,6 @@ export class PersonalizationComponent implements OnInit {
     ngOnInit(): void {
         this.categoryService.getAllCategories().subscribe(
             (data:any) => {
-
               this.listCategories=data;
         });
         setTimeout (() => {
@@ -55,8 +53,13 @@ export class PersonalizationComponent implements OnInit {
             (<HTMLInputElement>document.getElementById(element.value)).checked=true;
         });
     }, 1000);
-        console.log(this.list);
-        console.log(this.myUser)
+
+    this.userService.getAll().subscribe(
+        (data:any) => {
+          console.log(data)
+    }); 
+
+       
     }
 
     addDelChoice(category,value){
