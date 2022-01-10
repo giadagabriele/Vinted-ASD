@@ -41,7 +41,6 @@ export class MessageComponent implements OnInit {
   get f() { return this.formChangesSubscription.controls; }
 
   onSubmit() {
-    console.log(this.formChangesSubscription.value);
     this.messageService.postMessage(this.formChangesSubscription.value).subscribe(
       response => {
         console.log(response);

@@ -31,6 +31,8 @@ import { CardComponent } from './components/card/card.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CommonModule } from '@angular/common';
+import { PaypalComponent } from './components/payment/paypal/paypal.component';
+
 
 const config = new AuthServiceConfig([
   {
@@ -66,6 +68,8 @@ export function provideConfig() {
     PersonalizationComponent,
     SummaryComponent,
     CategoryComponent,
+    PaypalComponent,
+
    ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {CartModelServer} from '../../models/cart.model';
 import { FavoriteService } from '@app/services/favorite.service';
 import {UserService} from '../../services/user.service';
+import { ProductService } from '@app/services/product.service';
 
 declare let $: any;
 export class Favorite {
@@ -12,6 +13,15 @@ export class Favorite {
     public productId: number,
     public image: string
    ) { }
+}
+export class Product {
+  constructor(
+    public id: number,
+    public name: string,
+    public brand: string,
+    public image: string,
+    public catagory: string,
+  ) { }
 }
 
 @Component({
@@ -25,7 +35,8 @@ export class HeaderComponent implements OnInit {
   displayOrNot = true;
   selected?: string;
   users: string [] = [];
-  products: string [] = [];
+  productsDb: Product[];
+  products: string[] = [];
   noResult = false;
   cartData: CartModelServer;
   cartTotal: number;
@@ -37,11 +48,9 @@ export class HeaderComponent implements OnInit {
   optUsers() {
    this.users = ['Giada', 'Mohamed', 'Antonio', 'Tesfay', 'Gebreyowhans', 'Beatrice'];
   }
-  optProducts() {
-    this.products = ['prod1', 'prod2', 'prod3', 'prod4', 'prod5', 'prod6'];
-  }
   constructor(public favoriteService: FavoriteService,
               public userService: UserService,
+              public productService: ProductService,
               private router: Router
   ) {
   }
@@ -63,22 +72,21 @@ export class HeaderComponent implements OnInit {
   }
 
   favoriteList() {
-    this.favoriteService.getAllFavorites().subscribe((data: Favorite[]) =>  {
-      // start of (1)
-        this.favorites = data;
-        if (this.favorites.length > 0) {
-          this.favLength = this.favorites.length;
-          this.displayOrNot = false;
-        } else {
-          this.displayOrNot = true;
-        }
-      },
-      (error: any)   => console.log(error),
-      ()             => console.log('all data gets')
-    );
-
-
+      this.favoriteService.getAllFavorites().subscribe((data: Favorite[]) =>  {
+        // start of (1)
+          this.favorites = data;
+          if (this.favorites.length > 0) {
+            this.favLength = this.favorites.length;
+            this.displayOrNot = false;
+          } else {
+            this.displayOrNot = true;
+          }
+        },
+        (error: any)   => console.log(error),
+        ()             => console.log('all data gets')
+      );
     }
+
     deleteFavorite(id: number) {
       console.log('deleting the favorite list', id);
       const response = this.favoriteService.deleteFavorite(id)
@@ -108,6 +116,19 @@ export class HeaderComponent implements OnInit {
   navigateToContact() {
     this.router.navigateByUrl('/contact');
   }
+
+  optProducts() {
+    this.productService.getAllProduct().subscribe((data: Product[]) =>  {
+        this.productsDb = data;
+        this.productsDb.forEach(element => {
+          this.products.push(element.name);
+        });
+      },
+      (error: any)   => console.log(error),
+      ()             => console.log(this.products)
+    );
+  }
+
   typeaheadNoResults(event: boolean): void {
     this.noResult = event;
   }

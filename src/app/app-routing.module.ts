@@ -26,6 +26,8 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
 import { CardComponent } from './components/card/card.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { CommonModule } from '@angular/common';
+import { PaypalComponent } from './components/payment/paypal/paypal.component';
+import { PaymentSuccessComponent } from './components/payment/payment-success/payment-success.component';
 
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
@@ -56,10 +58,12 @@ const routes: Routes = [
       {
         path: 'login', component: LoginComponent
       },
+
       {
         path: 'profile', component: ProfileComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
+
       {
         path: 'register', component: RegisterComponent
       },
@@ -126,10 +130,21 @@ const routes: Routes = [
    // Wildcard Route if no route is found == 404 NOTFOUND page
    { path: 'myprofile', loadChildren: () => import('./components/profile/profile/profile.module').then(m => m.ProfileModule) },
 
+   {
+    path: 'payment', component: PaypalComponent
+    // , canActivate: [ProfileGuard, PersonalizationGuard]
+  },
+
+  {
+    path: 'paymentsuccess', component: PaymentSuccessComponent
+    // , canActivate: [ProfileGuard, PersonalizationGuard]
+  },
+
   // { path: 'myprofile', loadChildren: () => import(`./profile/profile.module`).then(m => m.ProfileModule)
    {
     path: '**', pathMatch: 'full', redirectTo: ''
   }
+
 
 ];
 
