@@ -16,6 +16,7 @@ import { environment } from './../../environment';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Category } from '@app/models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -104,6 +105,7 @@ export class UserService {
     this.authService.signOut();
     this.auth = false;
     this.authState$.next(this.auth);
+    sessionStorage.clear()
   }
 
 
@@ -117,7 +119,7 @@ export class UserService {
     });
   }
 
-  updateProfile(user: any): Observable<string> {
+  updateProfile(user: User): Observable<string> {
     console.log(user);
     const headers = new HttpHeaders().set('responsType', 'text');
     return this.httpClient.post(`${this.SERVER_URL}/user/updateUser`, user, {
@@ -142,6 +144,8 @@ export class UserService {
           this.authState$.next(true);
           this.userData$.next(res);
           console.log(this.userData$);
+          sessionStorage.setItem('id',''+res.id)
+          console.log("ciao bro",sessionStorage.getItem('id'))
         } else {
           this.auth = false;
           this.loginMessage$.next(
@@ -205,7 +209,11 @@ export class UserService {
 }
 
 clearCache() {
-  this.userProfile = null;
+  this.httpClient.post(`${this.SERVER_URL}/user/savePersonalizations`,55).subscribe(
+  (data:any) => {
+    console.log(data)});
+
+
 }
 }
 

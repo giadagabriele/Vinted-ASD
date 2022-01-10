@@ -318,6 +318,7 @@ export class ProfileComponent implements OnInit {
   formProfile: FormGroup;
   submitted=false;
   newUser :User;
+  authState: boolean;
   
   constructor(private authService: AuthService,
               private userService: UserService,
@@ -342,7 +343,7 @@ export class ProfileComponent implements OnInit {
         email : ['', [Validators.required, Validators.email]]
     });
    
-    
+    this.userService.authState$.subscribe(authState => this.authState = authState);
   }
   cancel(){
     console.log(this.newUser)

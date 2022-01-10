@@ -1,1 +1,121 @@
-<p>edit-product works!</p>
+<div class="container" *ngIf="productForm">
+    <form [formGroup]="productForm">
+      <div class="form-row">
+        <div class="col-md-4 mb-2">
+          <label for="name">Name</label>
+          <input type="text"
+            formControlName="name"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Name">
+            <small *ngIf="productForm.get('name').invalid && (productForm.get('name').dirty ||productForm.get('name').touched )">
+              <small *ngIf="(productForm.get('name')).errors?.required">Name is mandatory</small>
+              <small *ngIf="(productForm.get('name')).errors?.minlength">Please enter more than 6 characters</small>
+            </small>
+        </div>  
+        <div class="col-md-4 mb-2">
+          <label for="description">Description</label>
+          <input type="text"
+            formControlName="description"
+            class="form-control"
+            id="description"
+            name="description"
+            placeholder="Description">
+        </div>
+        <div class="col-md-4 mb-2">
+          <label for="size">Size</label>
+          <input type="input"
+            formControlName="size"  
+            class="form-control"
+            id="size"
+            name="size"
+            placeholder="Size">
+            <small *ngIf="productForm.get('size').invalid && (productForm.get('size').dirty ||productForm.get('size').touched )">
+              <small *ngIf="(productForm.get('size')).errors?.required">size is required</small>
+            </small>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-2">
+          <label for="price">Price</label>
+          <input type="number"
+            formControlName="price"
+            step="0.01"
+            class="form-control"
+            id="price"
+            name="price"
+            placeholder="Price">
+            <small *ngIf="productForm.get('price').invalid && (productForm.get('price').dirty ||productForm.get('price').touched )">
+              <small *ngIf="(productForm.get('price')).errors?.required">price is required</small>
+            </small>
+        </div>
+        <div class="col-md-4 mb-2">
+          <label for="brand">Brand</label>
+          <input type="text"
+            formControlName="brand"
+            class="form-control"
+            id="brand"
+            name="brand"
+            placeholder="Brand">
+            <small *ngIf="productForm.get('brand').invalid && (productForm.get('brand').dirty ||productForm.get('brand').touched )">
+              <small *ngIf="(productForm.get('brand')).errors?.required">brand is required</small>
+            </small>
+        </div>
+        <div class="col-md-4 mb-2">
+          <label for="color">Color</label>
+          <input type="text"
+            formControlName="color"
+            class="form-control"
+            id="color"
+            name="color"
+            placeholder="Color">
+            <small *ngIf="productForm.get('color').invalid && (productForm.get('color').dirty ||productForm.get('color').touched )">
+              <small *ngIf="(productForm.get('color')).errors?.required">color is required</small>
+            </small>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-2">
+          <label for="quantity">Quantity</label>
+          <input type="number"
+            formControlName="quantity" 
+            class="form-control"
+            id="quantity"
+            name="quantity"
+            placeholder="Quantity">
+            <small *ngIf="productForm.get('quantity').invalid && (productForm.get('quantity').dirty ||productForm.get('quantity').touched )">
+              <small *ngIf="(productForm.get('quantity')).errors?.required">quantity is required</small>
+            </small>
+        </div>
+        <div class="col-md-4 mb-2">
+          <label for="category">Category</label>
+          <input type="text"
+            formControlName="category"
+            class="form-control"
+            id="category"
+            name="category"
+            placeholder="Category">
+            <small *ngIf="productForm.get('category').invalid && (productForm.get('category').dirty ||productForm.get('category').touched )">
+              <small *ngIf="(productForm.get('category')).errors?.required">category is required</small>
+            </small>
+        </div>
+        <div class="col-md-4 mb-2">
+          <label for="photo">Photo</label>
+          <input type="text"
+            formControlName="photo"
+            class="form-control"
+            id="photo"
+            name="photo"
+            placeholder="Photo path">
+        </div>
+      </div>
+      <div class="form-row" style="margin-top: 30px;">
+        <button
+          [disabled]="!productForm.valid"
+          (click)="submit()"
+          type="submit"
+          class="btn btn-primary">Add Product</button>
+      </div>
+    </form>
+  </div>

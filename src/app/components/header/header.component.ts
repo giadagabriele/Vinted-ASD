@@ -112,4 +112,8 @@ export class HeaderComponent implements OnInit {
     this.noResult = event;
   }
 
+  createProduct() {
+    this.router.navigateByUrl('/create-product',)
+  }
+
 }

@@ -28,6 +28,7 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { CardComponent } from './components/card/card.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
   // put only header, footer and router-outlet there
@@ -37,23 +38,22 @@ const routes: Routes = [
     children: [
       {
         path: '', component: HomeComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
 
       },
       {
         path: 'product/:id', component: ProductComponent
-        // canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'cart', component: CartComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'cart', component: CartComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'checkout', component: CheckoutComponent
-        , canActivate: [ProfileGuard]
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'thankyou', component: ThankyouComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'login', component: LoginComponent
@@ -70,12 +70,10 @@ const routes: Routes = [
         canActivate: [ProfileGuard]
       },
       {
-        path: 'contact', component: ContactComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'contact', component: ContactComponent
       },
       {
-        path: 'clothes' , component: ClothesComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'clothes' , component: ClothesComponent
       },
       {
         path: 'shoes' , component: ShoesComponent
@@ -97,26 +95,32 @@ const routes: Routes = [
       },
       {
         path: 'favorite', component: FavoriteComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'create-product', component: CreateProductComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'edit-product', component: EditProductComponent
+        path: 'edit-product/:id', component: EditProductComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'message', component: MessageComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'purchase', component: PurchaseComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'addCard', component: CardComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'summary', component: SummaryComponent
+        , canActivate: [ProfileGuard, PersonalizationGuard]
       }
-
     ]
   },
   // Wildcard Route if no route is found == 404 NOTFOUND page
@@ -131,7 +135,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),FormsModule,ReactiveFormsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

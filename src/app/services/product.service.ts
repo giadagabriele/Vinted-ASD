@@ -34,6 +34,23 @@ export class ProductService {
     return this.httpClient.get<ProductModelServer>(this.SERVER_URL + '/product/' + id);
   }
 
+  save(id: number) {
+    this.httpClient.post(`${this.SERVER_URL}/saveProduct/`+this.getSingleProduct(id),id).subscribe(
+            (data:any) => {
+              console.log(data);    
+            })  ;       
+  }
+  update(id: number, request : Product){
+    return this.httpClient.post(`${this.SERVER_URL}product/update/`+id,request);
+  }
+
+  add(product: Product){
+    product.userId = +sessionStorage.getItem('id');
+    console.log("userId",sessionStorage.getItem('id'))
+    return this.httpClient.post(`${this.SERVER_URL}/product/add`,product);
+
+  }
+
   /*GET PRODUCTS FROM ONE CATEGORY */
   // getProductsFromCategory(catName: string): Observable<ProductModelServer[]>  {
   //   return this.http.get<ProductModelServer[]>(this.SERVER_URL + '/product/brand/' + catName);

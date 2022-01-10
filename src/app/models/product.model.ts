@@ -1,5 +1,6 @@
 export interface ProductModelServer {
   id: number;
+  userId: number;
   name: string;
   category: string;
   description: string;
@@ -11,4 +12,9 @@ export interface ProductModelServer {
 export interface ServerResponse {
   count: number;
   products: ProductModelServer[];
+}
+export class Category {
+  id: number;
+  name: string;
+  
 }
