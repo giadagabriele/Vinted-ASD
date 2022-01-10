@@ -16,10 +16,7 @@ import {HomeLayoutComponent} from './components/home-layout/home-layout.componen
 import {ContactComponent} from './components/contact/contact.component';
 import { ClothesComponent} from './components/clothes/clothes.component';
 import { CategoryComponent } from './components/category/category.component';
-import { AccessoriesComponent } from './components/accessories/accessories.component';
-import { CookComponent } from './components/cook/cook.component';
-import { TechnologyComponent } from './components/technology/technology.component';
-import { BookComponent } from './components/book/book.component';
+
 import { PersonalizationComponent } from './components/personalization/personalization.component';
 import { CreateProductComponent } from './components/sell-area/create-product/create-product.component';
 import { EditProductComponent } from './components/sell-area/edit-product/edit-product.component';
@@ -74,7 +71,7 @@ const routes: Routes = [
         path: 'contact', component: ContactComponent
       },
       {
-        path: 'clothes' , component: ClothesComponent
+        path: 'clothes' , component: CategoryComponent
       },
       {
         path: 'shoes' , component: CategoryComponent
