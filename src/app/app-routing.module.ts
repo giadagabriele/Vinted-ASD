@@ -15,11 +15,8 @@ import {HomeComponent} from './components/home/home.component';
 import {HomeLayoutComponent} from './components/home-layout/home-layout.component';
 import {ContactComponent} from './components/contact/contact.component';
 import { ClothesComponent} from './components/clothes/clothes.component';
-import { ShoesComponent } from './components/shoes/shoes.component';
-import { AccessoriesComponent } from './components/accessories/accessories.component';
-import { CookComponent } from './components/cook/cook.component';
-import { TechnologyComponent } from './components/technology/technology.component';
-import { BookComponent } from './components/book/book.component';
+import { CategoryComponent } from './components/category/category.component';
+
 import { PersonalizationComponent } from './components/personalization/personalization.component';
 import { CreateProductComponent } from './components/sell-area/create-product/create-product.component';
 import { EditProductComponent } from './components/sell-area/edit-product/edit-product.component';
@@ -29,6 +26,10 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
 import { CardComponent } from './components/card/card.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { PaypalComponent } from './components/payment/paypal/paypal.component';
+import { PaymentSuccessComponent } from './components/payment/payment-success/payment-success.component';
+
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
   // put only header, footer and router-outlet there
@@ -58,10 +59,12 @@ const routes: Routes = [
       {
         path: 'login', component: LoginComponent
       },
+
       {
         path: 'profile', component: ProfileComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
+
       {
         path: 'register', component: RegisterComponent
       },
@@ -73,29 +76,29 @@ const routes: Routes = [
         path: 'contact', component: ContactComponent
       },
       {
-        path: 'clothes' , component: ClothesComponent
+        path: 'clothes' , component: CategoryComponent
       },
       {
-        path: 'shoes' , component: ShoesComponent
+        path: 'shoes' , component: CategoryComponent
       },
       {
-        path: 'accessories', component: AccessoriesComponent
+        path: 'accessories', component: CategoryComponent
       },
       {
-        path: 'cook' , component: CookComponent
+        path: 'cook' , component: CategoryComponent
       },
       {
-        path: 'technology' , component: TechnologyComponent
+        path: 'technology' , component: CategoryComponent
       },
       {
-        path: 'book' , component: BookComponent
+        path: 'book' , component: CategoryComponent
       },
       {
         path: 'product', component: ProductComponent
       },
       {
-        path: 'favorite', component: FavoriteComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'favorite', component: FavoriteComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
         path: 'create-product', component: CreateProductComponent
@@ -106,13 +109,13 @@ const routes: Routes = [
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'message', component: MessageComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'message', component: MessageComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'purchase', component: PurchaseComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
-      },
+        path: 'purchase/:id', component: PurchaseComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
+      },   
       {
         path: 'addCard', component: CardComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
@@ -127,15 +130,26 @@ const routes: Routes = [
    // Wildcard Route if no route is found == 404 NOTFOUND page
    { path: 'myprofile', loadChildren: () => import('./components/profile/profile/profile.module').then(m => m.ProfileModule) },
 
+   {
+    path: 'payment', component: PaypalComponent
+    // , canActivate: [ProfileGuard, PersonalizationGuard]
+  },
+
+  {
+    path: 'paymentsuccess', component: PaymentSuccessComponent
+    // , canActivate: [ProfileGuard, PersonalizationGuard]
+  },
+
   // { path: 'myprofile', loadChildren: () => import(`./profile/profile.module`).then(m => m.ProfileModule)
    {
     path: '**', pathMatch: 'full', redirectTo: ''
   }
 
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),FormsModule,ReactiveFormsModule],
+  imports: [RouterModule.forRoot(routes),FormsModule,ReactiveFormsModule,CommonModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

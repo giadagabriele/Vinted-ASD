@@ -104,7 +104,7 @@
                     </ul>
                     <ul class="product-links">
                         <li>Category:</li>
-                        <li><a href="#">{{product.category}}</a></li>
+                        <li><a [routerLink]  ="['/', product.category]">{{product.category}}</a></li>
                         <!-- <li><a href="#">Accessories</a></li> -->
                     </ul>
 
@@ -113,7 +113,7 @@
                             <a routerLink="/message"> <button class="add-to-cart-btn"><i class="fa fa-envelope"></i> Send message</button></a>
                         </div>
                         <div style="margin-top: 10px;">
-                            <a routerLink="/purchase" (click)="saveProductId()"> <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Buy</button></a>
+                            <a [routerLink]="['/purchase', product.id]" > <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Buy</button></a>
                         </div>
                     </div>
 

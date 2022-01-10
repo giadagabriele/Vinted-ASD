@@ -7,7 +7,7 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { PersonalizationService } from '@app/services/personalization.service';
 import { Category } from '@app/models/product.model';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 
 
@@ -22,7 +22,7 @@ export class PersonalizationComponent implements OnInit {
      listCategories= new  Array<Category>();
      myUser:User;
      disabled=true;
-     
+
      constructor(
         private router: Router,
         private activatedRoute : ActivatedRoute,
@@ -37,26 +37,29 @@ export class PersonalizationComponent implements OnInit {
         this.personalizationService.getAllByUserId().subscribe(
             (data:any) => {
               console.log(data);
-            
               this.list=data;
         });
     }
-    
+
 
     ngOnInit(): void {
         this.categoryService.getAllCategories().subscribe(
             (data:any) => {
-             
               this.listCategories=data;
         });
-        setTimeout (() => {  
+        setTimeout (() => {
         this.list.forEach((element) => {
             console.log(element.value);
             (<HTMLInputElement>document.getElementById(element.value)).checked=true;
         });
     }, 1000);
-        console.log(this.list);
-        console.log(this.myUser)
+
+    this.userService.getAll().subscribe(
+        (data:any) => {
+          console.log(data)
+    }); 
+
+       
     }
 
     addDelChoice(category,value){
@@ -69,24 +72,24 @@ export class PersonalizationComponent implements OnInit {
                 found=true;
             }
         });
-      
-      
-           
-                       
+
+
+
+
         if(found){
-            this.disabled=true; 
+            this.disabled=true;
             return;
         }
-            
-        var obj= new PersonalizationData;     
+
+        var obj= new PersonalizationData;
         obj.category=idCategory;
         obj.value=value;
         obj.user=this.myUser;
         this.list.push(obj);
         this.disabled=false;
         console.log(this.list)
-        
-    
+
+
     }
 
     save(){
@@ -104,7 +107,7 @@ export class PersonalizationComponent implements OnInit {
     }
 
     getIdCategoryByName(name){
-        var category;     
+        var category;
         this.listCategories.forEach(element => {
             console.log(element)
             if(element.name===name ){

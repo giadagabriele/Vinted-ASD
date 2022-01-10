@@ -9,38 +9,46 @@ export class AppComponent {
   title = 'frontend';
   name = 'JOHN DOE';
 
-  constructor(private router : Router){
+  constructor(private router: Router) {
+  }
+  navigateToCategory() {
+    this.router.navigateByUrl('/category');
+  }
+  navigateToClothes() {
+    this.router.navigateByUrl('/clothes');
   }
 
-  navigateToClothes(){
-    this.router.navigateByUrl('/clothes')
+  navigateToShoes() {
+    this.router.navigateByUrl('/shoes');
   }
 
-  navigateToShoes(){
-    this.router.navigateByUrl('/shoes')
+  navigateToAccessories() {
+    this.router.navigateByUrl('/accessories');
   }
 
-  navigateToAccessories(){
-    this.router.navigateByUrl('/accessories')
+  navigateToCook() {
+    this.router.navigateByUrl('/cook');
   }
 
-  navigateToCook(){
-    this.router.navigateByUrl('/cook')
+  navigateToTechnology() {
+    this.router.navigateByUrl('/technology');
   }
 
-  navigateToTechnology(){
-    this.router.navigateByUrl('/technology')
+  navigateToBook() {
+    this.router.navigateByUrl('/book');
   }
 
-  navigateToBook(){
-    this.router.navigateByUrl('/book')
+  navigateToContact() {
+    this.router.navigateByUrl('/contact');
   }
 
-  navigateToContact(){
-    this.router.navigateByUrl('/contact')
+  navigateToPersonalization() {
+    this.router.navigateByUrl('/personalization');
   }
-
-  navigateToPersonalization(){
-    this.router.navigateByUrl('/personalization')
+  navigateToProduct() {
+    this.router.navigateByUrl('/product');
+  }
+  navigateToFavorite() {
+    this.router.navigateByUrl('/favorite');
   }
 }

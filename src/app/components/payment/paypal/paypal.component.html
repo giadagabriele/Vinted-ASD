@@ -1,0 +1,59 @@
+
+<div>
+  <h2>Pay with paypal</h2>
+  <div class="card-body">
+    <div class="modal-body">
+      <form [formGroup]="paymentForm" (ngSubmit)="paymentWithPayPal()">
+
+        <div class="form-group">
+          <label for="price">price</label>
+          <input type="number" min="0" class="form-control" id="price" required
+          formControlName="price" >
+        </div>
+  
+        <!--
+        <div class="form-group">
+          <label for="intent">intent</label>
+          <input type="text" class="form-control" id="intent"
+          formControlName="intent">
+
+                 
+                   required
+                  <div [hidden]="request.intent || intent.pristine"
+                 class="alert alert-danger">
+              intent is required
+            </div>
+        </div>
+
+  
+        <div class="form-group">
+          <label for="currency">currency</label>
+          <input type="text" maxlength="3" class="form-control" id="currency"
+          [(ngModel)]="request.currency" name="currency">
+
+           <div [hidden]="currency.valid || currency.pristine" class="alert alert-danger">
+            currency is required
+          </div>
+        </div>
+
+          
+        <div class="form-group">
+          <label for="method">method</label>
+          <input type="text" class="form-control" id="method"
+          [(ngModel)]="request.method" name="method">
+
+           <div [hidden]="method.valid || method.pristine" class="alert alert-danger">
+            payment method is required
+          </div>
+        </div>
+      -->
+        <button type="submit" class="btn btn-success">Submit</button>
+
+        <!-- <button type="submit" class="btn btn-success" [disabled]="!paypalForm.form.valid">Submit</button> -->
+     
+      </form>
+
+    </div>
+  </div>
+</div>
+

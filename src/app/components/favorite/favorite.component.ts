@@ -1,7 +1,7 @@
 import { Product } from './../product/product.component';
 import { FavoriteService } from './../../services/favorite.service';
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 declare let $: any;
 export class Favorite {
   constructor(
@@ -21,7 +21,7 @@ export class Favorite {
 export class FavoriteComponent implements OnInit {
   favorites: Favorite[];
  displayOrNot = true;
-  constructor( private favoriteService: FavoriteService) {
+  constructor( private favoriteService: FavoriteService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -82,6 +82,8 @@ export class FavoriteComponent implements OnInit {
         );
 }
 
-
+navigateToProduct() {
+  this.router.navigateByUrl('/product');
+}
 
 }

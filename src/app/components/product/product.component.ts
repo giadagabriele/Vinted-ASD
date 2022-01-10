@@ -1,10 +1,13 @@
 import { Favorite, HeaderComponent } from './../header/header.component';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../services/product.service';
+import { UserService } from '@app/services/user.service';
 import {CartService} from '../../services/cart.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {map} from 'rxjs/operators';
+import { User } from './../../models/user.model';
 import { FavoriteService } from '@app/services/favorite.service';
+
 declare let $: any;
 export class Product {
   constructor(
@@ -31,10 +34,17 @@ export class ProductComponent implements OnInit, AfterViewInit {
   countFavorite = 0;
   headerComponent: HeaderComponent;
   isFavorite = false;
+  user: User;
   constructor(private productService: ProductService,
               private cartService: CartService,
               public favoriteService: FavoriteService,
+              private userService: UserService,
               private route: ActivatedRoute) {
+                this.userService.userData$
+                .subscribe((data: User) => {
+                  this.user = data;
+                });
+                console.log(this.user.id);
   }
 
   ngOnInit(): void {
@@ -176,8 +186,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       console.log('already favorite');
       return;
     } else {
-    const userI = 15;
-    const newFavorite: any = { productId: id, userId: userI, image: this.product.image };
+    const newFavorite: any = { productId: id, userId: this.user.id, image: this.product.image };
     this.favoriteService.addFavorite(newFavorite)
         .subscribe(
             (data: Favorite) => {

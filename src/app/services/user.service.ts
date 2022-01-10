@@ -16,7 +16,6 @@ import { environment } from './../../environment';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Category } from '@app/models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -202,18 +201,13 @@ export class UserService {
         })
         .pipe(
             map((result) => {
-                this.clearCache();
                 return result;
             })
         );
 }
 
-clearCache() {
-  this.httpClient.post(`${this.SERVER_URL}/user/savePersonalizations`,55).subscribe(
-  (data:any) => {
-    console.log(data)});
-
-
+getAll(): Observable<User[]> {
+  return this.httpClient.get<User[]>(`${this.SERVER_URL}/user/all`)
 }
 }
 

@@ -5,6 +5,7 @@ import { SocialUser, AuthService } from 'angularx-social-login';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from '../../services/message.service';
+import { User } from '@app/models/user.model';
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -14,8 +15,15 @@ export class MessageComponent implements OnInit {
   formChangesSubscription: FormGroup;
   // tslint:disable-next-line:new-parens
   usergoogle: SocialUser;
+  user: User;
   constructor(private fb: FormBuilder, private authService: AuthService,
-              private userService: UserService, private router: Router, private messageService: MessageService ) { }
+              private userService: UserService, private router: Router, private messageService: MessageService ) {
+                this.userService.userData$
+                .subscribe((data: User) => {
+                  this.user = data;
+                });
+                console.log(this.user.email);
+              }
 
   ngOnInit(): void {
     if (!this.userService.auth) {
@@ -23,6 +31,7 @@ export class MessageComponent implements OnInit {
     }
 
     this.formChangesSubscription = this.fb.group({
+      senderId: [`${this.user.email}`],
       recieverId: [''],
       subject: [''],
       description: ['']
@@ -32,7 +41,6 @@ export class MessageComponent implements OnInit {
   get f() { return this.formChangesSubscription.controls; }
 
   onSubmit() {
-    console.log(this.formChangesSubscription.value);
     this.messageService.postMessage(this.formChangesSubscription.value).subscribe(
       response => {
         console.log(response);
