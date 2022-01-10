@@ -94,13 +94,8 @@ export class RegisterComponent implements OnInit {
             this.formChangesSubscription.reset;
        }
       });
-
-
-
-
-
-
   }
+  
   signInWithGoogle() {
     this.authService.authState.subscribe((user)=>{
       this.usergoogle=user;

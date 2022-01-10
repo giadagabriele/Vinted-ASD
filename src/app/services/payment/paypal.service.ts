@@ -9,7 +9,7 @@ import { environment } from 'src/environment';
 })
 export class PaypalService {
 
-  host = environment.SERVER_URL+'/pay';
+  host = environment.SERVER_URL;
   constructor(private httpClient: HttpClient) { }
 
   payWithPayPal(request: PaypalPaymentRequest){
@@ -18,16 +18,13 @@ export class PaypalService {
     // const headers = new HttpHeaders({
     //   'Authorization': 'Bearer '+sessionStorage.getItem('token')
     // });
-    
     return this.httpClient.post(this.host+'/pay',request,{headers});
+    console.log(" I am here in confirmaation")
   }
 
   confirmPayment(request: PayPalConfirmPaymentRequest){
     const headers = new HttpHeaders().set('responsType', 'text');
-    return this.httpClient.post(this.host+'/successPay', request, {
-      headers,
-      responseType: 'text' as const,
-    });
-    //  return this.httpClient.post(this.host+'/success',request,{headers}); if we set token
+    console.log(" I am here in confirmaation")
+    return this.httpClient.get(this.host+'/pay/success?paymentId='+request.paymentId+'&PayerID='+request.payerId,{headers});
   }
 }
