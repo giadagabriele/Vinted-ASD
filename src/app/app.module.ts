@@ -86,6 +86,7 @@ export function provideConfig() {
     SellAreaModule,
     TypeaheadModule.forRoot(),
     NgbModule,
+    ReactiveFormsModule,
     CommonModule
   ],
   providers: [

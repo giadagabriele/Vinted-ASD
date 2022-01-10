@@ -25,6 +25,7 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { CardComponent } from './components/card/card.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
 import { PaymentSuccessComponent } from './components/payment/payment-success/payment-success.component';
@@ -104,7 +105,7 @@ const routes: Routes = [
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'edit-product', component: EditProductComponent
+        path: 'edit-product/:id', component: EditProductComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
@@ -123,7 +124,6 @@ const routes: Routes = [
         path: 'summary', component: SummaryComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
       }
-
     ]
   },
   // Wildcard Route if no route is found == 404 NOTFOUND page
@@ -149,7 +149,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), CommonModule],
+  imports: [RouterModule.forRoot(routes),FormsModule,ReactiveFormsModule,CommonModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

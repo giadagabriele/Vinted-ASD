@@ -55,6 +55,8 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe((user)=>{
       this.usergoogle=user;
       console.log(this.usergoogle);
+      sessionStorage.setItem('id',this.usergoogle.id)
+      console.log("ciao bro",sessionStorage.getItem('id'))
     });
     this.userService.googleLogin();
     
@@ -76,6 +78,7 @@ export class LoginComponent implements OnInit {
       console.log(msg)
     });
     this.userService.Login(email,password);
+    
     
     
     

@@ -40,7 +40,16 @@ export class ProductService {
               console.log(data);    
             })  ;       
   }
+  update(id: number, request : Product){
+    return this.httpClient.post(`${this.SERVER_URL}product/update/`+id,request);
+  }
 
+  add(product: Product){
+    product.userId = +sessionStorage.getItem('id');
+    console.log("userId",sessionStorage.getItem('id'))
+    return this.httpClient.post(`${this.SERVER_URL}/product/add`,product);
+
+  }
 
   /*GET PRODUCTS FROM ONE CATEGORY */
   getProductByCategory(catName: string): Observable<ProductModelServer[]>  {

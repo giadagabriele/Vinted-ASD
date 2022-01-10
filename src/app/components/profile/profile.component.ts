@@ -320,9 +320,14 @@ export class ProfileComponent implements OnInit {
   formProfile: FormGroup;
   submitted=false;
   newUser :User;
+<<<<<<< HEAD
   noResult = false;
   citiesDB: City[];
   cities: string[] = [];
+=======
+  authState: boolean;
+  
+>>>>>>> 61d1140614fc1a8a620f742dc3e4c952164d6d9e
   constructor(private authService: AuthService,
               private userService: UserService,
               private cityService: CityService,
@@ -348,7 +353,7 @@ export class ProfileComponent implements OnInit {
         city: ['', Validators.required]
     });
    
-    
+    this.userService.authState$.subscribe(authState => this.authState = authState);
   }
   typeaheadNoResults(event: boolean): void {
     console.log(event)

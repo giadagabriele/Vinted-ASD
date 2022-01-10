@@ -185,4 +185,8 @@ result(){
     console.log(this.selected)
   }
 
+  createProduct() {
+    this.router.navigateByUrl('/create-product',)
+  }
+
 }
