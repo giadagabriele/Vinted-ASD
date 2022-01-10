@@ -23,6 +23,9 @@ public class User {
         Other;
     }
 
+    @OneToMany(mappedBy = "user")
+    private List<Product> products;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -170,9 +173,13 @@ public class User {
         this.showCityInProfile = showCityInProfile;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
 
-
-
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public City getCity() {
         return this.city;

@@ -7,6 +7,7 @@ import java.util.Date;
 public class ProductDto implements Serializable {
 
   private Long id;
+  private Long userId;
   private String category;
   private String name;
   private String description;
@@ -18,6 +19,14 @@ public class ProductDto implements Serializable {
   private int quantity;
   private Date uploadTime;
 
+  public Long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Long userId) {
+    this.userId = userId;
+  }
+  
   public String getDescription() {
     return this.description;
   }
