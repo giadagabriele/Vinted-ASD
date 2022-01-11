@@ -23,7 +23,7 @@ export class CityService {
     }
 
     getAll(): Observable<City[]> {
-        return this.httpClient.get<City[]>(`${this.SERVER_URL}city/all/`)
+        return this.httpClient.get<City[]>(`${this.SERVER_URL}/city/all/`)
      }
  
  
