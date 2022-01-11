@@ -28,7 +28,6 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CardComponent } from './components/card/card.component';
-import { SummaryComponent } from './components/summary/summary.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
@@ -66,7 +65,6 @@ export function provideConfig() {
     ModalComponent,
     CardComponent,
     PersonalizationComponent,
-    SummaryComponent,
     CategoryComponent,
     PaypalComponent,
 

@@ -24,7 +24,6 @@ import { MessageComponent } from './components/message/message.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { CardComponent } from './components/card/card.component';
-import { SummaryComponent } from './components/summary/summary.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
@@ -118,10 +117,6 @@ const routes: Routes = [
       },   
       {
         path: 'addCard', component: CardComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
-      },
-      {
-        path: 'summary', component: SummaryComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
       }
     ]
