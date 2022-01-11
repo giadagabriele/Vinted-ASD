@@ -1,3 +1,4 @@
+import { Category } from '@app/models/product.model';
 import { CategoryService } from './../../services/category.service';
 import { User } from './../../models/user.model';
 import { Observable } from 'rxjs';
@@ -6,7 +7,6 @@ import { PersonalizationData } from './../../models/personalization.model';
 import { Component, OnInit, NgModule } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { PersonalizationService } from '@app/services/personalization.service';
-import { Category } from '@app/models/product.model';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -54,10 +54,6 @@ export class PersonalizationComponent implements OnInit {
         });
     }, 1000);
 
-    this.userService.getAll().subscribe(
-        (data:any) => {
-          console.log(data)
-    }); 
 
        
     }
