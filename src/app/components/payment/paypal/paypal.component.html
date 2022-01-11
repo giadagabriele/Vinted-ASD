@@ -1,59 +1,53 @@
 
-<div>
-  <h2>Pay with paypal</h2>
-  <div class="card-body">
-    <div class="modal-body">
+<div class="container pt-5">
+  <div class="row justify-content-sm-center pt-5">
+    <div class="col-sm-6 shadow round pb-3">
+
+      <h2 class="text-center pt-3 text-secondary">Pay with paypal</h2>
+
       <form [formGroup]="paymentForm" (ngSubmit)="paymentWithPayPal()">
 
         <div class="form-group">
           <label for="price">price</label>
           <input type="number" min="0" class="form-control" id="price" required
           formControlName="price" >
+          <small *ngIf="paymentForm.get('price').invalid" class="text-danger">price is required and must not be zero and less</small>
         </div>
-  
-        <!--
+
         <div class="form-group">
           <label for="intent">intent</label>
-          <input type="text" class="form-control" id="intent"
-          formControlName="intent">
-
-                 
-                   required
-                  <div [hidden]="request.intent || intent.pristine"
-                 class="alert alert-danger">
-              intent is required
-            </div>
+          <input type="text" min="0" class="form-control" id="intent" required
+          formControlName="intent" >
+          <small *ngIf="paymentForm.get('intent').invalid" class="text-danger">intent is required</small>
         </div>
 
-  
         <div class="form-group">
           <label for="currency">currency</label>
-          <input type="text" maxlength="3" class="form-control" id="currency"
-          [(ngModel)]="request.currency" name="currency">
-
-           <div [hidden]="currency.valid || currency.pristine" class="alert alert-danger">
-            currency is required
-          </div>
+          <input type="text" min="0" class="form-control" id="currency" required
+          formControlName="currency" >
+          <small *ngIf="paymentForm.get('currency').invalid" class="text-danger">currency is required</small>
         </div>
 
-          
         <div class="form-group">
           <label for="method">method</label>
-          <input type="text" class="form-control" id="method"
-          [(ngModel)]="request.method" name="method">
-
-           <div [hidden]="method.valid || method.pristine" class="alert alert-danger">
-            payment method is required
-          </div>
+          <input type="text" min="0" class="form-control" id="method" required
+          formControlName="method" >
+          <small *ngIf="paymentForm.get('method').invalid" class="text-danger">method is required</small>
         </div>
-      -->
-        <button type="submit" class="btn btn-success">Submit</button>
 
-        <!-- <button type="submit" class="btn btn-success" [disabled]="!paypalForm.form.valid">Submit</button> -->
+        <div class="form-group">
+          <label for="description">description</label>
+          <input type="text" min="0" class="form-control" id="description" required
+          formControlName="description" >
+          <small *ngIf="paymentForm.get('description').invalid" class="text-danger">description is required</small>
+        </div>
+
+        <button type="submit" class="btn btn-success">Pay</button>
      
       </form>
-
     </div>
+
   </div>
+ 
 </div>
 

@@ -13,7 +13,7 @@ export class PaymentSuccessComponent implements OnInit {
   constructor(private paymentService: PaypalService) { }
 
   request: PayPalConfirmPaymentRequest = new PayPalConfirmPaymentRequest();
-
+  paymentResponse: PayPalConfirmPaymentResponse;
   ngOnInit() {
 
     if (document.URL.indexOf('?')){
@@ -30,14 +30,11 @@ export class PaymentSuccessComponent implements OnInit {
         }
       }
     }
-
-    console.log( this.request);
-
     // call to successPayment service
     this.paymentService.confirmPayment(this.request)
       .subscribe((response: PayPalConfirmPaymentResponse)=>{
-        console.log(response.status);
         if (response.status==='approved'){
+          this.paymentResponse = response;
           console.log(response);
           window.close();
           // location.replace('http://localhost:4200')
@@ -46,5 +43,7 @@ export class PaymentSuccessComponent implements OnInit {
     });
 
   }
-  
+  printPage() {
+    window.print();
+  }
 }
