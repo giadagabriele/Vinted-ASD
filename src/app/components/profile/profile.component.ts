@@ -350,9 +350,6 @@ export class ProfileComponent implements OnInit {
     
      this.isEditable=false;
      window.location.reload();
-
-   
-
   }
   logout() {
     this.userService.logout();
@@ -384,8 +381,6 @@ export class ProfileComponent implements OnInit {
        this.isEditable=false;
 
       });
-
-    
     
   }
 
