@@ -23,7 +23,7 @@ public class paypalOrderServiceImpl implements PaypalOrderService {
         Amount amount = new Amount();
         amount.setCurrency(_order.getCurrency());
         _order.setPrice(new BigDecimal(_order.getPrice()).setScale(2, RoundingMode.HALF_UP).doubleValue());
-        amount.setTotal(String.format("%.2f", _order.getPrice()));
+        amount.setTotal(String.format("%.3f", _order.getPrice()));
 
         Transaction transaction = new Transaction();
         transaction.setDescription(_order.getDescription());
