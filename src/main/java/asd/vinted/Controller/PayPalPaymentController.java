@@ -76,7 +76,7 @@ public class PayPalPaymentController {
             if (payment.getState().equals("approved")) {
                 response = new PayPalConfirmPaymentResponse();
                 response.setStatus("approved");
-                response.setPaymentID(payment.getId());
+                response.setPaymentID(paymentId);
 
                 payment.getTransactions().forEach(transaction -> {
                     if (!transaction.getAmount().getTotal().isEmpty()){
@@ -84,7 +84,16 @@ public class PayPalPaymentController {
                     }
                 });
                 response.setPaidPrice(amount[0]);
+                response.setPaymentDate(payment.getUpdateTime());
+                response.setPayerName(payment.getPayer().getPayerInfo().getFirstName()+" "+payment.getPayer().getPayerInfo().getLastName());
+                //response.setPayeeName(payment.getPayee().getFirstName()+" "+payment.getPayee().getLastName());
+                response.setAddressLine1(payment.getPayer().getPayerInfo().getShippingAddress().getLine1());
+                response.setCity(payment.getPayer().getPayerInfo().getShippingAddress().getCity());
+                response.setCountryCode(payment.getPayer().getPayerInfo().getShippingAddress().getCountryCode());
+                response.setPostalCode(payment.getPayer().getPayerInfo().getShippingAddress().getPostalCode());
+                response.setState(payment.getPayer().getPayerInfo().getShippingAddress().getState());
 
+               // response.setPaymentMode(payment.getTransactions().);
                 return ResponseEntity.ok().body(response);
             }
         } catch (PayPalRESTException e) {
