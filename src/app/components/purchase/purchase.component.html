@@ -3,14 +3,15 @@
     <p style="margin-bottom: 20px;">You want to buy this product:<img [src]="product.image"></p>
     <div class="product-details">
         <p><b>{{product.name}}</b></p>
-        <p>{{product.brand}}, {{product.color}} - {{product.size}}</p>
+        <p>{{product.brand}}, {{product.color}} {{product.size}}</p>
         <p>{{product.description}}</p>
-        <p><b>Qty:</b> {{product.quantity}}</p>
         <p><b>Price: </b>${{product.price}}</p>
-        <!-- <div class="add-to-cart" style="margin-top: 50px;">
-            <a routerLink="/payment"> <button class="add-to-cart-btn" ><i class="fa fa-cart-arrow-down"></i>Checkout</button></a>
-        </div> -->
-        <a><button  type="button" class="add-to-cart-btn" (click)="openModal()"><i class="fa fa-cart-arrow-down"></i>Checkout</button></a>
-
+        <div class="add-to-cart">
+            <a>
+                <button type="button" class="add-to-cart-btn" (click)="openModal()">
+                    <i class="fa fa-cart-arrow-down"></i>
+                Checkout</button>
+            </a>
+        </div>
     </div>
 </div>

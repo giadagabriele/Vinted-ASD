@@ -14,7 +14,6 @@ import {RegisterComponent} from './components/register/register.component';
 import {HomeComponent} from './components/home/home.component';
 import {HomeLayoutComponent} from './components/home-layout/home-layout.component';
 import {ContactComponent} from './components/contact/contact.component';
-import { ClothesComponent} from './components/clothes/clothes.component';
 import { CategoryComponent } from './components/category/category.component';
 
 import { PersonalizationComponent } from './components/personalization/personalization.component';
