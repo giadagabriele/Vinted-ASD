@@ -69,6 +69,9 @@ export function provideConfig() {
     PaypalComponent,
 
    ],
+   entryComponents:[
+    PaypalComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
