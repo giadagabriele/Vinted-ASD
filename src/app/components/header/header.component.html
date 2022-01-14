@@ -25,22 +25,22 @@
         <div>
           <div class="header-search">
             <form>
-              <select class="input-select col-md-3" (change)="opt($event.target.value)">
+              <select class="input-select col-md-5" (change)="opt($event.target.value)">
                 <option value="0">Choose option</option>
                 <option value="1">Users</option>
                 <option value="2">Products</option>
+                <option value="3">City</option>
               </select>
-              <input (typeaheadOnSelect)="result()" [(ngModel)]="selected" name="sele" [typeahead]="list"  [typeaheadScrollable]="true" [typeaheadOptionsInScrollableView]="5" (typeaheadNoResults)="typeaheadNoResults($event)" class="input col-md-3" placeholder="Search here">
-              <input class="input col-md-3" placeholder="Where">
+              <input (typeaheadOnSelect)="result()" [(ngModel)]="selected" name="sele" [typeahead]="list"  [typeaheadScrollable]="true" [typeaheadOptionsInScrollableView]="5" (typeaheadNoResults)="typeaheadNoResults($event)" class="input col-md-5" placeholder="Search here">
               <button class="search-btn col-md-2">Search</button>
-              <div class="alert alert-danger" style="width: fit-content; margin-left: 12em;" *ngIf="noResult">No Results Found</div>
+              <div class="alert alert-danger" style="text-align: center;" *ngIf="noResult">No Results Found</div>
             </form>
           </div>
         </div>
         <!-- /SEARCH BAR -->
 
         <!-- ACCOUNT -->
-        <div class="col-md-3" *ngIf="authState">
+        <div style="margin-left: 300px;" class="col-md-3" *ngIf="authState">
           <button class="sell-button" *ngIf="authState" routerLink="/create-product">Sell Product</button>
           <div class="header-ctn">
             <!-- Wishlist -->

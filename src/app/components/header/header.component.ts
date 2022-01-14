@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
   selected: string;
   users: string[] = [];
   list: string[] = [];
+  cities: string[] = [];
   value: any;
   productsDb: Product[];
   products: string[] = [];
@@ -118,6 +119,7 @@ export class HeaderComponent implements OnInit {
   optEmpty() {
     this.users.length = 0;
     this.products.length = 0;
+    this.cities.length = 0;
   }
 
   optUsers() {
@@ -130,6 +132,21 @@ export class HeaderComponent implements OnInit {
     },
     (error: any)   => console.log(error),
     ()             => this.list=this.users
+  );
+  }
+
+  optPlace() {
+    
+    this.optEmpty();
+    this.userService.getAll().subscribe((data: User[]) =>  {
+      
+      this.usersDb = data;
+      this.usersDb.forEach(element => {
+        this.cities.push(element.city.name+" @"+element.username);
+      });
+    },
+    (error: any)   => console.log(error),
+    ()             => this.list=this.cities
   );
   }
 
@@ -153,6 +170,8 @@ export class HeaderComponent implements OnInit {
       this.optUsers();
     if(val==2)
       this.optProducts();
+    if(val==3)
+      this.optPlace();
     this.value=val;  
   }
 
@@ -172,12 +191,22 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  searchPlace(){
+    this.usersDb.forEach(element => {
+      if(element.city.name+" @"+element.username===this.selected)
+      this._ngZone.run(()=>{
+      this.router.navigateByUrl('/user/'+element.username)});
+    });
+  }
+
   result(){
     console.log(this.selected)
     if(this.value==1)
       this.searchUser();
     if(this.value==2)
       this.searchProducts();
+    if(this.value==3)
+      this.searchPlace();
   }
 
 
