@@ -112,10 +112,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     // Product img zoom
     // tslint:disable-next-line:prefer-const
-    const zoomMainProduct = document.getElementById('product-main-img');
-    if (zoomMainProduct) {
-      $('#product-main-img .product-preview').zoom();
-    }
+   
   }
 
   Increase() {
