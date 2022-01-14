@@ -125,6 +125,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto getUserByUsername(String username) {
+        User user = userDao.findByUsername(username);
+        return modelMapper.map(user, UserDto.class);
+    }
+
+    @Override
     public boolean updateUserProfileSettings(ProfileSettingsDto userProfiles) {
 
         try {

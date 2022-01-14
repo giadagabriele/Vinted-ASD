@@ -1,9 +1,7 @@
 package asd.vinted.Controller;
 
 import asd.vinted.data.dto.UserDto;
-import asd.vinted.data.entity.Personalization;
 import asd.vinted.data.entity.User;
-import asd.vinted.data.service.PersonalizationService;
 import asd.vinted.data.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PersonalizationService personalizationService;
+
 
     @PostMapping(value = "/registration")
     public ResponseEntity<String> saveUser(@RequestBody User user){
@@ -48,7 +45,7 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public ResponseEntity<UserDto> loginUser(@RequestBody User user){
-        UserDto userLogin=null;
+        UserDto userLogin;
             user.setShowCityInProfile(false);
         userLogin=userService.findByEmailAndPassword(user.getEmail(),user.getPassword());
         return ResponseEntity.ok(userLogin);
@@ -73,6 +70,12 @@ public class UserController {
     public ResponseEntity<List<UserDto>> all(){
 
         return ResponseEntity.ok(userService.findAll());
+    }
+
+    @GetMapping(value = "/getByUsername/{username}")
+    public ResponseEntity<UserDto> getUser(@PathVariable String username){
+
+        return ResponseEntity.ok(userService.getUserByUsername(username));
     }
 
 
