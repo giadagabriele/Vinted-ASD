@@ -1,5 +1,5 @@
 import { User } from './../../models/user.model';
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {CartModelServer} from '../../models/cart.model';
 import { FavoriteService } from '@app/services/favorite.service';
@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
   constructor(public favoriteService: FavoriteService,
               public userService: UserService,
               public productService: ProductService,
-              private router: Router
+              private router: Router,private _ngZone: NgZone
   ) {
   }
 
@@ -125,21 +125,30 @@ result(){
     this.searchUser();
   if(this.value==2)
     this.searchProducts();
+  
 
   }
 
   searchProducts(){
+  
     this.productsDb.forEach(element => {
       if(element.name=== this.selected)
-      this.router.navigate(['/product', element.id]);
+      this._ngZone.run(()=>{
+      this.router.navigate(['/product', element.id]);});
     });
+   
 
   }
   searchUser(){
-    this.productsDb.forEach(element => {
-      if(element.name== this.selected)
-      this.router.navigate(['/product', element.id]);
-    });
+    this.usersDb.forEach(element => {
+      if(element.username=== this.selected)
+      this._ngZone.run(()=>{
+     this.router.navigateByUrl('/user/'+element.username)});
+     
+    
+  })
+  
+ 
 
   }
   opt(val){

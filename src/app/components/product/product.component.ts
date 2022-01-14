@@ -59,7 +59,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.id = prodId;
         if (this.id == null) {
           this.productService.getAllProduct().subscribe(prod => {
-            (// tslint:disable-next-line:no-unused-expression
+            (
            response: any) => {
              console.log('the value is ', response);
              this.Product = response;

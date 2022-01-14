@@ -1,3 +1,4 @@
+import { UserComponent } from './components/user/user.component';
 import { PersonalizationGuard } from './guard/Personalization.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { ProductModelServer } from './models/product.model';
@@ -61,6 +62,9 @@ const routes: Routes = [
       {
         path: 'profile', component: ProfileComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
+      },
+      {
+        path: 'user/:username', component: UserComponent
       },
 
       {

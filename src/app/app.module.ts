@@ -1,3 +1,4 @@
+import { UserComponent } from './components/user/user.component';
 import { PersonalizationComponent } from './components/personalization/personalization.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
@@ -67,6 +68,7 @@ export function provideConfig() {
     PersonalizationComponent,
     CategoryComponent,
     PaypalComponent,
+    UserComponent,
 
    ],
    entryComponents:[

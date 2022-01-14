@@ -44,7 +44,7 @@ export class UserService {
 
     authService.authState.subscribe((userSocial: SocialUser) => {
       console.log(userSocial);
-
+     
       if (userSocial != null) {
         userSocial.id = '0';
 
@@ -69,7 +69,8 @@ export class UserService {
           } else {
             this.auth = true;
             this.firstLogin = res.firstLogin;
-
+            sessionStorage.setItem('id',res.id.toString())
+            console.log("ciao bro",sessionStorage.getItem('id'))
             // @ts-ignore
             this.authState$.next(this.auth);
             this.userData$.next(res);
@@ -208,6 +209,10 @@ export class UserService {
 
 getAll(): Observable<User[]> {
   return this.httpClient.get<User[]>(`${this.SERVER_URL}/user/all`)
+}
+
+getUserByUsername(username:string): Observable<User> {
+  return this.httpClient.get<User>(`${this.SERVER_URL}/user/getByUsername/`+username)
 }
 }
 
