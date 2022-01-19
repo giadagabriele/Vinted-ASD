@@ -1,16 +1,13 @@
 package asd.vinted.Controller;
 
 import asd.vinted.data.dto.OrderDto;
-import asd.vinted.data.entity.Order;
-import asd.vinted.data.payment.PayPalConfirmPaymentRequest;
 import asd.vinted.data.payment.PayPalConfirmPaymentResponse;
 import asd.vinted.data.payment.PayPalPaymentResponse;
-import asd.vinted.data.service.PaypalOrderService;
+import asd.vinted.data.service.PaypalPaymentService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class PayPalPaymentController {
 
     @Autowired
-    PaypalOrderService paypalOrderService;
+    PaypalPaymentService paypalService;
 
     public static final String SUCCESS_URL = "pay/success";
     public static final String CANCEL_URL = "pay/cancel";
@@ -37,7 +34,7 @@ public class PayPalPaymentController {
         String message ="";
         //@RequestBody ProfileDetailsDto profileDetail
         try {
-            Payment payment = paypalOrderService.createPayment(_order, "http://localhost:8080/" + CANCEL_URL,
+            Payment payment = paypalService.createPayment(_order, "http://localhost:8080/" + CANCEL_URL,
                     "http://localhost:8080/" + SUCCESS_URL);
 
 //            System.out.println(payment);
@@ -71,7 +68,7 @@ public class PayPalPaymentController {
         double[] amount = {0.0};
         PayPalConfirmPaymentResponse response=null;
         try {
-            Payment payment = paypalOrderService.executePayment(paymentId,payerId);
+            Payment payment = paypalService.executePayment(paymentId,payerId);
             System.out.println(payment.toJSON());
             if (payment.getState().equals("approved")) {
                 response = new PayPalConfirmPaymentResponse();

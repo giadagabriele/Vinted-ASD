@@ -1,7 +1,7 @@
 package asd.vinted.data.service.impl;
 
 import asd.vinted.data.dto.OrderDto;
-import asd.vinted.data.service.PaypalOrderService;
+import asd.vinted.data.service.PaypalPaymentService;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class paypalOrderServiceImpl implements PaypalOrderService {
+public class PaypalPaymentServiceImpl implements PaypalPaymentService {
     @Autowired
     private APIContext apiContext;
 

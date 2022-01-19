@@ -6,7 +6,7 @@ import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface PaypalOrderService {
+public interface PaypalPaymentService {
 
     public Payment createPayment(OrderDto _order, String cancelUrl, String successUrl) throws PayPalRESTException;
     public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException;

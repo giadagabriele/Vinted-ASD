@@ -25,6 +25,12 @@ public class Order {
     @Column
     private String intent;
 
+    @Column
+    private String stripeToken;
+    @Column
+    private String stripeEmail;
+
+
     public Order() {
     }
 
@@ -96,5 +102,22 @@ public class Order {
     @Override
     public int hashCode() {
         return Objects.hash(id, price, currency, method, description, intent);
+    }
+
+
+    public String getStripeToken() {
+        return stripeToken;
+    }
+
+    public void setStripeToken(String stripeToken) {
+        this.stripeToken = stripeToken;
+    }
+
+    public String getStripeEmail() {
+        return stripeEmail;
+    }
+
+    public void setStripeEmail(String stripeEmail) {
+        this.stripeEmail = stripeEmail;
     }
 }
