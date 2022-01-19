@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PayPalConfirmPaymentRequest } from '@app/models/payment/paypal/PayPalConfirmPaymentRequest';
 import { PayPalConfirmPaymentResponse } from '@app/models/payment/paypal/payPalConfirmPaymentResponse';
-import { PaypalService } from '@app/services/payment/paypal.service';
+import { PaymentService } from '@app/services/payment/payment.service';
 
 import jsPDF from 'jspdf';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -18,7 +18,7 @@ export class PaymentSuccessComponent implements OnInit {
 
   @ViewChild('pdfTable') pdfTable: ElementRef;
   
-  constructor(private paymentService: PaypalService) { }
+  constructor(private paymentService: PaymentService) { }
 
   request: PayPalConfirmPaymentRequest = new PayPalConfirmPaymentRequest();
   paymentResponse: PayPalConfirmPaymentResponse;
@@ -43,7 +43,6 @@ export class PaymentSuccessComponent implements OnInit {
       .subscribe((response: PayPalConfirmPaymentResponse)=>{
         if (response.status==='approved'){
           this.paymentResponse = response;
-          console.log(response);
           window.close();
           // location.replace('http://localhost:4200')
 

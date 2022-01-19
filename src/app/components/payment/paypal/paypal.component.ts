@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PurchaseComponent } from '@app/components/purchase/purchase.component';
-import { PaypalPaymentRequest } from '@app/models/payment/paypal/PaypalPaymentRequest';
+import { GenericPaymentRequest } from '@app/models/payment/paypal/GenericPaymentRequest';
 import { PayPalPaymentResponse } from '@app/models/payment/paypal/PayPalPaymentResponse';
-import { PaypalService } from '@app/services/payment/paypal.service';
+import { PaymentService } from '@app/services/payment/payment.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -15,10 +15,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class PaypalComponent implements OnInit {
 
   @Input() fromParent;
-  constructor(private paypalPaymentService: PaypalService,private formBuilder: FormBuilder,public activeModal: NgbActiveModal) { }
+  constructor(private paypalPaymentService: PaymentService,private formBuilder: FormBuilder,public activeModal: NgbActiveModal) { }
     paymentForm: FormGroup;
     
-    request: PaypalPaymentRequest;
+    request: GenericPaymentRequest;
 
 ngOnInit() {
 
@@ -39,10 +39,7 @@ ngOnInit() {
 paymentWithPayPal(){
   this.paypalPaymentService.payWithPayPal(this.paymentForm.value)
     .subscribe((response: PayPalPaymentResponse)=>{
-      console.log(response);
       if (response.status){
-        console.log(response.url);
-        //window.open(response.url,'_blank');
         location.replace(response.url);
       }
     });

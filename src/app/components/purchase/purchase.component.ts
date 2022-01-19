@@ -3,7 +3,8 @@ import { ProductService } from '@app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaypalComponent } from '../payment/paypal/paypal.component';
-import { PaypalPaymentRequest } from '@app/models/payment/paypal/PaypalPaymentRequest';
+import { GenericPaymentRequest } from '@app/models/payment/paypal/GenericPaymentRequest';
+import { CreditCardPaymentComponent } from '../payment/CreditCard/credit-card-payment/credit-card-payment.component';
 
 @Component({
   selector: 'app-purchase',
@@ -13,7 +14,7 @@ import { PaypalPaymentRequest } from '@app/models/payment/paypal/PaypalPaymentRe
 export class PurchaseComponent implements OnInit {
   id:any;
   product: any
-  paymentFormRequest: PaypalPaymentRequest;
+  paymentFormRequest: GenericPaymentRequest;
   constructor(
     private productService: ProductService,
     private _Activatedroute:ActivatedRoute,
@@ -30,7 +31,7 @@ export class PurchaseComponent implements OnInit {
     });
   }
 
-  openModal() {
+  openPaypalModal() {
     const modalRef = this.modalService.open(PaypalComponent,
       {
         scrollable: true,
@@ -40,19 +41,26 @@ export class PurchaseComponent implements OnInit {
       });
       
       this.paymentFormRequest.price=this.product.product.price;
-
-    let data = {
-      prop1: 'Some Data',
-      prop2: 'From Parent Component',
-      prop3: 'This Can be anything'
-    }
-  
-    modalRef.componentInstance.fromParent = data;
     modalRef.result.then((result) => {
       console.log(result);
     }, (reason) => {
     });
   }
 
+  openCreditCardModal() {
+    const modalRef = this.modalService.open(CreditCardPaymentComponent,
+      {
+        scrollable: true,
+        windowClass: 'myCustomModalClass',
+        // keyboard: false,
+        // backdrop: 'static'
+      });
+      
+      this.paymentFormRequest.price=this.product.product.price;
+    modalRef.result.then((result) => {
+      console.log(result);
+    }, (reason) => {
+    });
+  }
   
 }
