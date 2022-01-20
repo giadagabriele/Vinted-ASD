@@ -51,6 +51,13 @@ public class ProductController {
     return ResponseEntity.ok(products);
   }
 
+  @GetMapping("product/category/{category}/sortByPrice")
+  public ResponseEntity<List<ProductDto>> allSortedByPrice(@PathVariable("category") String category) {
+    List<ProductDto> products=productService.getProductByCategory(category);
+    products.sort((o1, o2) -> (int) (o1.getPrice()- o2.getPrice()));
+    return ResponseEntity.ok(products);
+  }
+
   @PostMapping("product/add")
   public ResponseEntity<ProductDto> add(@RequestBody ProductDto product) {
     ProductDto p = productService.addProduct(product);
