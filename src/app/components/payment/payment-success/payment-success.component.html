@@ -8,7 +8,7 @@
 </div>
 <div class="container mt-5 mb-3" id="pdfTable" #pdfTable>
   <div class="row d-flex justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-10">
           <div class="card">
               <div class="d-flex flex-row p-2">
                   <div class="d-flex flex-column"> <span class="font-weight-bold">Payment receipt</span></div>
@@ -23,20 +23,20 @@
                               <td>From</td>
                               <td>Payer ID</td>
                               <td>Paid Amount</td>
-                              <td>Payment Amount</td>
+                              <td>Payment ID</td>
                               <td>Payment Date</td>
                           </tr>
                           <tr class="content">
-                              <td class="font-weight-bold"> {{this.paymentResponse.payeeName}} <br>Attn: Jassa Smith Pymont <br>Australia</td>
+                              <td class="font-weight-bold"> {{this.paymentResponse.payeeName}} <br><br></td>
                               <td class="font-weight-bold"> {{this.paymentResponse.payerName}} <br>{{this.paymentResponse.payerEmail}}
                                 <br> {{this.paymentResponse.addressLine1}} 
                                 <br>  {{this.paymentResponse.city}}<br> {{this.paymentResponse.countryCode}}
                                 <br>{{this.paymentResponse.postalCode}} <br>{{this.paymentResponse.state}}</td>
 
-                                <td class="font-weight-bold"> {{this.paymentResponse.payer_id}}</td>
+                                <td class="font-weight-bold">{{this.paymentResponse.payer_id}}</td>
                                 <td class="font-weight-bold">{{this.paymentResponse.paidPrice}}</td>
-                                <td class="font-weight-bold"> {{this.paymentResponse.PaymentID}}</td>
-                                <td class="font-weight-bold"> {{this.paymentResponse.PaymentDate}}</td>
+                                <td class="font-weight-bold">{{this.paymentResponse.paymentID}}</td>
+                                <td class="font-weight-bold">{{this.paymentResponse.PaymentDate}}</td>
                           </tr>
                       </tbody>
                   </table>

@@ -1,7 +1,7 @@
 export class PayPalConfirmPaymentResponse{
     status: string;
     paidPrice:number;
-    PaymentID: string;
+    paymentID: string;
     PaymentDate: string;
     payeeName: string;
     paymentMode: string;

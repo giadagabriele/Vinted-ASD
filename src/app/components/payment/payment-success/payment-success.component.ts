@@ -43,6 +43,7 @@ export class PaymentSuccessComponent implements OnInit {
       .subscribe((response: PayPalConfirmPaymentResponse)=>{
         if (response.status==='approved'){
           this.paymentResponse = response;
+          console.log(response);
           window.close();
           // location.replace('http://localhost:4200')
 
