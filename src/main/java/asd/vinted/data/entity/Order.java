@@ -29,6 +29,30 @@ public class Order {
     private String stripeToken;
     @Column
     private String stripeEmail;
+    @Column
+    private String  paymentID;
+    @Column
+    private String  PaymentDate;
+    @Column
+    private String  payeeName;
+    @Column
+    private String  paymentMode;
+    @Column
+    private String  payerName;
+    @Column
+    private String  addressLine1;
+    @Column
+    private String  city;
+    @Column
+    private String  countryCode;
+    @Column
+    private String  postalCode;
+    @Column
+    private String  state;
+    @Column
+    private String  payerEmail;
+    @Column
+    private String  payer_id;
 
 
     public Order() {
@@ -91,20 +115,6 @@ public class Order {
         this.intent = intent;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return id == order.id && Double.compare(order.price, price) == 0 && Objects.equals(currency, order.currency) && Objects.equals(method, order.method) && Objects.equals(description, order.description) && Objects.equals(intent, order.intent);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, price, currency, method, description, intent);
-    }
-
-
     public String getStripeToken() {
         return stripeToken;
     }
@@ -119,5 +129,101 @@ public class Order {
 
     public void setStripeEmail(String stripeEmail) {
         this.stripeEmail = stripeEmail;
+    }
+
+    public String getPaymentID() {
+        return paymentID;
+    }
+
+    public void setPaymentID(String paymentID) {
+        this.paymentID = paymentID;
+    }
+
+    public String getPaymentDate() {
+        return PaymentDate;
+    }
+
+    public void setPaymentDate(String paymentDate) {
+        PaymentDate = paymentDate;
+    }
+
+    public String getPayeeName() {
+        return payeeName;
+    }
+
+    public void setPayeeName(String payeeName) {
+        this.payeeName = payeeName;
+    }
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
+    }
+
+    public String getPayerName() {
+        return payerName;
+    }
+
+    public void setPayerName(String payerName) {
+        this.payerName = payerName;
+    }
+
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getPayerEmail() {
+        return payerEmail;
+    }
+
+    public void setPayerEmail(String payerEmail) {
+        this.payerEmail = payerEmail;
+    }
+
+    public String getPayer_id() {
+        return payer_id;
+    }
+
+    public void setPayer_id(String payer_id) {
+        this.payer_id = payer_id;
     }
 }

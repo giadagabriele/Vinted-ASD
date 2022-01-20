@@ -15,10 +15,20 @@ public class OrderDto {
     private String intent;
     private String cancelURL;
     private String successURL;
-    @Column
     private String stripeToken;
-    @Column
     private String stripeEmail;
+    private String  paymentID;
+    private String  PaymentDate;
+    private String  payeeName;
+    private String  paymentMode;
+    private String  payerName;
+    private String  addressLine1;
+    private String  city;
+    private String  countryCode;
+    private String  postalCode;
+    private String  state;
+    private String  payerEmail;
+    private String  payer_id;
 
 
     public String getCancelURL() {
@@ -85,33 +95,99 @@ public class OrderDto {
         this.stripeEmail = stripeEmail;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderDto orderDto = (OrderDto) o;
-        return Double.compare(orderDto.price, price) == 0 && Objects.equals(id, orderDto.id) && Objects.equals(currency, orderDto.currency) && Objects.equals(method, orderDto.method) && Objects.equals(description, orderDto.description) && Objects.equals(intent, orderDto.intent) && Objects.equals(cancelURL, orderDto.cancelURL) && Objects.equals(successURL, orderDto.successURL) && Objects.equals(stripeToken, orderDto.stripeToken) && Objects.equals(stripeEmail, orderDto.stripeEmail);
+    public String getPaymentID() {
+        return paymentID;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, price, currency, method, description, intent, cancelURL, successURL, stripeToken, stripeEmail);
+    public void setPaymentID(String paymentID) {
+        this.paymentID = paymentID;
     }
 
-    @Override
-    public String toString() {
-        return "OrderDto{" +
-                "id=" + id +
-                ", price=" + price +
-                ", currency='" + currency + '\'' +
-                ", method='" + method + '\'' +
-                ", description='" + description + '\'' +
-                ", intent='" + intent + '\'' +
-                ", cancelURL='" + cancelURL + '\'' +
-                ", successURL='" + successURL + '\'' +
-                ", stripeToken='" + stripeToken + '\'' +
-                ", stripeEmail='" + stripeEmail + '\'' +
-                '}';
+    public String getPaymentDate() {
+        return PaymentDate;
     }
 
+    public void setPaymentDate(String paymentDate) {
+        PaymentDate = paymentDate;
+    }
+
+    public String getPayeeName() {
+        return payeeName;
+    }
+
+    public void setPayeeName(String payeeName) {
+        this.payeeName = payeeName;
+    }
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
+    }
+
+    public String getPayerName() {
+        return payerName;
+    }
+
+    public void setPayerName(String payerName) {
+        this.payerName = payerName;
+    }
+
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getPayerEmail() {
+        return payerEmail;
+    }
+
+    public void setPayerEmail(String payerEmail) {
+        this.payerEmail = payerEmail;
+    }
+
+    public String getPayer_id() {
+        return payer_id;
+    }
+
+    public void setPayer_id(String payer_id) {
+        this.payer_id = payer_id;
+    }
 }
