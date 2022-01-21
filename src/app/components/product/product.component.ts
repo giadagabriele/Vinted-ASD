@@ -189,6 +189,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
             (data: Favorite) => {
                 console.log('created: ', data);
                 this.isFavorite = true;
+                //window.location.reload();
             },
             (error: any) => console.log(error),
             () => this.ngOnInit()

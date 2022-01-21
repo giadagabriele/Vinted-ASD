@@ -76,7 +76,7 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="col-md-4 mb-2">
+     <!--<div class="col-md-4 mb-2">
         <label for="quantity">Quantity</label>
         <input type="number"
           formControlName="quantity" 
@@ -87,9 +87,10 @@
           <small *ngIf="productForm.get('quantity').invalid && (productForm.get('quantity').dirty ||productForm.get('quantity').touched )">
             <small *ngIf="(productForm.get('quantity')).errors?.required">quantity is required</small>
           </small>
-      </div>
+      </div>--> 
       <div class="col-md-4 mb-2">
         <label for="category">Category</label>
+        <label for="category" style="font-size:12px;">(<b>clothes</b> or <b>shoes</b> or <b>accessories</b> or <b>cook</b> or <b>technology</b> or <b>book</b>)</label>
         <input type="text"
           formControlName="category"
           class="form-control"
@@ -101,8 +102,10 @@
           </small>
       </div>
       <div class="col-md-4 mb-2">
+      </div>
+      <div class="col-md-4 mb-2">
         <label for="photo">Photo</label>
-        <input type="text"
+        <input type="file"
           formControlName="photo"
           class="form-control"
           id="photo"
