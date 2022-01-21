@@ -1,5 +1,5 @@
 import { User } from './../../models/user.model';
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {CartModelServer} from '../../models/cart.model';
 import { FavoriteService } from '@app/services/favorite.service';
@@ -37,7 +37,8 @@ export class HeaderComponent implements OnInit {
   selected: string;
   users: string[] = [];
   list: string[] = [];
-  value;
+  cities: string[] = [];
+  value: any;
   productsDb: Product[];
   products: string[] = [];
   noResult = false;
@@ -49,7 +50,7 @@ export class HeaderComponent implements OnInit {
   constructor(public favoriteService: FavoriteService,
               public userService: UserService,
               public productService: ProductService,
-              private router: Router
+              private router: Router,private _ngZone: NgZone
   ) {
   }
 
@@ -116,43 +117,11 @@ export class HeaderComponent implements OnInit {
   }
 
   optEmpty() {
-    this.users = [];
-    this.products = [];
-  }
-result(){
-  console.log(this.selected)
-  if(this.value==1)
-    this.searchUser();
-  if(this.value==2)
-    this.searchProducts();
-
+    this.users.length = 0;
+    this.products.length = 0;
+    this.cities.length = 0;
   }
 
-  searchProducts(){
-    this.productsDb.forEach(element => {
-      if(element.name=== this.selected)
-      this.router.navigate(['/product', element.id]);
-    });
-
-  }
-  searchUser(){
-    this.productsDb.forEach(element => {
-      if(element.name== this.selected)
-      this.router.navigate(['/product', element.id]);
-    });
-
-  }
-  opt(val){
-  
-  if(val===0)
-    this.optEmpty()
-  if(val==1)
-    this.optUsers();
-  if(val==2)
-    this.optProducts();
-  this.value=val;  
-  
-  }
   optUsers() {
     this.optEmpty();
     this.userService.getAll().subscribe((data: User[]) =>  {
@@ -166,18 +135,80 @@ result(){
   );
   }
 
+  optPlace() {
+    
+    this.optEmpty();
+    this.userService.getAll().subscribe((data: User[]) =>  {
+      
+      this.usersDb = data;
+      this.usersDb.forEach(element => {
+        this.cities.push(element.city.name+" @"+element.username);
+      });
+    },
+    (error: any)   => console.log(error),
+    ()             => this.list=this.cities
+  );
+  }
+
   optProducts() {
     this.optEmpty();
     this.productService.getAllProduct().subscribe((data: Product[]) =>  {
         this.productsDb = data;
         this.productsDb.forEach(element => {
           this.products.push(element.name);
-        });
+        })
       },
       (error: any)   => console.log(error),
       ()             => this.list=this.products
     );
   }
+ 
+  opt(val){
+    if(val==0)
+      this.optEmpty()
+    if(val==1)
+      this.optUsers();
+    if(val==2)
+      this.optProducts();
+    if(val==3)
+      this.optPlace();
+    this.value=val;  
+  }
+
+  searchProducts(){
+    this.productsDb.forEach(element => {
+      if(element.name=== this.selected)
+      this._ngZone.run(()=>{
+      this.router.navigate(['/product', element.id])});
+    });
+  }
+
+  searchUser(){
+    this.usersDb.forEach(element => {
+      if(element.username=== this.selected)
+      this._ngZone.run(()=>{
+     this.router.navigateByUrl('/user/'+element.username)});
+    });
+  }
+
+  searchPlace(){
+    this.usersDb.forEach(element => {
+      if(element.city.name+" @"+element.username===this.selected)
+      this._ngZone.run(()=>{
+      this.router.navigateByUrl('/user/'+element.username)});
+    });
+  }
+
+  result(){
+    console.log(this.selected)
+    if(this.value==1)
+      this.searchUser();
+    if(this.value==2)
+      this.searchProducts();
+    if(this.value==3)
+      this.searchPlace();
+  }
+
 
   typeaheadNoResults(event: boolean): void {
     console.log(event)

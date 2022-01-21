@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PaypalPaymentRequest } from '@app/models/payment/paypal/PaypalPaymentRequest';
+import { PurchaseComponent } from '@app/components/purchase/purchase.component';
+import { GenericPaymentRequest } from '@app/models/payment/paypal/GenericPaymentRequest';
 import { PayPalPaymentResponse } from '@app/models/payment/paypal/PayPalPaymentResponse';
-import { PaypalService } from '@app/services/payment/paypal.service';
+import { PaymentService } from '@app/services/payment/payment.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-paypal',
@@ -11,13 +14,16 @@ import { PaypalService } from '@app/services/payment/paypal.service';
 })
 export class PaypalComponent implements OnInit {
 
-
-  constructor(private paypalPaymentService: PaypalService, private fb: FormBuilder,
-    private formBuilder: FormBuilder) { }
+  @Input() fromParent;
+  constructor(private paypalPaymentService: PaymentService,private formBuilder: FormBuilder,public activeModal: NgbActiveModal) { }
     paymentForm: FormGroup;
+    
+    request: GenericPaymentRequest;
 
 ngOnInit() {
 
+ // this.request.price=this.product.product.price;
+ 
   this.paymentForm=new FormGroup({
 
     'price':new FormControl(null,[Validators.required,Validators.min(0.1)]),
@@ -29,21 +35,23 @@ ngOnInit() {
     'successURL':new FormControl('http://localhost:4200/paymentsuccess',[Validators.required]),
   })
 }
-request: PaypalPaymentRequest;
-paymentWithPayPal(){
 
-  console.log(this.paymentForm.value)
+paymentWithPayPal(){
   this.paypalPaymentService.payWithPayPal(this.paymentForm.value)
     .subscribe((response: PayPalPaymentResponse)=>{
-      console.log(response);
       if (response.status){
-        console.log(response.url);
-        //window.open(response.url,'_blank');
         location.replace(response.url);
       }
     });
 }
 
+
 get f() { return this.paymentForm.controls; }
 
+closeModal(sendData) {
+  this.activeModal.close(sendData);
 }
+
+}
+
+

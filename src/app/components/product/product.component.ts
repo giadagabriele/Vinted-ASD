@@ -59,7 +59,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.id = prodId;
         if (this.id == null) {
           this.productService.getAllProduct().subscribe(prod => {
-            (// tslint:disable-next-line:no-unused-expression
+            (
            response: any) => {
              console.log('the value is ', response);
              this.Product = response;
@@ -112,10 +112,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     // Product img zoom
     // tslint:disable-next-line:prefer-const
-    const zoomMainProduct = document.getElementById('product-main-img');
-    if (zoomMainProduct) {
-      $('#product-main-img .product-preview').zoom();
-    }
+   
   }
 
   Increase() {

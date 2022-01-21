@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PayPalConfirmPaymentRequest } from '@app/models/payment/paypal/PayPalConfirmPaymentRequest';
 import { PayPalConfirmPaymentResponse } from '@app/models/payment/paypal/payPalConfirmPaymentResponse';
-import { PaypalService } from '@app/services/payment/paypal.service';
+import { PaymentService } from '@app/services/payment/payment.service';
+
+import jsPDF from 'jspdf';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import htmlToPdfmake from 'html-to-pdfmake';
 
 @Component({
   selector: 'app-payment-success',
@@ -10,7 +16,9 @@ import { PaypalService } from '@app/services/payment/paypal.service';
 })
 export class PaymentSuccessComponent implements OnInit {
 
-  constructor(private paymentService: PaypalService) { }
+  @ViewChild('pdfTable') pdfTable: ElementRef;
+  
+  constructor(private paymentService: PaymentService) { }
 
   request: PayPalConfirmPaymentRequest = new PayPalConfirmPaymentRequest();
   paymentResponse: PayPalConfirmPaymentResponse;
@@ -43,7 +51,17 @@ export class PaymentSuccessComponent implements OnInit {
     });
 
   }
-  printPage() {
-    window.print();
+
+  public ExportAsPDF() {
+    const doc = new jsPDF();
+    //get table html
+    const pdfTable = this.pdfTable.nativeElement;
+    //html to pdf format
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+   
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).open();
   }
+
 }
+

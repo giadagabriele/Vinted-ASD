@@ -19,7 +19,16 @@ export class CategoryComponent implements OnInit {
       private route: ActivatedRoute
     ) {}
 
-    ngOnInit(): void {
+    opt(val){
+      if(val==0)
+        this.default();
+      if(val==1)
+        this.sortByAscendingPrice();
+      if(val==2)
+        this.sortByDescendingPrice();
+    }
+    
+    default(){
       this.route.url
       .pipe(
         // tslint:disable-next-line:variable-name
@@ -42,11 +51,79 @@ export class CategoryComponent implements OnInit {
            };
           });
         } else {
-          console.log('we get before the data', this.product);
-          this.productService.getProductByCategory(this.category).subscribe(prod => {
-          this.product = prod;
-          console.log('we get the data', this.product);
-        });
+             console.log('we get before the data', this.product);
+              this.productService.getProductByCategory(this.category).subscribe(prod => {
+              this.product = prod;
+              console.log('we get the data', this.product);
+            });
+      }
+      });
+    }
+
+    ngOnInit(): void {
+      this.default();
+    }
+
+    sortByAscendingPrice(){
+      this.route.url
+      .pipe(
+        // tslint:disable-next-line:variable-name
+        map((_param: UrlSegment[]) => {
+          return _param[0].path;
+        })
+      )
+
+      // tslint:disable-next-line:variable-name
+      .subscribe(_prodId => {
+        this.category = _prodId;
+        console.log(this.category);
+        if (this.category == null) {
+          // tslint:disable-next-line:variable-name
+          this.productService.getAllProduct().subscribe(_prod => {
+            (// tslint:disable-next-line:no-unused-expression
+           response: any) => {
+             console.log('the value is ', response);
+             this.Product = response;
+           };
+          });
+        } else {
+             console.log('we get before the data', this.product);
+              this.productService.getProductByCategorySortedByAscendingPrice(this.category).subscribe(prod => {
+              this.product = prod;
+              console.log('we get the data', this.product);
+            });
+      }
+      });
+    }
+
+    sortByDescendingPrice(){
+      this.route.url
+      .pipe(
+        // tslint:disable-next-line:variable-name
+        map((_param: UrlSegment[]) => {
+          return _param[0].path;
+        })
+      )
+
+      // tslint:disable-next-line:variable-name
+      .subscribe(_prodId => {
+        this.category = _prodId;
+        console.log(this.category);
+        if (this.category == null) {
+          // tslint:disable-next-line:variable-name
+          this.productService.getAllProduct().subscribe(_prod => {
+            (// tslint:disable-next-line:no-unused-expression
+           response: any) => {
+             console.log('the value is ', response);
+             this.Product = response;
+           };
+          });
+        } else {
+             console.log('we get before the data', this.product);
+              this.productService.getProductByCategorySortedByDescendingPrice(this.category).subscribe(prod => {
+              this.product = prod;
+              console.log('we get the data', this.product);
+            });
       }
       });
     }

@@ -1,4 +1,4 @@
-export class PaypalPaymentRequest{
+export class GenericPaymentRequest{
     price: number;
     currency: string;
     method: string;
@@ -6,5 +6,7 @@ export class PaypalPaymentRequest{
     description: string;
     successURL: string;
     cancelURL: string;
+    stripeToken: string;
+    stripeEmail: string;
   }
   

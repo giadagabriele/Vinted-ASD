@@ -1,3 +1,4 @@
+import { UserComponent } from './components/user/user.component';
 import { PersonalizationGuard } from './guard/Personalization.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { ProductModelServer } from './models/product.model';
@@ -14,7 +15,6 @@ import {RegisterComponent} from './components/register/register.component';
 import {HomeComponent} from './components/home/home.component';
 import {HomeLayoutComponent} from './components/home-layout/home-layout.component';
 import {ContactComponent} from './components/contact/contact.component';
-import { ClothesComponent} from './components/clothes/clothes.component';
 import { CategoryComponent } from './components/category/category.component';
 
 import { PersonalizationComponent } from './components/personalization/personalization.component';
@@ -24,7 +24,6 @@ import { MessageComponent } from './components/message/message.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { CardComponent } from './components/card/card.component';
-import { SummaryComponent } from './components/summary/summary.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
@@ -63,6 +62,9 @@ const routes: Routes = [
       {
         path: 'profile', component: ProfileComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
+      },
+      {
+        path: 'user/:username', component: UserComponent
       },
 
       {
@@ -118,10 +120,6 @@ const routes: Routes = [
       },   
       {
         path: 'addCard', component: CardComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
-      },
-      {
-        path: 'summary', component: SummaryComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
       }
     ]
