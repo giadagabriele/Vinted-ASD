@@ -33,11 +33,17 @@ public class ProductController {
     return ResponseEntity.ok(productService.getAllProducts());
   }
 
+
   // @GetMapping("/product/name")
   // public ResponseEntity<ProductDto> test(@RequestParam("name") String name) {
   //   return ResponseEntity.ok(productService.getProductByName(name) );
   // }
 
+  @GetMapping("myProducts/{userId}")
+  public ResponseEntity<List<ProductDto>> allProductsBySeller(@PathVariable("userId") Long userId) {
+    List<ProductDto> products=productService.getAllProductsBySeller(userId);
+    return ResponseEntity.ok(products);
+  }
 
   @GetMapping("product/{id}")
   @CrossOrigin(origins ="http://localhost:4200")

@@ -36,9 +36,9 @@ public List<ProductDto> getAllProducts() {
 }
 
   @Override
-  public List<ProductDto> getAllProductsBySeller(long id) {
-    //TODO: do it LOL
-    return null;
+  public List<ProductDto> getAllProductsBySeller(Long userId) {
+    List<Product> product = productDao.findByUserId(userId);
+    return product.stream().map(prod->modelMapper.map(prod, ProductDto.class)).collect(Collectors.toList());
   }
 
   @Override
