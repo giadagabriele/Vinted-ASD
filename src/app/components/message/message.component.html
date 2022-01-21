@@ -1,12 +1,11 @@
+<div class="container pt-5">
+  <div class="row justify-content-sm-center pt-5">
+    <div class="col-sm-6 shadow round pb-3">
 
-<div class="container" id="container">
-  <div class="form-container sign-in-container">
+      <h2 class="text-center pt-3 text-secondary">Send Message</h2>
     <form  [formGroup]="formChangesSubscription" (ngSubmit)="onSubmit()">
-
-    <h3>Send Message</h3>
-      <span> Reciever ID</span>
       <input  formControlName="recieverId" name="recieverId"
-      placeholder="reciever Email"
+      placeholder="Reciever Email"
       ngModel required type="text"/>
       <input formControlName="subject" name="subject"
       placeholder="Subject" ngModel  required type="text"/>
