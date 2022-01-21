@@ -56,7 +56,11 @@ export class ProductService {
     return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName);
    }
 
-   getProductByCategorySortedByPrice(catName: string): Observable<ProductModelServer[]>  {
-    return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName+'/sortByPrice');
+   getProductByCategorySortedByAscendingPrice(catName: string): Observable<ProductModelServer[]>  {
+    return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName+'/sortByAscendingPrice');
+   }
+
+   getProductByCategorySortedByDescendingPrice(catName: string): Observable<ProductModelServer[]>  {
+    return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName+'/sortByDescendingPrice');
    }
 }
