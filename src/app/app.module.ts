@@ -33,6 +33,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
 import { CreditCardPaymentComponent } from './components/payment/CreditCard/credit-card-payment/credit-card-payment.component';
+import { MyproductsComponent } from './components/myproducts/myproducts.component';
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -69,6 +70,7 @@ export function provideConfig() {
     PaypalComponent,
     UserComponent,
     CreditCardPaymentComponent,
+    MyproductsComponent
    ],
    entryComponents:[
     PaypalComponent
