@@ -21,7 +21,7 @@ export class CreateProductComponent implements OnInit {
     price:['',[Validators.required]],
     brand:['',[Validators.required]],
     color:['',[Validators.required]],
-    quantity:['',[Validators.required]],
+    quantity:['1',[Validators.required]],
     category:['',[Validators.required]],
     photo:[''],
   });

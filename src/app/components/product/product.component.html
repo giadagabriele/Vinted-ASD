@@ -85,14 +85,14 @@
                     </p>
 
 
-                    <div class="qty-label" style="width: fit-content;">
+                   <!-- <div class="qty-label" style="width: fit-content;">
                         Qty
                         <div class="input-number">
                             <input type="number" [max]="product?.quantity >=1 ? product?.quantity : 0" min="1" readonly #quantity value="{{product?.quantity >= 1 ? 1: 0}}">
                             <span class="qty-up" (click)="Increase()">+</span>
                             <span class="qty-down" (click)="Decrease()">-</span>
                         </div>
-                    </div>
+                    </div>-->
 
 
 
@@ -105,8 +105,11 @@
                     <ul class="product-links">
                         <li>Category:</li>
                         <li><a [routerLink]  ="['/', product.category]">{{product.category}}</a></li>
-                        <!-- <li><a href="#">Accessories</a></li> -->
                     </ul>
+                    <ul class="product-links">
+                        <li>Seller:</li>
+                        <li><a href="#"></a></li>
+                    </ul>   
 
                     <div class="add-to-cart" style="margin-top: 10px;">
                         <div>
