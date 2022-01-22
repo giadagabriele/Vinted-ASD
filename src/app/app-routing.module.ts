@@ -1,3 +1,4 @@
+import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { UserComponent } from './components/user/user.component';
 import { PersonalizationGuard } from './guard/Personalization.guard';
 import { AdminGuard } from './guard/admin.guard';
@@ -66,7 +67,9 @@ const routes: Routes = [
       {
         path: 'user/:username', component: UserComponent
       },
-
+      {
+        path: 'searchUser/:searchText', component: SearchUsersComponent
+      },
       {
         path: 'register', component: RegisterComponent
       },

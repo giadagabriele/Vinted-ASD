@@ -1,0 +1,90 @@
+ <!-- <div class="container text-center">
+    <h1></h1>
+  </div>
+  <div class="container">
+   <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <input class="form-control text-center" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="  Start searching for a hero by id or name or country">
+      </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Full name</th>
+          <th>username</th>
+          <th>email</th>
+        </tr>
+        </thead>
+        <tbody>
+     <tr routerLink="/user/{{user.username}}" *ngFor="let user of usersDb | filter:searchText">
+          <td>{{user.firstName}}{{user.lastName}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  -->
+ 
+<!------ Include the above in your HEAD tag ---------->
+
+<!-- Team -->
+<section id="team" class="pb-5">
+    <div class="container">
+        <h5 class="section-title h3">Search results</h5>
+        <div class="row">
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4" routerLink="/user/{{user.username}}" *ngFor="let user of usersDb | filter:searchText as filtered_result ">
+            
+                <div class="image-flip" >
+                    <div class="mainflip flip-0">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="card image"></p>
+                                    <h4 class="card-title">{{user.username}}</h4>
+                                    <p class="card-text">{{user.email}}</p>
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> <p class="card-text">{{user.city.name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h4 class="card-title">{{user.username}}</h4>
+                                    <p class="card-text">Click here to see the full profile of this user.</p>
+                               <!--     <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
+                                                <i class="fa fa-skype"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
+                                                <i class="fa fa-google"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <!--  <li class="animate-repeat" ng-if="filtered_result.length == 0">
+
+           No items in the collection!
+                </li>-->
+            </div>
+            

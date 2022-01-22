@@ -1,3 +1,4 @@
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UserComponent } from './components/user/user.component';
 import { PersonalizationComponent } from './components/personalization/personalization.component';
 import {BrowserModule} from '@angular/platform-browser';
@@ -33,6 +34,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
 import { CreditCardPaymentComponent } from './components/payment/CreditCard/credit-card-payment/credit-card-payment.component';
+import { SearchUsersComponent } from './components/search-users/search-users.component';
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -69,6 +71,7 @@ export function provideConfig() {
     PaypalComponent,
     UserComponent,
     CreditCardPaymentComponent,
+    SearchUsersComponent
    ],
    entryComponents:[
     PaypalComponent
@@ -89,7 +92,8 @@ export function provideConfig() {
     TypeaheadModule.forRoot(),
     NgbModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     {

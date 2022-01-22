@@ -17,7 +17,6 @@ export class CategoryService {
     private myUser:User;
     constructor(
         private httpClient: HttpClient,  private router: Router,private userService:UserService) {
-        
             this.userService.userData$
             .subscribe((data: User) => {
               this.myUser = data;
@@ -26,10 +25,10 @@ export class CategoryService {
 
     
     getAllCategories(): Observable<Category[]> {
- 
-        return this.httpClient.get<Category[]>(`${this.SERVER_URL}category/getAll`);
+        return this.httpClient.get<Category[]>(`${this.SERVER_URL}/category/getAll`);
     
     }
 
+    
 
 }

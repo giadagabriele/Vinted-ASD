@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
   users: string[] = [];
   list: string[] = [];
   cities: string[] = [];
-  value: any;
+  value=2;
   productsDb: Product[];
   products: string[] = [];
   noResult = false;
@@ -46,6 +46,7 @@ export class HeaderComponent implements OnInit {
   cartTotal: number;
   authState: boolean;
   usersDb: User[];
+ 
   
   constructor(public favoriteService: FavoriteService,
               public userService: UserService,
@@ -56,6 +57,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.favoriteList();
+    this.optProducts();
     // this.cartService.cartTotal$.subscribe(total => this.cartTotal = total);
 
     // this.cartService.cartData$.subscribe(data => this.cartData = data);
@@ -164,11 +166,12 @@ export class HeaderComponent implements OnInit {
   }
  
   opt(val){
-    if(val==0)
-      this.optEmpty()
+    
+
     if(val==1)
       this.optUsers();
-    if(val==2)
+    
+      if(val==2)
       this.optProducts();
     if(val==3)
       this.optPlace();
@@ -219,5 +222,13 @@ export class HeaderComponent implements OnInit {
   createProduct() {
     this.router.navigateByUrl('/create-product',)
   }
+
+  search(){
+    if(this.value==1)
+    this.router.navigate(['/searchUser', this.selected]);
+
+  }
+
+   
 
 }
