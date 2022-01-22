@@ -29,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
 import { PaymentSuccessComponent } from './components/payment/payment-success/payment-success.component';
+import { MyproductsComponent } from './components/myproducts/myproducts.component';
 
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
@@ -124,6 +125,10 @@ const routes: Routes = [
       {
         path: 'addCard', component: CardComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
+      },
+      {
+        path: 'myproducts', component: MyproductsComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       }
     ]
   },
