@@ -1,3 +1,4 @@
+import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { UserComponent } from './components/user/user.component';
 import { PersonalizationGuard } from './guard/Personalization.guard';
 import { AdminGuard } from './guard/admin.guard';
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
 import { PaymentSuccessComponent } from './components/payment/payment-success/payment-success.component';
+import { MyproductsComponent } from './components/myproducts/myproducts.component';
 
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
@@ -66,7 +68,9 @@ const routes: Routes = [
       {
         path: 'user/:username', component: UserComponent
       },
-
+      {
+        path: 'searchUser/:searchText', component: SearchUsersComponent
+      },
       {
         path: 'register', component: RegisterComponent
       },
@@ -121,6 +125,10 @@ const routes: Routes = [
       {
         path: 'addCard', component: CardComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
+      },
+      {
+        path: 'myproducts', component: MyproductsComponent,
+        canActivate: [ProfileGuard, PersonalizationGuard]
       }
     ]
   },

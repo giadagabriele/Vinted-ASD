@@ -2,3 +2,27 @@
 
 width: 150px !important;
 }
+
+.header-search form .search-btn {
+    height: 42px;
+    width: 100px;
+    background: #D10024;
+    color: #FFF;
+    font-weight: 700;
+    border: none;
+    border-radius: 0px 40px 40px 0px;
+}
+.header-search form .input {
+    width: 320px;
+    margin-right: -4px;
+    display: inline-block;
+}
+
+.alert-danger {
+    margin-left: 220px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    width: 220px;
+}
+
