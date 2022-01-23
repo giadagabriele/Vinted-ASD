@@ -1,3 +1,5 @@
+import { City } from './../../models/city.model';
+import { CityService } from './../../services/city.service';
 import { ModalComponent } from './../modal/modal.component';
 import { SocialUser, AuthService } from 'angularx-social-login';
 import { User } from './../../models/user.model';
@@ -28,10 +30,14 @@ export class RegisterComponent implements OnInit {
   name:String;
   submitted=false;
   loding=false;
+  noResult = false;
+  citiesDB: City[];
+  cities: string[] = [];
 
   constructor(private fb: FormBuilder,
               private checkEmailService: CheckEmailService,
               private userService: UserService,
+              private cityService: CityService,
               private router: Router,
               private route: ActivatedRoute,
               private modalService: NgbModal,
@@ -47,7 +53,16 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     if (this.userService.auth) 
     this.router.navigateByUrl( '/');
-    
+    this.cityService.getAll().subscribe(
+      (data:City[]) => {
+        this.citiesDB = data;
+        this.citiesDB.forEach(element => {
+          this.cities.push(element.name);
+        });
+      },
+      (error: any)   => console.log(error),
+      ()             => console.log(this.cities),
+      );
     this.comparePassword=true;
       this.formChangesSubscription = this.fb.group({
         firstName: ['', Validators.required],
@@ -55,13 +70,17 @@ export class RegisterComponent implements OnInit {
         username: ['', Validators.required],
         confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        email : ['', [Validators.required, Validators.email]]
-    });
+        email : ['', [Validators.required, Validators.email]],
+        city:['']
+      });
 
   }
 
 
-
+  typeaheadNoResults(event: boolean): void {
+    console.log(event)
+    this.noResult = event;
+  }
   get f() { return this.formChangesSubscription.controls; }
 
 
@@ -73,17 +92,25 @@ export class RegisterComponent implements OnInit {
     return false;
 
   }
+  setCity(){
+    this.citiesDB.forEach(element => {
+      if(element.name === this.f.city.value)
+        this.user.city=element;
+    
+    });
+  }
 
   onSubmit() {
     this.submitted = true;
     this.comparePassword=this.comparePasswordFunc();
-    console.log(this.comparePassword)
+    this.user=this.formChangesSubscription.value;
+    this.setCity();
+    
     if (this.formChangesSubscription.invalid|| !this.comparePassword) {
       return;
-  }
-  console.log(this.formChangesSubscription.value);
-
-    this.userService.registraUser(this.formChangesSubscription.value).subscribe(
+    }
+  
+    this.userService.registraUser(this.user).subscribe(
       response => {
         console.log(response);
         const modalRef = this.modalService.open(ModalComponent);
@@ -117,7 +144,7 @@ export class RegisterComponent implements OnInit {
       });
 
   }
-
+ 
 }
 @Component({
   selector: 'ngbd-modal-content',

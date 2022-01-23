@@ -37,6 +37,8 @@ import { CreditCardPaymentComponent } from './components/payment/CreditCard/cred
 import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { MyproductsComponent } from './components/myproducts/myproducts.component';
 import { InoutComponent } from './components/message/inout/inout.component';
+import { UsersproductsComponent } from './components/usersproducts/usersproducts.component';
+
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -75,7 +77,8 @@ export function provideConfig() {
     CreditCardPaymentComponent,
     SearchUsersComponent,
     MyproductsComponent,
-    InoutComponent
+    InoutComponent,
+    UsersproductsComponent
    ],
    entryComponents:[
     PaypalComponent

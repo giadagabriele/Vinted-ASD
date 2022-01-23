@@ -337,16 +337,19 @@ export class ProfileComponent implements OnInit {
 
     this.userService.userData$
       .subscribe((data: User) => {
+        console.log(data);
+        if(data.city==null)
+          data.city= new City();
         this.myUser = data;
       });
       this.formProfile = this.fb.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        phoneNumber: ['', Validators.required],
+        phoneNumber: ['',[Validators.minLength(6),Validators.maxLength(15) ]],
         username: ['', [Validators.required, Validators.minLength(6)]],
-        address: ['', [Validators.required, Validators.minLength(12)]],
+        address: ['', [ Validators.minLength(12)]],
         email : ['', [Validators.required, Validators.email]],
-        city: ['', Validators.required]
+        city: ['']
     });
    
     this.userService.authState$.subscribe(authState => this.authState = authState);
@@ -382,10 +385,15 @@ export class ProfileComponent implements OnInit {
   get f() { return this.formProfile.controls; }
 
   save(){
+  
     this.submitted=true;
+    if(this.myUser.city.name=='')
+      this.myUser.city=null;
+      
     if(this.formProfile.invalid)
       return;
-      console.log(this.myUser)
+
+      
       this.userService.updateProfile(this.myUser).subscribe(
       response => {
         console.log(response);
