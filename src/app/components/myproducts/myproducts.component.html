@@ -1,3 +1,4 @@
+
 <!-- SECTION -->
 <div class="section">
   <!-- container -->
@@ -9,13 +10,18 @@
                     <div class="product">
                     <div class="product-card"> <!--<span class="sale">Sale</span>  <span class="sale">{{cat.name}}</span>--> <span class="price">${{cat.price}}</span>
                         <img [src]="cat.image" alt="" class="rounded img-fluid">
+
+                        <div class="buttonEdit">
                         
-                        <div class="buttons d-flex flex-row">  <button [routerLink]  ="['/product', cat.id]" class="cta-btn" class="btn">Show details  <i class="fa fa-arrow-circle-right"></i></button> </div>
-                    </div>
-                </div>
-                
+                        <div >  <button [routerLink]  ="['/edit-product', cat.id]" class="cta-btn" class="btn"><i class="fa fa-edit" style='font-size:36px'></i></button> </div> 
+                        </div>
+                        <div class="buttons d-flex flex-row">  <button [routerLink]  ="['/product', cat.id]" class="cta-btn" class="btn">Show details  <i class="fa fa-arrow-circle-right"></i></button> </div> 
+                        
+                       
                 </div>   
     </div> 
   </div>
+
+
 </div>
 <!-- /SECTION -->

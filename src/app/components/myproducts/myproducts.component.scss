@@ -25,6 +25,12 @@ body {
 		top: 10px;
 		font-size: 14px;
 	}
+	.buttonEdit{
+		opacity: 0;
+		right: 10px;
+		bottom: 6px;
+		
+	}
 	.price {
 		border-radius: 5px;
 		color: red;
@@ -44,6 +50,10 @@ body {
 	&:hover {
 		.buttons {
 			opacity: 1;
+		}
+		.buttonEdit{
+			opacity: 1;
+			size: 23;
 		}
 	}
 }
@@ -69,6 +79,7 @@ body {
 		}
 	}
 }
+
 .search {
 	width: 38px;
 	height: 38px;

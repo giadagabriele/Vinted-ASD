@@ -14,6 +14,7 @@ export class MyproductsComponent implements OnInit {
   [x: string]: any;
   category: string;
   idUtente: number;
+  show: boolean ;
   product: Array<ProductModelServer> = new  Array<ProductModelServer>();
    constructor(
      private productService: ProductService,
@@ -71,6 +72,7 @@ export class MyproductsComponent implements OnInit {
 
    ngOnInit(): void {
      this.default();
+     
    }
 
 
