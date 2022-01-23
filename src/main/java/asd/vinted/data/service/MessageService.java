@@ -6,7 +6,7 @@ import asd.vinted.data.entity.Message;
 public interface MessageService {
 
     List<MessageDto> getAllMessages();
-    MessageDto getMessage(Long id);
+    List<MessageDto> getMessage(String id);
     MessageDto addMessage(MessageDto message);
     void delete(Long id);
 }

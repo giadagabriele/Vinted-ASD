@@ -11,9 +11,12 @@ import asd.vinted.data.entity.Message;
 import org.springframework.stereotype.Service;
 
 import asd.vinted.data.service.MessageService;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -27,9 +30,14 @@ public class MessageServiceImpl implements MessageService {
         return Message.stream().map(mess->modelMapper.map(mess, MessageDto.class)).collect(Collectors.toList());
     }
     @Override
-    public MessageDto getMessage(Long id) {
-      Message message = messageDao.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
-      return modelMapper.map(message, MessageDto.class);
+    public List<MessageDto> getMessage(String id) {
+     List<Message> sentbox = messageDao.findBySenderId(id);
+     List<Message> inbox = messageDao.findByRecieverId(id);
+     List<Message> newList = Stream.of(sentbox, inbox)
+     .flatMap(Collection::stream)
+     .collect(Collectors.toList());
+      return newList.stream().map(prod->modelMapper.map(prod, MessageDto.class)).collect(Collectors.toList());
+
     }
 
     @Override

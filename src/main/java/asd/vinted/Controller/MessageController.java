@@ -19,7 +19,7 @@ import asd.vinted.data.service.MessageService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/message") //the root path for products
+@RequestMapping("/") //the root path for products
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class MessageController {
@@ -27,24 +27,24 @@ public class MessageController {
   @Autowired
   private MessageService messageService;
 
-  @GetMapping("/message")
+  @GetMapping("message")
   public ResponseEntity<List<MessageDto>> all() {
     return ResponseEntity.ok(messageService.getAllMessages());
   }
 
-  @GetMapping("/message/{id}")
-  public ResponseEntity<MessageDto> all(@PathVariable("id") Long id) {
-    MessageDto message = messageService.getMessage(id);
+  @GetMapping("message/{id}")
+  public ResponseEntity<List<MessageDto>> all(@PathVariable("id") String id) {
+    List<MessageDto> message = messageService.getMessage(id);
     return ResponseEntity.ok(message);
   }
 
-  @PostMapping("/message")
+  @PostMapping("message")
   public ResponseEntity<MessageDto> add(@RequestBody MessageDto Message) {
     MessageDto p = messageService.addMessage(Message);
     return ResponseEntity.ok(p);
   }
 
-  @DeleteMapping("/message/{id}")
+  @DeleteMapping("message/{id}")
   public HttpStatus delete(@PathVariable Long id) {
     messageService.delete(id);
     return HttpStatus.OK;
