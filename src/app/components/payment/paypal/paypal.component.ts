@@ -15,18 +15,17 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class PaypalComponent implements OnInit {
 
   @Input() fromParent;
+  @Input() public price;
   constructor(private paypalPaymentService: PaymentService,private formBuilder: FormBuilder,public activeModal: NgbActiveModal) { }
     paymentForm: FormGroup;
-    
     request: GenericPaymentRequest;
 
 ngOnInit() {
-
  // this.request.price=this.product.product.price;
- 
+
   this.paymentForm=new FormGroup({
 
-    'price':new FormControl(null,[Validators.required,Validators.min(0.1)]),
+    'price':new FormControl(this.price.price,[Validators.required,Validators.min(0.1)]),
     'intent':new FormControl('Sale',[Validators.required]),
     'currency':new FormControl('EUR',[Validators.required,Validators.minLength(3)]),
     'method':new FormControl('Paypal',[Validators.required]),

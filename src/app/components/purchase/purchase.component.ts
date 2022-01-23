@@ -12,20 +12,21 @@ import { CreditCardPaymentComponent } from '../payment/CreditCard/credit-card-pa
   styleUrls: ['./purchase.component.scss']
 })
 export class PurchaseComponent implements OnInit {
-  id:any;
-  product: any
+  id: any;
+  product: any;
+  price: any;
   paymentFormRequest: GenericPaymentRequest;
   constructor(
     private productService: ProductService,
-    private _Activatedroute:ActivatedRoute,
+    private _Activatedroute: ActivatedRoute,
     private modalService: NgbModal) {
-      this._Activatedroute.paramMap.subscribe(params => { 
-        this.id = params.get('id'); 
+      this._Activatedroute.paramMap.subscribe(params => {
+        this.id = params.get('id');
     });
      }
 
   ngOnInit() {
-    console.log(this.id)
+    console.log(this.id);
     this.productService.getSingleProduct(this.id).subscribe(prod => {
       this.product = prod;
     });
@@ -39,8 +40,8 @@ export class PurchaseComponent implements OnInit {
         // keyboard: false,
         // backdrop: 'static'
       });
-      
-      this.paymentFormRequest.price=this.product.product.price;
+    modalRef.componentInstance.price = {price: this.product.price};
+    this.paymentFormRequest.price = this.product.price;
     modalRef.result.then((result) => {
       console.log(result);
     }, (reason) => {
@@ -55,12 +56,12 @@ export class PurchaseComponent implements OnInit {
         // keyboard: false,
         // backdrop: 'static'
       });
-      
-      this.paymentFormRequest.price=this.product.product.price;
+    modalRef.componentInstance.price = {price: this.product.price};
+    this.paymentFormRequest.price = this.product.price;
     modalRef.result.then((result) => {
       console.log(result);
     }, (reason) => {
     });
   }
-  
+
 }

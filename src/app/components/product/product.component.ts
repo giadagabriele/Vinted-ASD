@@ -1,3 +1,4 @@
+import { MessageComponent } from './../message/message.component';
 import { Favorite, HeaderComponent } from './../header/header.component';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../services/product.service';
@@ -7,6 +8,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {map} from 'rxjs/operators';
 import { User } from './../../models/user.model';
 import { FavoriteService } from '@app/services/favorite.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare let $: any;
 export class Product {
@@ -35,11 +37,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
   headerComponent: HeaderComponent;
   isFavorite = false;
   user: User;
+  header: {};
   constructor(private productService: ProductService,
               private cartService: CartService,
               public favoriteService: FavoriteService,
               private userService: UserService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private modalService: NgbModal) {
                 this.userService.userData$
                 .subscribe((data: User) => {
                   this.user = data;
@@ -59,6 +63,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.id = prodId;
         if (this.id == null) {
           this.productService.getAllProduct().subscribe(prod => {
+            // tslint:disable-next-line:no-unused-expression
             (
            response: any) => {
              console.log('the value is ', response);
@@ -112,7 +117,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     // Product img zoom
     // tslint:disable-next-line:prefer-const
-   
+
   }
 
   Increase() {
@@ -132,9 +137,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.quantityInput.nativeElement.value = value.toString();
 
   }
-  sendMessage() {
-    this.router.navigate(['/message']);
-  }
+
   Decrease() {
     // tslint:disable-next-line:radix
     let value = parseInt(this.quantityInput.nativeElement.value);
@@ -189,7 +192,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
             (data: Favorite) => {
                 console.log('created: ', data);
                 this.isFavorite = true;
-                //window.location.reload();
             },
             (error: any) => console.log(error),
             () => this.ngOnInit()
@@ -199,8 +201,25 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   saveProductId() {
     this.productService.save(this.id);
-    console.log(this.id)
-    this.router.navigateByUrl("/")
+    console.log(this.id);
+    this.router.navigateByUrl('/');
+  }
+
+
+  openMessageModal() {
+    const modalRef = this.modalService.open(MessageComponent,
+      {
+        scrollable: true,
+        windowClass: 'myCustomModalClass',
+        // keyboard: false,
+        // backdrop: 'static'
+      });
+
+    modalRef.result.then((result) => {
+      console.log(result);
+    }, (reason) => {
+      console.log('test');
+    });
   }
 
 }

@@ -109,11 +109,11 @@
                     <ul class="product-links">
                         <li>Seller:</li>
                         <li><a href="#"></a></li>
-                    </ul>   
+                    </ul>
 
                     <div class="add-to-cart" style="margin-top: 10px;">
                         <div>
-                            <a routerLink="/message"> <button class="add-to-cart-btn"><i class="fa fa-envelope"></i> Send message</button></a>
+                            <a href="javascript: void(0)"> <button class="add-to-cart-btn" (click)="openMessageModal()"><i class="fa fa-envelope"></i> Send message</button></a>
                         </div>
                         <div style="margin-top: 10px;">
                             <a [routerLink]="['/purchase', product.id]" > <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Buy</button></a>
