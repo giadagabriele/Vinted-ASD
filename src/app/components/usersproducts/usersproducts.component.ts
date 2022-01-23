@@ -49,7 +49,7 @@ export class UsersproductsComponent implements OnInit {
          });
        } else {
                console.log('we get before the data', this.product);
-                this.productService.getAllProductsByUserSeller(this.idUtente).subscribe(prod => {
+                this.productService.getAllProductsByOtherUserSeller(this.idUtente).subscribe(prod => {
                   this.product = prod;
                   console.log('we get the data', this.product);
                 })
