@@ -297,11 +297,12 @@
                     <div class="col-sm-9 text-secondary">
                       <div *ngIf="isEditable" >
                         <input  mdbInput formControlName="phoneNumber" name="phoneNumber"
-                        [(ngModel)]="myUser.phoneNumber" required type="number"   class="form-control">
+                        [(ngModel)]="myUser.phoneNumber"  type="number"   class="form-control">
                         <span class="text-danger align-middle">
                           <div *ngIf="submitted && f.phoneNumber.errors">
-                  
-                            <div  style="text-align: center;" *ngIf="f.phoneNumber.errors.required">Phone number is required</div>
+                            <div style="text-align: center;" *ngIf="f.phoneNumber.errors.minlength"> Phone number must be at least 6 digits</div>
+                            <div style="text-align: center;" *ngIf="f.phoneNumber.errors.maxlength"> phoneNumber must be at maximun 12 12</div>
+
                           </div>
                         </span>
                       </div>
@@ -318,11 +319,10 @@
                     <div class="col-sm-9 text-secondary">
                       <div *ngIf="isEditable" >
                         <input  mdbInput formControlName="address" name="address"
-                        [(ngModel)]="myUser.address" required type="text"   class="form-control">
+                        [(ngModel)]="myUser.address"  type="text"   class="form-control">
                         <span class="text-danger align-middle">
                           <div *ngIf="submitted && f.address.errors">
                   
-                            <div  style="text-align: center;" *ngIf="f.address.errors.required">Address is required</div>
                             <div style="text-align: center;" *ngIf="f.address.errors.minlength"> Address must be at least 12 characters</div>
                           </div>
                         </span>
@@ -339,12 +339,17 @@
                     </div>
                     <div class="col-sm-9 text-secondary">
                       <div *ngIf="isEditable" >
-           
+                        <div *ngIf="this.myUser.city!=undefined" >
                           <input class="form-control" (ngModelChange)="setCity()" mdbInput formControlName="city" name="city" [(ngModel)]="myUser.city.name" [typeahead]="cities"  [typeaheadScrollable]="true" (typeaheadNoResults)="typeaheadNoResults($event)" [typeaheadOptionsInScrollableView]="5"   placeholder="Search here">
-                   
+                         
+
+                        </div>
                       </div>
                       <div *ngIf="!isEditable" >
-                        {{this.myUser.city.name}}
+                        <div *ngIf="this.myUser.city!=undefined" >
+                         {{this.myUser.city.name}}
+                        </div>
+                     
                       </div>
                     </div>
                   </div>

@@ -49,6 +49,15 @@
           <div *ngIf="f.email.errors.email">Not a valid email</div>
         </div>
       </span>
+      <input  formControlName="city" name="city"
+      placeholder="City" ngModel
+      required type="text"/>
+      <span class="text-danger align-middle">
+        <div *ngIf="submitted && f.email.errors">
+
+         
+        </div>
+      </span>
       <input  formControlName="password" name="password" 
       placeholder="Password" ngModel type="password" required />
       <span class="text-danger align-middle">
