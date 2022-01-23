@@ -18,9 +18,9 @@ export class MessageComponent implements OnInit {
   // tslint:disable-next-line:new-parens
   usergoogle: SocialUser;
   user: User;
-
   @Input() fromParent;
-  @Input() public header;
+  @Input() public productUser;
+  displayOrNot: boolean;
 
   constructor(private fb: FormBuilder, private authService: AuthService,
               // tslint:disable-next-line:max-line-length
@@ -33,13 +33,15 @@ export class MessageComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    if (!this.userService.auth) {
-    this.router.navigateByUrl( '/login');
-    }
+    // this.inBox();
+    console.log(this.productUser);
+    // if (!this.userService.auth) {
+    // this.router.navigateByUrl( '/login');
+    // }
 
     this.formChangesSubscription = this.fb.group({
-      senderId: [`${this.user.email}`],
-      recieverId: [''],
+      senderId: [`${this.user.id}`],
+      recieverId: [`${this.productUser.user}`],
       subject: [''],
       description: ['']
   });
@@ -52,6 +54,7 @@ export class MessageComponent implements OnInit {
       response => {
         console.log(response);
         this.formChangesSubscription.reset();
+        this.closeModal('close');
         if (response === 'success') {
           // tslint:disable-next-line:no-unused-expression
           this.formChangesSubscription.reset();

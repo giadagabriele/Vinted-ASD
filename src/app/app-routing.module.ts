@@ -30,7 +30,7 @@ import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
 import { PaymentSuccessComponent } from './components/payment/payment-success/payment-success.component';
 import { MyproductsComponent } from './components/myproducts/myproducts.component';
-
+import { InoutComponent} from './components/message/inout/inout.component';
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
   // put only header, footer and router-outlet there
@@ -115,13 +115,13 @@ const routes: Routes = [
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'message', component: MessageComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'message', component: InoutComponent,
+        canActivate: [ProfileGuard]
       },
       {
         path: 'purchase/:id', component: PurchaseComponent,
         canActivate: [ProfileGuard, PersonalizationGuard]
-      },   
+      },
       {
         path: 'addCard', component: CardComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]

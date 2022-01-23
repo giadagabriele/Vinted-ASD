@@ -18,14 +18,14 @@ export class MessageService {
     ) { }
 
     getAll() {
-      return this.httpClient.get<{ MessageComponent }[]>(this.SERVER_URL + '/message/message');
+      return this.httpClient.get<{ MessageComponent }[]>(this.SERVER_URL + '/message');
     }
-  getMessage(id: number): Observable<ProductModelServer> {
-    return this.httpClient.get<ProductModelServer>(this.SERVER_URL + '/product/' + id);
+  getMessage(id: number): Observable<any> {
+    return this.httpClient.get<any>(this.SERVER_URL + '/message/' + id);
   }
   postMessage(message: any): Observable<string> {
     const headers = new HttpHeaders().set('responsType', 'text');
-    return this.httpClient.post(`${this.SERVER_URL}/message/message`, message, {
+    return this.httpClient.post(`${this.SERVER_URL}/message`, message, {
       headers,
       responseType: 'text' as const,
     });

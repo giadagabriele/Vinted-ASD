@@ -51,4 +51,7 @@ export class AppComponent {
   navigateToFavorite() {
     this.router.navigateByUrl('/favorite');
   }
+  navigateToMessage() {
+    this.router.navigateByUrl('/message');
+  }
 }

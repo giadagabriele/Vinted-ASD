@@ -214,7 +214,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         // keyboard: false,
         // backdrop: 'static'
       });
-
+    modalRef.componentInstance.productUser = {user: this.product.userId};
     modalRef.result.then((result) => {
       console.log(result);
     }, (reason) => {
