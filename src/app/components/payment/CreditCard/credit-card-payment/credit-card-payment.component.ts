@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GenericPaymentRequest } from '@app/models/payment/paypal/GenericPaymentRequest';
@@ -19,9 +19,9 @@ interface Alert {
   styleUrls: ['./credit-card-payment.component.scss']
 })
 export class CreditCardPaymentComponent implements OnInit {
-
+  @Input() public price;
   stripApiKey = environment.StripApi_Key;
-  
+
   amount: number;
   paymentHandler: any = null;
   request: GenericPaymentRequest =new GenericPaymentRequest();
@@ -43,7 +43,7 @@ export class CreditCardPaymentComponent implements OnInit {
 
     this.paymentForm=new FormGroup({
 
-      'price':new FormControl(null,[Validators.required,Validators.min(0.1)]),
+      'price':new FormControl(this.price.price,[Validators.required,Validators.min(0.1)]),
       'intent':new FormControl('Sale',[Validators.required]),
       'currency':new FormControl('EUR',[Validators.required,Validators.minLength(3)]),
       'method':new FormControl('Credit Card',[Validators.required]),
@@ -51,7 +51,7 @@ export class CreditCardPaymentComponent implements OnInit {
       // 'cancelURL':new FormControl('http://localhost:4200/payment-cancel',[Validators.required]),
       'successURL':new FormControl('http://localhost:4200/paymentsuccess',[Validators.required]),
     })
-    
+
   }
 
   private initStrip() {

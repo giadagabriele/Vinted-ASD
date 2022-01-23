@@ -1,0 +1,34 @@
+<!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+<div > <table class="table" style="width: 600px">
+                        <tbody>
+                        <tr><th> Inbox</th> </tr>
+                        <tr> <td> Sender Id </td> <td> Subject</td> <td> Description </td> <td> Date </td> </tr>
+                            <tr *ngFor="let inbo of inbox" style ="width:150px">
+                            <td>
+                                <div id="product-imgs">
+                                    <div class="product-preview">
+                                    {{inbo.senderId}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                            {{inbo.subject}}
+                            </td>
+                            <td>
+                            {{inbo.description}}
+                            </td>
+                            <td>
+                            {{inbo.sentDate}}
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                     </div>
+                      </div>
+                       </div>

@@ -36,6 +36,7 @@ import { PaypalComponent } from './components/payment/paypal/paypal.component';
 import { CreditCardPaymentComponent } from './components/payment/CreditCard/credit-card-payment/credit-card-payment.component';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { MyproductsComponent } from './components/myproducts/myproducts.component';
+import { InoutComponent } from './components/message/inout/inout.component';
 import { UsersproductsComponent } from './components/usersproducts/usersproducts.component';
 
 const config = new AuthServiceConfig([
@@ -76,6 +77,7 @@ export function provideConfig() {
     CreditCardPaymentComponent,
     SearchUsersComponent,
     MyproductsComponent,
+    InoutComponent,
     UsersproductsComponent
    ],
    entryComponents:[

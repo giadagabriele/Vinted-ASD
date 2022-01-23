@@ -1,10 +1,11 @@
+<!-- <div class="container pt-5">
+  <div class="row justify-content-sm-center pt-5">
+    <div class="col-sm-6 shadow round pb-3">
 
-<div class="container">
+      <h2 class="text-center pt-3 text-secondary">Send Message</h2>
     <form  [formGroup]="formChangesSubscription" (ngSubmit)="onSubmit()">
-
-    <h3>Send Message</h3>
       <input  formControlName="recieverId" name="recieverId"
-      placeholder="reciever Email"
+      placeholder="Reciever Email"
       ngModel required type="text"/>
       <input formControlName="subject" name="subject"
       placeholder="Subject" ngModel  required type="text"/>
@@ -16,3 +17,32 @@
       <button type="submit" >Send Message</button>
 		</form>
   </div>
+ -->
+
+
+ <div class="modal-header">
+  <h5 class="modal-title">Compose Mail</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="closeModal('dismiss')">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="formChangesSubscription" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input type="text" formControlName="subject" name="subject"
+      placeholder="Subject" ngModel >
+    </div>
+
+    <div class="form-group">
+
+      <textarea rows="4" cols="30" formControlName="description" name="description"
+      placeholder="Your Message" ngModel ></textarea>
+    </div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('close')">Cancel</button>
+  <button type="submit" class="btn btn-success">Send</button>
+</div>
+  </form>
+</div>

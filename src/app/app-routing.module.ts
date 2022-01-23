@@ -30,6 +30,7 @@ import { CommonModule } from '@angular/common';
 import { PaypalComponent } from './components/payment/paypal/paypal.component';
 import { PaymentSuccessComponent } from './components/payment/payment-success/payment-success.component';
 import { MyproductsComponent } from './components/myproducts/myproducts.component';
+import { InoutComponent} from './components/message/inout/inout.component';
 import { UsersproductsComponent } from './components/usersproducts/usersproducts.component';
 
 const routes: Routes = [
@@ -116,13 +117,13 @@ const routes: Routes = [
         , canActivate: [ProfileGuard, PersonalizationGuard]
       },
       {
-        path: 'message', component: MessageComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        path: 'message', component: InoutComponent,
+        canActivate: [ProfileGuard]
       },
       {
         path: 'purchase/:id', component: PurchaseComponent,
         canActivate: [ProfileGuard, PersonalizationGuard]
-      },   
+      },
       {
         path: 'addCard', component: CardComponent
         , canActivate: [ProfileGuard, PersonalizationGuard]
