@@ -50,7 +50,7 @@
         </div>
       </span>
       <input  formControlName="city" name="city"
-      placeholder="City" ngModel
+      placeholder="City" ngModel formControlName="city" name="city"  [typeahead]="cities"  [typeaheadScrollable]="true" (typeaheadNoResults)="typeaheadNoResults($event)" [typeaheadOptionsInScrollableView]="5"
       required type="text"/>
       <span class="text-danger align-middle">
         <div *ngIf="submitted && f.email.errors">
