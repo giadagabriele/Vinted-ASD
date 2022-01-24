@@ -11,31 +11,31 @@
     <form [formGroup]="paymentForm" (ngSubmit)="payWithCreditCard()">
       <div class="form-group">
         <label for="price">price</label>
-        <input type="number" min="0" class="form-control" id="price" required
-        formControlName="price" value="5" >
+        <input type="hidden" min="0" class="form-control" id="price" required
+        formControlName="price" value="5" ><span><i class="fas fa-euro-sign"> {{this.price.price}}</i> </span>
         <small *ngIf="paymentForm.get('price').invalid" class="text-danger">price is required and must not be zero and less</small>
       </div>
   
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="intent">intent</label>
         <input type="text" min="0" class="form-control" id="intent" required
         formControlName="intent" >
         <small *ngIf="paymentForm.get('intent').invalid" class="text-danger">intent is required</small>
-      </div>
+      </div> -->
   
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="currency">currency</label>
         <input type="text" min="0" class="form-control" id="currency" required
         formControlName="currency" >
         <small *ngIf="paymentForm.get('currency').invalid" class="text-danger">currency is required</small>
-      </div>
+      </div> -->
   
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="method">method</label>
         <input type="text" min="0" class="form-control" id="method" required
         formControlName="method" >
         <small *ngIf="paymentForm.get('method').invalid" class="text-danger">method is required</small>
-      </div>
+      </div> -->
   
       <div class="form-group">
         <label for="description">description</label>
