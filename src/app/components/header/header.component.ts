@@ -225,7 +225,9 @@ export class HeaderComponent implements OnInit {
 
   search(){
     if(this.value==1)
-    this.router.navigate(['/searchUser', this.selected]);
+      this.router.navigate(['/searchUser', this.selected]);
+    if(this.value==2)
+      this.router.navigate(['/searchProduct', this.selected]);
 
   }
 

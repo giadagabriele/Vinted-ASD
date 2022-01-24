@@ -1,0 +1,33 @@
+
+<section id="team" class="pb-5">
+    <div class="container">
+        <h5 class="section-title h3">Search results</h5>
+        <div class="row">
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4" routerLink="/product/{{product.id}}" *ngFor="let product of productsDb | filter:searchText as filtered_result ">
+            
+                <div class="image-flip" >
+                    <div class="mainflip flip-0">
+                        <div class="frontside"> 
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src={{product.image}} alt="card image"></p>
+                                    <h4 class="card-title">{{product.name}}</h4>
+                                    <p class="card-text">{{product.brand}}</p>
+                                    <p class="card-text">${{product.price}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h4 class="card-title">{{product.name}}</h4>
+                                    <p class="card-text">Click here to see the full product.</p>
+                             
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            

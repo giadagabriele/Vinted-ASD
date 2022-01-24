@@ -32,6 +32,7 @@ import { PaymentSuccessComponent } from './components/payment/payment-success/pa
 import { MyproductsComponent } from './components/myproducts/myproducts.component';
 import { InoutComponent} from './components/message/inout/inout.component';
 import { UsersproductsComponent } from './components/usersproducts/usersproducts.component';
+import { SearchProductComponent } from './components/search-product/search-product.component';
 
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
@@ -72,6 +73,9 @@ const routes: Routes = [
       },
       {
         path: 'searchUser/:searchText', component: SearchUsersComponent
+      },
+      {
+        path: 'searchProduct/:searchText', component: SearchProductComponent
       },
       {
         path: 'register', component: RegisterComponent
