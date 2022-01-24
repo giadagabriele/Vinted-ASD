@@ -6,6 +6,8 @@ import {CartModelServer} from '../../models/cart.model';
 import { FavoriteService } from '@app/services/favorite.service';
 import {UserService} from '../../services/user.service';
 import { ProductService } from '@app/services/product.service';
+import { City } from '@app/models/city.model';
+import { CityService } from '@app/services/city.service';
 
 declare let $: any;
 export class Favorite {
@@ -47,11 +49,13 @@ export class HeaderComponent implements OnInit {
   cartTotal: number;
   authState: boolean;
   usersDb: User[];
+  citiesDb: City[];
  
   
   constructor(public favoriteService: FavoriteService,
               public userService: UserService,
               public productService: ProductService,private authenticationService: AuthenticationService,
+              private cityService: CityService,
               private router: Router,private _ngZone: NgZone
   ) {
   }
@@ -142,11 +146,11 @@ logout() {
   optPlace() {
     
     this.optEmpty();
-    this.userService.getAll().subscribe((data: User[]) =>  {
+    this.cityService.getAll().subscribe((data: City[]) =>  {
       
-      this.usersDb = data;
-      this.usersDb.forEach(element => {
-        this.cities.push(element.city.name+" @"+element.username);
+      this.citiesDb = data;
+      this.citiesDb.forEach(element => {
+        this.cities.push(element.name);
       });
     },
     (error: any)   => console.log(error),
@@ -172,7 +176,6 @@ logout() {
 
     if(val==1)
       this.optUsers();
-    
       if(val==2)
       this.optProducts();
     if(val==3)
@@ -196,14 +199,6 @@ logout() {
     });
   }
 
-  searchPlace(){
-    this.usersDb.forEach(element => {
-      if(element.city.name+" @"+element.username===this.selected)
-      this._ngZone.run(()=>{
-      this.router.navigateByUrl('/user/'+element.username)});
-    });
-  }
-
   result(){
     console.log(this.selected)
     if(this.value==1)
@@ -211,7 +206,7 @@ logout() {
     if(this.value==2)
       this.searchProducts();
     if(this.value==3)
-      this.searchPlace();
+      this.search();
   }
 
 
@@ -230,7 +225,8 @@ logout() {
       this.router.navigate(['/searchUser', this.selected]);
     if(this.value==2)
       this.router.navigate(['/searchProduct', this.selected]);
-
+    if(this.value==3)
+      this.router.navigate(['/searchUser', this.selected]);
   }
 
    

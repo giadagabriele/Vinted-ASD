@@ -12,7 +12,6 @@ import { ProductService } from '@app/services/product.service';
 export class CreateProductComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private productSrv: ProductService) { }
-  aaform: FormGroup
    
   productForm = this.formBuilder.group({
     name: ['',[Validators.required,Validators.minLength(6)]],
@@ -23,7 +22,7 @@ export class CreateProductComponent implements OnInit {
     color:['',[Validators.required]],
     quantity:['1',[Validators.required]],
     category:['',[Validators.required]],
-    photo:[''],
+    image:['',[Validators.required]],
   });
 
   ngOnInit(): void {
@@ -31,6 +30,7 @@ export class CreateProductComponent implements OnInit {
   
   submit(){
     let prod : Product = this.productForm.value;
+    prod.image = '/assets/img/'+prod.image.substring(12,prod.image.length)
     //prod.userId = 
     this.productSrv.add(prod).subscribe((response:any) => {
       if(response){
