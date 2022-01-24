@@ -3,6 +3,8 @@ import { map } from 'rxjs/operators';
 import { UserService } from '@app/services/user.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +15,8 @@ export class UserComponent implements OnInit {
   usertoview : User;
   myUser:User;
   constructor(private userService: UserService,private router: Router,
-    private route: ActivatedRoute) { this.userService.userData$
+    private route: ActivatedRoute,
+    private modalService: NgbModal) { this.userService.userData$
       .subscribe((data: User) => {
         this.myUser = data;
       }); }
@@ -39,6 +42,22 @@ export class UserComponent implements OnInit {
           });
       
       });
+  }
+
+  openMessageModal() {
+    const modalRef = this.modalService.open(MessageComponent,
+      {
+        scrollable: true,
+        windowClass: 'myCustomModalClass',
+        // keyboard: false,
+        // backdrop: 'static'
+      });
+    modalRef.componentInstance.productUser = {user: this.usertoview.id};
+    modalRef.result.then((result) => {
+      console.log(result);
+    }, (reason) => {
+      console.log('test');
+    });
   }
 
 }
