@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { City } from './../../models/city.model';
 import { CityService } from './../../services/city.service';
 import { ModalComponent } from './../modal/modal.component';
@@ -33,6 +34,7 @@ export class RegisterComponent implements OnInit {
   noResult = false;
   citiesDB: City[];
   cities: string[] = [];
+  returnUrl: string;
 
   constructor(private fb: FormBuilder,
               private checkEmailService: CheckEmailService,
@@ -41,7 +43,8 @@ export class RegisterComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private modalService: NgbModal,
-              private authService:AuthService
+              private authService:AuthService,
+              private authenticationService:AuthenticationService
               ) {
 
 
@@ -51,8 +54,11 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (this.userService.auth) 
-    this.router.navigateByUrl( '/');
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+   
+    if (this.authenticationService.currentUserValue) { 
+      this.router.navigate(['/']);
+  }
     this.cityService.getAll().subscribe(
       (data:City[]) => {
         this.citiesDB = data;
@@ -128,7 +134,7 @@ export class RegisterComponent implements OnInit {
       this.usergoogle=user;
       console.log(this.usergoogle);
     });
-    this.userService.googleLogin();
+    this.authenticationService.googleLogin();
     console.log(this.usergoogle);
     this.userService.registraUser(this.usergoogle).subscribe(
       response => {

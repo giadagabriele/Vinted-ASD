@@ -4,11 +4,11 @@
   <div id="top-header">
     <div class="container">
       <ul class="header-links pull-left">
-        <li *ngIf="!authState"><a routerLink="/login"><i class="fa fa-sign-in"></i> LOGIN</a></li>
-        <li *ngIf="authState"><a routerLink="/profile"><i class="fa fa-sign-in"></i> My account</a></li>
+        <li *ngIf="!currentUser"><a routerLink="/login"><i class="fa fa-sign-in"></i> LOGIN</a></li>
+        <li *ngIf="currentUser"><a routerLink="/profile"><i class="fa fa-sign-in"></i> My account</a></li>
 
-        <li *ngIf="!authState"><a routerLink="/register"><i class="fa fa-user-plus"></i> REGISTER</a></li>
-        <li *ngIf="authState"><a (click)="logout()"><i class="fa fa-user-plus"></i> LOGOUT</a></li>
+        <li *ngIf="!currentUser"><a routerLink="/register"><i class="fa fa-user-plus"></i> REGISTER</a></li>
+        <li *ngIf="currentUser"><a (click)="logout()"><i class="fa fa-user-plus"></i> LOGOUT</a></li>
       </ul>
     </div>
   </div>
@@ -42,8 +42,8 @@
         <!-- /SEARCH BAR -->
 
         <!-- ACCOUNT -->
-        <div style="margin-left: 263px;" class="col-md-3" *ngIf="authState">
-          <button class="sell-button" *ngIf="authState" routerLink="/create-product">Sell Product</button>
+        <div style="margin-left: 263px;" class="col-md-3" *ngIf="currentUser">
+          <button class="sell-button" *ngIf="currentUser" routerLink="/create-product">Sell Product</button>
           <div class="header-ctn">
             <!-- Wishlist -->
             <ng-template #popTitle let-favorite="favorite"><a routerLink="/favorite">All Favorite</a></ng-template>

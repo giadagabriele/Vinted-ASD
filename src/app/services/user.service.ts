@@ -42,43 +42,7 @@ export class UserService {
   constructor(private authService: AuthService,
               private httpClient: HttpClient,  private router: Router) {
 
-    authService.authState.subscribe((userSocial: SocialUser) => {
-      console.log(userSocial);
-     
-      if (userSocial != null) {
-        userSocial.id = '0';
-
-        this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`, userSocial).subscribe((res: User) => {
-       console.log(res.firstLogin);
-        //  No user exists in database with Social Login
-       if (res === null) {
-            // Send data to backend to register the user in database so that the user can place orders against his user id
-          const userConv = this.fromSocialUserToUser(userSocial);
-          this.registraUser(
-              userConv
-            ).subscribe(response => {
-              if (response === 'Congratulations, your account has been successfully created.') {
-                this.auth = true;
-                this.firstLogin = userConv.firstLogin;
-
-                this.authState$.next(this.auth);
-                this.userData$.next(userConv);
-              }
-            });
-
-          } else {
-            this.auth = true;
-            this.firstLogin = res.firstLogin;
-            sessionStorage.setItem('id',res.id.toString())
-            console.log("ciao bro",sessionStorage.getItem('id'))
-            // @ts-ignore
-            this.authState$.next(this.auth);
-            this.userData$.next(res);
-          }
-        });
-
-      }
-    });
+   
   }
 
   //  Login User with Email and Password
@@ -97,9 +61,7 @@ export class UserService {
 
   }
 //  Google Authentication
-  googleLogin()  {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
+  
 
   logout() {
     this.authService.signOut();

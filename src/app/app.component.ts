@@ -1,3 +1,5 @@
+import { User } from './models/user.model';
+import { AuthenticationService } from './services/authentication.service';
 import { Component } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 @Component({
@@ -6,10 +8,9 @@ import {Router, ActivatedRoute} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
-  name = 'JOHN DOE';
+  currentUser: User;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authenticationService: AuthenticationService) {
   }
   navigateToCategory() {
     this.router.navigateByUrl('/category');
@@ -54,4 +55,5 @@ export class AppComponent {
   navigateToMessage() {
     this.router.navigateByUrl('/message');
   }
+  
 }
