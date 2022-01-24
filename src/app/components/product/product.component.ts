@@ -199,13 +199,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // saveProductId() {
-  //   this.productService.save(this.id);
-  //   console.log(this.id);
-  //   this.router.navigateByUrl('/');
-  // }
-
-
   openMessageModal() {
     const modalRef = this.modalService.open(MessageComponent,
       {
