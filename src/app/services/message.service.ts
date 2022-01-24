@@ -30,6 +30,11 @@ export class MessageService {
       responseType: 'text' as const,
     });
   }
+  // tslint:disable-next-line:variable-name
+  deleteMessage(_id: number): Observable <any > {
+    console.log(' i am deleteing the message the fowlliwing', _id);
+    return this.httpClient.delete<any>(`${this.SERVER_URL}/message/ ${_id}`);
+  }
 
   clearCache() {
     throw new Error('Method not implemented.');

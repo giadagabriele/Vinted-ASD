@@ -3,12 +3,20 @@
   <!-- container -->
   <div class="container">
     <!-- row -->
+              <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+            <button class="btn btn-outline-primary mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Mail</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownManual">
+              <button ngbDropdownItem (click) ="mail('Inbox')">Inbox</button>
+              <button ngbDropdownItem (click) ="mail('Sent Messages')">Sent Mail</button>
+              <button ngbDropdownItem (click) ="mail('All')">All Mail</button>
+            </div>
+          </div>
     <div class="row">
-<div > <table class="table" style="width: 600px">
+<div > <table class="table" style="width: 100%">
                         <tbody>
-                        <tr><th> Inbox</th> </tr>
+                        <tr><th> {{typeMessage}}</th> </tr>
                         <tr> <td> Sender Id </td> <td> Subject</td> <td> Description </td> <td> Date </td> </tr>
-                            <tr *ngFor="let inbo of inbox" style ="width:150px">
+                            <tr *ngFor="let inbo of message" style ="width:900px">
                             <td>
                                 <div id="product-imgs">
                                     <div class="product-preview">
@@ -24,6 +32,15 @@
                             </td>
                             <td>
                             {{inbo.sentDate}}
+                            </td>
+                            <td>
+                            <a href="javascript: void(0)" class ="btn primary" (click) ="writeMessage(inbo.senderId)"> Write Message </a>
+                            </td>
+                            <td>
+                            <a href="javascript: void(0)" class ="btn primary" (click) ="delete(inbo.id)"> Delete </a>
+                            </td>
+                            <td>
+                            <a href="javascript: void(0)" class ="btn primary" (click) ="reportSpam(inbo.id)"> Report to Spam </a>
                             </td>
                             </tr>
                         </tbody>
