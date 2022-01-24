@@ -9,6 +9,7 @@ import {ProductModelServer, ServerResponse} from '../models/product.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
 
   private SERVER_URL = environment.SERVER_URL;
@@ -34,6 +35,12 @@ export class ProductService {
     return this.httpClient.get<ProductModelServer>(this.SERVER_URL + '/product/' + id);
   }
 
+  save(id: number) {
+    this.httpClient.post(`${this.SERVER_URL}/saveProduct/`+this.getSingleProduct(id),id).subscribe(
+            (data:any) => {
+              console.log(data);    
+            })  ;       
+  }
   update(id: number, request : Product){
     return this.httpClient.post(`${this.SERVER_URL}product/update/`+id,request);
   }
@@ -58,14 +65,19 @@ export class ProductService {
     return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName+'/sortByDescendingPrice');
    }
 
-   getAllProductsBySeller(userId: number): Observable<ProductModelServer[]>  {
-      userId = +sessionStorage.getItem('id');
-      console.log("userId",sessionStorage.getItem('id'));
-      return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/myProducts/' + userId);
-   }
-
    getAllProductsByOtherUserSeller(userId: number): Observable<ProductModelServer[]>  {
     return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/myProducts/' + userId);
  }
 
+ getAllProductsBySeller(userId: number): Observable<ProductModelServer[]>  {
+  
+  
+  userId = +sessionStorage.getItem('id');
+  
+  console.log("userId",sessionStorage.getItem('id'));
+
+  return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/myProducts/' + userId);
+  
+  }
+   
 }

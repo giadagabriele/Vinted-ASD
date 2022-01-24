@@ -214,6 +214,10 @@ getAll(): Observable<User[]> {
 getUserByUsername(username:string): Observable<User> {
   return this.httpClient.get<User>(`${this.SERVER_URL}/user/getByUsername/`+username)
 }
+
+
+
+
 }
 
 

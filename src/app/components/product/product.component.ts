@@ -27,11 +27,13 @@ export class Product {
   styleUrls: ['./product.component.scss']
 })
 
+
 export class ProductComponent implements OnInit, AfterViewInit {
   [x: string]: any;
   id: number;
   product: any;
   thumbImages: any[] = [];
+ 
   @ViewChild('quantity') quantityInput;
   countFavorite = 0;
   headerComponent: HeaderComponent;
@@ -81,6 +83,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
         });
       }
       });
+    
+     
+
+        
+        
+      
   }
 
   ngAfterViewInit(): void {
