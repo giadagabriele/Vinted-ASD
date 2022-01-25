@@ -46,8 +46,6 @@ export class ProductService {
   }
 
   add(product: Product){
-    product.userId = +sessionStorage.getItem('id');
-    console.log("userId",sessionStorage.getItem('id'))
     return this.httpClient.post(`${this.SERVER_URL}/product/add`,product);
 
   }

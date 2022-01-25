@@ -1,12 +1,12 @@
 import { AuthenticationService } from './../../services/authentication.service';
 import { MessageComponent } from './../message/message.component';
 import { Favorite, HeaderComponent } from './../header/header.component';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ProductService} from '../../services/product.service';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ProductService } from '../../services/product.service';
 import { UserService } from '@app/services/user.service';
-import {CartService} from '../../services/cart.service';
+import { CartService } from '../../services/cart.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { User } from './../../models/user.model';
 import { FavoriteService } from '@app/services/favorite.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -34,7 +34,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   id: number;
   product: any;
   thumbImages: any[] = [];
- 
+
   @ViewChild('quantity') quantityInput;
   countFavorite = 0;
   headerComponent: HeaderComponent;
@@ -42,19 +42,19 @@ export class ProductComponent implements OnInit, AfterViewInit {
   user: User;
   header: {};
   constructor(private productService: ProductService,
-              private cartService: CartService,
-              public favoriteService: FavoriteService,
-              private route: ActivatedRoute,
-              private modalService: NgbModal,private authenticationService:AuthenticationService) {
-                this.authenticationService.currentUser
-    .subscribe((data: User) => {
-      this.myUser = data;
-    });
-             
+    private cartService: CartService,
+    public favoriteService: FavoriteService,
+    private route: ActivatedRoute,
+    private modalService: NgbModal, private authenticationService: AuthenticationService) {
+    this.authenticationService.currentUser
+      .subscribe((data: User) => {
+        this.myUser = data;
+      });
+
   }
 
   ngOnInit(): void {
-   
+
     this.route.paramMap
       .pipe(
         map((param: ParamMap) => {
@@ -68,32 +68,32 @@ export class ProductComponent implements OnInit, AfterViewInit {
           this.productService.getAllProduct().subscribe(prod => {
             // tslint:disable-next-line:no-unused-expression
             (
-           response: any) => {
-             console.log('the value is ', response);
-             this.Product = response;
-           };
+              response: any) => {
+              console.log('the value is ', response);
+              this.Product = response;
+            };
           });
         } else {
-        this.productService.getSingleProduct(this.id).subscribe(prod => {
-          this.product = prod;
-          this.favoriteList(this.id);
-          if (prod.images !== null) {
-            // this.thumbImages = prod.images.split(';');
-          }
+          this.productService.getSingleProduct(this.id).subscribe(prod => {
+            this.product = prod;
+            this.favoriteList(this.id);
+            if (prod.images !== null) {
+              // this.thumbImages = prod.images.split(';');
+            }
 
-        });
-      }
+          });
+        }
       });
-    
-     
 
-        
-        
-      
+
+
+
+
+
   }
 
   ngAfterViewInit(): void {
-// Product Main img Slick
+    // Product Main img Slick
     $('#product-main-img').slick({
       infinite: true,
       speed: 300,
@@ -169,41 +169,41 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
   favoriteList(id) {
     let favorites = [];
-    this.favoriteService.getAllFavorites().subscribe((data: Favorite[]) =>  {
+    this.favoriteService.getAllFavorites().subscribe((data: Favorite[]) => {
       // start of (1)
-        favorites = data;
-        if (favorites.length > 0) {
-          favorites.forEach(item => {
-            console.log(item.productId.toString() === id);
-            if (item.productId.toString() === id) {
-              this.isFavorite = true;
-              return;
-            }
-          });
-          // console.log(favorites[0].productId);
-          this.displayOrNot = false;
-        } else {
-          this.displayOrNot = true;
-        }
-      },
-      (error: any)   => console.log(error),
-      ()             => console.log('all data gets')
+      favorites = data;
+      if (favorites.length > 0) {
+        favorites.forEach(item => {
+          console.log(item.productId.toString() === id);
+          if (item.productId.toString() === id) {
+            this.isFavorite = true;
+            return;
+          }
+        });
+        // console.log(favorites[0].productId);
+        this.displayOrNot = false;
+      } else {
+        this.displayOrNot = true;
+      }
+    },
+      (error: any) => console.log(error),
+      () => console.log('all data gets')
     );
-    }
+  }
   onSave(id: number) {
     if (this.isFavorite) {
       console.log('already favorite');
       return;
     } else {
-    const newFavorite: any = { productId: id, userId: this.user.id, image: this.product.image };
-    this.favoriteService.addFavorite(newFavorite)
+      const newFavorite: any = { productId: id, userId: this.user.id, image: this.product.image };
+      this.favoriteService.addFavorite(newFavorite)
         .subscribe(
-            (data: Favorite) => {
-                console.log('created: ', data);
-                this.isFavorite = true;
-            },
-            (error: any) => console.log(error),
-            () => this.ngOnInit()
+          (data: Favorite) => {
+            console.log('created: ', data);
+            this.isFavorite = true;
+          },
+          (error: any) => console.log(error),
+          () => this.ngOnInit()
         );
     }
   }
@@ -216,7 +216,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         // keyboard: false,
         // backdrop: 'static'
       });
-    modalRef.componentInstance.productUser = {user: this.product.userId};
+    modalRef.componentInstance.productUser = { user: this.product.userId };
     modalRef.result.then((result) => {
       console.log(result);
     }, (reason) => {
