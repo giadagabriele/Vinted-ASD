@@ -22,6 +22,7 @@ export class FavoriteComponent implements OnInit {
   favorites: Favorite[];
  displayOrNot = true;
   constructor( private favoriteService: FavoriteService, private router: Router) {
+    
   }
 
   ngOnInit(): void {

@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { MessageComponent } from './../message/message.component';
 import { Favorite, HeaderComponent } from './../header/header.component';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
@@ -45,15 +46,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
               public favoriteService: FavoriteService,
               private userService: UserService,
               private route: ActivatedRoute,
-              private modalService: NgbModal) {
-                this.userService.userData$
-                .subscribe((data: User) => {
-                  this.user = data;
-                });
-                console.log(this.user.id);
+              private modalService: NgbModal,private authenticationService:AuthenticationService) {
+                this.authenticationService.currentUser
+    .subscribe((data: User) => {
+      this.myUser = data;
+    });
+             
   }
 
   ngOnInit(): void {
+   
     this.route.paramMap
       .pipe(
         map((param: ParamMap) => {
