@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { User } from './../../models/user.model';
 import {Component, NgZone, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
@@ -53,11 +54,12 @@ export class HeaderComponent implements OnInit {
   
   constructor(public favoriteService: FavoriteService,
               public userService: UserService,
-              public productService: ProductService,
+              public productService: ProductService,private authenticationService: AuthenticationService,
               private cityService: CityService,
               private router: Router,private _ngZone: NgZone
   ) {
   }
+  currentUser: User;
 
   ngOnInit(): void {
     this.favoriteList();
@@ -66,7 +68,7 @@ export class HeaderComponent implements OnInit {
 
     // this.cartService.cartData$.subscribe(data => this.cartData = data);
 
-    this.userService.authState$.subscribe(authState => this.authState = authState);
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
   toggleMessage(popover) {
     if (popover.isOpen()) {
@@ -114,10 +116,10 @@ export class HeaderComponent implements OnInit {
 }
 
 
-  logout() {
-    this.userService.logout();
-    this.router.navigateByUrl('/');
-  }
+logout() {
+  this.authenticationService.logout();
+  this.router.navigate(['/login']);
+}
   navigateToContact() {
     this.router.navigateByUrl('/contact');
   }

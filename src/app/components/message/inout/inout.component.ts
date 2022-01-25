@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../../services/authentication.service';
 import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '@app/services/message.service';
@@ -22,8 +23,8 @@ export class InoutComponent implements OnInit {
   typeMessage: 'Inbox';
   message: any;
   // tslint:disable-next-line:max-line-length
-  constructor(private userService: UserService, private messageService: MessageService, private modalService: NgbModal) {
-    this.userService.userData$
+  constructor(private userService: UserService, private messageService: MessageService, private modalService: NgbModal, private authenticationService: AuthenticationService) {
+    this.authenticationService.currentUser
     .subscribe((data: User) => {
       this.user = data;
     });

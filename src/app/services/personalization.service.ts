@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@app/services/authentication.service';
 import { PersonalizationData } from './../models/personalization.model';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -17,9 +18,9 @@ export class PersonalizationService {
     private baseUrl = `${this.SERVER_URL}/personalization/`;
     private myUser:User;
     constructor(
-        private httpClient: HttpClient,  private router: Router,private userService:UserService) {
+        private httpClient: HttpClient,  private router: Router,private authenticationService:AuthenticationService) {
         
-            this.userService.userData$
+            this.authenticationService.currentUser
             .subscribe((data: User) => {
               this.myUser = data;
             });

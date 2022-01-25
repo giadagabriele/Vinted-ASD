@@ -66,7 +66,7 @@ const routes: Routes = [
 
       {
         path: 'profile', component: ProfileComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        , canActivate: [ProfileGuard]
       },
       {
         path: 'user/:username', component: UserComponent

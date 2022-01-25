@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@app/services/authentication.service';
 import { Category } from '@app/models/product.model';
 import { CategoryService } from './../../services/category.service';
 import { User } from './../../models/user.model';
@@ -26,14 +27,16 @@ export class PersonalizationComponent implements OnInit {
      constructor(
         private router: Router,
         private activatedRoute : ActivatedRoute,
-        private userService: UserService,
+        private authenticationService: AuthenticationService,
+        private userService:UserService,
         private personalizationService: PersonalizationService,
         private categoryService: CategoryService
     ){
-        this.userService.userData$
-        .subscribe((data: User) => {
-          this.myUser = data;
-        });
+        this.authenticationService.currentUser
+    .subscribe((data: User) => {
+      this.myUser = data;
+    });
+   
         this.personalizationService.getAllByUserId().subscribe(
             (data:any) => {
               console.log(data);

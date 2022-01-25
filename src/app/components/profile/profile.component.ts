@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { City } from './../../models/city.model';
 import { CityService } from './../../services/city.service';
 import { User } from './../../models/user.model';
@@ -308,6 +309,7 @@ import {AuthService, SocialUser} from 'angularx-social-login';
 import {ResponseModel, UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -324,35 +326,38 @@ export class ProfileComponent implements OnInit {
   citiesDB: City[];
   cities: string[] = [];
   authState:boolean;
+  currentUser: User;
+
   constructor(private authService: AuthService,
               private userService: UserService,
               private cityService: CityService,
               private router: Router,
               private modalService: NgbModal,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
    
-
-    this.userService.userData$
-      .subscribe((data: User) => {
-        console.log(data);
-        if(data.city==null)
-          data.city= new City();
-        this.myUser = data;
-      });
-      this.formProfile = this.fb.group({
+    this.myUser = this.authenticationService.currentUserValue;
+  
+    
+        if( this.myUser.city==null)
+        this.myUser.city= new City();
+        this.cityService.getAll().subscribe(
+          (data:City[]) => {
+            this.citiesDB = data;
+          });
+    
+        this.formProfile = this.fb.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        phoneNumber: ['',[Validators.minLength(6),Validators.maxLength(15) ]],
+        phoneNumber: ['',],
         username: ['', [Validators.required, Validators.minLength(6)]],
         address: ['', [ Validators.minLength(12)]],
         email : ['', [Validators.required, Validators.email]],
         city: ['']
     });
    
-    this.userService.authState$.subscribe(authState => this.authState = authState);
   }
   typeaheadNoResults(event: boolean): void {
     console.log(event)
@@ -373,12 +378,12 @@ export class ProfileComponent implements OnInit {
     this.cityService.getAll().subscribe(
       (data:City[]) => {
         this.citiesDB = data;
-        this.citiesDB.forEach(element => {
-          this.cities.push(element.name);
-        });
+        
       },
       (error: any)   => console.log(error),
-      ()             => console.log(this.cities),
+      ()             => this.citiesDB.forEach(element => {
+        this.cities.push(element.name);
+      }),
       );
   }
  
@@ -390,8 +395,11 @@ export class ProfileComponent implements OnInit {
     if(this.myUser.city.name=='')
       this.myUser.city=null;
       
+    
+
     if(this.formProfile.invalid)
       return;
+     
 
       
       this.userService.updateProfile(this.myUser).subscribe(
@@ -401,15 +409,16 @@ export class ProfileComponent implements OnInit {
           if (response !== "Congratulations, your account has been successfully created.") {
             const modalRef = this.modalService.open(ModalComponent);
             modalRef.componentInstance.name = response;
-          
-       }
+          }
        else 
        this.isEditable=false;
+       localStorage.setItem('currentUser', JSON.stringify(this.myUser));
 
       });
     
   }
   setCity(){
+   
     this.citiesDB.forEach(element => {
       if(element.name=== this.f.city.value)
         this.myUser.city=element;
