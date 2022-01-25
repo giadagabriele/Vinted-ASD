@@ -77,7 +77,8 @@ export class RegisterComponent implements OnInit {
         confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         email : ['', [Validators.required, Validators.email]],
-        city:['']
+        city:[''],
+        profilePic:['/assets/img/img_avatar.png'],
       });
 
   }
