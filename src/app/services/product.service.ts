@@ -38,8 +38,8 @@ export class ProductService {
   save(id: number) {
     this.httpClient.post(`${this.SERVER_URL}/saveProduct/`+this.getSingleProduct(id),id).subscribe(
             (data:any) => {
-              console.log(data);    
-            })  ;       
+              console.log(data);
+            })  ;
   }
   update(id: number, request : Product){
     return this.httpClient.post(`${this.SERVER_URL}product/update/`+id,request);
@@ -70,14 +70,14 @@ export class ProductService {
  }
 
  getAllProductsBySeller(userId: number): Observable<ProductModelServer[]>  {
-  
-  
+
+
   userId = +sessionStorage.getItem('id');
-  
+
   console.log("userId",sessionStorage.getItem('id'));
 
   return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/myProducts/' + userId);
-  
+
   }
-   
+
 }

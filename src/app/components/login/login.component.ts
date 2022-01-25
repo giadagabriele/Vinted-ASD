@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-   
+
+
     this.userService.authState$.subscribe(authState => {
       if (authState) {
         this.router.navigateByUrl(this.route.snapshot.queryParams.returnUrl || '/profile');
@@ -45,14 +45,14 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       email : ['', [Validators.required, Validators.email]]
   });
-   
+
 
   }
   cambia(){
     this.container.classList.add("right-panel-active");
   }
   signInWithGoogle() {
-   
+
     this.userService.googleLogin();
     this.authService.authState.subscribe((user)=>{
       this.usergoogle=user;
@@ -71,17 +71,17 @@ export class LoginComponent implements OnInit {
     const password = this.f.password.value;
 
     console.log(email,password)
-   
-  
+
+
     this.userService.loginMessage$.subscribe(msg => {
       this.loginMessage = msg;
       console.log(msg)
     });
     this.userService.Login(email,password);
-    
-    
-    
-    
+
+
+
+
 
 
   }

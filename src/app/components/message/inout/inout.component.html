@@ -3,7 +3,7 @@
   <!-- container -->
   <div class="container">
     <!-- row -->
-              <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+          <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
             <button class="btn btn-outline-primary mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Mail</button>
             <div ngbDropdownMenu aria-labelledby="dropdownManual">
               <button ngbDropdownItem (click) ="mail('Inbox')">Inbox</button>
@@ -40,8 +40,14 @@
                             <a href="javascript: void(0)" class ="btn primary" (click) ="delete(inbo.id)"> Delete </a>
                             </td>
                             <td>
-                            <a href="javascript: void(0)" class ="btn primary" (click) ="reportSpam(inbo.id)"> Report to Spam </a>
-                            </td>
+                              <select ngModel (ngModelChange)="onSave($event,inbo.senderId)" id="selectid" class="form-control-mb-6">
+                                  <option value="Sale of cultural or regulated assets">Sale of cultural or regulated assets</option>
+                                  <option value="Inappropriate">Inappropriate</option>
+                                  <option value="Bullying or intimidation">Bullying or intimidation</option>
+                                  <option value="Possible scam">Possible scam</option>
+                                  <option value="Prefer not to say">Prefer not to say</option>
+                              </select>
+                              </td>
                             </tr>
                         </tbody>
                     </table>

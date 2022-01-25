@@ -36,11 +36,11 @@ export class UserComponent implements OnInit {
             if(this.myUser.username===user.username)
             this.router.navigateByUrl('/profile');
             this.usertoview=user;
-            
+
             console.log(this.usertoview)
 
           });
-      
+
       });
   }
 

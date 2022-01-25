@@ -6,11 +6,13 @@ import { SocialUser } from 'angularx-social-login';
 import { UserService } from '@app/services/user.service';
 import { MessageComponent } from '../message.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-inout',
   templateUrl: './inout.component.html',
   styleUrls: ['./inout.component.scss']
 })
+
 export class InoutComponent implements OnInit {
   [x: string]: any;
   usergoogle: SocialUser;
@@ -19,6 +21,7 @@ export class InoutComponent implements OnInit {
   sentMail: {};
   typeMessage: 'Inbox';
   message: any;
+  // tslint:disable-next-line:max-line-length
   constructor(private userService: UserService, private messageService: MessageService, private modalService: NgbModal) {
     this.userService.userData$
     .subscribe((data: User) => {
@@ -79,15 +82,32 @@ export class InoutComponent implements OnInit {
   }
 // tslint:disable-next-line:ban-types
 delete(reciever: number) {
+  if (confirm('Are you sure you want to delete the message?')) {
   this.messageService.deleteMessage(reciever).subscribe(
     (res: any) => this.mail(this.typeMessage),
     (error: any) => console.log(error),
     () => console.log('deleted')
   );
   }
-
 }
-function id(id: any) {
-  throw new Error('Function not implemented.');
+
+
+  onSave($event, u) {
+    console.log($event, u);
+    if (confirm('Are you sure you want to report as ' + $event)) {
+      console.log('Implement delete functionality here');
+      const newReport: any = { user: u, reason: $event, reportedBy: this.user.id };
+      this.messageService.addReport(newReport)
+            .subscribe(
+                (data: any) => {
+                    console.log('created: ', data);
+                },
+                (error: any) => console.log(error),
+                () => console.log('completed')
+            );
+    }
+    console.log('report canceled as ' + $event);
+  }
+
 }
 
