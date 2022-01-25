@@ -70,11 +70,6 @@ export class ProductService {
  }
 
  getAllProductsBySeller(userId: number): Observable<ProductModelServer[]>  {
-  
-  
-  userId = +sessionStorage.getItem('id');
-  
-  console.log("userId",sessionStorage.getItem('id'));
 
   return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/myProducts/' + userId);
   

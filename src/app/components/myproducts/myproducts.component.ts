@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { ProductModelServer } from '@app/models/product.model';
+import { User } from '@app/models/user.model';
+import { AuthenticationService } from '@app/services/authentication.service';
 import { ProductService } from '@app/services/product.service';
 import { element } from 'protractor';
 import { map } from 'rxjs/operators';
@@ -19,8 +21,14 @@ export class MyproductsComponent implements OnInit {
    constructor(
      private productService: ProductService,
      private router: Router,
-     private route: ActivatedRoute
-   ) {}
+     private route: ActivatedRoute,
+     private authenticationService:AuthenticationService
+   ) {
+    this.authenticationService.currentUser
+    .subscribe((data: User) => {
+      this.idUtente = data.id;
+    });
+   }
 
    opt(val){
      if(val==0)
@@ -55,15 +63,10 @@ export class MyproductsComponent implements OnInit {
          });
        } else {
             console.log('we get before the data', this.product);
-            this.productService.getAllProduct().subscribe(products => {
-              products.forEach(element => {
-                  this.idUtente = element.userId;
-              })
                 this.productService.getAllProductsBySeller(this.idUtente).subscribe(prod => {
                   this.product = prod;
                   console.log('we get the data', this.product);
                 });
-              })
            
             
      }

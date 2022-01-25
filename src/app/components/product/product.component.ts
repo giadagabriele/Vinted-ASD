@@ -44,7 +44,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
   constructor(private productService: ProductService,
               private cartService: CartService,
               public favoriteService: FavoriteService,
-              private userService: UserService,
               private route: ActivatedRoute,
               private modalService: NgbModal,private authenticationService:AuthenticationService) {
                 this.authenticationService.currentUser
