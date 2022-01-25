@@ -195,12 +195,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
       console.log('already favorite');
       return;
     } else {
-      const newFavorite: any = { productId: id, userId: this.user.id, image: this.product.image };
+      const newFavorite: any = { productId: id, userId: this.myUser.id, image: this.product.image };
       this.favoriteService.addFavorite(newFavorite)
         .subscribe(
           (data: Favorite) => {
             console.log('created: ', data);
             this.isFavorite = true;
+            window.location.reload();
           },
           (error: any) => console.log(error),
           () => this.ngOnInit()
