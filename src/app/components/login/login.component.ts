@@ -57,14 +57,15 @@ export class LoginComponent implements OnInit {
   signInWithGoogle() {
    
     this.authenticationService.googleLogin();
-      console.log(this.authenticationService.currentUserValue)
+     
    if (this.authenticationService.currentUserValue)
         this.router.navigate([this.returnUrl]);
 
-      console.log(this.usergoogle);
-      sessionStorage.setItem('id',this.user.id)
-      console.log("ciao bro",sessionStorage.getItem('id'))
-   
+      this.authenticationService.loginMessage$.subscribe(msg => {
+        this.loginMessage = msg;
+        console.log(msg)
+      });
+     
   }
   get f() { return this.formSignIn.controls; }
 

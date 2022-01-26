@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@app/services/authentication.service';
 
 import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
@@ -22,6 +23,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   auth = false;
+  private img='/assets/img/img_avatar.png';
   firstLogin = false;
   private SERVER_URL = environment.SERVER_URL;
   private baseUrlUpdateProfile = `${this.SERVER_URL}/user/`;
@@ -55,7 +57,7 @@ export class UserService {
     userConverted.lastName = userSocial.lastName;
     userConverted.username = userSocial.name;
     userConverted.email = userSocial.email;
-    userConverted.profilePic = userSocial.photoUrl;
+    userConverted.profilePic = this.img;
 
     return userConverted;
 
@@ -71,6 +73,29 @@ export class UserService {
   }
 
 
+  registraUserGoogle() {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    
+    this.authService.authState.subscribe((userSocial: SocialUser) => { 
+     
+      if (userSocial != null) {
+        userSocial.id = '0';
+        const userConv=this.fromSocialUserToUser(userSocial);
+        this.httpClient.post(`${this.SERVER_URL}/user/loginGoogle`, userSocial).subscribe((res: User) => {
+        //  No user exists in database with Social Login
+       if (res === null) {
+        
+         this.loginMessage$.next( this.registraUser(
+           userConv
+          ).toString())
+         
+         }
+     
+        });
+      }
+        });
+     
+  }
 
   registraUser(user): Observable<string> {
     console.log(user);
@@ -80,7 +105,7 @@ export class UserService {
       responseType: 'text' as const,
     });
   }
-
+  
   updateProfile(user: User): Observable<string> {
     console.log(user);
     const headers = new HttpHeaders().set('responsType', 'text');

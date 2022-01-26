@@ -46,6 +46,14 @@
                   <div>
                     <a href="javascript: void(0)"> <button class="add-to-cart-btn" (click)="openMessageModal()"><i
                           class="fa fa-envelope"></i> Send message</button></a>
+                        <div  *ngIf="request">
+                          <button class="add-to-cart-btn" style="margin-top: 4px;" (click)="requestPhoneNumber()"><i
+                            class="fa fa-phone"></i> Request phone number</button>
+                          </div>
+                          <div  *ngIf="!request">
+                            <button class="btn" disabled ><i
+                              class="fa fa-phone"></i> Request Sent</button>
+                            </div>
                   </div>
                 </div>
               </div>

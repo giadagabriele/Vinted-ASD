@@ -57,15 +57,18 @@ export class AuthenticationService {
     
             this.http.post(`${this.SERVER_URL}/user/loginGoogle`, userSocial).subscribe((res: User) => {
             //  No user exists in database with Social Login
-            console.log("userSocial");
+            console.log(res);
 
            if (res === null) {
-                // Send data to backend to register the user in database
+         //     Send data to backend to register the user in database
               const userConv = this.userService.fromSocialUserToUser(userSocial);
-             return this.userService.registraUser(
-                  userConv
-                );
-                
+              this.userService.registraUser(
+                 userConv
+               ).subscribe(msg=>{
+                if (msg === "Congratulations, your account has been successfully created.")
+                  this.googleLogin();
+               });
+            
     
               } else {
                 localStorage.setItem('currentUser', JSON.stringify(res));
