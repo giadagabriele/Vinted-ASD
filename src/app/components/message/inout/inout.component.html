@@ -69,7 +69,7 @@
                                 <button mdbBtn color="primary" mdbWavesEffect (click)="onSave(inbo.senderId)"> Submit</button>
 
                                 </ng-template>
-                                <div>
+                                <div *ngIf="inbo.senderId != user.id">
                                   <a href="javascript: void(0)">
                                     <i class="fa fa-exclamation-circle" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="top"
                                   triggers="manual" [autoClose] ="false" data-toggle="popover" #p="ngbPopover" (click)="toggleMessage(p)"><span> Report</span> </i>

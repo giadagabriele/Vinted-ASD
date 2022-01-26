@@ -5,104 +5,24 @@
     <!-- row -->
     <div class="row">
       <!-- category1 -->
-      <div class="col-md-4 col-xs-6">
+      <div class="col-md-4 col-xs-6" *ngFor="let cat of category">
         <div class="shop">
           <div class="shop-img">
-            <img src="/assets/img/clothes.png" alt="">
+            <img [src]="cat.image" alt="">
           </div>
           <div class="shop-body">
-            <h3>Clothes</h3>
+            <h3>{{cat.category}}</h3>
            <!-- <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>-->
-           <button class="cta-btn" class="btn"  (click)="navigateToClothes()">SHOP NOW  <i class="fa fa-arrow-circle-right"></i></button>
+           <button class="cta-btn" class="btn"  (click)="navigate(cat.category)">SHOP NOW  <i class="fa fa-arrow-circle-right"></i></button>
           </div>
         </div>
       </div>
       <!-- /category1 -->
 
-
-
-      <!-- category2 -->
-      <div class="col-md-4 col-xs-6">
-        <div class="shop">
-          <div class="shop-img">
-            <img src="/assets/img/shoes.png" alt="">
-          </div>
-          <div class="shop-body">
-            <h3>Shoes</h3>
-            <button class="cta-btn" class="btn" [routerLink]  ="['/shoes']">SHOP NOW  <i class="fa fa-arrow-circle-right"></i></button>
-
-          </div>
-        </div>
-      </div>
-      <!-- /category2 -->
-
-      <!-- category3 -->
-      <div class="col-md-4 col-xs-6">
-        <div class="shop">
-          <div class="shop-img">
-            <img src="/assets/img/aa.png" alt="">
-          </div>
-          <div class="shop-body">
-            <h3>Accessories</h3>
-            <button class="cta-btn" class="btn"  (click)="navigateToAccessories()">SHOP NOW  <i class="fa fa-arrow-circle-right"></i></button>
-
-          </div>
-        </div>
-      </div>
-      <!-- /category3 -->
-
-       <!-- category4 -->
-       <div class="col-md-4 col-xs-6">
-        <div class="shop">
-          <div class="shop-img">
-            <img src="/assets/img/cook.png" alt="">
-          </div>
-          <div class="shop-body">
-            <h3>Cooking</h3>
-            <button class="cta-btn" class="btn" (click)="navigateToCook()">SHOP NOW  <i class="fa fa-arrow-circle-right"></i></button>
-          </div>
-        </div>
-      </div>
-      <!-- /category4 -->
-
-       <!-- category5 -->
-       <div class="col-md-4 col-xs-6">
-        <div class="shop">
-          <div class="shop-img">
-            <img src="/assets/img/tecnology.png" alt="">
-          </div>
-          <div class="shop-body">
-            <h3>Technology</h3>
-            <button class="cta-btn" class="btn"  (click)="navigateToTechnology()">SHOP NOW  <i class="fa fa-arrow-circle-right"></i></button>
-          </div>
-        </div>
-      </div>
-      <!-- /category5 -->
-
-
-       <!-- category6 -->
-       <div class="col-md-4 col-xs-6">
-        <div class="shop">
-          <div class="shop-img">
-            <img src="/assets/img/book.png" alt="">
-          </div>
-          <div class="shop-body">
-            <h3>Books</h3>
-            <button class="cta-btn" class="btn"  (click)="navigateToBook()">SHOP NOW  <i class="fa fa-arrow-circle-right"></i></button>
-          </div>
-        </div>
-      </div>
-      <!-- /category6 -->
-
-
-
     </div>
     <!-- /row -->
   </div>
   <!-- /container -->
-
-
-
 
 </div>
 <!-- /SECTION -->

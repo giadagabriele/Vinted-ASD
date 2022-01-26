@@ -22,11 +22,13 @@ export class InoutComponent implements OnInit {
   sentMail: {};
   typeMessage: 'Inbox';
   message: any;
+
   constructor(private messageService: MessageService, private modalService: NgbModal,private authenticationService:AuthenticationService) {
     this.authenticationService.currentUser
     .subscribe((data: User) => {
       this.user = data;
     });
+
     console.log(this.user.id);
    }
 
