@@ -13,7 +13,7 @@ import { ProductService } from '@app/services/product.service';
 })
 export class CreateProductComponent implements OnInit {
  myUser: User;
- categories = ['Clothes', 'Shoes', 'Accessories', 'Cook', 'Technology', 'Books'];
+ categories = ['clothes', 'shoes', 'accessories', 'cook', 'technology', 'books'];
   constructor(private formBuilder: FormBuilder,
               private productSrv: ProductService,
               private authenticationService: AuthenticationService) {
