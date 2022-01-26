@@ -22,11 +22,7 @@ export class InoutComponent implements OnInit {
   sentMail: {};
   typeMessage: 'Inbox';
   message: any;
-  closeToggle: any;
-  spamLength: number;
-  template = true;
-  // tslint:disable-next-line:max-line-length
-  constructor(private userService: UserService, private messageService: MessageService, private modalService: NgbModal, private authenticationService: AuthenticationService) {
+  constructor(private messageService: MessageService, private modalService: NgbModal,private authenticationService:AuthenticationService) {
     this.authenticationService.currentUser
     .subscribe((data: User) => {
       this.user = data;

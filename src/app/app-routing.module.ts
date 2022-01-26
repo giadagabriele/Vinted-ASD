@@ -110,15 +110,15 @@ const routes: Routes = [
       },
       {
         path: 'favorite', component: FavoriteComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        canActivate: [ProfileGuard]
       },
       {
         path: 'create-product', component: CreateProductComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        , canActivate: [ProfileGuard]
       },
       {
         path: 'edit-product/:id', component: EditProductComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        , canActivate: [ProfileGuard]
       },
       {
         path: 'message', component: InoutComponent,
@@ -126,19 +126,19 @@ const routes: Routes = [
       },
       {
         path: 'purchase/:id', component: PurchaseComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        canActivate: [ProfileGuard]
       },
       {
         path: 'addCard', component: CardComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        , canActivate: [ProfileGuard]
       },
       {
         path: 'myproducts', component: MyproductsComponent,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        canActivate: [ProfileGuard]
       },
       {
         path: 'usersproducts/:id', component: UsersproductsComponent ,
-        canActivate: [ProfileGuard, PersonalizationGuard]
+        canActivate: [ProfileGuard]
       }
     ]
   },

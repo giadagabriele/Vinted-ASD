@@ -2,6 +2,8 @@ import { Product } from './../product/product.component';
 import { FavoriteService } from './../../services/favorite.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { AuthenticationService } from '@app/services/authentication.service';
+import { User } from '@app/models/user.model';
 declare let $: any;
 export class Favorite {
   constructor(
@@ -21,7 +23,13 @@ export class Favorite {
 export class FavoriteComponent implements OnInit {
   favorites: Favorite[];
  displayOrNot = true;
-  constructor( private favoriteService: FavoriteService, private router: Router) {
+ myUser: User;
+  constructor( private favoriteService: FavoriteService, private router: Router,
+               private authenticationService: AuthenticationService) {
+      this.authenticationService.currentUser
+      .subscribe((data: User) => {
+        this.myUser = data;
+      });
   }
 
   ngOnInit(): void {
@@ -55,12 +63,12 @@ export class FavoriteComponent implements OnInit {
       .subscribe(
         (res: any) => this.favoriteList(),
         (error: any) => console.log(error),
-        () => console.log('deleted')
+        () => window.location.reload()
       );
     }
 
   onSave(formData: Favorite) {
-      const newFavorite: any = { prdoductId: formData.productId, userId: formData.userId };
+      const newFavorite: any = { productId: formData.productId, userId: this.myUser.id};
       this.favoriteService.addFavorite(newFavorite)
           .subscribe(
               (data: Favorite) => {

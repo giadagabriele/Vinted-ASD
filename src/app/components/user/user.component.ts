@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageComponent } from '../message/message.component';
+import { AuthenticationService } from '@app/services/authentication.service';
 
 @Component({
   selector: 'app-user',
@@ -13,11 +14,12 @@ import { MessageComponent } from '../message/message.component';
 })
 export class UserComponent implements OnInit {
   usertoview : User;
-  myUser:User;
+  myUser: User
   constructor(private userService: UserService,private router: Router,
     private route: ActivatedRoute,
-    private modalService: NgbModal) { this.userService.userData$
-      .subscribe((data: User) => {
+    private modalService: NgbModal,
+    private authenticationService: AuthenticationService) { 
+      this.authenticationService.currentUser.subscribe((data: User) => {
         this.myUser = data;
       }); }
 

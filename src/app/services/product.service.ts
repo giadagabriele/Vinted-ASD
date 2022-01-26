@@ -36,19 +36,17 @@ export class ProductService {
   }
 
   save(id: number) {
-    this.httpClient.post(`${this.SERVER_URL}/saveProduct/`+this.getSingleProduct(id),id).subscribe(
-            (data:any) => {
+    this.httpClient.post(`${this.SERVER_URL}/saveProduct/` + this.getSingleProduct(id), id).subscribe(
+            (data: any) => {
               console.log(data);
             })  ;
   }
-  update(id: number, request : Product){
-    return this.httpClient.post(`${this.SERVER_URL}product/update/`+id,request);
+  update(id: number, request: Product) {
+    return this.httpClient.post(`${this.SERVER_URL}product/update/` + id, request);
   }
 
-  add(product: Product){
-    product.userId = +sessionStorage.getItem('id');
-    console.log("userId",sessionStorage.getItem('id'))
-    return this.httpClient.post(`${this.SERVER_URL}/product/add`,product);
+  add(product: Product) {
+    return this.httpClient.post(`${this.SERVER_URL}/product/add`, product);
 
   }
 
@@ -58,11 +56,11 @@ export class ProductService {
    }
 
    getProductByCategorySortedByAscendingPrice(catName: string): Observable<ProductModelServer[]>  {
-    return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName+'/sortByAscendingPrice');
+    return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName + '/sortByAscendingPrice');
    }
 
    getProductByCategorySortedByDescendingPrice(catName: string): Observable<ProductModelServer[]>  {
-    return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName+'/sortByDescendingPrice');
+    return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/product/category/' + catName + '/sortByDescendingPrice');
    }
 
    getAllProductsByOtherUserSeller(userId: number): Observable<ProductModelServer[]>  {
@@ -74,7 +72,7 @@ export class ProductService {
 
   userId = +sessionStorage.getItem('id');
 
-  console.log("userId",sessionStorage.getItem('id'));
+  console.log('userId', sessionStorage.getItem('id'));
 
   return this.httpClient.get<ProductModelServer[]>(this.SERVER_URL + '/myProducts/' + userId);
 

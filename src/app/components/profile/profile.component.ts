@@ -355,7 +355,8 @@ export class ProfileComponent implements OnInit {
         username: ['', [Validators.required, Validators.minLength(6)]],
         address: ['', [ Validators.minLength(12)]],
         email : ['', [Validators.required, Validators.email]],
-        city: ['']
+        city: [''],
+        profilePic: [''],
     });
    
   }
@@ -400,7 +401,7 @@ export class ProfileComponent implements OnInit {
     if(this.formProfile.invalid)
       return;
      
-
+    this.myUser.profilePic = '/assets/img/'+this.myUser.profilePic.substring(12,this.myUser.profilePic.length);
       
       this.userService.updateProfile(this.myUser).subscribe(
       response => {

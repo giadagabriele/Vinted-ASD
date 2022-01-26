@@ -1,117 +1,6 @@
-<!-- <div class="container emp-profile">
-  <form novalidate>
-    <div class="row">
-      <!-- <div class="col-md-4">
-        <div class="profile-img">
-          <img [src]="myUser?.photoUrl" alt="{{myUser?.firstName || myUser?.fname}}"/>
-          <div class="file btn btn-lg btn-primary">
-            Change Photo
-            <input name="file" type="file"/>
-          </div>
-        </div>
-      </div> -->
-
-     <!--  <div class="col-lg-3">
-        <!-- <fieldset class="border p-3 mt-4"> -->
-         <!--  <div class="col-12">
-            <div class="form-group" id="profpic">
-              <img
-                src="/assets/img/joe.jpeg"
-                id="imgProfile"
-                class="img-responsive"
-                alt=""
-              />
-              <div class="mt-2">
-                <!-- <input type="file" (change)="onFileChanged($event)" id="profpicfile"  name="profpicfile"/>
-                <a (click)="triggerInput()" class="btn btn-sm btn-success w-100 text-white">Change Photo</a> -->
-           <!--    </div>
-            </div>
-          </div>
-        <!-- </fieldset> -->
-      <!-- </div>
-
-      <div class="col-md-6">
-        <div class="profile-head">
-          
-          <div class="row">
-              <h5>
-                <!-- {{
-                  myUser?.username || myUser.firstName + " " + myUser.lastName
-                }} -->
-             <!--  </h5>
- <!--
-              <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6">
-                  <p>{{ myUser.name || myUser.username }}</p>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <label
-                    ><i class="fa fa-map-marker" aria-hidden="true"></i
-                  ></label>
-                </div>
-                <div class="col-md-6">
-                  <p>{{ myUser.email }}</p>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Phone</label>
-                </div>
-                <div class="col-md-6">
-                  <p>9999-778-754</p>
-                </div>
-              </div>
-         
-
-           
-
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Verified Information</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <label><i class="far fa-check-square"></i></label>
-                    <p>{{ myUser.email }}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Email</label>
-                </div>
-                <div class="col-md-6">
-                  <p>{{ myUser.email }}</p>
-                </div>
-              </div>
-           
-          </div>
-
-          <div class="row">
-           
-          </div>
-
-
-        </div>
-      </div>
-      <!-- <div class="col-md-2">
-        <button (click)="logout()" class="btn btn-secondary btn-sm" name="btnAddMore" type="button">Logout</button>
-      </div> -->
-  <!--   </div>
-  </form>
-</div> -->
-
-
-
-
 <div class="container">
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -130,268 +19,267 @@
       </div>
     </div>
   </div>
-     
 
-    <div class="main-body">
-      
-      
-      <!-- Modal -->
-     
-          <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-                    <div class="mt-3">
-                      <h4>{{this.myUser.username}}</h4>
-                  <!--    <p class="text-secondary mb-1">small smille </p>-->
-                      <p class="text-muted font-size-sm">{{this.myUser.address}}</p>
-                   <!--   <button style="margin-right: 9px;" class="btn btn-primary ">Follow</button> -->
-                      
-                   <!--   <button class="btn btn-outline-primary">Message</button> -->
-                    </div>
-                    <div class="mt-3">
-                      <!--<button class="btn btn-outline-primary  btn-lg btn-block ">Change profile pic</button>!-->
-                    
-                      
-                    </div>
-                  </div>
-                </div>
+
+  <div class="main-body">
+
+
+    <!-- Modal -->
+
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="{{this.myUser.profilePic}}" alt="profile pic" class="rounded-circle"
+                width="150">
+              <div class="mt-3">
+                <h4>{{this.myUser.username}}</h4>
+                <!--    <p class="text-secondary mb-1">small smille </p>-->
+                <p class="text-muted font-size-sm">{{this.myUser.address}}</p>
+                <!--   <button style="margin-right: 9px;" class="btn btn-primary ">Follow</button> -->
+
+                <!--   <button class="btn btn-outline-primary">Message</button> -->
               </div>
-              <!--<div class="card mt-3">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
-                      <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
-                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                    </svg> Your orders</h6>
-                    <span class="text-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                    </svg>
-                    </span>
-                  </li>
-                  
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">
-                      <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z"/>
-                      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                    </svg> Your "on sale"  </h6>
-                    <span class="text-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                    </svg>
-                    </span>
-                  </li>
-                 </ul>
-              </div>-->
+              <div class="mt-3">
+                <!--<button class="btn btn-outline-primary  btn-lg btn-block ">Change profile pic</button>!-->
+
+
+              </div>
             </div>
-            <div class="col-md-8">
-              <div class="card mb-3">
-                <div class="card-body">
-                  <form [formGroup]="formProfile" >
-                    <div *ngIf="!isEditable" >
-                    <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                     
-                     
-                     
-                     
-                      {{this.myUser.firstName}}{{this.myUser.lastName}}
-                    </div>
-                    </div>
-                    <hr>
-                  </div>
-                  
-                  <div *ngIf="isEditable" >
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">First Name</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                     
-                     
-                        <input  mdbInput formControlName="firstName" name="firstName"
-                        [(ngModel)]="myUser.firstName" required type="text"   class="form-control">
-                        <span class="text-danger align-middle">
+          </div>
+        </div>
 
-                          <div *ngIf="submitted && f.firstName.errors" >
-                            <div style="text-align: center;"  *ngIf="f.firstName.errors.required">First Name is required</div>
-                        </div>
-                          </span>
-                      </div>
-                    </div>
-                    <hr>
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <form [formGroup]="formProfile">
+              <div *ngIf="!isEditable">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Full Name</h6>
                   </div>
-                  <div *ngIf="isEditable" >
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Last Name</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                     
-                     
-                        <input  mdbInput formControlName="lastName" name="lastName"
-                        [(ngModel)]="myUser.lastName" required type="text"   class="form-control">
-                        <span class="text-danger align-middle">
+                  <div class="col-sm-9 text-secondary">
 
-                          <div *ngIf="submitted && f.lastName.errors" >
-                            <div style="text-align: center;" *ngIf="f.lastName.errors.required">Last Name is required</div>
-                        </div>
-                          </span>
-                      </div>
-                    </div>
-                    <hr>
-                  </div>
-                  <div *ngIf="isEditable" >
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Username</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                     
-                     
-                        <input  mdbInput formControlName="username" name="username"
-                        [(ngModel)]="myUser.username" required type="text"   class="form-control">
-                        <span class="text-danger align-middle">
 
-                          <div *ngIf="submitted && f.username.errors" >
-                            <div  style="text-align: center;" *ngIf="f.username.errors.required">Username is required</div>
-                            <div style="text-align: center;" *ngIf="f.username.errors.minlength"> Username must be at least 6 characters</div>
 
-                        </div>
-                          </span>
-                      </div>
-                    </div>
-                    <hr>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <div *ngIf="isEditable" >
-                        <input  mdbInput formControlName="email" name="email"
-                        [(ngModel)]="myUser.email" required type="text"   class="form-control">
-                        <span class="text-danger align-middle">
-                          <div *ngIf="submitted && f.email.errors">
-                  
-                            <div style="text-align: center;" *ngIf="f.email.errors.required">email is required</div>
-                            <div style="text-align: center;" *ngIf="f.email.errors.email">Not a valid email</div>
-                          </div>
-                        </span>
-                      </div>
-                      <div *ngIf="!isEditable" >
-                        {{this.myUser.email}}
-                      </div>
-                    </div>
-                  </div>
-                  <hr>
-                 
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone number</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <div *ngIf="isEditable" >
-                        <input  mdbInput formControlName="phoneNumber" name="phoneNumber"
-                        [(ngModel)]="myUser.phoneNumber"  type="number"   class="form-control">
 
-                      </div>
-                      <div *ngIf="!isEditable" >
-                        {{this.myUser.phoneNumber}}
-                      </div>
-                    </div>
+                    {{this.myUser.firstName}}{{this.myUser.lastName}}
                   </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <div *ngIf="isEditable" >
-                        <input  mdbInput formControlName="address" name="address"
-                        [(ngModel)]="myUser.address" required type="text"   class="form-control">
-                        <span class="text-danger align-middle">
-                          <div *ngIf="submitted && f.address.errors">
-                  
-                            <div style="text-align: center;" *ngIf="f.address.errors.minlength"> Address must be at least 12 characters</div>
-                          </div>
-                        </span>
-                      </div>
-                      <div *ngIf="!isEditable" >
-                        {{this.myUser.address}}
-                      </div>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">City</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <div *ngIf="isEditable" >
-                        <div *ngIf="this.myUser.city!=undefined" >
-                          <input class="form-control" (ngModelChange)="setCity()" mdbInput formControlName="city" name="city" [(ngModel)]="myUser.city.name" [typeahead]="cities"  [typeaheadScrollable]="true" (typeaheadNoResults)="typeaheadNoResults($event)" [typeaheadOptionsInScrollableView]="5"   placeholder="Search here">
-                          
-
-                        </div>
-                      </div>
-                      <div *ngIf="!isEditable" >
-                        <div *ngIf="this.myUser.city!=undefined" >
-                         {{this.myUser.city.name}}
-                        </div>
-                     
-                      </div>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div *ngIf="!isEditable" >
-                        <button class="btn btn-info" (click)="edit()" >{{button}}</button>
-                     </div>
-                     <div style="text-align: center" *ngIf="isEditable" >
-                      <button style= "margin-right: 10px;" class="btn btn-info" (click)="save()" >Save</button>
-                      <button class="btn btn-outline-info" (click)="cancel()" >Cancel</button>
-
-                      </div>
-                    </div>
-                  </div>
-                </form>
                 </div>
+                <hr>
               </div>
 
-              <div class="row gutters-sm">
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                     
-                      <div class=" align-items-center text-center">
-                      <img src="/assets/img/shopping4.svg"  class="rounded-circle" width="150"   height="179">                  
-                      
-                      <div class="mt-3">
-                      <button class=" btn btn-outline-primary btn-sm btn-block" routerLink="/products"> My orders</button>
+              <div *ngIf="isEditable">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">First Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+
+
+                    <input mdbInput formControlName="firstName" name="firstName" [(ngModel)]="myUser.firstName" required
+                      type="text" class="form-control">
+                    <span class="text-danger align-middle">
+
+                      <div *ngIf="submitted && f.firstName.errors">
+                        <div style="text-align: center;" *ngIf="f.firstName.errors.required">First Name is required
+                        </div>
                       </div>
-                      
+                    </span>
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div *ngIf="isEditable">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Last Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+
+
+                    <input mdbInput formControlName="lastName" name="lastName" [(ngModel)]="myUser.lastName" required
+                      type="text" class="form-control">
+                    <span class="text-danger align-middle">
+
+                      <div *ngIf="submitted && f.lastName.errors">
+                        <div style="text-align: center;" *ngIf="f.lastName.errors.required">Last Name is required</div>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div *ngIf="isEditable">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Username</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+
+
+                    <input mdbInput formControlName="username" name="username" [(ngModel)]="myUser.username" required
+                      type="text" class="form-control">
+                    <span class="text-danger align-middle">
+
+                      <div *ngIf="submitted && f.username.errors">
+                        <div style="text-align: center;" *ngIf="f.username.errors.required">Username is required</div>
+                        <div style="text-align: center;" *ngIf="f.username.errors.minlength"> Username must be at least
+                          6 characters</div>
+
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Email</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <div *ngIf="isEditable">
+                    <input mdbInput formControlName="email" name="email" [(ngModel)]="myUser.email" required type="text"
+                      class="form-control">
+                    <span class="text-danger align-middle">
+                      <div *ngIf="submitted && f.email.errors">
+
+                        <div style="text-align: center;" *ngIf="f.email.errors.required">email is required</div>
+                        <div style="text-align: center;" *ngIf="f.email.errors.email">Not a valid email</div>
+                      </div>
+                    </span>
+                  </div>
+                  <div *ngIf="!isEditable">
+                    {{this.myUser.email}}
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Phone number</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <div *ngIf="isEditable">
+                    <input mdbInput formControlName="phoneNumber" name="phoneNumber" [(ngModel)]="myUser.phoneNumber"
+                      type="number" class="form-control">
+
+                  </div>
+                  <div *ngIf="!isEditable">
+                    {{this.myUser.phoneNumber}}
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Address</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <div *ngIf="isEditable">
+                    <input mdbInput formControlName="address" name="address" [(ngModel)]="myUser.address" required
+                      type="text" class="form-control">
+                    <span class="text-danger align-middle">
+                      <div *ngIf="submitted && f.address.errors">
+
+                        <div style="text-align: center;" *ngIf="f.address.errors.minlength"> Address must be at least 12
+                          characters</div>
+                      </div>
+                    </span>
+                  </div>
+                  <div *ngIf="!isEditable">
+                    {{this.myUser.address}}
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">City</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <div *ngIf="isEditable">
+                    <div *ngIf="this.myUser.city!=undefined">
+                      <input class="form-control" (ngModelChange)="setCity()" mdbInput formControlName="city"
+                        name="city" [(ngModel)]="myUser.city.name" [typeahead]="cities" [typeaheadScrollable]="true"
+                        (typeaheadNoResults)="typeaheadNoResults($event)" [typeaheadOptionsInScrollableView]="5"
+                        placeholder="Search here">
+
 
                     </div>
                   </div>
-                </div>
-                </div>
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      
-                     <div class="align-items-center text-center">
-                      <img src="/assets/img/shopping.svg"  class="rounded-circle" width="150"   height="179">                  
-                      <div class="mt-3">
-                       
-                      <button class=" btn btn-outline-primary btn-sm btn-block" *ngIf="authState" routerLink="/myproducts">My Sales</button>
+                  <div *ngIf="!isEditable">
+                    <div *ngIf="this.myUser.city!=undefined">
+                      {{this.myUser.city.name}}
                     </div>
-          </div>
 
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div *ngIf="isEditable">
+                <div>
+                  <h6 class="mb-0">Photo</h6>
+                  <input type="file"
+                  formControlName="profilePic" name="profilePic" [(ngModel)]="myUser.profilePic"
+                    placeholder="Profile pic">
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div *ngIf="!isEditable">
+                    <button class="btn btn-info" (click)="edit()">{{button}}</button>
+                  </div>
+                  <div style="text-align: center" *ngIf="isEditable">
+                    <button style="margin-right: 10px;" class="btn btn-info" (click)="save()">Save</button>
+                    <button class="btn btn-outline-info" (click)="cancel()">Cancel</button>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row gutters-sm">
+          <div class="col-sm-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+
+                <div class=" align-items-center text-center">
+                  <img src="/assets/img/shopping4.svg" class="rounded-circle" width="150" height="179">
+
+                  <div class="mt-3">
+                    <button class=" btn btn-outline-primary btn-sm btn-block" routerLink="/products"> My orders</button>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+
+                <div class=" align-items-center text-center">
+                  <img src="/assets/img/shopping.svg" class="rounded-circle" width="150" height="179">
+
+                  <div class="mt-3">
+                    <button class=" btn btn-outline-primary btn-sm btn-block" routerLink="/myproducts"> My sales</button>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>

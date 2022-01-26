@@ -8,6 +8,7 @@ import { MessageService } from '../../services/message.service';
 import { User } from '@app/models/user.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from '@app/services/authentication.service';
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -24,9 +25,8 @@ export class MessageComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService,
               // tslint:disable-next-line:max-line-length
-              private userService: UserService, private router: Router, private messageService: MessageService, public activeModal: NgbActiveModal ) {
-                this.userService.userData$
-                .subscribe((data: User) => {
+              private authenticationService:AuthenticationService, private router: Router, private messageService: MessageService, public activeModal: NgbActiveModal ) {
+                this.authenticationService.currentUser.subscribe((data: User) => {
                   this.user = data;
                 });
                 console.log(this.user.email);

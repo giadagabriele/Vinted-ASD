@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '@app/components/product/product.component';
+import { User } from '@app/models/user.model';
+import { AuthenticationService } from '@app/services/authentication.service';
 import { ProductService } from '@app/services/product.service';
 
 
@@ -10,8 +12,15 @@ import { ProductService } from '@app/services/product.service';
   styleUrls: ['./create-product.component.scss']
 })
 export class CreateProductComponent implements OnInit {
-
-  constructor(private formBuilder: FormBuilder, private productSrv: ProductService) { }
+ myUser: User;
+  constructor(private formBuilder: FormBuilder, 
+    private productSrv: ProductService,
+    private authenticationService:AuthenticationService) { 
+      this.authenticationService.currentUser
+      .subscribe((data: User) => {
+        this.myUser = data;
+      });
+    }
    
   productForm = this.formBuilder.group({
     name: ['',[Validators.required,Validators.minLength(6)]],
@@ -31,7 +40,7 @@ export class CreateProductComponent implements OnInit {
   submit(){
     let prod : Product = this.productForm.value;
     prod.image = '/assets/img/'+prod.image.substring(12,prod.image.length)
-    //prod.userId = 
+    prod.userId = this.myUser.id;
     this.productSrv.add(prod).subscribe((response:any) => {
       if(response){
       //  this.route.navigate(['/listaprodotticaricati'])

@@ -98,7 +98,7 @@ export class HeaderComponent implements OnInit {
       console.log('deleting the favorite list', id);
       const response = this.favoriteService.deleteFavorite(id)
       .subscribe(
-        (res: any) => this.favoriteList(),
+        (res: any) => window.location.reload(),
         (error: any) => console.log(error),
         () => console.log('deleted')
       );
