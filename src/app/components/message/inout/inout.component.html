@@ -3,7 +3,7 @@
   <!-- container -->
   <div class="container">
     <!-- row -->
-              <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+          <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
             <button class="btn btn-outline-primary mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Mail</button>
             <div ngbDropdownMenu aria-labelledby="dropdownManual">
               <button ngbDropdownItem (click) ="mail('Inbox')">Inbox</button>
@@ -40,8 +40,51 @@
                             <a href="javascript: void(0)" class ="btn primary" (click) ="delete(inbo.id)"> Delete </a>
                             </td>
                             <td>
-                            <a href="javascript: void(0)" class ="btn primary" (click) ="reportSpam(inbo.id)"> Report to Spam </a>
-                            </td>
+
+                               <ng-template #popTitle let-report="report">Report the user</ng-template>
+                                <ng-template #popContent let-report="report" style="width: 200px">
+
+                                <form>
+                                  <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="r2" name="Inappropriate"
+                                          [(ngModel)]="template" value="Inappropriate">
+                                    <label style="font-size: medium;" class="form-check-label" for="materialChecked">Inappropriate</label>
+                                  </div>
+                                  <hr>
+                                  <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="r3" name="intimidation"
+                                          [(ngModel)]="template" value="Bullying or intimidation">
+                                    <label style="font-size: medium;" class="form-check-label" for="materialChecked">Bullying or intimidation</label>
+                                  </div>
+                                  <hr>
+                                  <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="r4" name="scam"
+                                          [(ngModel)]="template" value="Possible scam">
+                                    <label style="font-size: medium;" class="form-check-label" for="materialChecked">Possible scam</label>
+                                  </div>
+                                  <hr>
+                                  <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="r5" name="not"
+                                          [(ngModel)]="template" value="Prefer not to say">
+                                    <label style="font-size: medium;" class="form-check-label" for="materialChecked">Prefer not to say</label>
+                                  </div>                     
+
+                                </form>
+                                <div class="product-details">
+                                  <div class="add-to-cart">
+                                <button mdbBtn color="primary" style="margin-top: 20px;" class="add-to-cart-btn" mdbWavesEffect (click)="onSave(inbo.senderId)"> <i class="fa fa-send" aria-hidden="true"></i>Submit</button>
+                                </div>
+                              </div>
+
+                                </ng-template>
+                                <div *ngIf="inbo.senderId != user.id">
+                                  <a href="javascript: void(0)">
+                                    <i class="fa fa-exclamation-circle" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="bottom"
+                                  triggers="manual" [autoClose] ="false" data-toggle="popover" #p="ngbPopover" (click)="toggleMessage(p)"><span> Report</span> </i>
+                                  </a>
+                                </div>
+
+                              </td>
                             </tr>
                         </tbody>
                     </table>

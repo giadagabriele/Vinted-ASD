@@ -7,11 +7,13 @@ import { SocialUser } from 'angularx-social-login';
 import { UserService } from '@app/services/user.service';
 import { MessageComponent } from '../message.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-inout',
   templateUrl: './inout.component.html',
   styleUrls: ['./inout.component.scss']
 })
+
 export class InoutComponent implements OnInit {
   [x: string]: any;
   usergoogle: SocialUser;
@@ -20,11 +22,13 @@ export class InoutComponent implements OnInit {
   sentMail: {};
   typeMessage: 'Inbox';
   message: any;
+
   constructor(private messageService: MessageService, private modalService: NgbModal,private authenticationService:AuthenticationService) {
     this.authenticationService.currentUser
     .subscribe((data: User) => {
       this.user = data;
     });
+
     console.log(this.user.id);
    }
 
@@ -80,15 +84,58 @@ export class InoutComponent implements OnInit {
   }
 // tslint:disable-next-line:ban-types
 delete(reciever: number) {
+  if (confirm('Are you sure you want to delete the message?')) {
   this.messageService.deleteMessage(reciever).subscribe(
     (res: any) => this.mail(this.typeMessage),
     (error: any) => console.log(error),
     () => console.log('deleted')
   );
   }
-
 }
-function id(id: any) {
-  throw new Error('Function not implemented.');
+
+
+  onSave(u) {
+    console.log(this.template, u);
+    if (confirm('Are you sure you want to report as ' + this.template)) {
+      console.log('Implement delete functionality here');
+      const newReport: any = { user: u, reason: this.template, reportedBy: this.user.id };
+      this.messageService.addReport(newReport)
+            .subscribe(
+                (data: any) => {
+                    console.log('created: ', data);
+                    this.closeToggle.close();
+                },
+                (error: any) => console.log(error),
+                () => console.log('completed')
+            );
+    }
+    console.log('report canceled as ' + this.template);
+  }
+  toggleMessage(popover) {
+    this.closeToggle = popover;
+    console.log(popover);
+    if (popover.isOpen()) {
+      popover.close();
+    } else {
+      popover.open();
+    }
+  }
+
+  reportNumber(value: any) {
+    this.messageService.getReport(value.toString()).subscribe((data: any) =>  {
+      console.log(data);
+      this.spamLength = data.length;
+        // tslint:disable-next-line:align
+        if (data.length > 0) {
+          console.log(data.length);
+          // this.displayOrNot = false;
+        }
+      },
+      (error: any)   => console.log(error),
+      ()             => console.log('all data gets')
+    );
+
+  }
+
 }
 

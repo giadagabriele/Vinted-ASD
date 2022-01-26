@@ -414,7 +414,7 @@ export class ProfileComponent implements OnInit {
        else 
        this.isEditable=false;
        localStorage.setItem('currentUser', JSON.stringify(this.myUser));
-
+       window.location.reload();
       });
     
   }

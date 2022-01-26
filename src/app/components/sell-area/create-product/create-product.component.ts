@@ -13,41 +13,42 @@ import { ProductService } from '@app/services/product.service';
 })
 export class CreateProductComponent implements OnInit {
  myUser: User;
-  constructor(private formBuilder: FormBuilder, 
-    private productSrv: ProductService,
-    private authenticationService:AuthenticationService) { 
+ categories = ['clothes', 'shoes', 'accessories', 'cook', 'technology', 'books'];
+  constructor(private formBuilder: FormBuilder,
+              private productSrv: ProductService,
+              private authenticationService: AuthenticationService) {
       this.authenticationService.currentUser
       .subscribe((data: User) => {
         this.myUser = data;
       });
     }
-   
+
   productForm = this.formBuilder.group({
-    name: ['',[Validators.required,Validators.minLength(6)]],
+    name: ['', [Validators.required, Validators.minLength(6)]],
     description: [''],
-    size: ['',[Validators.required]],
-    price:['',[Validators.required]],
-    brand:['',[Validators.required]],
-    color:['',[Validators.required]],
-    quantity:['1',[Validators.required]],
-    category:['',[Validators.required]],
-    image:['',[Validators.required]],
+    size: ['', [Validators.required]],
+    price: ['', [Validators.required]],
+    brand: ['', [Validators.required]],
+    color: ['', [Validators.required]],
+    quantity: ['1', [Validators.required]],
+    category: ['', [Validators.required]],
+    image: ['', [Validators.required]],
   });
 
   ngOnInit(): void {
   }
-  
-  submit(){
-    let prod : Product = this.productForm.value;
-    prod.image = '/assets/img/'+prod.image.substring(12,prod.image.length)
+
+  submit() {
+    const prod: Product = this.productForm.value;
+    prod.image = '/assets/img/' + prod.image.substring(12, prod.image.length);
     prod.userId = this.myUser.id;
-    this.productSrv.add(prod).subscribe((response:any) => {
-      if(response){
+    this.productSrv.add(prod).subscribe((response: any) => {
+      if (response) {
       //  this.route.navigate(['/listaprodotticaricati'])
-        console.log("product added correctly")
-        alert('product added correctly :)')
+        console.log('product added correctly');
+        alert('product added correctly :)');
     }
-    })
+    });
   }
 
 }

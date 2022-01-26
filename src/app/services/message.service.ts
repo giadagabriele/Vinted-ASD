@@ -5,11 +5,17 @@ import {Router} from '@angular/router';
 import {environment} from '../../environment';
 import {Observable} from 'rxjs';
 import {ProductModelServer} from '../models/product.model';
-
+export class Report {
+  id: number;
+  user: string;
+  reason: string;
+  repotedBy: string;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
+  [x: string]: any;
 
   private SERVER_URL = environment.SERVER_URL;
 
@@ -39,4 +45,25 @@ export class MessageService {
   clearCache() {
     throw new Error('Method not implemented.');
   }
+
+  getAllReports(): Observable<Report[]> {
+    console.log('getting all the favorites from the server');
+    return this.httpClient.get<Report[]>(this.SERVER_URL + '/report');
+  }
+
+  // tslint:disable-next-line:variable-name
+  getReport(_id: string): Observable<Report> {
+    return this.httpClient.get<Report>(`${this.SERVER_URL}/report/${_id}`);
+}
+
+
+addReport(newReport: Report): Observable<Report> {
+  return this.httpClient.post<Report>(`${this.SERVER_URL}/report`, newReport, {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  });
+}
+
+
 }

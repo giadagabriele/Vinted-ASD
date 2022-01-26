@@ -33,6 +33,7 @@ import { MyproductsComponent } from './components/myproducts/myproducts.componen
 import { InoutComponent} from './components/message/inout/inout.component';
 import { UsersproductsComponent } from './components/usersproducts/usersproducts.component';
 import { SearchProductComponent } from './components/search-product/search-product.component';
+import { PaymenthistoryComponent } from './components/paymenthistory/paymenthistory.component';
 
 const routes: Routes = [
   // Define routes for the landing / home page, create a separate component for the layout of home page
@@ -138,6 +139,10 @@ const routes: Routes = [
       },
       {
         path: 'usersproducts/:id', component: UsersproductsComponent ,
+        canActivate: [ProfileGuard]
+      },
+      {
+        path: 'paymenthistory', component: PaymenthistoryComponent,
         canActivate: [ProfileGuard]
       }
     ]

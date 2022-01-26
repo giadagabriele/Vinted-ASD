@@ -13,7 +13,7 @@
             <small *ngIf="(productForm.get('name')).errors?.required">Name is required</small>
             <small *ngIf="(productForm.get('name')).errors?.minlength">Please enter more than 6 characters</small>
           </small>
-      </div>  
+      </div>
       <div class="col-md-4 mb-2">
         <label for="description">Description</label>
         <input type="text"
@@ -26,7 +26,7 @@
       <div class="col-md-4 mb-2">
         <label for="size">Size</label>
         <input type="input"
-          formControlName="size"  
+          formControlName="size"
           class="form-control"
           id="size"
           name="size"
@@ -79,7 +79,7 @@
      <!--<div class="col-md-4 mb-2">
         <label for="quantity">Quantity</label>
         <input type="number"
-          formControlName="quantity" 
+          formControlName="quantity"
           class="form-control"
           id="quantity"
           name="quantity"
@@ -87,10 +87,21 @@
           <small *ngIf="productForm.get('quantity').invalid && (productForm.get('quantity').dirty ||productForm.get('quantity').touched )">
             <small *ngIf="(productForm.get('quantity')).errors?.required">quantity is required</small>
           </small>
-      </div>--> 
+      </div>-->
       <div class="col-md-4 mb-2">
         <label for="category">Category</label>
-        <label for="category" style="font-size:12px;">(<b>clothes</b> or <b>shoes</b> or <b>accessories</b> or <b>cook</b> or <b>technology</b> or <b>book</b>)</label>
+<!--        <label for="category" style="font-size:12px;">(<b>clothes</b> or <b>shoes</b> or <b>accessories</b> or <b>cook</b> or <b>technology</b> or <b>book</b>)</label>
+-->
+        <select formControlName="category"
+          class="form-control"
+          id="category"
+          name="category"
+          placeholder="Choose Category">
+          <option *ngFor="let category of categories" [ngValue]="category">
+            {{ category}}
+          </option>
+        </select>
+<!--
         <input type="text"
           formControlName="category"
           class="form-control"
@@ -99,7 +110,7 @@
           placeholder="Category">
           <small *ngIf="productForm.get('category').invalid && (productForm.get('category').dirty ||productForm.get('category').touched )">
             <small *ngIf="(productForm.get('category')).errors?.required">category is required</small>
-          </small>
+          </small> -->
       </div>
       <div class="col-md-4 mb-2">
       </div>

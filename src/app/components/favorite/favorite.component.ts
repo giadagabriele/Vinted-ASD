@@ -25,7 +25,7 @@ export class FavoriteComponent implements OnInit {
  displayOrNot = true;
  myUser: User;
   constructor( private favoriteService: FavoriteService, private router: Router,
-    private authenticationService:AuthenticationService) {
+               private authenticationService: AuthenticationService) {
       this.authenticationService.currentUser
       .subscribe((data: User) => {
         this.myUser = data;

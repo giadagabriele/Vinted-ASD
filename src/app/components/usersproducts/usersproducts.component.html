@@ -10,7 +10,7 @@
         <div class="product">
           <div class="product-card">
             <!--<span class="sale">Sale</span>  <span class="sale">{{cat.name}}</span>--> <span
-              class="price">${{cat.price}}</span>
+              class="price">{{cat.price}}€</span>
             <img [src]="cat.image" alt="" class="rounded img-fluid">
 
             <div class="buttons d-flex flex-row"> <button [routerLink]="['/product', cat.id]" class="cta-btn"
