@@ -22,6 +22,9 @@ export class InoutComponent implements OnInit {
   sentMail: {};
   typeMessage: 'Inbox';
   message: any;
+  closeToggle: any;
+  spamLength: number;
+  template = true;
   // tslint:disable-next-line:max-line-length
   constructor(private userService: UserService, private messageService: MessageService, private modalService: NgbModal, private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser
@@ -93,21 +96,47 @@ delete(reciever: number) {
 }
 
 
-  onSave($event, u) {
-    console.log($event, u);
-    if (confirm('Are you sure you want to report as ' + $event)) {
+  onSave(u) {
+    console.log(this.template, u);
+    if (confirm('Are you sure you want to report as ' + this.template)) {
       console.log('Implement delete functionality here');
-      const newReport: any = { user: u, reason: $event, reportedBy: this.user.id };
+      const newReport: any = { user: u, reason: this.template, reportedBy: this.user.id };
       this.messageService.addReport(newReport)
             .subscribe(
                 (data: any) => {
                     console.log('created: ', data);
+                    this.closeToggle.close();
                 },
                 (error: any) => console.log(error),
                 () => console.log('completed')
             );
     }
-    console.log('report canceled as ' + $event);
+    console.log('report canceled as ' + this.template);
+  }
+  toggleMessage(popover) {
+    this.closeToggle = popover;
+    console.log(popover);
+    if (popover.isOpen()) {
+      popover.close();
+    } else {
+      popover.open();
+    }
+  }
+
+  reportNumber(value: any) {
+    this.messageService.getReport(value.toString()).subscribe((data: any) =>  {
+      console.log(data);
+      this.spamLength = data.length;
+        // tslint:disable-next-line:align
+        if (data.length > 0) {
+          console.log(data.length);
+          // this.displayOrNot = false;
+        }
+      },
+      (error: any)   => console.log(error),
+      ()             => console.log('all data gets')
+    );
+
   }
 
 }

@@ -40,13 +40,42 @@
                             <a href="javascript: void(0)" class ="btn primary" (click) ="delete(inbo.id)"> Delete </a>
                             </td>
                             <td>
-                              <select ngModel (ngModelChange)="onSave($event,inbo.senderId)" id="selectid" class="form-control-mb-6">
-                                  <option value="Sale of cultural or regulated assets">Sale of cultural or regulated assets</option>
-                                  <option value="Inappropriate">Inappropriate</option>
-                                  <option value="Bullying or intimidation">Bullying or intimidation</option>
-                                  <option value="Possible scam">Possible scam</option>
-                                  <option value="Prefer not to say">Prefer not to say</option>
-                              </select>
+
+                               <ng-template #popTitle let-report="report">Report the user</ng-template>
+                                <ng-template #popContent let-report="report" style="width: 200px">
+
+                                <form>
+                                  <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="r2" name="Inappropriate"
+                                          [(ngModel)]="template" value="Inappropriate">
+                                    <label class="form-check-label" for="materialChecked">Inappropriate</label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="r3" name="intimidation"
+                                          [(ngModel)]="template" value="Bullying or intimidation">
+                                    <label class="form-check-label" for="materialChecked">Bullying or intimidation</label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="r4" name="scam"
+                                          [(ngModel)]="template" value="Possible scam">
+                                    <label class="form-check-label" for="materialChecked">Possible scam</label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="r5" name="not"
+                                          [(ngModel)]="template" value="Prefer not to say">
+                                    <label class="form-check-label" for="materialChecked">Prefer not to say</label>
+                                  </div>
+                                </form>
+                                <button mdbBtn color="primary" mdbWavesEffect (click)="onSave(inbo.senderId)"> Submit</button>
+
+                                </ng-template>
+                                <div>
+                                  <a href="javascript: void(0)">
+                                    <i class="fa fa-exclamation-circle" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="top"
+                                  triggers="manual" [autoClose] ="false" data-toggle="popover" #p="ngbPopover" (click)="toggleMessage(p)"><span> Report</span> </i>
+                                  </a>
+                                </div>
+
                               </td>
                             </tr>
                         </tbody>
