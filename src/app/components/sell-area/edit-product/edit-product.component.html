@@ -41,7 +41,7 @@
           <label for="price">Price</label>
           <input type="number"
             formControlName="price"
-            step="0.01"
+            step="1.00"
             class="form-control"
             id="price"
             name="price"
@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-4 mb-2">
+        <!--<div class="col-md-4 mb-2">
           <label for="quantity">Quantity</label>
           <input type="number"
             formControlName="quantity" 
@@ -87,22 +87,27 @@
             <small *ngIf="productForm.get('quantity').invalid && (productForm.get('quantity').dirty ||productForm.get('quantity').touched )">
               <small *ngIf="(productForm.get('quantity')).errors?.required">quantity is required</small>
             </small>
-        </div>
+        </div>!-->
         <div class="col-md-4 mb-2">
           <label for="category">Category</label>
-          <input type="text"
-            formControlName="category"
-            class="form-control"
-            id="category"
-            name="category"
-            placeholder="Category">
+            <select formControlName="category"
+          class="form-control"
+          id="category"
+          name="category"
+          placeholder="Choose Category">
+          <option *ngFor="let category of categories" [ngValue]="category">
+            {{ category}}
+          </option>
+        </select>
             <small *ngIf="productForm.get('category').invalid && (productForm.get('category').dirty ||productForm.get('category').touched )">
               <small *ngIf="(productForm.get('category')).errors?.required">category is required</small>
             </small>
         </div>
         <div class="col-md-4 mb-2">
+        </div>
+        <div class="col-md-4 mb-2">
           <label for="photo">Photo</label>
-          <input type="text"
+          <input type="file"
             formControlName="photo"
             class="form-control"
             id="photo"
@@ -115,7 +120,7 @@
           [disabled]="!productForm.valid"
           (click)="submit()"
           type="submit"
-          class="btn btn-primary">Add Product</button>
+          class="btn btn-primary">Edit Product</button>
       </div>
     </form>
   </div>

@@ -1,3 +1,7 @@
+import { ModalComponent } from './../modal/modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CallRequestService } from './../../services/callRequest.service';
+import { CallRequest } from './../../models/callRequest.model';
 import { AuthenticationService } from './../../services/authentication.service';
 import { User } from './../../models/user.model';
 import {Component, NgZone, OnInit} from '@angular/core';
@@ -18,6 +22,9 @@ export class Favorite {
     public image: string
    ) { }
 }
+
+
+
 export class Product {
   constructor(
     public id: number,
@@ -35,7 +42,11 @@ export class Product {
 })
 export class HeaderComponent implements OnInit {
   favorites: Favorite[];
+  notifications: CallRequest[];
+
   favLength = 0;
+  notifiLength = 0;
+
   displayOrNot = true;
   selected: string;
   users: string[] = [];
@@ -56,19 +67,22 @@ export class HeaderComponent implements OnInit {
               public userService: UserService,
               public productService: ProductService,private authenticationService: AuthenticationService,
               private cityService: CityService,
-              private router: Router,private _ngZone: NgZone
+              private router: Router,private _ngZone: NgZone,private callRequestService:CallRequestService,private modalService:NgbModal
   ) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+
   }
   currentUser: User;
 
   ngOnInit(): void {
-    this.favoriteList();
-    this.optProducts();
+   
     // this.cartService.cartTotal$.subscribe(total => this.cartTotal = total);
 
     // this.cartService.cartData$.subscribe(data => this.cartData = data);
 
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.favoriteList();
+    this.notificationList();
+    this.optProducts();
   }
   toggleMessage(popover) {
     if (popover.isOpen()) {
@@ -114,7 +128,68 @@ export class HeaderComponent implements OnInit {
             () => console.log('completed')
         );
 }
+notificationList() {
 
+  this.callRequestService.allNotificationsByUserId(this.currentUser.id).subscribe((data: CallRequest[]) =>  {
+    console.log(data)
+    this.notifications = data;
+     
+        this.notifiLength = this.notifications.length;
+        this.displayOrNot = false;
+     
+    },
+    (error: any)   => console.log(error),
+    ()             => console.log('all data gets')
+  );
+}
+
+deleteNotification(cr:CallRequest) {
+  cr.status=2;
+  console.log(cr)
+  this.callRequestService.save(cr).subscribe(resp=>{
+   const modalRef = this.modalService.open(ModalComponent);
+  if(resp){
+    modalRef.componentInstance.name = "Request denied successfully";
+  }
+  else
+   modalRef.componentInstance.name = "There was a problem, please try again later";
+  
+
+});
+setTimeout(() => 
+{
+  this.notificationList()
+},
+200);
+}
+acceptNotification(cr:CallRequest){
+  cr.status=1;
+  console.log(cr)
+  this.callRequestService.save(cr).subscribe(resp=>{
+   const modalRef = this.modalService.open(ModalComponent);
+  if(resp){
+    modalRef.componentInstance.name = "Request accepted successfully";
+  }
+  else
+   modalRef.componentInstance.name = "There was a problem, please try again later";
+  
+
+});
+window.location.reload();
+
+  
+}
+
+getSingleNotification(id: number): void {
+this.favoriteService.getFavorite(id)
+    .subscribe(
+        (res: Favorite) => {
+            console.log('data', res);
+        },
+        (error: any) => console.log(error),
+        () => console.log('completed')
+    );
+}
 
 logout() {
   this.authenticationService.logout();
