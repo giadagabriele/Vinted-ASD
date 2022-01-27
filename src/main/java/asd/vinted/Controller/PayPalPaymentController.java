@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Column;
+
 @RestController
 @RequestMapping(value = "/")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -23,6 +25,8 @@ public class PayPalPaymentController {
     public static final String SUCCESS_URL = "pay/success";
     public static final String CANCEL_URL = "pay/cancel";
 
+    private  static String productID;
+
     @GetMapping("/")
     public String home() {
         return "home";
@@ -31,6 +35,7 @@ public class PayPalPaymentController {
     @PostMapping("/pay")
     public ResponseEntity<PayPalPaymentResponse> payment(@RequestBody OrderDto _order) {
 
+        productID=null;
         PayPalPaymentResponse response = null;
         String message ="";
         //@RequestBody ProfileDetailsDto profileDetail
@@ -40,6 +45,9 @@ public class PayPalPaymentController {
 
             response=paypalService.paymentCreatResponse(payment);
 
+            response.setProductID(_order.getProductID());
+
+            productID=_order.getProductID();
             return ResponseEntity.ok().body(response);
 
         } catch (PayPalRESTException e) {
@@ -57,15 +65,15 @@ public class PayPalPaymentController {
     }
 
     @GetMapping(value = SUCCESS_URL)
-    public ResponseEntity<PayPalConfirmPaymentResponse> successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+    public ResponseEntity<PayPalConfirmPaymentResponse> successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,@RequestParam("UserID") String userID) {
 
         PayPalConfirmPaymentResponse response=null;
         try {
 
             Payment payment = paypalService.executePayment(paymentId,payerId);
 
-            response=paypalService.paymentConfiramtionResponse(payment,paymentId);
-
+            response=paypalService.paymentConfiramtionResponse(payment,paymentId,productID,userID);
+            productID=null;
             return ResponseEntity.ok().body(response);
 
 

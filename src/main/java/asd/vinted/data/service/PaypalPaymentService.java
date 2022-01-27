@@ -16,5 +16,5 @@ public interface PaypalPaymentService {
     public Payment createPayment(OrderDto _order, String cancelUrl, String successUrl) throws PayPalRESTException;
     public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException;
     public PayPalPaymentResponse paymentCreatResponse( Payment payment);
-    public PayPalConfirmPaymentResponse paymentConfiramtionResponse( Payment payment,String paymentId);
+    public PayPalConfirmPaymentResponse paymentConfiramtionResponse( Payment payment,String paymentId,String productID,String userID);
 }
