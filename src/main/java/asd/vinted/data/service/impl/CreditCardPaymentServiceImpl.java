@@ -39,7 +39,7 @@ public class CreditCardPaymentServiceImpl implements CreditCardPaymentService {
             if (orderCharge.getStatus().equals("succeeded")){
                 response = new CreditCardPaymentResponse();
                 response.setStatus(orderCharge.getStatus());
-                response.setAmount(orderCharge.getAmount()/100);
+                response.setAmount(createPayment.getPrice());
                 response.setPaymentID(orderCharge.getId());
 
                 // Save Order details to DB

@@ -35,7 +35,6 @@ public class PayPalPaymentController {
     @PostMapping("/pay")
     public ResponseEntity<PayPalPaymentResponse> payment(@RequestBody OrderDto _order) {
 
-        productID=null;
         PayPalPaymentResponse response = null;
         String message ="";
         //@RequestBody ProfileDetailsDto profileDetail
@@ -47,7 +46,6 @@ public class PayPalPaymentController {
 
             response.setProductID(_order.getProductID());
 
-            productID=_order.getProductID();
             return ResponseEntity.ok().body(response);
 
         } catch (PayPalRESTException e) {
@@ -65,7 +63,7 @@ public class PayPalPaymentController {
     }
 
     @GetMapping(value = SUCCESS_URL)
-    public ResponseEntity<PayPalConfirmPaymentResponse> successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,@RequestParam("UserID") String userID) {
+    public ResponseEntity<PayPalConfirmPaymentResponse> successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,@RequestParam("UserID") String userID,@RequestParam("ProductID") String productID) {
 
         PayPalConfirmPaymentResponse response=null;
         try {
@@ -73,7 +71,8 @@ public class PayPalPaymentController {
             Payment payment = paypalService.executePayment(paymentId,payerId);
 
             response=paypalService.paymentConfiramtionResponse(payment,paymentId,productID,userID);
-            productID=null;
+
+
             return ResponseEntity.ok().body(response);
 
 
