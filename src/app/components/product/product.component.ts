@@ -36,6 +36,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   [x: string]: any;
   id: number;
   product: any;
+  idForCheckingBuy: any;
   thumbImages: any[] = [];
 
   @ViewChild('quantity') quantityInput;
@@ -51,6 +52,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     private modalService: NgbModal, private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser
       .subscribe((data: User) => {
+        this.idForCheckingBuy = data.id;
         this.myUser = data;
       });
 
