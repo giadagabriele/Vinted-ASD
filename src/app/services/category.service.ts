@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@app/services/authentication.service';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -16,8 +17,8 @@ export class CategoryService {
     private baseUrlUpdateProfile = `${this.SERVER_URL}/user/`;
     private myUser:User;
     constructor(
-        private httpClient: HttpClient,  private router: Router,private userService:UserService) {
-            this.userService.userData$
+        private httpClient: HttpClient,  private router: Router,private userService:UserService,private authenticationService:AuthenticationService ) {
+            this.authenticationService.currentUser
             .subscribe((data: User) => {
               this.myUser = data;
             });

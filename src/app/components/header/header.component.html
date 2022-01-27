@@ -43,10 +43,11 @@
 
         <!-- ACCOUNT -->
         <div style="margin-left: 263px;" class="col-md-3" *ngIf="currentUser">
-          <button class="sell-button" *ngIf="currentUser" routerLink="/create-product">Sell Product</button>
+          <button class="sell-button"  style="    margin-left: 80px; margin-bottom: 10px;" *ngIf="currentUser" routerLink="/create-product">Sell Product</button>
           <div class="header-ctn">
             <!-- Wishlist -->
             <ng-template #popTitle let-favorite="favorite"><a routerLink="/favorite">All Favorite</a></ng-template>
+
             <ng-template #popContent let-favorite="favorite" style="width: 150px">
                     <table class="table" style="width: fit-content;">
                         <tbody>
@@ -71,12 +72,40 @@
               <a href="javascript: void(0)">
                 <i class="fa fa-heart-o" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="bottom"
               triggers="manual" data-toggle="popover" #p1="ngbPopover" (click)="toggleMessage(p1)"></i>
-                <span>Favorites List</span>
                 <div class="qty">{{favLength}}</div>
               </a>
             </div>
             <!-- /Wishlist -->
 
+            <ng-template #popTitleNotifi let-notification="notification"><a routerLink="/notification" (onclick)="notificationList()">Notification</a></ng-template>
+
+            <ng-template #popContentNotifi let-notification="notification" style="width: 150px">
+                    <table class="table" style="width: fit-content;">
+                        <tbody>
+                            <tr *ngFor="let notification of notifications" style ="width:150px">
+                            <td>
+                            <a [routerLink]  ="['/user',notification.userOfRequest.username]"> 
+                                <div id="product-imgs">
+                                        <small>{{notification.userOfRequest.username}} wants to call you</small>
+                                  
+                                </div>
+                            </a>
+                            </td>
+                            <td>
+                              <a  (click)="acceptNotification(notification)"> <i class="fa fa-check"> </i></a>
+                              <a  (click)="deleteNotification(notification)"> <i class="fa fa-ban"> </i></a>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </ng-template>
+            <div>
+              <a href="javascript: void(0)">
+                <i class="fa fa-bell" [ngbPopover]="popContentNotifi" [popoverTitle]="popTitleNotifi" placement="bottom"
+              triggers="manual" data-toggle="popover" #p3="ngbPopover" (click)="toggleMessage(p3)"></i>
+                <div class="qty">{{notifiLength}}</div>
+              </a>
+            </div>
             <!-- Menu Toogle -->
             <div class="menu-toggle">
               <a href="#">
@@ -109,6 +138,7 @@
         <li><a routerLink="/message" >Message</a></li>
         <li><a routerLink="/personalization" >Personalization</a></li>
         <li><a routerLink="/contact" >Contact Us</a></li>
+
       </ul>
       <!-- /NAV -->
     </div>

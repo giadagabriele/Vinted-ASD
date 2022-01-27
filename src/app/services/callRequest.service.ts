@@ -19,14 +19,28 @@ export class CallRequestService {
            
     }
 
-    getAllByUserId(id): Observable<CallRequest[]> {
-        return this.httpClient.get<CallRequest[]>(`${this.SERVER_URL}/call/allRequestsByUserId/`+id)
+    getAllResponsesByUserId(id): Observable<CallRequest[]> {
+        return this.httpClient.get<CallRequest[]>(`${this.SERVER_URL}/call/allResponsesByUserId/`+id)
      }
-     
+
+     getAllRequestsByUserId(id): Observable<CallRequest[]> {
+      return this.httpClient.get<CallRequest[]>(`${this.SERVER_URL}/call/allRequestsByUserId/`+id)
+   }
+      allNotificationsByUserId(id): Observable<CallRequest[]> {
+      return this.httpClient.get<CallRequest[]>(`${this.SERVER_URL}/call/allNotificationsByUserId/`+id)
+   }
      save( callReq:CallRequest): Observable<boolean> {
         return this.httpClient.post<boolean>(`${this.SERVER_URL}/call/save/`,callReq)
      }
 
+     accept(call): Observable<boolean> {
+        console.log(call)
+        return this.httpClient.post<boolean>(`${this.SERVER_URL}/call/accept/`,call)
+     }
+     cancel(id): Observable<boolean> {
+        return this.httpClient.get<boolean>(`${this.SERVER_URL}/call/cancel/`+id)
+     }
+    
  
  
 

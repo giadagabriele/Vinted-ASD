@@ -334,6 +334,9 @@ export class ProfileComponent implements OnInit {
               private router: Router,
               private modalService: NgbModal,
               private fb: FormBuilder,private authenticationService: AuthenticationService) {
+                this.authenticationService.currentUser.subscribe((data: User) => {
+                  this.myUser = data;
+                });
   }
 
   ngOnInit(): void {
@@ -400,7 +403,7 @@ export class ProfileComponent implements OnInit {
 
     if(this.formProfile.invalid)
       return;
-     
+     console.log(this.myUser.profilePic)
     this.myUser.profilePic = '/assets/img/'+this.myUser.profilePic.substring(12,this.myUser.profilePic.length);
       
       this.userService.updateProfile(this.myUser).subscribe(
