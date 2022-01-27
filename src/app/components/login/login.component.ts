@@ -57,6 +57,8 @@ export class LoginComponent implements OnInit {
   signInWithGoogle() {
 
     this.authenticationService.googleLogin();
+     
+   if (this.authenticationService.currentUserValue)
     console.log(this.authenticationService.currentUserValue);
     if (this.authenticationService.currentUserValue) {
         this.router.navigate([this.returnUrl]);
@@ -66,6 +68,11 @@ export class LoginComponent implements OnInit {
     sessionStorage.setItem('id', this.user.id);
     console.log('ciao bro', sessionStorage.getItem('id'));
 
+      this.authenticationService.loginMessage$.subscribe(msg => {
+        this.loginMessage = msg;
+        console.log(msg)
+      });
+     
   }
   get f() { return this.formSignIn.controls; }
 

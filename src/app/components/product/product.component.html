@@ -96,7 +96,7 @@
 
 
 
-                    <ul class="product-btns">
+                    <ul class="product-btns" *ngIf="product.quantity===1">
                         <div *ngIf="isFavorite"><li><a><i class="fa fa-heart"></i> Favorite Added</a></li> </div>
                         <!-- <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li> -->
                          <div *ngIf="!isFavorite"> <li><a href="javascript:void(0)" (click)="onSave(product.id)">
@@ -112,10 +112,13 @@
                     </ul>
 
                     <div class="add-to-cart" style="margin-top: 10px;">
-                        <div>
+                        <div *ngIf="product.quantity===0" style="margin-top: 20px;">
+                            <h2>SOLD</h2>
+                         </div>
+                        <div *ngIf="product.quantity===1">
                             <a href="javascript: void(0)"> <button class="add-to-cart-btn" (click)="openMessageModal()"><i class="fa fa-envelope"></i> Send message</button></a>
                         </div>
-                        <div style="margin-top: 10px;">
+                        <div *ngIf="product.quantity===1" style="margin-top: 10px;">
                             <a [routerLink]="['/purchase', product.id]" > <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Buy</button></a>
                         </div>
                     </div>

@@ -7,6 +7,9 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
+import { BehaviorSubject } from 'rxjs';
+import { AuthenticationService } from '@app/services/authentication.service';
+import { User } from '@app/models/user.model';
 
 @Component({
   selector: 'app-payment-success',
@@ -16,8 +19,11 @@ import htmlToPdfmake from 'html-to-pdfmake';
 export class PaymentSuccessComponent implements OnInit {
 
   @ViewChild('pdfTable') pdfTable: ElementRef;
+  public user:User;
   
-  constructor(private paymentService: PaymentService) { }
+  constructor(private paymentService: PaymentService, private authService:AuthenticationService) { 
+    this.user=authService.currentUserValue;
+  }
 
   request: PayPalConfirmPaymentRequest = new PayPalConfirmPaymentRequest();
   paymentResponse: PayPalConfirmPaymentResponse;
@@ -37,6 +43,8 @@ export class PaymentSuccessComponent implements OnInit {
         }
       }
     }
+    this.request.userID= this.user.id;
+   
     // call to successPayment service
     this.paymentService.confirmPayment(this.request)
       .subscribe((response: PayPalConfirmPaymentResponse)=>{

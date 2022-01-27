@@ -354,6 +354,7 @@ export class ProfileComponent implements OnInit {
         phoneNumber: ['',],
         username: ['', [Validators.required, Validators.minLength(6)]],
         address: ['', [ Validators.minLength(12)]],
+        email : ['', [Validators.required, Validators.email]],
         city: [''],
         profilePic: [''],
     });

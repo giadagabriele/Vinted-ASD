@@ -16,12 +16,19 @@ export class PaypalComponent implements OnInit {
 
   @Input() fromParent;
   @Input() public price;
+  // @Input() public id;
+  // @Input() public user;
+
   constructor(private paypalPaymentService: PaymentService,private formBuilder: FormBuilder,public activeModal: NgbActiveModal) { }
     paymentForm: FormGroup;
     request: GenericPaymentRequest;
 
 ngOnInit() {
  // this.request.price=this.product.product.price;
+
+  //  console.log(this.user.user)
+  //  console.log(this.id.id)
+  //  console.log(this.price.price)
 
   this.paymentForm=new FormGroup({
 
@@ -32,6 +39,8 @@ ngOnInit() {
     'description':new FormControl('I paid for my order',[Validators.required]),
     'cancelURL':new FormControl('http://localhost:4200/payment-cancel',[Validators.required]),
     'successURL':new FormControl('http://localhost:4200/paymentsuccess',[Validators.required]),
+    'productID':new FormControl("2",[Validators.required,Validators.min(0.1)]),
+    
   })
 }
 

@@ -12,7 +12,7 @@
       <div class="form-group">
         <label for="price">price</label>
         <input type="hidden" min="0" class="form-control" id="price" required
-        formControlName="price" value="5" ><span><i class="fas fa-euro-sign"> {{this.price.price}}</i> </span>
+        formControlName="price" value="5" ><span><i class="fas fa-euro-sign"> {{this.price.price}}€</i> </span>
         <small *ngIf="paymentForm.get('price').invalid" class="text-danger">price is required and must not be zero and less</small>
       </div>
   

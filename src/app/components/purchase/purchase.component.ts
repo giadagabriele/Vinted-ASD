@@ -5,6 +5,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaypalComponent } from '../payment/paypal/paypal.component';
 import { GenericPaymentRequest } from '@app/models/payment/paypal/GenericPaymentRequest';
 import { CreditCardPaymentComponent } from '../payment/CreditCard/credit-card-payment/credit-card-payment.component';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '@app/models/user.model';
+import { AuthenticationService } from '@app/services/authentication.service';
 
 @Component({
   selector: 'app-purchase',
@@ -16,12 +19,19 @@ export class PurchaseComponent implements OnInit {
   product: any;
   price: any;
   paymentFormRequest: GenericPaymentRequest;
+
+  private userSubject: BehaviorSubject<User>;
+public user:User;
+
   constructor(
     private productService: ProductService,
     private _Activatedroute: ActivatedRoute,
+    private authService:AuthenticationService,
     private modalService: NgbModal) {
       this._Activatedroute.paramMap.subscribe(params => {
         this.id = params.get('id');
+
+        this.user=authService.currentUserValue;
     });
      }
 
@@ -29,6 +39,7 @@ export class PurchaseComponent implements OnInit {
     console.log(this.id);
     this.productService.getSingleProduct(this.id).subscribe(prod => {
       this.product = prod;
+      
     });
   }
 
@@ -42,6 +53,10 @@ export class PurchaseComponent implements OnInit {
       });
     modalRef.componentInstance.price = {price: this.product.price};
     this.paymentFormRequest.price = this.product.price;
+
+ 
+
+
     modalRef.result.then((result) => {
       console.log(result);
     }, (reason) => {
