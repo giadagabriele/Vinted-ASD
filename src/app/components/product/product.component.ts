@@ -15,6 +15,9 @@ declare let $: any;
 export class Product {
   constructor(
     public id: number,
+    public size: string,
+    public description: string,
+    public price: string,
     public userId: number,
     public name: string,
     public brand: string,

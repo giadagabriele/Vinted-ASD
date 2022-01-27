@@ -42,7 +42,7 @@ export class ProductService {
             })  ;
   }
   update(id: number, request: Product) {
-    return this.httpClient.post(`${this.SERVER_URL}product/update/` + id, request);
+    return this.httpClient.post(`${this.SERVER_URL}/product/update/` + id, request);
   }
 
   add(product: Product) {
