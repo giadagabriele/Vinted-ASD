@@ -14,7 +14,6 @@ public class Favorite {
     private long userId;
     private long productId;
     private String image;
-
     public String getImage() {
         return this.image;
     }
@@ -47,8 +46,17 @@ public class Favorite {
         this.productId = productId;
     }
 
-    // @ManyToOne
-    // @JoinColumn(name="user" , referencedColumnName = "id")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="userId" , referencedColumnName = "id",insertable = false,updatable = false)
+    public User user;
 
     // @ManyToOne
     // @JoinColumn(name="products" , referencedColumnName = "id")
