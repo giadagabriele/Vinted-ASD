@@ -13,5 +13,7 @@ export class PayPalConfirmPaymentResponse{
     state: string;
     payerEmail: string;
     payer_id: string;
+   
+    
   }
   

@@ -10,6 +10,7 @@ import htmlToPdfmake from 'html-to-pdfmake';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { User } from '@app/models/user.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-payment-success',
@@ -21,7 +22,9 @@ export class PaymentSuccessComponent implements OnInit {
   @ViewChild('pdfTable') pdfTable: ElementRef;
   public user:User;
   
-  constructor(private paymentService: PaymentService, private authService:AuthenticationService) { 
+  constructor(private paymentService: PaymentService,
+     private authService:AuthenticationService,
+     private toastr: ToastrService,) { 
     this.user=authService.currentUserValue;
   }
 
@@ -44,20 +47,32 @@ export class PaymentSuccessComponent implements OnInit {
       }
     }
     this.request.userID= this.user.id;
+    this.request.productId=localStorage.getItem('productId');
    
+    console.log(this.request.productId);
+
     // call to successPayment service
     this.paymentService.confirmPayment(this.request)
       .subscribe((response: PayPalConfirmPaymentResponse)=>{
         if (response.status==='approved'){
           this.paymentResponse = response;
+
+          localStorage.removeItem('productId');
+
           console.log(response);
           window.close();
-          // location.replace('http://localhost:4200')
+          location.replace('http://localhost:4200')
+          this.showSuccessAlert(response);
 
         }
     });
 
   }
+
+  async showSuccessAlert(data: any){
+    this.toastr.success('Payment successfully completed ! check your profile for your order history:',"payment with paypal")
+  }
+
 
   public ExportAsPDF() {
     const doc = new jsPDF();

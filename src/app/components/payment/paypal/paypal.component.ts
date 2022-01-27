@@ -15,36 +15,31 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class PaypalComponent implements OnInit {
 
   @Input() fromParent;
-  @Input() public price;
+  @Input() public obj;
   // @Input() public id;
-  // @Input() public user;
-
   constructor(private paypalPaymentService: PaymentService,private formBuilder: FormBuilder,public activeModal: NgbActiveModal) { }
     paymentForm: FormGroup;
     request: GenericPaymentRequest;
 
 ngOnInit() {
- // this.request.price=this.product.product.price;
-
-  //  console.log(this.user.user)
-  //  console.log(this.id.id)
-  //  console.log(this.price.price)
-
   this.paymentForm=new FormGroup({
 
-    'price':new FormControl(this.price.price,[Validators.required,Validators.min(0.1)]),
+    'price':new FormControl(this.obj.price,[Validators.required,Validators.min(0.1)]),
     'intent':new FormControl('Sale',[Validators.required]),
     'currency':new FormControl('EUR',[Validators.required,Validators.minLength(3)]),
     'method':new FormControl('Paypal',[Validators.required]),
     'description':new FormControl('I paid for my order',[Validators.required]),
     'cancelURL':new FormControl('http://localhost:4200/payment-cancel',[Validators.required]),
     'successURL':new FormControl('http://localhost:4200/paymentsuccess',[Validators.required]),
-    'productID':new FormControl("2",[Validators.required,Validators.min(0.1)]),
+    'productID':new FormControl(this.obj.productId,[Validators.required,Validators.min(0.1)]),
     
   })
 }
 
 paymentWithPayPal(){
+
+  localStorage.setItem('productId',this.obj.productId);
+
   this.paypalPaymentService.payWithPayPal(this.paymentForm.value)
     .subscribe((response: PayPalPaymentResponse)=>{
       if (response.status){

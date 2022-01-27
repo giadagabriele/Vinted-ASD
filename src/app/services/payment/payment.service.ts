@@ -22,7 +22,9 @@ export class PaymentService {
   confirmPayment(request: PayPalConfirmPaymentRequest){
     const headers = new HttpHeaders().set('responsType', 'text');
     
-    return this.httpClient.get(this.host+'/pay/success?paymentId='+request.paymentId+'&PayerID='+request.payerId+'&UserID='+request.userID,{headers});
+    return this.httpClient.get(this.host+'/pay/success?paymentId='+
+    request.paymentId+'&PayerID='+request.payerId+'&UserID='+request.userID+'&ProductID='+request.productId,{headers});
+    
   }
 
   creditCardPayment(request: GenericPaymentRequest){

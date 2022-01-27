@@ -39,7 +39,7 @@ public user:User;
     console.log(this.id);
     this.productService.getSingleProduct(this.id).subscribe(prod => {
       this.product = prod;
-      
+
     });
   }
 
@@ -51,8 +51,9 @@ public user:User;
         // keyboard: false,
         // backdrop: 'static'
       });
-    modalRef.componentInstance.price = {price: this.product.price};
-    this.paymentFormRequest.price = this.product.price;
+    modalRef.componentInstance.obj = {price: this.product.price,productId:this.id};
+   
+    //this.paymentFormRequest.price = this.product.price;
 
  
 
@@ -71,7 +72,7 @@ public user:User;
         // keyboard: false,
         // backdrop: 'static'
       });
-    modalRef.componentInstance.price = {price: this.product.price};
+    modalRef.componentInstance.obj = {price: this.product.price,productId:this.id};
     this.paymentFormRequest.price = this.product.price;
     modalRef.result.then((result) => {
       console.log(result);

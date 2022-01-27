@@ -21,7 +21,7 @@ interface Alert {
   styleUrls: ['./credit-card-payment.component.scss']
 })
 export class CreditCardPaymentComponent implements OnInit {
-  @Input() public price;
+  @Input() public obj;
   stripApiKey = environment.StripApi_Key;
 
   amount: number;
@@ -48,14 +48,14 @@ export class CreditCardPaymentComponent implements OnInit {
     this.initStrip();
     this.paymentForm=new FormGroup({
 
-      'price':new FormControl(this.price.price,[Validators.required,Validators.min(0.1)]),
+      'price':new FormControl(this.obj.price,[Validators.required,Validators.min(0.1)]),
       'intent':new FormControl('Sale',[Validators.required]),
       'currency':new FormControl('EUR',[Validators.required,Validators.minLength(3)]),
       'method':new FormControl('Credit Card',[Validators.required]),
       'description':new FormControl('Payment for order',[Validators.required]),
       // 'cancelURL':new FormControl('http://localhost:4200/payment-cancel',[Validators.required]),
       'successURL':new FormControl('http://localhost:4200/paymentsuccess',[Validators.required]),
-      'productID':new FormControl("2",[Validators.required,Validators.min(0.1)]),
+      'productID':new FormControl(this.obj.productId,[Validators.required,Validators.min(0.1)]),
     })
   }
 
@@ -91,7 +91,13 @@ export class CreditCardPaymentComponent implements OnInit {
       this.paymentService.creditCardPayment(this.request)
         .subscribe((response: any) => {
           if (response.status==='succeeded'){
+
             this.showSuccessAlert(response);
+            
+            window.close();
+            location.replace('http://localhost:4200')
+
+           
           }
         });
 
