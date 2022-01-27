@@ -131,24 +131,14 @@ export class RegisterComponent implements OnInit {
   }
   
   signInWithGoogle() {
-    this.authService.authState.subscribe((user)=>{
-      this.usergoogle=user;
-      console.log(this.usergoogle);
-    });
     this.authenticationService.googleLogin();
-    console.log(this.usergoogle);
-    this.userService.registraUser(this.usergoogle).subscribe(
-      response => {
-        console.log(response);
-          const modalRef = this.modalService.open(ModalComponent);
-          modalRef.componentInstance.name = response;
-
-          if (response === "Congratulations, your account has been successfully created.") {
-            this.submitted = false;
-            this.formChangesSubscription.reset;
-
-          }
-      });
+    
+    this.authenticationService.loginMessage$.subscribe(msg => {
+      console.log(msg)
+      if (msg === "Congratulations, your account has been successfully created.")
+      console.log(msg)
+    });
+   
 
   }
  
