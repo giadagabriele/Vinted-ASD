@@ -2,8 +2,16 @@ package asd.vinted.data.payment;
 
 public class CreditCardPaymentResponse {
     private String status;
-    private Long amount;
+    private double amount;
     private String paymentID;
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 
     public String getStatus() {
         return status;
@@ -12,15 +20,6 @@ public class CreditCardPaymentResponse {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public Long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Long amount) {
-        this.amount = amount;
-    }
-
     public String getPaymentID() {
         return paymentID;
     }
