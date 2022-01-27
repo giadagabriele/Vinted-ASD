@@ -52,32 +52,38 @@ public List<ProductDto> getProductByCategory(String category) {
   return product.stream().map(prod->modelMapper.map(prod, ProductDto.class)).collect(Collectors.toList());
 }
 
-@Override
-public ProductDto addProduct(ProductDto dto) {
-  System.out.println();
-  Product product = new Product();
-  product = modelMapper.map(dto, Product.class);
-  System.out.println("prod = "+ dto.getUserId()) ;
-  product.setUser(userDao.findById(dto.getUserId()).orElseThrow(() -> new UserNotFoundException(dto.getUserId())));
-  Product saved = ((CrudRepository<Product, Long>) productDao).save(product);
-  System.out.println(saved+ "Product");
-  return modelMapper.map(saved, ProductDto.class);
+  @Override
+  public ProductDto addProduct(ProductDto dto) {
+    System.out.println();
+    Product product = new Product();
+    product = modelMapper.map(dto, Product.class);
+    System.out.println("prod = "+ dto.getUserId()) ;
+    product.setUser(userDao.findById(dto.getUserId()).orElseThrow(() -> new UserNotFoundException(dto.getUserId())));
+    Product saved = ((CrudRepository<Product, Long>) productDao).save(product);
+    System.out.println(saved+ "Product");
+    return modelMapper.map(saved, ProductDto.class);
 
-}
+  }
 
-@Override
-public Product updateProduct(Long id, ProductDto product) {
-  return productDao.findById(id).map(prod -> {
-    prod.setName(product.getName());
-    prod.setBrand(product.getBrand());
-    return productDao.save(prod);
-  }).orElseThrow(() -> new ExceptionHandler());
-}
+  @Override
+  public Product updateProduct(Long id, ProductDto product) {
+    return productDao.findById(id).map(prod -> {
+      prod.setName(product.getName());
+      prod.setBrand(product.getBrand());
+      prod.setCategory(product.getCategory());
+      prod.setColor(product.getColor());
+      prod.setDescription(product.getDescription());
+      prod.setImage(product.getImage());
+      prod.setSize(product.getSize());
+      prod.setPrice(product.getPrice());
+      return productDao.save(prod);
+    }).orElseThrow(() -> new ExceptionHandler());
+  }
 
-@Override
-public void delete(Long id) {
-  productDao.deleteById(id);
-}
+  @Override
+  public void delete(Long id) {
+    productDao.deleteById(id);
+  }
 
   @Override
   public boolean save(Product product) {
