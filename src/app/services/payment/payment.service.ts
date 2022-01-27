@@ -21,8 +21,8 @@ export class PaymentService {
 
   confirmPayment(request: PayPalConfirmPaymentRequest){
     const headers = new HttpHeaders().set('responsType', 'text');
-    console.log(" I am here in confirmation")
-    return this.httpClient.get(this.host+'/pay/success?paymentId='+request.paymentId+'&PayerID='+request.payerId,{headers});
+    
+    return this.httpClient.get(this.host+'/pay/success?paymentId='+request.paymentId+'&PayerID='+request.payerId+'&UserID='+request.userID,{headers});
   }
 
   creditCardPayment(request: GenericPaymentRequest){

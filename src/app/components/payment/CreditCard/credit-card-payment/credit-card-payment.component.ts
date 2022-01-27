@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GenericPaymentRequest } from '@app/models/payment/paypal/GenericPaymentRequest';
+import { User } from '@app/models/user.model';
+import { AuthenticationService } from '@app/services/authentication.service';
 import { PaymentService } from '@app/services/payment/payment.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -24,23 +26,26 @@ export class CreditCardPaymentComponent implements OnInit {
 
   amount: number;
   paymentHandler: any = null;
+  public user:User;
   request: GenericPaymentRequest =new GenericPaymentRequest();
 
   constructor(private paymentService: PaymentService,
               private formBuilder: FormBuilder,
               public activeModal: NgbActiveModal,
               private toastr: ToastrService,
-              private route: Router) {
+              private route: Router,
+              private authService:AuthenticationService) {
+                this.user=authService.currentUserValue;
                }
+
   paymentForm =  this.formBuilder.group({
     price: ['',[Validators.required,Validators.nullValidator]],
     description: ['', [Validators.required,Validators.nullValidator]]
   });
 
-  ngOnInit() {
-    //StorePage.instance.getTotalCartPrice();
-    this.initStrip();
 
+  ngOnInit() {
+    this.initStrip();
     this.paymentForm=new FormGroup({
 
       'price':new FormControl(this.price.price,[Validators.required,Validators.min(0.1)]),
@@ -50,8 +55,8 @@ export class CreditCardPaymentComponent implements OnInit {
       'description':new FormControl('Payment for order',[Validators.required]),
       // 'cancelURL':new FormControl('http://localhost:4200/payment-cancel',[Validators.required]),
       'successURL':new FormControl('http://localhost:4200/paymentsuccess',[Validators.required]),
+      'productID':new FormControl("2",[Validators.required,Validators.min(0.1)]),
     })
-
   }
 
   private initStrip() {
@@ -79,6 +84,9 @@ export class CreditCardPaymentComponent implements OnInit {
       this.request.price = this.paymentForm.value.price;
       this.request.stripeToken = token.id;
       this.request.stripeEmail = token.email;
+      this.request.productID =this.paymentForm.value.productID;
+      this.request.userID =this.user.id;
+     
 
       this.paymentService.creditCardPayment(this.request)
         .subscribe((response: any) => {
@@ -100,19 +108,6 @@ export class CreditCardPaymentComponent implements OnInit {
   }
 
   async showSuccessAlert(data: any){
-    // const alerts = await this.alert.create({
-    //   header: 'Card Payment',
-    //   message: 'Payment successfully completed. Details of the transaction: \nAmount: '+data.amount+'\nPayment ID: '+data.paymentID,
-    //   buttons: [
-    //     {
-    //       text: 'Okay',
-    //       handler: ()=>{
-    //         location.replace('http://localhost:4200/purchase');
-    //       }
-    //     }
-    //   ]
-    // });
-    // await alerts.present();
     this.toastr.success('Payment successfully completed. Details of the transaction: \nAmount: '+data.amount+'\nPayment ID: '+data.paymentID, "Card Payment")
   }
 

@@ -85,4 +85,8 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
         this.authService.signOut();
     }
+
+    public get loggedInUser(): User {
+      return this.currentUserSubject.value;
+    }
 }

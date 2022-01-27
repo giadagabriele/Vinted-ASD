@@ -8,5 +8,8 @@ export class GenericPaymentRequest{
     cancelURL: string;
     stripeToken: string;
     stripeEmail: string;
+    productID: string;   
+    userID:number;
+    
   }
   
