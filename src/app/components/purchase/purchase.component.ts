@@ -21,7 +21,7 @@ export class PurchaseComponent implements OnInit {
   paymentFormRequest: GenericPaymentRequest;
 
   private userSubject: BehaviorSubject<User>;
-public user:User;
+public user: User;
 
   constructor(
     private productService: ProductService,
@@ -52,10 +52,10 @@ public user:User;
         // backdrop: 'static'
       });
     modalRef.componentInstance.obj = {price: this.product.price,productId:this.id};
-   
+
     //this.paymentFormRequest.price = this.product.price;
 
- 
+
 
 
     modalRef.result.then((result) => {
