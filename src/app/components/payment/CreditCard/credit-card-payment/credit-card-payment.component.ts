@@ -121,7 +121,7 @@ export class CreditCardPaymentComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   addPaymentHistory(data: any) {
     // tslint:disable-next-line:max-line-length
-    const paymentHistory: any = { product: data.productID, user: data.userID, price: data.price, description: data.description, paymentMethod: 'Credit Card'};
+    const paymentHistory: any = { product: this.request.productID, user: this.user.id, price: this.request.price, description: this.request.description, paymentMethod: 'Credit Card'};
     this.paymenthistoryService.add(paymentHistory)
           .subscribe(
             // tslint:disable-next-line:no-shadowed-variable
