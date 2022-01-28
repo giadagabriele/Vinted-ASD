@@ -20,10 +20,10 @@ export class EditProductComponent implements OnInit {
   productForm = this.formBuilder.group({
     name: ['',[Validators.required,Validators.minLength(6)]],
     description: [''],
-    size: ['',[Validators.required]],
+    size: [''],
     price:['',[Validators.required]],
     brand:['',[Validators.required]],
-    color:['',[Validators.required]],
+    color:[''],
     quantity:['1',[Validators.required]],
     category:['',[Validators.required]],
     photo:[''],
