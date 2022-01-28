@@ -1,3 +1,4 @@
+import { PaymenthistoryService } from './../../../../services/paymenthistory.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,7 +9,6 @@ import { PaymentService } from '@app/services/payment/payment.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environment';
-
 
 interface Alert {
   type: string;
@@ -34,6 +34,7 @@ export class CreditCardPaymentComponent implements OnInit {
               public activeModal: NgbActiveModal,
               private toastr: ToastrService,
               private route: Router,
+              private paymenthistoryService: PaymenthistoryService,
               private authService:AuthenticationService) {
                 this.user=authService.currentUserValue;
                }
@@ -78,6 +79,7 @@ export class CreditCardPaymentComponent implements OnInit {
         checkoutPayment(token);
       }
     });
+
     const checkoutPayment=(token: any)=>{
       console.log('request for checkout');
       this.request.description = this.paymentForm.value.description;
@@ -86,18 +88,17 @@ export class CreditCardPaymentComponent implements OnInit {
       this.request.stripeEmail = token.email;
       this.request.productID =this.paymentForm.value.productID;
       this.request.userID =this.user.id;
-     
+
 
       this.paymentService.creditCardPayment(this.request)
         .subscribe((response: any) => {
-          if (response.status==='succeeded'){
-
+          // this.addPaymentHistory(this.request);
+          // this.showSuccessAlert(response);
+          if (response.status === 'succeeded') {
+            this.addPaymentHistory(this.request);
             this.showSuccessAlert(response);
-            
             window.close();
             location.replace('http://localhost:4200')
-
-           
           }
         });
 
@@ -114,7 +115,24 @@ export class CreditCardPaymentComponent implements OnInit {
   }
 
   async showSuccessAlert(data: any){
+    // tslint:disable-next-line:max-line-length
     this.toastr.success('Payment successfully completed. Details of the transaction: \nAmount: '+data.amount+'\nPayment ID: '+data.paymentID, "Card Payment")
   }
+  // tslint:disable-next-line:variable-name
+  addPaymentHistory(data: any) {
+    // tslint:disable-next-line:max-line-length
+    const paymentHistory: any = { product: data.productID, user: data.userID, price: data.price, description: data.description, paymentMethod: 'Credit Card'};
+    this.paymenthistoryService.add(paymentHistory)
+          .subscribe(
+            // tslint:disable-next-line:no-shadowed-variable
+            (data: any) => {
+              console.log('payment history added', data);
+              window.location.reload();
+            },
+            (error: any) => console.log(error),
+            () => this.ngOnInit()
+          );
+  }
+
 
 }

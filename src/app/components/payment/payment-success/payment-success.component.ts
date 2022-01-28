@@ -76,7 +76,7 @@ addPaymentHistory() {
   this.paymenthistoryService.add(paymentHistory)
         .subscribe(
           (data: any) => {
-            console.log('payment history added', data);
+            console.log('payment history added', data)
             window.location.reload();
           },
           (error: any) => console.log(error),
