@@ -1,6 +1,10 @@
 package asd.vinted.data.dto;
 import java.io.Serializable;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 
 public class PaymentHistoryDto implements Serializable {
@@ -10,7 +14,8 @@ public class PaymentHistoryDto implements Serializable {
     private String description;
     private String product;
     private Double price;
-    private Date paidTime;
+    @CreationTimestamp
+    private Timestamp paidTime;
 
     public long getId() {
         return this.id;
@@ -60,11 +65,11 @@ public class PaymentHistoryDto implements Serializable {
         this.price = price;
     }
 
-    public Date getPaidTime() {
+    public Timestamp getPaidTime() {
         return this.paidTime;
     }
 
-    public void setPaidTime(Date paidTime) {
+    public void setPaidTime(Timestamp paidTime) {
         this.paidTime = paidTime;
     }
 

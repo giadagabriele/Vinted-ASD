@@ -46,17 +46,17 @@ public class Favorite {
         this.productId = productId;
     }
 
-    public User getUser() {
-        return user;
-    }
+    // public User getUser() {
+    //     return user;
+    // }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    // public void setUser(User user) {
+    //     this.user = user;
+    // }
 
-    @ManyToOne
-    @JoinColumn(name="userId" , referencedColumnName = "id",insertable = false,updatable = false)
-    public User user;
+    // @ManyToOne
+    // @JoinColumn(name="userId" , referencedColumnName = "id",insertable = false,updatable = false)
+    // public User user;
 
     // @ManyToOne
     // @JoinColumn(name="products" , referencedColumnName = "id")
@@ -74,7 +74,7 @@ public class Favorite {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.productId, this.userId);
+        return Objects.hash(this.id, this.productId);
     }
 
 }

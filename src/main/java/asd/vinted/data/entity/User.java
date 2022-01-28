@@ -65,11 +65,11 @@ public class User {
     @JoinColumn(name = "userInformationId", referencedColumnName = "id")
     private UserInformation userInformation;
 
-    @OneToMany(mappedBy = "user")
-    private List<Favorite>favorites;
+    // @OneToMany(mappedBy = "user")
+    // private List<Favorite>favorites;
 
-    @OneToMany(mappedBy = "user")
-    private List<Message>messages;
+    // @OneToMany(mappedBy = "user")
+    // private List<Message>messages;
 
     public long getId() {
         return this.id;
@@ -195,21 +195,21 @@ public class User {
         this.userInformation = userInformation;
     }
 
-    public List<Favorite> getFavorites() {
-        return favorites;
-    }
+    // public List<Favorite> getFavorites() {
+    //     return favorites;
+    // }
 
-    public void setFavorites(List<Favorite> favorites) {
-        this.favorites = favorites;
-    }
+    // public void setFavorites(List<Favorite> favorites) {
+    //     this.favorites = favorites;
+    // }
 
-    public List<Message> getMessages() {
-        return messages;
-    }
+    // public List<Message> getMessages() {
+    //     return messages;
+    // }
 
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
+    // public void setMessages(List<Message> messages) {
+    //     this.messages = messages;
+    // }
 
     @Override
     public String toString() {

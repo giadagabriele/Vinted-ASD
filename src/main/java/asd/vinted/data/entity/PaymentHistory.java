@@ -3,9 +3,12 @@ package asd.vinted.data.entity;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.util.List;
 import java.util.Objects;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="payment_history")
@@ -18,7 +21,8 @@ public class PaymentHistory {
     private String description;
     private String product;
     private Double price;
-    private Date paidTime;
+    @CreationTimestamp
+    private Timestamp paidTime;
 
     public long getId() {
         return this.id;
@@ -68,11 +72,11 @@ public class PaymentHistory {
         this.price = price;
     }
 
-    public Date getPaidTime() {
+    public Timestamp getPaidTime() {
         return this.paidTime;
     }
 
-    public void setPaidTime(Date paidTime) {
+    public void setPaidTime(Timestamp paidTime) {
         this.paidTime = paidTime;
     }
 
