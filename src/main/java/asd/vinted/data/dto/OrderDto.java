@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
+import java.util.concurrent.atomic.LongAdder;
 
 public class OrderDto {
     private Long id;
@@ -30,13 +31,13 @@ public class OrderDto {
     private String  payerEmail;
     private String  payer_id;
     private String  productID;
-    private String  userID;
+    private long  userID;
 
-    public String getUserID() {
+    public long getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
     }
 
@@ -206,5 +207,8 @@ public class OrderDto {
 
     public void setPayer_id(String payer_id) {
         this.payer_id = payer_id;
+    }
+
+    public static void delete(Long id2) {
     }
 }

@@ -2,12 +2,12 @@ package asd.vinted.data.service;
 
 import java.util.List;
 
-import asd.vinted.data.dto.PaymentHistoryDto;
+import asd.vinted.data.dto.OrderDto;
 
 public interface PaymentHistoryService {
-    List<PaymentHistoryDto> getPaymentHistoryByUser(long user);
-    List<PaymentHistoryDto> getPaymentHistoryByProduct(String product);
-    List<PaymentHistoryDto> getPaymentHistory();
-    PaymentHistoryDto addPaymentHistory(PaymentHistoryDto paymentHistory);
+    List<OrderDto> getPaymentHistoryByUser(long user);
+    List<OrderDto> getPaymentHistoryByProduct(String product);
+    // List<OrderDto> getPaymentHistory();
+    // OrderDto addPaymentHistory(OrderDto paymentHistory);
     void delete(Long id);
  }

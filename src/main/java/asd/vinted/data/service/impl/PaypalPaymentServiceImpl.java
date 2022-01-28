@@ -87,7 +87,7 @@ public class PaypalPaymentServiceImpl implements PaypalPaymentService {
     }
 
     @Override
-    public PayPalConfirmPaymentResponse paymentConfiramtionResponse(Payment payment,String paymentId,String productID,String userID) {
+    public PayPalConfirmPaymentResponse paymentConfiramtionResponse(Payment payment,String paymentId,String productID,long userID) {
 
         double[] amount = {0.0};
         String[] currency={""};

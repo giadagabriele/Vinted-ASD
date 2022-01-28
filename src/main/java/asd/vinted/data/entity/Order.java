@@ -56,7 +56,7 @@ public class Order {
     @Column
     private String  productID;
     @Column
-    private String  userID;
+    private long  userID;
 
     public String getProductID() {
         return productID;
@@ -66,11 +66,11 @@ public class Order {
         this.productID = productID;
     }
 
-    public String getUserID() {
+    public long getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
     }
 

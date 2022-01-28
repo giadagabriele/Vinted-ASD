@@ -7,9 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import asd.vinted.data.dao.PaymentHistoryDao;
-import asd.vinted.data.dto.PaymentHistoryDto;
-import asd.vinted.data.entity.PaymentHistory;
+import asd.vinted.data.dao.orderDao;
+import asd.vinted.data.dto.OrderDto;
+import asd.vinted.data.entity.Order;
 import asd.vinted.data.entity.PaymentHistory;
 import asd.vinted.data.service.PaymentHistoryService;
 
@@ -18,35 +18,37 @@ import asd.vinted.data.service.PaymentHistoryService;
 public class PaymentHistoryServiceImpl implements PaymentHistoryService{
 
     @Autowired
-    private PaymentHistoryDao paymentHistoryDao;
+    private orderDao _orderDao;
+
     @Autowired
     private ModelMapper modelMapper;
 
-    @Override
-    public List<PaymentHistoryDto> getPaymentHistory() {
-         List<PaymentHistory> PaymentHistory= paymentHistoryDao.findAll();
-        return PaymentHistory.stream().map(mess->modelMapper.map(mess, PaymentHistoryDto.class)).collect(Collectors.toList());
-    }
+    // @Override
+    // public List<OrderDto> getPaymentHistory() {
+    //      List<Order> order= _orderDao.findAll();
+    //     return Order.stream().map(mess->modelMapper.map(mess, orderDao.class)).collect(Collectors.toList());
+    // }
 
     @Override
-    public List<PaymentHistoryDto> getPaymentHistoryByProduct(String product) {
-      List<PaymentHistory> paymentHistory = paymentHistoryDao.findByProduct(product);
-      return paymentHistory.stream().map(prod->modelMapper.map(prod, PaymentHistoryDto.class)).collect(Collectors.toList());
+    public List<OrderDto> getPaymentHistoryByProduct(String product) {
+      List<Order> order = _orderDao.findByproductID(product);
+      return order.stream().map(prod->modelMapper.map(prod, OrderDto.class)).collect(Collectors.toList());
     }
     @Override
-    public List<PaymentHistoryDto> getPaymentHistoryByUser(long user) {
-      List<PaymentHistory> paymentHistory = paymentHistoryDao.findByUser(user);
-      return paymentHistory.stream().map(prod->modelMapper.map(prod, PaymentHistoryDto.class)).collect(Collectors.toList());
+    public List<OrderDto> getPaymentHistoryByUser(long user) {
+      List<Order> order = _orderDao.findByUserID(user);
+      return order.stream().map(prod->modelMapper.map(prod, OrderDto.class)).collect(Collectors.toList());
     }
-    @Override
-    public PaymentHistoryDto addPaymentHistory(PaymentHistoryDto dto) {
-        PaymentHistory favorite = modelMapper.map(dto, PaymentHistory.class);
-        PaymentHistory saved = paymentHistoryDao.save(favorite);
-      return modelMapper.map(saved, PaymentHistoryDto.class);
-    }
+    // @Override
+    // public OrderDto addPaymentHistory(OrderDto dto) {
+    //     Order order = modelMapper.map(dto, Order.class);
+    //     Order saved = _orderDao.save(order);
+    //   return modelMapper.map(saved, OrderDto.class);
+    // }
+
     @Override
     public void delete(Long id) {
-      paymentHistoryDao.deleteById(id);
+        OrderDto.delete(id);
     }
 
 }

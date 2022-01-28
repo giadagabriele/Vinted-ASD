@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import asd.vinted.data.dto.PaymentHistoryDto;
+import asd.vinted.data.dto.OrderDto;
 import asd.vinted.data.service.PaymentHistoryService;
 import java.util.List;
 
@@ -25,28 +25,28 @@ public class PaymentHistoryController {
   @Autowired
   private PaymentHistoryService paymentHistoryService;
 
-  @GetMapping("paymenthistory")
-  public ResponseEntity<List<PaymentHistoryDto>> all() {
-    return ResponseEntity.ok(paymentHistoryService.getPaymentHistory());
-  }
+//   @GetMapping("paymenthistory")
+//   public ResponseEntity<List<OrderDto>> all() {
+//     return ResponseEntity.ok(paymentHistoryService.getPaymentHistory());
+//   }
 
   @GetMapping("paymenthistory/{product}")
-  public ResponseEntity<List<PaymentHistoryDto>> all(@PathVariable("product") String product) {
-    List<PaymentHistoryDto> paymentHistory=paymentHistoryService.getPaymentHistoryByProduct(product);
+  public ResponseEntity<List<OrderDto>> all(@PathVariable("product") String product) {
+    List<OrderDto> paymentHistory=paymentHistoryService.getPaymentHistoryByProduct(product);
     return ResponseEntity.ok(paymentHistory);
   }
 
   @GetMapping("paymenthistory/user/{user}")
-  public ResponseEntity<List<PaymentHistoryDto>> all(@PathVariable("user") long user) {
-    List<PaymentHistoryDto> paymentHistory=paymentHistoryService.getPaymentHistoryByUser(user);
+  public ResponseEntity<List<OrderDto>> all(@PathVariable("user") long user) {
+    List<OrderDto> paymentHistory=paymentHistoryService.getPaymentHistoryByUser(user);
     return ResponseEntity.ok(paymentHistory);
   }
 
-  @PostMapping("paymenthistory")
-  public ResponseEntity<PaymentHistoryDto> add(@RequestBody PaymentHistoryDto history) {
-    PaymentHistoryDto p = paymentHistoryService.addPaymentHistory(history);
-    return ResponseEntity.ok(p);
-  }
+//   @PostMapping("paymenthistory")
+//   public ResponseEntity<OrderDto> add(@RequestBody PaymentHistoryDto history) {
+//     PaymentHistoryDto p = paymentHistoryService.addPaymentHistory(history);
+//     return ResponseEntity.ok(p);
+//   }
 
   @DeleteMapping("paymenthistory/{id}")
   public HttpStatus delete(@PathVariable Long id) {
