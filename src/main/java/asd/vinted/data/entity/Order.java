@@ -1,10 +1,13 @@
 package asd.vinted.data.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+
 import java.util.Objects;
 
 @Entity
@@ -36,8 +39,7 @@ public class Order {
     @Column
     private String  paymentID;
     @Column
-    @CreationTimestamp
-    private Timestamp PaymentDate;
+    private Date PaymentDate;
     @Column
     private String  payeeName;
     @Column
@@ -62,34 +64,6 @@ public class Order {
     private String  productID;
     @Column
     private long  userID;
-
-    public String getProductID() {
-        return productID;
-    }
-
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
-
-    public long getUserID() {
-        return userID;
-    }
-
-    public void setUserID(long userID) {
-        this.userID = userID;
-    }
-
-    public Order() {
-    }
-
-    public Order(Long id, double price, String currency, String method, String description, String intent) {
-        this.id = id;
-        this.price = price;
-        this.currency = currency;
-        this.method = method;
-        this.description = description;
-        this.intent = intent;
-    }
 
     public Long getId() {
         return id;
@@ -163,11 +137,11 @@ public class Order {
         this.paymentID = paymentID;
     }
 
-    public Timestamp getPaymentDate() {
+    public Date getPaymentDate() {
         return PaymentDate;
     }
 
-    public void setPaymentDate(Timestamp paymentDate) {
+    public void setPaymentDate(Date paymentDate) {
         PaymentDate = paymentDate;
     }
 
@@ -249,5 +223,49 @@ public class Order {
 
     public void setPayer_id(String payer_id) {
         this.payer_id = payer_id;
+    }
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
+    public long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", price=" + price +
+                ", currency='" + currency + '\'' +
+                ", method='" + method + '\'' +
+                ", description='" + description + '\'' +
+                ", intent='" + intent + '\'' +
+                ", stripeToken='" + stripeToken + '\'' +
+                ", stripeEmail='" + stripeEmail + '\'' +
+                ", paymentID='" + paymentID + '\'' +
+                ", PaymentDate=" + PaymentDate +
+                ", payeeName='" + payeeName + '\'' +
+                ", paymentMode='" + paymentMode + '\'' +
+                ", payerName='" + payerName + '\'' +
+                ", addressLine1='" + addressLine1 + '\'' +
+                ", city='" + city + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", state='" + state + '\'' +
+                ", payerEmail='" + payerEmail + '\'' +
+                ", payer_id='" + payer_id + '\'' +
+                ", productID='" + productID + '\'' +
+                ", userID=" + userID +
+                '}';
     }
 }

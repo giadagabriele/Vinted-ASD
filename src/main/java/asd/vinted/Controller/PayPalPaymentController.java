@@ -63,7 +63,7 @@ public class PayPalPaymentController {
     }
 
     @GetMapping(value = SUCCESS_URL)
-    public ResponseEntity<PayPalConfirmPaymentResponse> successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,@RequestParam("UserID") String userID,@RequestParam("ProductID") String productID) {
+    public ResponseEntity<PayPalConfirmPaymentResponse> successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,@RequestParam("UserID") long userID,@RequestParam("ProductID") String productID) {
 
         PayPalConfirmPaymentResponse response=null;
         try {

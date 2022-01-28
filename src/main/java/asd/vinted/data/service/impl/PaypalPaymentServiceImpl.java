@@ -15,7 +15,12 @@ import com.paypal.base.rest.PayPalRESTException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -135,11 +140,10 @@ public class PaypalPaymentServiceImpl implements PaypalPaymentService {
                 orderDto.setPaymentID(response.getPaymentID());
                 orderDto.setPayer_id( response.getPayer_id());
                 orderDto.setPayeeName(response.getPayerName());
-                orderDto.setPaymentDate(response.getPaymentDate());
+                orderDto.setPaymentDate((Timestamp) new Date());
                 orderDto.setPayerEmail(response.getPayerEmail());
                 orderDto.setProductID(productID);
                 orderDto.setUserID(userID);
-
                 orderService.saveOrderDetails(orderDto);
 
                 return response;
