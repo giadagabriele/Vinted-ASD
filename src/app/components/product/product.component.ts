@@ -84,8 +84,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
         } else {
           this.paymenthistoryService.getPaymenthistoryByProduct(this.id.toString()).subscribe(data => {
             if (data.length>0){
-              this.flad = true;
+              this.flag = true;
             }
+            console.log(data);
             //console.log('i get the proudct is sold', prod.length);
           });
         }

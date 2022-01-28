@@ -43,7 +43,7 @@ paymentWithPayPal(){
   this.paypalPaymentService.payWithPayPal(this.paymentForm.value)
     .subscribe((response: PayPalPaymentResponse)=>{
       if (response.status){
-        location.replace(response.url);
+        window.location.replace(response.url);
       }
     });
 }
