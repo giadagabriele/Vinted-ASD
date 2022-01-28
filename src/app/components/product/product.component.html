@@ -113,7 +113,7 @@
                     </ul>
 
                     <div class="add-to-cart" style="margin-top: 10px;">
-                        <div *ngIf="product.quantity===0" style="margin-top: 20px;">
+                        <div *ngIf="flag" style="margin-top: 20px;">
                             <h2>SOLD</h2>
                          </div>
                         <div *ngIf="product.quantity===1 && !(product.userId===idForCheckingBuy)">
@@ -125,7 +125,7 @@
                     </div>
 
 
-                            
+
 
                     <!-- <ul class="product-links">
                         <li>Share:</li>

@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 import { User } from './../../models/user.model';
 import { FavoriteService } from '@app/services/favorite.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PaymenthistoryService } from '@app/services/paymenthistory.service';
 
 declare let $: any;
 export class Product {
@@ -38,7 +39,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   product: any;
   idForCheckingBuy: any;
   thumbImages: any[] = [];
-
+  flag=false;
   @ViewChild('quantity') quantityInput;
   countFavorite = 0;
   headerComponent: HeaderComponent;
@@ -46,10 +47,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
   user: User;
   header: {};
   constructor(private productService: ProductService,
-    private cartService: CartService,
-    public favoriteService: FavoriteService,
-    private route: ActivatedRoute,
-    private modalService: NgbModal, private authenticationService: AuthenticationService) {
+              private cartService: CartService,
+              public favoriteService: FavoriteService,
+              private route: ActivatedRoute,
+              private modalService: NgbModal,
+              private authenticationService: AuthenticationService,
+              private paymenthistoryService: PaymenthistoryService) {
     this.authenticationService.currentUser
       .subscribe((data: User) => {
         this.idForCheckingBuy = data.id;
@@ -79,19 +82,24 @@ export class ProductComponent implements OnInit, AfterViewInit {
             };
           });
         } else {
-          this.productService.getSingleProduct(this.id).subscribe(prod => {
-            this.product = prod;
-            this.favoriteList(this.id);
-            if (prod.images !== null) {
-              // this.thumbImages = prod.images.split(';');
+          this.paymenthistoryService.getPaymenthistoryByProduct(this.id.toString()).subscribe(data => {
+            if (data.length>0){
+              this.flad = true;
             }
-
+            //console.log('i get the proudct is sold', prod.length);
           });
         }
       });
 
 
+    this.productService.getSingleProduct(this.id).subscribe(prod => {
+        this.product = prod;
+        this.favoriteList(this.id);
+        if (prod.images !== null) {
+          // this.thumbImages = prod.images.split(';');
+        }
 
+      });
 
 
 
