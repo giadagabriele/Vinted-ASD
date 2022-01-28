@@ -87,7 +87,7 @@ public class PaypalPaymentServiceImpl implements PaypalPaymentService {
     }
 
     @Override
-    public PayPalConfirmPaymentResponse paymentConfiramtionResponse(Payment payment,String paymentId) {
+    public PayPalConfirmPaymentResponse paymentConfiramtionResponse(Payment payment,String paymentId,String productID,String userID) {
 
         double[] amount = {0.0};
         String[] currency={""};
@@ -137,6 +137,8 @@ public class PaypalPaymentServiceImpl implements PaypalPaymentService {
                 orderDto.setPayeeName(response.getPayerName());
                 orderDto.setPaymentDate(response.getPaymentDate());
                 orderDto.setPayerEmail(response.getPayerEmail());
+                orderDto.setProductID(productID);
+                orderDto.setUserID(userID);
 
                 orderService.saveOrderDetails(orderDto);
 

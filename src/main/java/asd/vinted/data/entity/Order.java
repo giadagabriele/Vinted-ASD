@@ -53,7 +53,26 @@ public class Order {
     private String  payerEmail;
     @Column
     private String  payer_id;
+    @Column
+    private String  productID;
+    @Column
+    private String  userID;
 
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
     public Order() {
     }

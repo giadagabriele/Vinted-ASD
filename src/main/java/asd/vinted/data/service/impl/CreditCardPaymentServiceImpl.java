@@ -39,7 +39,7 @@ public class CreditCardPaymentServiceImpl implements CreditCardPaymentService {
             if (orderCharge.getStatus().equals("succeeded")){
                 response = new CreditCardPaymentResponse();
                 response.setStatus(orderCharge.getStatus());
-                response.setAmount(orderCharge.getAmount()/100);
+                response.setAmount(createPayment.getPrice());
                 response.setPaymentID(orderCharge.getId());
 
                 // Save Order details to DB
@@ -50,6 +50,10 @@ public class CreditCardPaymentServiceImpl implements CreditCardPaymentService {
                 orderDto.setCurrency(orderCharge.getCurrency());
                 orderDto.setDescription(orderCharge.getDescription());
                 orderDto.setIntent(orderCharge.getPaymentIntent());
+
+                orderDto.setUserID(createPayment.getUserID());
+                orderDto.setProductID(createPayment.getProductID());
+
                // orderDto.setPaymentID(orderCharge.get);
 //                orderDto.setPayer_id( response.getPayer_id());
                   orderDto.setPayeeName(orderCharge.getReceiptEmail());
@@ -57,7 +61,6 @@ public class CreditCardPaymentServiceImpl implements CreditCardPaymentService {
                orderDto.setPayerEmail(orderCharge.getBillingDetails().getName());
 //
                 orderService.saveOrderDetails(orderDto);
-
 
                 return response;
             }

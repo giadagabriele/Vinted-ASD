@@ -22,6 +22,10 @@ public class Message {
     @CreationTimestamp
     private Timestamp sentDate;
 
+    @ManyToOne
+    @JoinColumn(name="userId" , referencedColumnName = "id",insertable = false,updatable = false)
+    public User user;
+
     public String getSenderId() {
         return this.senderId;
     }
@@ -70,7 +74,15 @@ public class Message {
         this.sentDate = sentDate;
     }
 
-  @Override
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
   public boolean equals(Object o) {
     if (this == o)
       return true;

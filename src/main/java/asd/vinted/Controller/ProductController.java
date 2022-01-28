@@ -78,17 +78,25 @@ public class ProductController {
     return ResponseEntity.ok(p);
   }
 
+
   // @PutMapping("/product/{id}")
   // public ResponseEntity<ProductDto> update(@PathVariable Long id,
   //     @RequestBody ProductDto product) {
   //   ProductDto p = productService.updateProduct(id, product);
   //   return ResponseEntity.ok(p);
   // }
-  @PutMapping("product/update/{id}")
-  public ResponseEntity<Product> update(@PathVariable Long id,
-      @RequestBody ProductDto product) {
+
+  @PostMapping("product/update/{id}")
+  public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody ProductDto product) {
     Product p = productService.updateProduct(id, product);
     return ResponseEntity.ok(p);
+  }
+
+  @PostMapping(value = "/saveId/{id}")
+  @CrossOrigin(origins ="http://localhost:4200")
+  public ResponseEntity<Boolean> saveProduct(@RequestBody Product product,@PathVariable Long id){
+    System.out.println(id);
+    return ResponseEntity.ok(productService.save(product));
   }
 
 

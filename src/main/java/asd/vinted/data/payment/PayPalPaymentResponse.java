@@ -4,6 +4,15 @@ public class PayPalPaymentResponse {
 
     private boolean status;
     private String url;
+    private String productID;
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
 
     public boolean isStatus() {
         return status;

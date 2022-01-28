@@ -29,7 +29,24 @@ public class OrderDto {
     private String  state;
     private String  payerEmail;
     private String  payer_id;
+    private String  productID;
+    private String  userID;
 
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
 
     public String getCancelURL() {
         return cancelURL;
