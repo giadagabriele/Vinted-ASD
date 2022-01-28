@@ -1,3 +1,5 @@
+import { CallsComponent } from './components/calls/calls.component';
+import { CallRequest } from './models/callRequest.model';
 import { SearchUsersComponent } from './components/search-users/search-users.component';
 import { UserComponent } from './components/user/user.component';
 import { PersonalizationGuard } from './guard/Personalization.guard';
@@ -51,15 +53,15 @@ const routes: Routes = [
       },
       {
         path: 'cart', component: CartComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        , canActivate: [ProfileGuard]
       },
       {
         path: 'checkout', component: CheckoutComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        , canActivate: [ProfileGuard]
       },
       {
         path: 'thankyou', component: ThankyouComponent
-        , canActivate: [ProfileGuard, PersonalizationGuard]
+        , canActivate: [ProfileGuard]
       },
       {
         path: 'login', component: LoginComponent
@@ -123,6 +125,10 @@ const routes: Routes = [
       },
       {
         path: 'message', component: InoutComponent,
+        canActivate: [ProfileGuard]
+      },
+      {
+        path: 'calls', component: CallsComponent,
         canActivate: [ProfileGuard]
       },
       {
