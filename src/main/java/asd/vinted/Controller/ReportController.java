@@ -50,4 +50,10 @@ public class ReportController {
     reportService.delete(id);
     return HttpStatus.OK;
   }
+
+  @GetMapping("getAllByUserId/{id}")
+  public ResponseEntity<List<ReportDto>> getAllByUserId(@PathVariable String id) {
+    // reportDto report = reportService.getreport(id);
+    return ResponseEntity.ok(reportService.getReport(id));
+  }
 }
