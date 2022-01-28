@@ -175,7 +175,6 @@ acceptNotification(cr:CallRequest){
   
 
 });
-window.location.reload();
 
   
 }

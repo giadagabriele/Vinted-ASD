@@ -40,6 +40,7 @@ import { InoutComponent } from './components/message/inout/inout.component';
 import { UsersproductsComponent } from './components/usersproducts/usersproducts.component';
 import { SearchProductComponent } from './components/search-product/search-product.component';
 import { PaymenthistoryComponent } from './components/paymenthistory/paymenthistory.component';
+import { CallsComponent } from './components/calls/calls.component';
 
 const config = new AuthServiceConfig([
   {
@@ -82,7 +83,8 @@ export function provideConfig() {
     InoutComponent,
     UsersproductsComponent,
     SearchProductComponent,
-    PaymenthistoryComponent
+    PaymenthistoryComponent,
+    CallsComponent
    ],
    entryComponents:[
     PaypalComponent

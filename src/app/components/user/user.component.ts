@@ -1,3 +1,4 @@
+import { MessageService, Report } from './../../services/message.service';
 import { ModalComponent } from './../modal/modal.component';
 import { CallRequestService } from './../../services/callRequest.service';
 import { CallRequest } from './../../models/callRequest.model';
@@ -9,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageComponent } from '../message/message.component';
 import { AuthenticationService } from '@app/services/authentication.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-user',
@@ -19,40 +21,23 @@ export class UserComponent implements OnInit {
   usertoview : User;
   myUser: User
   request=true;
+  ban=false;
   username:string;
   canRequest=true;
   canSeeNumber=false;
   isDataLoaded=false;
+  
   constructor(private userService: UserService,private router: Router,
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private authenticationService: AuthenticationService,private callRequestService:CallRequestService) {  
+    private authenticationService: AuthenticationService,private callRequestService:CallRequestService,private messageService:MessageService) {  
       this.isDataLoaded=false;
       this.authenticationService.currentUser.subscribe((data: User) => {
       this.myUser = data;
     });
 
-   /*  this.route.paramMap
-      .pipe(
-        map((param: ParamMap) => {
-          // @ts-ignore
-          return param.params.username;
-        })
-      )
-      .subscribe(username => {
-        this.userService.getUserByUsername(username).subscribe((user:User)=>
-          {
-            console.log(user)
-            if(this.myUser.username===user.username)
-               this.router.navigateByUrl('/profile');
-            this.usertoview=user;
-            this.controlRequestCall();
-            console.log(this.usertoview)
-
-          });
-
-      });
- */    this.route.params.subscribe((params) => {
+ 
+    this.route.params.subscribe((params) => {
         this.username=params.username;
       });
       this.userService.getUserByUsername(this.username).subscribe((user:User)=>
@@ -80,19 +65,18 @@ export class UserComponent implements OnInit {
  
   }
   controlRequestCall(){
-    this.isDataLoaded=true;
     console.log(this.usertoview)
     this.controlSeeNumber();
+    this.checkBan();
     if(this.usertoview.phoneNumber===null)
       this.canRequest=false;
       else{
         this.callRequestService.getAllResponsesByUserId(this.usertoview.id).subscribe((data: CallRequest[]) =>  {
           console.log(data)
           data.forEach((element:CallRequest) => {
-            console.log(element.userOfRequest)
-            console.log(this.myUser)
             if(element.userOfRequest.id==this.myUser.id)
-            this.request=false
+              this.request=false
+            this.isDataLoaded=true;
           });
           
           
@@ -148,13 +132,21 @@ export class UserComponent implements OnInit {
 
 
   }
+  checkBan(){
+    this.messageService.getAllByUserId(this.myUser.id).subscribe((datat:Report[])=>{
+      if(data.length>=3)
+        this.ban=true;
+
+    });
+
+
+  }
   openMessageModal() {
     const modalRef = this.modalService.open(MessageComponent,
       {
         scrollable: true,
         windowClass: 'myCustomModalClass',
-        // keyboard: false,
-        // backdrop: 'static'
+        
       });
     modalRef.componentInstance.productUser = {user: this.usertoview.id};
     modalRef.result.then((result) => {

@@ -53,6 +53,7 @@
                   <div>
                     <a href="javascript: void(0)"> <button class="add-to-cart-btn" (click)="openMessageModal()"><i
                           class="fa fa-envelope"></i> Send message</button></a>
+                         <div *ngIf="!ban">
                           <div  *ngIf="canRequest">
                             <div  *ngIf="request">
                             <button class="add-to-cart-btn" style="margin-top: 4px;" (click)="requestPhoneNumber()"><i
@@ -71,7 +72,13 @@
                                 class="fa fa-phone"></i> Call request cant be sent, this user dosn't recive calls</button>
                               </div>
                           </div>
-              
+                        </div>
+                        <div *ngIf="ban">
+
+                          <button class="btn" disabled ><i
+                            class="fa fa-phone"></i> Call request cant be sent, you have been banned from this func.</button>
+                         
+                        </div>
                 </div>
               </div>
               <div class="mt-3">

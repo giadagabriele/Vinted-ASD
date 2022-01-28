@@ -47,15 +47,16 @@ export class MessageService {
   }
 
   getAllReports(): Observable<Report[]> {
-    console.log('getting all the favorites from the server');
     return this.httpClient.get<Report[]>(this.SERVER_URL + '/report');
   }
 
-  // tslint:disable-next-line:variable-name
   getReport(_id: string): Observable<Report> {
     return this.httpClient.get<Report>(`${this.SERVER_URL}/report/${_id}`);
 }
 
+getAllByUserId(_id: any): Observable<Report[]> {
+  return this.httpClient.get<Report[]>(`${this.SERVER_URL}/getAllByUserId/`+_id);
+}
 
 addReport(newReport: Report): Observable<Report> {
   return this.httpClient.post<Report>(`${this.SERVER_URL}/report`, newReport, {
