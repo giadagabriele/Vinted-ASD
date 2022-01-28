@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Time;
+import org.hibernate.annotations.CreationTimestamp;
+import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.concurrent.atomic.LongAdder;
 
@@ -19,7 +22,6 @@ public class OrderDto {
     private String stripeToken;
     private String stripeEmail;
     private String  paymentID;
-    private String  PaymentDate;
     private String  payeeName;
     private String  paymentMode;
     private String  payerName;
@@ -32,6 +34,8 @@ public class OrderDto {
     private String  payer_id;
     private String  productID;
     private long  userID;
+    @CreationTimestamp
+    private Timestamp PaymentDate;
 
     public long getUserID() {
         return userID;
@@ -121,11 +125,11 @@ public class OrderDto {
         this.paymentID = paymentID;
     }
 
-    public String getPaymentDate() {
+    public Timestamp getPaymentDate() {
         return PaymentDate;
     }
 
-    public void setPaymentDate(String paymentDate) {
+    public void setPaymentDate(Timestamp paymentDate) {
         PaymentDate = paymentDate;
     }
 

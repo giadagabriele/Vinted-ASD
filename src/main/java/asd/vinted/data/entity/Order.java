@@ -1,6 +1,10 @@
 package asd.vinted.data.entity;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -32,7 +36,8 @@ public class Order {
     @Column
     private String  paymentID;
     @Column
-    private String  PaymentDate;
+    @CreationTimestamp
+    private Timestamp PaymentDate;
     @Column
     private String  payeeName;
     @Column
@@ -158,11 +163,11 @@ public class Order {
         this.paymentID = paymentID;
     }
 
-    public String getPaymentDate() {
+    public Timestamp getPaymentDate() {
         return PaymentDate;
     }
 
-    public void setPaymentDate(String paymentDate) {
+    public void setPaymentDate(Timestamp paymentDate) {
         PaymentDate = paymentDate;
     }
 
