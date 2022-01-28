@@ -134,7 +134,7 @@ export class UserComponent implements OnInit {
   }
   checkBan(){
     this.messageService.getAllByUserId(this.myUser.id).subscribe((datat:Report[])=>{
-      if(data.length>=3)
+      if(datat.length>=3)
         this.ban=true;
 
     });
