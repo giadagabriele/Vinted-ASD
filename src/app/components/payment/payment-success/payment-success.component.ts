@@ -57,7 +57,6 @@ export class PaymentSuccessComponent implements OnInit {
       .subscribe((response: PayPalConfirmPaymentResponse) => {
         if (response.status === 'approved') {
           this.paymentResponse = response;
-          this.addPaymentHistory();
           localStorage.removeItem('productId');
 
           console.log(response);
@@ -69,20 +68,6 @@ export class PaymentSuccessComponent implements OnInit {
     });
 
   }
-
-addPaymentHistory() {
-  // tslint:disable-next-line:max-line-length
-  const paymentHistory: any = { product: localStorage.getItem('productId'), user: this.user.id, price: '', description: ' ', paymentMethod: ''};
-  this.paymenthistoryService.add(paymentHistory)
-        .subscribe(
-          (data: any) => {
-            console.log('payment history added', data)
-            window.location.reload();
-          },
-          (error: any) => console.log(error),
-          () => this.ngOnInit()
-        );
-}
 
   async showSuccessAlert(data: any) {
     this.toastr.success('Payment successfully completed ! check your profile for your order history:', 'payment with paypal');

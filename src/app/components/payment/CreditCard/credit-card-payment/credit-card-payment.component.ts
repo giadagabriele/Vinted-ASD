@@ -95,7 +95,7 @@ export class CreditCardPaymentComponent implements OnInit {
           // this.addPaymentHistory(this.request);
           // this.showSuccessAlert(response);
           if (response.status === 'succeeded') {
-            this.addPaymentHistory(this.request);
+            // this.addPaymentHistory(this.request);
             this.showSuccessAlert(response);
             window.close();
             location.replace('http://localhost:4200')
@@ -119,20 +119,20 @@ export class CreditCardPaymentComponent implements OnInit {
     this.toastr.success('Payment successfully completed. Details of the transaction: \nAmount: '+data.amount+'\nPayment ID: '+data.paymentID, "Card Payment")
   }
   // tslint:disable-next-line:variable-name
-  addPaymentHistory(data: any) {
-    // tslint:disable-next-line:max-line-length
-    const paymentHistory: any = { product: this.request.productID, user: this.user.id, price: this.request.price, description: this.request.description, paymentMethod: 'Credit Card'};
-    this.paymenthistoryService.add(paymentHistory)
-          .subscribe(
-            // tslint:disable-next-line:no-shadowed-variable
-            (data: any) => {
-              console.log('payment history added', data);
-              window.location.reload();
-            },
-            (error: any) => console.log(error),
-            () => this.ngOnInit()
-          );
-  }
+  // addPaymentHistory(data: any) {
+  //   // tslint:disable-next-line:max-line-length
+  //   const paymentHistory: any = { product: this.request.productID, user: this.user.id, price: this.request.price, description: this.request.description, paymentMethod: 'Credit Card'};
+  //   this.paymenthistoryService.add(paymentHistory)
+  //         .subscribe(
+  //           // tslint:disable-next-line:no-shadowed-variable
+  //           (data: any) => {
+  //             console.log('payment history added', data);
+  //             window.location.reload();
+  //           },
+  //           (error: any) => console.log(error),
+  //           () => this.ngOnInit()
+  //         );
+  // }
 
 
 }
