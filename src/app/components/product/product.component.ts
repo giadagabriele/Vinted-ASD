@@ -39,7 +39,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   product: any;
   idForCheckingBuy: any;
   thumbImages: any[] = [];
-  flag=false;
+  flag = false;
   @ViewChild('quantity') quantityInput;
   countFavorite = 0;
   headerComponent: HeaderComponent;
@@ -87,7 +87,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
               this.flag = true;
             }
             console.log(data);
-            //console.log('i get the proudct is sold', prod.length);
+            // console.log('i get the proudct is sold', prod.length);
           });
         }
       });
