@@ -15,7 +15,11 @@ import com.paypal.base.rest.PayPalRESTException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -87,7 +91,7 @@ public class PaypalPaymentServiceImpl implements PaypalPaymentService {
     }
 
     @Override
-    public PayPalConfirmPaymentResponse paymentConfiramtionResponse(Payment payment,String paymentId,String productID,String userID) {
+    public PayPalConfirmPaymentResponse paymentConfiramtionResponse(Payment payment,String paymentId,String productID,long userID) {
 
         double[] amount = {0.0};
         String[] currency={""};
@@ -135,11 +139,10 @@ public class PaypalPaymentServiceImpl implements PaypalPaymentService {
                 orderDto.setPaymentID(response.getPaymentID());
                 orderDto.setPayer_id( response.getPayer_id());
                 orderDto.setPayeeName(response.getPayerName());
-                orderDto.setPaymentDate(response.getPaymentDate());
+                orderDto.setPaymentDate(new Date());
                 orderDto.setPayerEmail(response.getPayerEmail());
                 orderDto.setProductID(productID);
                 orderDto.setUserID(userID);
-
                 orderService.saveOrderDetails(orderDto);
 
                 return response;

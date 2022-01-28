@@ -12,6 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 @Service
 public class CreditCardPaymentServiceImpl implements CreditCardPaymentService {
     @Autowired
@@ -57,7 +62,7 @@ public class CreditCardPaymentServiceImpl implements CreditCardPaymentService {
                // orderDto.setPaymentID(orderCharge.get);
 //                orderDto.setPayer_id( response.getPayer_id());
                   orderDto.setPayeeName(orderCharge.getReceiptEmail());
-               orderDto.setPaymentDate(orderCharge.getReceiptEmail());
+              orderDto.setPaymentDate(new Date());
                orderDto.setPayerEmail(orderCharge.getBillingDetails().getName());
 //
                 orderService.saveOrderDetails(orderDto);
