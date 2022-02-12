@@ -1,0 +1,2 @@
+
+INSERT INTO `user` (`id`,`address`,`birth_date`,`email`,`firstname`,`last_name`,`password`,`profile_pic`,`user_name`,`city_id`,`first_name`,`username`,`gender`,`phone_number`,`show_city_in_profile`,`user_information_id`,`first_login`,`birthDate`,`firstLogin`,`lastName`,`phoneNumber`,`profilePic`,`showCityInProfile`,`cityId`,`userInformationId`) VALUES (58,NULL,NULL,'janedoe@email.com',NULL,'Doe','cGFzc3Bhc3M=','/assets/img/img_avatar.png',NULL,3,'Jane','janedoe',NULL,NULL,'0',NULL,'0',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL);
