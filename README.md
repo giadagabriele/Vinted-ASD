@@ -1,4 +1,4 @@
-# Vinted-ASD
+# Vinted-ASD <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgiadagabriele%2FVinted-ASD&count_bg=%231FC8AF&title_bg=%23ABABAB&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 Agile Software Development group project - Università della Calabria
 
 Spring Project connected to MySQL database
